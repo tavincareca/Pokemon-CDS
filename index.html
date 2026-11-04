@@ -31,13 +31,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 @keyframes frameElectric { 0%, 100% { box-shadow: 0 0 20px #ffff00, 0 0 40px #ffd700, inset 0 0 20px #ffa500; border-color: #ffff00; } 50% { box-shadow: 0 0 40px #ffd700, 0 0 80px #fff, inset 0 0 30px #ffff00; border-color: #fff; } }
 @keyframes frameGalaxy { 0%, 100% { box-shadow: 0 0 20px #8a2be2, 0 0 40px #4b0082, inset 0 0 20px #9400d3; border-color: #8a2be2; } 50% { box-shadow: 0 0 40px #9400d3, 0 0 80px #ff00ff, inset 0 0 30px #4b0082; border-color: #ff00ff; } }
 @keyframes frameShadow { 0%, 100% { box-shadow: 0 0 20px #333, 0 0 40px #111, inset 0 0 20px #000; border-color: #555; } 50% { box-shadow: 0 0 40px #111, 0 0 80px #000, inset 0 0 30px #333; border-color: #000; } }
-
 .frame-fire { animation: frameFire 1.5s infinite alternate !important; border-width: 4px !important; }
 .frame-ice { animation: frameIce 2s infinite alternate !important; border-width: 4px !important; }
 .frame-electric { animation: frameElectric 1s infinite alternate !important; border-width: 4px !important; }
 .frame-galaxy { animation: frameGalaxy 2.5s infinite alternate !important; border-width: 4px !important; }
 .frame-shadow { animation: frameShadow 2s infinite alternate !important; border-width: 4px !important; }
-
 .slab-container.hack { background: linear-gradient(135deg, #000, #001a00); border: 3px solid #00ff41; box-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0,255,65,0.4), inset 0 0 15px rgba(0,255,65,0.2); animation: hackPulse 2s infinite; position: relative; overflow: hidden; }
 .slab-container.hack .slab-label { background: linear-gradient(180deg, #003300, #00ff41); border-bottom: 2px solid #00b82f; }
 .slab-container.hack .psa-logo { color: #000; font-family: monospace; font-weight: 900; font-size: 0.55rem; }
@@ -48,7 +46,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .slab-container.hack .slab-img-wrap img { filter: hue-rotate(60deg) saturate(1.4) contrast(1.2) brightness(0.85); }
 .slab-container.hack .slab-img-wrap::after { content: '01001000 01000001 01000011 01001011'; position: absolute; bottom: 2px; left: 0; right: 0; font-size: 5px; color: #00ff41; text-align: center; font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 3px #00ff41; animation: hackBlink 1.5s infinite; z-index: 10; pointer-events: none; }
 .slab-container.hack::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.12) 0px, rgba(0, 255, 65, 0.12) 1px, transparent 1px, transparent 3px); pointer-events: none; z-index: 10; border-radius: 6px; }
-
 .det-slab.hack { background: linear-gradient(135deg, #000, #001a00); border-color: #00ff41; box-shadow: 0 0 30px #00ff41, inset 0 0 20px rgba(0,255,65,0.3); animation: hackPulse 2s infinite; }
 .det-slab.hack .slab-label { background: linear-gradient(180deg, #003300, #00ff41); border-bottom-color: #00b82f; }
 .det-slab.hack .psa-logo { color: #000; }
@@ -56,16 +53,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .det-slab.hack .g-name { color: #001a00; }
 .det-slab.hack .slab-img-wrap { background: #000; }
 .det-slab.hack .slab-img-wrap img { filter: hue-rotate(60deg) saturate(1.4) contrast(1.2) brightness(0.85); }
-
 .album-card.hack-album { background: #000; border: 2px solid #00ff41; box-shadow: 0 0 15px rgba(0,255,65,0.4); }
 .album-card.hack-album .album-nome { color: #00ff41; font-family: monospace; font-weight: 900; text-shadow: 0 0 5px #00ff41; font-size: 0.9rem; }
 .album-card.hack-album .album-prog { color: #00ff41; font-family: monospace; }
 .album-card.hack-album .barra { background: rgba(0,255,65,0.2); }
 .album-card.hack-album .barra .fill { background: #00ff41; box-shadow: 0 0 10px #00ff41; }
 .album-card.hack-album .album-img { background: repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.1) 0px, rgba(0, 255, 65, 0.1) 1px, transparent 1px, transparent 5px), #000; font-family: monospace; color: #00ff41; font-size: 1.5rem; font-weight: 900; text-shadow: 0 0 10px #00ff41; border: 1px dashed #00ff41; }
-
 .icon-verified { display: inline-block; width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' fill='%231DA1F2'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; background-position: center; vertical-align: middle; margin-left: 2px; filter: drop-shadow(0 0 3px rgba(29,161,242,0.4)); }
-
 .btn{padding:15px 26px;border-radius:18px;border:none;background:linear-gradient(180deg,#6dd5ed,#4a9fd8);color:#fff;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 6px 0 #2a6a9a;width:100%;max-width:340px;letter-spacing:.5px;transition:.15s;font-family:inherit;text-transform:uppercase;position:relative;overflow:hidden;margin:0 auto}
 .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #2a6a9a}.btn::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:brilhar 3s infinite}
 .btn.gold{background:linear-gradient(180deg,#ffd93d,#f7a800);color:#fff;box-shadow:0 6px 0 #b57a00}.btn.ghost{background:rgba(255,255,255,.95);color:#4a6fa5;box-shadow:0 6px 0 #cfd8e3}.btn.verde{background:linear-gradient(180deg,#7eeb8e,#34c759);box-shadow:0 6px 0 #1f8a3a}.btn.vermelho{background:linear-gradient(180deg,#ff5566,#e03545);box-shadow:0 6px 0 #a02030}.btn.mini{width:auto;padding:8px 16px;font-size:.8rem;max-width:none}
@@ -557,7 +551,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   <button class="btn gold" onclick="abrirCustomizacao()" style="margin-bottom:12px;">🎨 Personalizar Perfil</button>
   <button class="btn loja" onclick="abrirAmigos()" style="margin-bottom:12px;">👥 Meus Amigos</button>
   <button class="btn" onclick="abrirHistoricoVendas()" style="margin-bottom:12px; background:linear-gradient(180deg,#4a9fd8,#2a6a9a); box-shadow:0 6px 0 #1a4a6a;">📜 Histórico de Vendas</button>
-  <button class="btn verde" onclick="gerarPerfilCode()" style="margin-bottom:12px;">📤 Compartilhar Perfil</button>
   
   <div id="boxLinkPerfil" style="display:none; width:100%; max-width:340px; margin-top:10px;">
       <input type="text" id="inputPerfilCode" class="campo" readonly style="font-size:0.8rem;">
@@ -647,8 +640,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 <div class="modal-overlay" id="modalAddAmigo">
   <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
     <h3 style="color:#ffd93d;">Adicionar Amigo</h3>
-    <p style="color:#a89ec4; font-size:0.85rem; font-weight:800; margin-bottom:15px;">Digite o ID que seu amigo te mandou.</p>
-    <input type="text" id="inputAddAmigo" class="campo" placeholder="Ex: #1234">
+    <p style="color:#a89ec4; font-size:0.85rem; font-weight:800; margin-bottom:15px;">Cole o código de perfil do seu amigo.</p>
+    <input type="text" id="inputAddAmigo" class="campo" placeholder="Cole o código do perfil...">
     <button class="btn gold" onclick="adicionarAmigo()">Adicionar</button>
     <button class="btn ghost" onclick="document.getElementById('modalAddAmigo').classList.remove('ativo')" style="margin-top:10px; color:#1a0a2a;">Cancelar</button>
   </div>
@@ -659,29 +652,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <h3 style="text-align:center; margin-bottom:15px; color:#ffd93d;">Selecione uma Carta</h3>
     <div class="modal-cartas-grid" id="modalCartasGrid"></div>
     <button class="btn ghost" onclick="document.getElementById('modalSelecionarCarta').classList.remove('ativo')" style="margin-top:15px; color:#1a0a2a;">Fechar</button>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modalAdminOpcoes">
-  <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
-    <h3 style="color:#ffd93d;" id="adminOpcoesTitulo">Carta</h3>
-    <div style="display:flex; flex-direction:column; gap:8px; margin-top:20px;">
-        <button class="btn gold" onclick="executarAdminNormal('meuInv')">➕ Meu Inventário (Normal)</button>
-        <button class="btn" style="background:linear-gradient(180deg,#a855f7,#6d28d9); color:#fff; box-shadow:0 6px 0 #4a1a8a;" onclick="executarAdminPSA('meuInv')">➕ Meu Inventário (PSA)</button>
-        <button class="btn" style="background:linear-gradient(180deg,#4a9fd8,#2a6a9a); color:#fff; box-shadow:0 6px 0 #1a4a6a;" onclick="executarAdminNormal('correio')">📬 Enviar p/ Correio (Normal)</button>
-        <button class="btn" style="background:linear-gradient(180deg,#a855f7,#6d28d9); color:#fff; box-shadow:0 6px 0 #4a1a8a;" onclick="executarAdminPSA('correio')">📬 Enviar p/ Correio (PSA)</button>
-    </div>
-    <button class="btn ghost" onclick="document.getElementById('modalAdminOpcoes').classList.remove('ativo')" style="margin-top:15px; color:#1a0a2a;">Fechar</button>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modalSelecionarAmigoAdmin">
-  <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
-    <h3 style="color:#ffd93d;">Enviar para Correio</h3>
-    <p style="color:#a89ec4; font-size:0.85rem; font-weight:800; margin-bottom:15px;">Digite o ID do jogador que vai receber.</p>
-    <input type="text" id="adminCorreioId" class="campo" placeholder="Ex: #1234">
-    <button class="btn gold" onclick="confirmarEnvioCorreio()">Enviar</button>
-    <button class="btn ghost" onclick="document.getElementById('modalSelecionarAmigoAdmin').classList.remove('ativo')" style="margin-top:10px; color:#1a0a2a;">Cancelar</button>
   </div>
 </div>
 
@@ -1042,7 +1012,7 @@ const SENHA_MOD='1502';
 const SENHA_TESTER='0326';
 const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
-// --- CONFIGURAÇÃO FIREBASE ---
+// --- INICIALIZAÇÃO FIREBASE ---
 const firebaseConfig = {
   apiKey: "AIzaSyC15fN-BOwRt08q6zw9t4Edi1owX90xj7M",
   authDomain: "pokemon-cds.firebaseapp.com",
@@ -1111,25 +1081,6 @@ let trocaTimerInterval = null;
 let trocaCancelada = false;
 let trocaConcluida = false;
 
-const CARTAS_HACK = [
-  { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999, valorVenda: 0 },
-  { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999, valorVenda: 0 },
-  { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999, valorVenda: 0 },
-  { id: 'hack-umbreon', nome: 'Umbreon', emoji: '🌙', num: 'H-04', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh7/189_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh7/189.png', preco: 999999, valorVenda: 0 },
-  { id: 'hack-mew', nome: 'Mew', emoji: '🔮', num: 'H-05', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3pt5/205.png', preco: 999999, valorVenda: 0 }
-];
-
-const PACOTES=[
-  {cod:'base1',nome:'Base Set (1999)',emoji:'👑',preco:250,c1:'#d4a017',c2:'#8b5a00',gh:'base1'},
-  {cod:'sv1',nome:'Scarlet & Violet (2023)',emoji:'🔴',preco:20,c1:'#ee1515',c2:'#8b0a0a',gh:'sv1'},
-  {cod:'sv3pt5',nome:'Pokémon 151 (2023)',emoji:'🎴',preco:45,c1:'#ffcb05',c2:'#3b4cca',gh:'sv3pt5'}
-]; // Você pode adicionar os outros pacotes aqui depois.
-
-const RAR_NOME={'C':'Comum','U':'Incomum','R':'Rara','RH':'Rara Holo','UR':'Ultra Rara','RB':'Rainbow Rare','SEC':'Secret Rare','IR':'Ilustração Rara','SIR':'Ilustração Especial','HR':'Hyper Rare','PR':'Promo'};
-const RAR_BASE={C:0.30,U:0.50,R:3,RH:30,UR:300,IR:800,HR:1500,RB:2500,SEC:3000,SIR:5000,PR:5};
-const ERA_MULT={base1:100,sv1:1,sv3pt5:1.3};
-const VINTAGE_SETS=new Set(['base1']);
-
 function salvarEstado(){
   localStorage.setItem(KEY+'moedas',moedas);
   localStorage.setItem(KEY+'colecao',JSON.stringify(colecao));
@@ -1153,14 +1104,11 @@ function salvarEstado(){
 
 function mostrarTela(id, push = true){
   const atual = document.querySelector('.tela.ativa');
-  if (push && atual && atual.id !== id) {
-      if (telaStack[telaStack.length - 1] !== atual.id) { telaStack.push(atual.id); }
-  }
+  if (push && atual && atual.id !== id) { if (telaStack[telaStack.length - 1] !== atual.id) { telaStack.push(atual.id); } }
   document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
   const telaAtiva = document.getElementById(id);
   if(telaAtiva) telaAtiva.classList.add('ativa');
-  window.scrollTo(0,0);
-  if(telaAtiva) telaAtiva.scrollTop = 0;
+  window.scrollTo(0,0); if(telaAtiva) telaAtiva.scrollTop = 0;
 }
 
 function voltarTela(){
@@ -1171,12 +1119,11 @@ function voltarTela(){
       else { irParaHome(); return; }
   }
   if (document.getElementById('telaDetalhe').classList.contains('ativa')) {
-      if (albumAberto) { abrirAlbum(albumAberto, true); } else { abaColecao = 'graded'; mostrarCol(true); }
+      if (albumAberto) { abrirAlbum(albumAberto); } else { abaColecao = 'graded'; mostrarCol(); }
       setTimeout(() => { const t = document.getElementById('telaColecao'); if(t) t.scrollTop = scrollDetalheSalvo; }, 30); return;
   }
   if (telaStack.length > 0) {
-      const anterior = telaStack.pop();
-      mostrarTela(anterior, false);
+      const anterior = telaStack.pop(); mostrarTela(anterior, false);
       if (anterior === 'telaColecao') { setTimeout(() => { const t = document.getElementById('telaColecao'); if(t) t.scrollTop = scrollColecaoLista; }, 10); }
   } else { irParaHome(); }
 }
@@ -1194,35 +1141,24 @@ function atualizarUI(){
   document.getElementById('statCartas').textContent=totalCartas;
   document.getElementById('statTotal').textContent=totalCartasDB;
   const nv = calcularNivel(totalCartas);
-  const nvEl = document.getElementById('nvAvatar');
-  if(nvEl) nvEl.textContent='Nv. '+nv;
+  const nvEl = document.getElementById('nvAvatar'); if(nvEl) nvEl.textContent='Nv. '+nv;
   const avEl = document.getElementById('avatarUser');
   if(perfil && avEl) {
       const imgHtml = (perfil.avatar.startsWith('http') || perfil.avatar.startsWith('data:')) ? `<img src="${perfil.avatar}" style="width:100%;height:100%;object-fit:contain;">` : `<span style="font-size:2rem;font-weight:900;">${perfil.avatar}</span>`;
       avEl.innerHTML = `${imgHtml}<div class="nv" id="nvAvatar">Nv. ${nv}</div>`;
       avEl.style.background = perfil.cor;
   }
-  const lojaSaldo=document.getElementById('lojaSaldo');
-  if(lojaSaldo)lojaSaldo.textContent=moedasStr+' 🪙';
-  const invSaldo=document.getElementById('invSaldo');
-  if(invSaldo)invSaldo.textContent=moedasStr+' 🪙';
+  const lojaSaldo=document.getElementById('lojaSaldo'); if(lojaSaldo)lojaSaldo.textContent=moedasStr+' 🪙';
+  const invSaldo=document.getElementById('invSaldo'); if(invSaldo)invSaldo.textContent=moedasStr+' 🪙';
   
-  const lojaLimite=document.getElementById('lojaLimiteTxt');
-  const invLimite=document.getElementById('invLimiteTxt');
-  if (lojaLimite && invLimite) {
-      const txtLimite = perfil.pacotesInfinitos ? '∞' : pacotesCompradosHoje + ' / ' + LIMITE_DIARIO_PACOTES;
-      lojaLimite.textContent = txtLimite; invLimite.textContent = txtLimite;
-  }
-  const homeVer = document.getElementById('homeVerified');
-  if(homeVer) homeVer.style.display = perfil.isVerified ? 'inline-block' : 'none';
-  const barraFill = document.getElementById('barraTrabalhoFill');
-  const barraTxt = document.getElementById('barraTrabalhoTxt');
-  if (barraFill && barraTxt) {
-      const pct = Math.min(100, (ganhoHoje / LIMITE_DIARIO_MOEDAS) * 100);
-      barraFill.style.width = pct + '%'; barraTxt.textContent = ganhoHoje.toLocaleString('pt-BR') + ' / 50.000';
-  }
-  const contadorPoke = document.getElementById('contadorPokebola');
-  const pokeEl = document.getElementById('pokebolaTrabalho');
+  const lojaLimite=document.getElementById('lojaLimiteTxt'); const invLimite=document.getElementById('invLimiteTxt');
+  if (lojaLimite && invLimite) { const txtLimite = perfil.pacotesInfinitos ? '∞' : pacotesCompradosHoje + ' / ' + LIMITE_DIARIO_PACOTES; lojaLimite.textContent = txtLimite; invLimite.textContent = txtLimite; }
+  
+  const homeVer = document.getElementById('homeVerified'); if(homeVer) homeVer.style.display = perfil.isVerified ? 'inline-block' : 'none';
+  const barraFill = document.getElementById('barraTrabalhoFill'); const barraTxt = document.getElementById('barraTrabalhoTxt');
+  if (barraFill && barraTxt) { const pct = Math.min(100, (ganhoHoje / LIMITE_DIARIO_MOEDAS) * 100); barraFill.style.width = pct + '%'; barraTxt.textContent = ganhoHoje.toLocaleString('pt-BR') + ' / 50.000'; }
+  
+  const contadorPoke = document.getElementById('contadorPokebola'); const pokeEl = document.getElementById('pokebolaTrabalho');
   if (contadorPoke && pokeEl) {
       if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) { contadorPoke.textContent = '🚫 Limite diário!'; pokeEl.classList.add('locked'); }
       else { contadorPoke.textContent = ganhoHoje.toLocaleString('pt-BR') + ' / 50.000'; pokeEl.classList.remove('locked'); }
@@ -1232,17 +1168,11 @@ function atualizarUI(){
 // --- SISTEMA ONLINE (FIREBASE) ---
 function iniciarApp(){
   document.getElementById('loading').style.display='none';
-  if(!usuario) { mostrarTela('telaLogin', false); } 
-  else { document.getElementById('nomeUser').textContent=usuario.nome; mostrarTela('telaIntro', false); }
-  preencherAdminSelect();
-  montarAdminHackGrid();
-  atualizarUI();
-  atualizarBotoesAdmin();
-  checarResetDiario();
-  setInterval(checarResetDiario, 60000);
-  escutarEventoGlobal();
-  escutarCorreio();
-  escutarTrocasRecebidas();
+  montarFlut();
+  if(!usuario) { mostrarTela('telaLogin', false); } else { document.getElementById('nomeUser').textContent=usuario.nome; mostrarTela('telaIntro', false); }
+  preencherAdminSelect(); montarAdminHackGrid(); atualizarUI(); atualizarBotoesAdmin();
+  checarResetDiario(); setInterval(checarResetDiario, 60000);
+  escutarEventoGlobal(); escutarCorreio(); escutarTrocasRecebidas();
 }
 
 function checarResetDiario() {
@@ -1270,16 +1200,9 @@ auth.onAuthStateChanged(user => {
 });
 
 document.getElementById('btnEntrar').onclick=()=>{
-  const n=document.getElementById('inputNome').value.trim();
-  const i=parseInt(document.getElementById('inputIdade').value);
-  const e=document.getElementById('erroLogin');
-  if(!n){e.textContent='Digite seu nome!';return;}
-  if(!i||i<1){e.textContent='Digite sua idade!';return;}
-  if(i<6){e.textContent='Você precisa ter 6 anos ou mais.';return;}
-  usuario={nome:n,idade:i};
-  localStorage.setItem(KEY+'user',JSON.stringify(usuario));
-  document.getElementById('nomeUser').textContent=n;
-  e.textContent=''; mostrarTela('telaIntro'); salvarEstado();
+  const n=document.getElementById('inputNome').value.trim(); const i=parseInt(document.getElementById('inputIdade').value); const e=document.getElementById('erroLogin');
+  if(!n){e.textContent='Digite seu nome!';return;} if(!i||i<1){e.textContent='Digite sua idade!';return;} if(i<6){e.textContent='Você precisa ter 6 anos ou mais.';return;}
+  usuario={nome:n,idade:i}; localStorage.setItem(KEY+'user',JSON.stringify(usuario)); document.getElementById('nomeUser').textContent=n; e.textContent=''; mostrarTela('telaIntro'); salvarEstado();
 };
 
 document.getElementById('btnIniciar').onclick=()=>{ if(!tutorialFeito)iniciarTutorial();else entrarNoJogo(); };
@@ -1291,23 +1214,16 @@ function entrarNoJogo(){ telaStack = []; montarLoja(); atualizarUI(); mostrarTel
 // --- CORREIO ---
 function escutarCorreio() {
     if(!meuUid) return;
-    db.ref('correios/' + meuUid).on('value', snapshot => {
-        if(snapshot.val()) { const btn = document.getElementById('btnCorreio'); if(btn) btn.style.borderColor = '#ff5566'; }
-    });
+    db.ref('correios/' + meuUid).on('value', snapshot => { if(snapshot.val()) { const btn = document.getElementById('btnCorreio'); if(btn) btn.style.borderColor = '#ff5566'; } });
 }
 document.getElementById('btnCorreio').onclick = abrirCorreio;
-
 function abrirCorreio() {
-    mostrarTela('telaCorreio');
-    const lista = document.getElementById('listaCorreio');
-    lista.innerHTML = '<p style="color:#a89ec4; text-align:center;">Carregando...</p>';
+    mostrarTela('telaCorreio'); const lista = document.getElementById('listaCorreio'); lista.innerHTML = '<p style="color:#a89ec4; text-align:center;">Carregando...</p>';
     db.ref('correios/' + meuUid).once('value').then(snapshot => {
-        const data = snapshot.val();
-        lista.innerHTML = '';
+        const data = snapshot.val(); lista.innerHTML = '';
         if(!data || Object.keys(data).length === 0) { lista.innerHTML = '<p style="color:#a89ec4; text-align:center; padding:20px;">Seu correio está vazio.</p>'; return; }
         for(const key in data) {
-            const item = data[key]; const div = document.createElement('div');
-            div.className = 'inv-item';
+            const item = data[key]; const div = document.createElement('div'); div.className = 'inv-item';
             let desc = item.tipo === 'moedas' ? `💰 ${item.valor} Moedas` : `🎴 Pacote: ${item.valor}`;
             let img = item.tipo === 'moedas' ? 'https://cdn-icons-png.flaticon.com/512/217/217853.png' : 'https://images.pokemontcg.io/sv1/logo.png';
             div.innerHTML = `<div class="thumb" style="background:#2a1a4a;"><img src="${img}"></div><div class="info"><div class="nome">${item.remetente || 'Admin'}</div><div class="qtd">${desc}</div></div><button class="btn mini gold" onclick="resgatarCorreio('${key}', '${item.tipo}', '${item.valor}')">Resgatar</button>`;
@@ -1318,38 +1234,28 @@ function abrirCorreio() {
 }
 window.resgatarCorreio = (key, tipo, valor) => {
     if(tipo === 'moedas') { moedas += parseInt(valor); } else if(tipo === 'pacote') { inventario[valor] = (inventario[valor] || 0) + 1; }
-    db.ref('correios/' + meuUid + '/' + key).remove();
-    salvarEstado(); atualizarUI(); abrirCorreio(); alert('✅ Resgatado!');
+    db.ref('correios/' + meuUid + '/' + key).remove(); salvarEstado(); atualizarUI(); abrirCorreio(); alert('✅ Resgatado!');
 };
 
 // --- EVENTOS GLOBAIS ---
 function escutarEventoGlobal() {
     db.ref('eventos/ativo').on('value', snapshot => {
-        eventoAtual = snapshot.val();
-        const banner = document.getElementById('bannerEventoGlobal');
+        eventoAtual = snapshot.val(); const banner = document.getElementById('bannerEventoGlobal');
         if (eventoAtual && Date.now() < eventoAtual.fim) {
-            banner.style.display = 'block';
-            document.getElementById('bannerEventoTitulo').textContent = eventoAtual.titulo;
-            document.getElementById('bannerEventoSub').textContent = eventoAtual.desc;
+            banner.style.display = 'block'; document.getElementById('bannerEventoTitulo').textContent = eventoAtual.titulo; document.getElementById('bannerEventoSub').textContent = eventoAtual.desc;
         } else { banner.style.display = 'none'; }
     });
 }
 document.getElementById('btnEventos').onclick = abrirEvento;
-
 function abrirEvento() {
     if(!eventoAtual) { alert('Nenhum evento ativo no momento.'); return; }
     mostrarTela('telaEvento');
-    document.getElementById('evTitulo').textContent = eventoAtual.titulo;
-    document.getElementById('evDesc').textContent = eventoAtual.desc;
-    const restam = eventoAtual.fim - Date.now();
-    const horas = Math.floor(restam / 3600000); const mins = Math.floor((restam % 3600000) / 60000);
-    document.getElementById('evTempo').textContent = `Termina em: ${horas}h ${mins}m`;
-    document.getElementById('evPremio').textContent = `Prêmio: ${eventoAtual.premioTipo.toUpperCase()} (${eventoAtual.premioValor})`;
+    document.getElementById('evTitulo').textContent = eventoAtual.titulo; document.getElementById('evDesc').textContent = eventoAtual.desc;
+    const restam = eventoAtual.fim - Date.now(); const horas = Math.floor(restam / 3600000); const mins = Math.floor((restam % 3600000) / 60000);
+    document.getElementById('evTempo').textContent = `Termina em: ${horas}h ${mins}m`; document.getElementById('evPremio').textContent = `Prêmio: ${eventoAtual.premioTipo.toUpperCase()} (${eventoAtual.premioValor})`;
     const btn = document.getElementById('btnResgatarEvento');
-    if (eventoAtual.resgatados && eventoAtual.resgatados[meuUid]) { btn.textContent = '✅ Já Resgatado'; btn.disabled = true; btn.style.opacity = '0.5'; } 
-    else { btn.textContent = '🎁 Resgatar Prêmio'; btn.disabled = false; btn.style.opacity = '1'; }
+    if (eventoAtual.resgatados && eventoAtual.resgatados[meuUid]) { btn.textContent = '✅ Já Resgatado'; btn.disabled = true; btn.style.opacity = '0.5'; } else { btn.textContent = '🎁 Resgatar Prêmio'; btn.disabled = false; btn.style.opacity = '1'; }
 }
-
 window.resgatarEvento = () => {
     if(!eventoAtual || Date.now() > eventoAtual.fim) { alert('Evento expirado!'); return; }
     if(eventoAtual.resgatados && eventoAtual.resgatados[meuUid]) { alert('Você já resgatou!'); return; }
@@ -1357,37 +1263,10 @@ window.resgatarEvento = () => {
     else if(eventoAtual.premioTipo === 'carta') { const cid = eventoAtual.premioValor; if(!colecao[cid]) colecao[cid] = {qtd:0, data:new Date().toISOString(), gradeds:[]}; colecao[cid].qtd += 1; }
     else if(eventoAtual.premioTipo === 'hack') { const hc = CARTAS_HACK[Math.floor(Math.random() * CARTAS_HACK.length)]; if(!colecao[hc.id]) colecao[hc.id] = {qtd:0, data:new Date().toISOString(), gradeds:[]}; if(!colecao[hc.id].gradeds) colecao[hc.id].gradeds = []; colecao[hc.id].gradeds.push({ nota:10, preco:hc.preco, hack:true, data:new Date().toISOString(), historico:[] }); }
     else if(eventoAtual.premioTipo === 'pacote') { inventario[eventoAtual.premioValor] = (inventario[eventoAtual.premioValor] || 0) + 1; }
-    db.ref('eventos/ativo/resgatados/' + meuUid).set(true);
-    salvarEstado(); atualizarUI(); abrirEvento(); alert('🎉 Prêmio resgatado!');
+    db.ref('eventos/ativo/resgatados/' + meuUid).set(true); salvarEstado(); atualizarUI(); abrirEvento(); alert('🎉 Prêmio resgatado!');
 };
 
-// --- ADMIN: CRIAR EVENTO E CORREIO ---
-function criarEventoGlobal() {
-    const titulo = document.getElementById('adminEvTitulo').value.trim();
-    const desc = document.getElementById('adminEvDesc').value.trim();
-    const tempoH = parseInt(document.getElementById('adminEvTempo').value);
-    const tipo = document.getElementById('adminEvPremioTipo').value;
-    const valor = document.getElementById('adminEvPremioValor').value.trim();
-    if(!titulo || !desc || !valor) { alert('Preencha tudo!'); return; }
-    const evento = { titulo, desc, premioTipo: tipo, premioValor: valor, fim: Date.now() + (tempoH * 3600000), resgatados: {} };
-    db.ref('eventos/ativo').set(evento).then(() => { alert('Evento Criado!'); document.getElementById('adminEvTitulo').value = ''; document.getElementById('adminEvDesc').value = ''; document.getElementById('adminEvPremioValor').value = ''; });
-}
-function encerrarEventoGlobal() { if(confirm('Encerrar evento atual?')) { db.ref('eventos/ativo').remove(); } }
-
-function enviarCorreioDireto() {
-    const idAlvo = document.getElementById('adminCorreioDestId').value.trim();
-    const tipo = document.getElementById('adminCorreioTipo').value;
-    const valor = document.getElementById('adminCorreioValor').value.trim();
-    if(!idAlvo || !valor) { alert('Preencha o ID e o valor!'); return; }
-    db.ref('users').orderByChild('perfil/id').equalTo(idAlvo).once('value').then(snapshot => {
-        if(snapshot.exists()) {
-            const uid = Object.keys(snapshot.val())[0];
-            db.ref('correios/' + uid).push({ tipo, valor, remetente: 'Admin' }).then(() => { alert('Enviado pro correio!'); document.getElementById('adminCorreioDestId').value = ''; document.getElementById('adminCorreioValor').value = ''; });
-        } else { alert('ID não encontrado! O jogador precisa abrir o jogo antes.'); }
-    });
-}
-
-// --- SISTEMA DE TROCA SEGURA (5 SEGUNDOS) ---
+// --- TROCAS (DUPLA CONFIRMAÇÃO COM 5 SEGUNDOS) ---
 function escutarTrocasRecebidas() {
     if(!meuUid) return;
     db.ref('trocas_pendentes/' + perfil.id).on('value', snapshot => {
@@ -1399,7 +1278,7 @@ function escutarTrocasRecebidas() {
                 const t = data[idSala];
                 if (t.status === 'pendente') {
                     htmlAdd += `<div class="amigo-card" style="background:#3a1a5a; border-color:#ffd93d; margin-bottom:8px;">
-                        <div class="amigo-info"><div class="amigo-nome">Troca de ${t.deNome}</div><div class="amigo-status">${t.cartas.length} carta(s) oferecida(s)</div></div>
+                        <div class="amigo-info"><div class="amigo-nome">Troca de ${t.deNome}</div><div class="amigo-status">${t.cartas.length} carta(s)</div></div>
                         <button class="btn mini verde" onclick="aceitarTroca('${idSala}', '${encodeURIComponent(JSON.stringify(t.cartas))}')">Aceitar</button>
                     </div>`;
                 }
@@ -1447,7 +1326,46 @@ function concluirTroca(idSala, cartas) {
     salvarEstado(); db.ref('trocas_pendentes/' + perfil.id + '/' + idSala).remove();
     alert('✅ TROCA CONCLUÍDA!'); irParaHome();
 }
-  // --- LOJA E PACOTES ---
+</script>
+// --- CONSTANTES DO JOGO ---
+const CARTAS_HACK = [
+  { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999 },
+  { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999 },
+  { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999 },
+  { id: 'hack-umbreon', nome: 'Umbreon', emoji: '🌙', num: 'H-04', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh7/189_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh7/189.png', preco: 999999 },
+  { id: 'hack-mew', nome: 'Mew', emoji: '🔮', num: 'H-05', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3pt5/205.png', preco: 999999 }
+];
+
+const PACOTES=[
+  {cod:'base1',nome:'Base Set (1999)',emoji:'👑',preco:250,c1:'#d4a017',c2:'#8b5a00',gh:'base1'},
+  {cod:'base2',nome:'Jungle (1999)',emoji:'🌴',preco:100,c1:'#2e8b57',c2:'#1a4d30',gh:'base2'},
+  {cod:'base3',nome:'Fossil (1999)',emoji:'🦴',preco:90,c1:'#8b7355',c2:'#4a3a20',gh:'base3'},
+  {cod:'base5',nome:'Team Rocket (2000)',emoji:'🚀',preco:100,c1:'#8b1a1a',c2:'#4a0a0a',gh:'base5'},
+  {cod:'neo1',nome:'Neo Genesis (2000)',emoji:'🌟',preco:90,c1:'#4169e1',c2:'#1a2a6a',gh:'neo1'},
+  {cod:'ex1',nome:'EX Ruby & Sapphire (2003)',emoji:'💎',preco:70,c1:'#dc143c',c2:'#8b0a20',gh:'ex1'},
+  {cod:'ex8',nome:'EX Deoxys (2005)',emoji:'🌌',preco:70,c1:'#9400d3',c2:'#4a006a',gh:'ex8'},
+  {cod:'dp1',nome:'Diamond & Pearl (2007)',emoji:'💠',preco:50,c1:'#87ceeb',c2:'#4a7a8b',gh:'dp1'},
+  {cod:'hgss1',nome:'HeartGold SoulSilver (2010)',emoji:'🏆',preco:40,c1:'#ffd700',c2:'#b8860b',gh:'hgss1'},
+  {cod:'xy1',nome:'XY (2014)',emoji:'❌',preco:30,c1:'#e63946',c2:'#8b0a1a',gh:'xy1'},
+  {cod:'xy12',nome:'Evolutions (2016)',emoji:'🔙',preco:50,c1:'#ff8c00',c2:'#8b4a00',gh:'xy12'},
+  {cod:'sm1',nome:'Sun & Moon (2017)',emoji:'☀️',preco:25,c1:'#ffa500',c2:'#8b5a00',gh:'sm1'},
+  {cod:'swsh1',nome:'Sword & Shield (2020)',emoji:'⚔️',preco:20,c1:'#1e90ff',c2:'#0a3a7a',gh:'swsh1'},
+  {cod:'swsh7',nome:'Evolving Skies (2021)',emoji:'🌙',preco:60,c1:'#4a5fc0',c2:'#1a2a6a',gh:'swsh7'},
+  {cod:'swsh12pt5',nome:'Crown Zenith (2023)',emoji:'👑',preco:40,c1:'#ffd93d',c2:'#b8860b',gh:'swsh12pt5'},
+  {cod:'sv1',nome:'Scarlet & Violet (2023)',emoji:'🔴',preco:20,c1:'#ee1515',c2:'#8b0a0a',gh:'sv1'},
+  {cod:'sv3pt5',nome:'Pokémon 151 (2023)',emoji:'🎴',preco:45,c1:'#ffcb05',c2:'#3b4cca',gh:'sv3pt5'},
+  {cod:'sv4pt5',nome:'Paldean Fates (2024)',emoji:'✨',preco:40,c1:'#a855f7',c2:'#4a1a7a',gh:'sv4pt5'},
+  {cod:'sv6',nome:'Twilight Masquerade (2024)',emoji:'🎭',preco:30,c1:'#8b5a8b',c2:'#4a1a4a',gh:'sv6'},
+  {cod:'sv7',nome:'Stellar Crown (2024)',emoji:'👑',preco:30,c1:'#ffb700',c2:'#8b5a00',gh:'sv7'},
+  {cod:'sv8',nome:'Surging Sparks (2024)',emoji:'⚡',preco:45,c1:'#ffd93d',c2:'#f7a800',gh:'sv8'},
+  {cod:'sv8pt5',nome:'Prismatic Evolutions (2025)',emoji:'🌈',preco:70,c1:'#ff6ec7',c2:'#7a1a6a',gh:'sv8pt5'}
+];
+
+const RAR_NOME={'C':'Comum','U':'Incomum','R':'Rara','RH':'Rara Holo','UR':'Ultra Rara','RB':'Rainbow Rare','SEC':'Secret Rare','IR':'Ilustração Rara','SIR':'Ilustração Especial','HR':'Hyper Rare','PR':'Promo'};
+const RAR_BASE={C:0.30,U:0.50,R:3,RH:30,UR:300,IR:800,HR:1500,RB:2500,SEC:3000,SIR:5000,PR:5};
+const ERA_MULT={base1:100,base2:25,base3:25,base5:20,neo1:15,ex1:8,ex8:8,dp1:4,hgss1:4,xy1:2,xy12:2,sm1:1.2,swsh1:1,swsh7:1.5,swsh12pt5:1,sv1:1,sv3pt5:1.3,sv4pt5:1.3,sv6:1,sv7:1,sv8:1.2,sv8pt5:1.5};
+
+// --- LOJA E PACOTES ---
 function montarLoja(){
   const c=document.getElementById('packsScroll');c.innerHTML='';
   PACOTES.forEach(p=>{
@@ -1461,93 +1379,63 @@ function montarLoja(){
       '<img class="b-logo-img" src="'+packImg+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="b-emoji" style="display:none">'+p.emoji+'</div>'+
       '<div class="b-info">'+p.preco+' 🪙</div></div>'+
       '<div class="info"><div class="nome">'+p.nome.split(' (')[0]+'</div><div class="preco">'+p.preco+' 🪙'+(temCartas?'':' ⚠️')+'</div></div>';
-    d.onclick=()=>{
-      if(!temCartas){alert('Esse pacote não carregou. Toque em "🔄 Recarregar".');return;}
-      pacoteEscolhido=p.cod; salvarEstado();montarLoja();atualizarBotaoComprar();
-    };
+    d.onclick=()=>{ if(!temCartas){alert('Esse pacote não carregou. Toque em "🔄 Recarregar".');return;} pacoteEscolhido=p.cod; salvarEstado();montarLoja();atualizarBotaoComprar(); };
     c.appendChild(d);
   });
   atualizarBotaoComprar();
 }
-function atualizarBotaoComprar(){
-  const p=PACOTES.find(x=>x.cod===pacoteEscolhido);
-  if(p){ document.getElementById('btnComprar').textContent='💰 COMPRAR '+quantidade+'x POR '+(p.preco*quantidade)+' 🪙'; }
-}
+function atualizarBotaoComprar(){ const p=PACOTES.find(x=>x.cod===pacoteEscolhido); if(p){ document.getElementById('btnComprar').textContent='💰 COMPRAR '+quantidade+'x POR '+(p.preco*quantidade)+' 🪙'; } }
 document.getElementById('btnComprar').onclick=()=>{
-  const el=document.querySelector('.pack-card.sel');
-  if(!el){alert('Selecione um pacote!');return;}
-  const precoUnit=parseInt(el.dataset.preco);
-  const precoTotal=precoUnit*quantidade;
+  const el=document.querySelector('.pack-card.sel'); if(!el){alert('Selecione um pacote!');return;}
+  const precoUnit=parseInt(el.dataset.preco); const precoTotal=precoUnit*quantidade;
   if(!perfil.pacotesInfinitos && (pacotesCompradosHoje + quantidade) > LIMITE_DIARIO_PACOTES) { alert(`🚫 LIMITE ATINGIDO!`); return; }
   if(!dinheiroInfinito && moedas<precoTotal){alert('Moedas insuficientes!');return;}
-  if(!dinheiroInfinito) moedas-=precoTotal;
-  if(!perfil.pacotesInfinitos) pacotesCompradosHoje += quantidade;
-  inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade;
-  salvarEstado();atualizarUI();
-  const p=PACOTES.find(x=>x.cod===pacoteEscolhido);
-  alert('✅ Você comprou '+quantidade+'x '+p.nome.split(' (')[0]+'!');
+  if(!dinheiroInfinito) moedas-=precoTotal; if(!perfil.pacotesInfinitos) pacotesCompradosHoje += quantidade;
+  inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade; salvarEstado();atualizarUI();
+  const p=PACOTES.find(x=>x.cod===pacoteEscolhido); alert('✅ Você comprou '+quantidade+'x '+p.nome.split(' (')[0]+'!');
 };
 
-// --- INVENTÁRIO ---
+// --- INVENTÁRIO E ABERTURA ---
 function montarInventario(){
   const c=document.getElementById('invLista');c.innerHTML='';
   const keys=Object.keys(inventario).filter(k=>inventario[k]>0);
   if(keys.length===0){ c.innerHTML='<div class="inv-vazio">🎒 Seu inventário está vazio.<br><br>Compre pacotes na 🏪 Loja!</div>'; return; }
   keys.forEach(setId=>{
     const p=PACOTES.find(x=>x.cod===setId); if(!p)return;
-    const qtd=inventario[setId];
-    const packImg=PACKSHOTS[setId] || 'https://images.pokemontcg.io/'+setId+'/logo.png';
+    const qtd=inventario[setId]; const packImg=PACKSHOTS[setId] || 'https://images.pokemontcg.io/'+setId+'/logo.png';
     const d=document.createElement('div'); d.className='inv-item';
     d.innerHTML='<div class="thumb" style="--c1:'+p.c1+';--c2:'+p.c2+'"><img src="'+packImg+'"></div>'+
       '<div class="info"><div class="nome">'+p.nome+'</div><div class="qtd">📦 '+qtd+' pacote(s)</div></div>'+
       '<div class="btns"><button class="abrir1" data-set="'+setId+'" data-qty="1">Abrir 1</button><button class="tudo" data-set="'+setId+'" data-qty="'+qtd+'">Abrir '+qtd+'</button></div>';
     c.appendChild(d);
   });
-  document.querySelectorAll('.inv-item .btns button').forEach(btn=>{
-    btn.onclick=()=>{ abrirDoInventario(btn.dataset.set, parseInt(btn.dataset.qty)); };
-  });
+  document.querySelectorAll('.inv-item .btns button').forEach(btn=>{ btn.onclick=()=>{ abrirDoInventario(btn.dataset.set, parseInt(btn.dataset.qty)); }; });
 }
-
 function abrirDoInventario(setId, qty){
   if(!inventario[setId] || inventario[setId] <= 0)return;
-  const realQty=Math.min(qty, inventario[setId]);
-  inventario[setId]-=realQty;
+  const realQty=Math.min(qty, inventario[setId]); inventario[setId]-=realQty;
   if(inventario[setId]<=0) delete inventario[setId];
-  salvarEstado();atualizarUI();
-  pacoteEscolhido=setId;
-  pacotesSendoAbertos = realQty;
-  pacotesFaltandoAbrir = realQty - 1;
-  const p=PACOTES.find(x=>x.cod===setId);
-  const pf=document.getElementById('packFechado');
+  salvarEstado();atualizarUI(); pacoteEscolhido=setId; pacotesSendoAbertos = realQty; pacotesFaltandoAbrir = realQty - 1;
+  const p=PACOTES.find(x=>x.cod===setId); const pf=document.getElementById('packFechado');
   pf.style.setProperty('--c1',p.c1); pf.style.setProperty('--c2',p.c2);
   document.getElementById('packNome').textContent=p.nome+(realQty>1?' ('+realQty+'x)':'');
   pf.className='pack-3d'; pf.style.display='flex'; pf.style.opacity='1'; pf.style.transform='';
   mostrarTela('telaPack'); configurarRasgar();
 }
-
 document.getElementById('btnCancelarPack').onclick=()=>{
-  if(pacotesSendoAbertos > 0){
-    inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + pacotesFaltandoAbrir + 1;
-    pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; salvarEstado();
-  }
+  if(pacotesSendoAbertos > 0){ inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + pacotesFaltandoAbrir + 1; pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; salvarEstado(); }
   telaStack = []; montarInventario(); mostrarTela('telaInventario', false);
 };
-
 function configurarRasgar(){
-  const p=document.getElementById('packFechado');
-  let sx=0,sy=0,arr=false;
+  const p=document.getElementById('packFechado'); let sx=0,sy=0,arr=false;
   const ini=e=>{arr=true;const t=e.touches?e.touches[0]:e;sx=t.clientX;sy=t.clientY;};
   const mov=e=>{if(!arr)return;const t=e.touches?e.touches[0]:e;if(Math.abs(t.clientX-sx)>50||Math.abs(t.clientY-sy)>50){arr=false;rasgar();}};
   const newP = p.cloneNode(true); p.parentNode.replaceChild(newP, p);
-  newP.addEventListener('touchstart',ini,{passive:true}); newP.addEventListener('touchmove',mov,{passive:true});
-  newP.addEventListener('mousedown',ini); newP.addEventListener('mousemove',mov);
+  newP.addEventListener('touchstart',ini,{passive:true}); newP.addEventListener('touchmove',mov,{passive:true}); newP.addEventListener('mousedown',ini); newP.addEventListener('mousemove',mov);
 }
-
-// --- ABERTURA DE PACOTES ---
 function sortearRar(tab){
   const tabAjustada = tab.map(t => ['UR','IR','SIR','HR','RB','SEC'].includes(t.r) ? {r: t.r, p: t.p * multiplicadorSortePacotes} : t);
-  const tot=tabAjustada.reduce((s,t)=>s+t.p,0); let r=Math.random()*tot;
-  for(const t of tabAjustada){ if(r<t.p)return t.r; r-=t.p; } return 'C';
+  const tot=tabAjustada.reduce((s,t)=>s+t.p,0); let r=Math.random()*tot; for(const t of tabAjustada){ if(r<t.p)return t.r; r-=t.p; } return 'C';
 }
 function pegarCarta(setId,rarAlvo){
   const pool=CARDS_POR_SET[setId]||[]; if(pool.length===0)return null;
@@ -1560,36 +1448,27 @@ const CHANCES_5=[{r:'C', p: 60},{r:'U', p: 22},{r:'R', p: 10},{r:'RH', p: 6},{r:
 function gerarCartasDoPack(setId){
   const cartas=[];
   for(let i=0;i<7;i++){ const c=pegarCarta(setId,Math.random()<0.7?'C':'U'); if(c)cartas.push(c); }
-  const c9=pegarCarta(setId,sortearRar(CHANCES_4)); if(c9)cartas.push(c9);
-  const c10=pegarCarta(setId,sortearRar(CHANCES_5)); if(c10)cartas.push(c10);
+  const c9=pegarCarta(setId,sortearRar(CHANCES_4)); if(c9)cartas.push(c9); const c10=pegarCarta(setId,sortearRar(CHANCES_5)); if(c10)cartas.push(c10);
   while(cartas.length<10){ const c=pegarCarta(setId,'C'); if(c)cartas.push(c);else break; } return cartas;
 }
 function rasgar(){
   if(ripLock) return; ripLock = true; setTimeout(()=>ripLock=false, 1000);
-  document.getElementById('btnCancelarPack').style.display='none';
-  document.getElementById('packFechado').classList.add('aberto');
+  document.getElementById('btnCancelarPack').style.display='none'; document.getElementById('packFechado').classList.add('aberto');
   packAtual=gerarCartasDoPack(pacoteEscolhido);
   packAtual.forEach(c=>{ if(!colecao[c.id])colecao[c.id]={qtd:0,gradeds:[]}; colecao[c.id].qtd=(colecao[c.id].qtd||0)+1; });
   salvarEstado();atualizarUI();
-  setTimeout(()=>{
-    document.getElementById('packFechado').style.display='none';
-    revIdx=0; mostrarTela('telaRevelar'); mostrarCartaRevelar();
-  },400);
+  setTimeout(()=>{ document.getElementById('packFechado').style.display='none'; revIdx=0; mostrarTela('telaRevelar'); mostrarCartaRevelar(); },400);
   checarAlbumCompleto(pacoteEscolhido);
 }
-
 function mostrarCartaRevelar(){
   revEstado='mostrando'; const c=packAtual[revIdx]; if(!c)return;
-  const img=document.getElementById('revImg'); img.onerror=function(){this.src=CARTA_VERSO;};
-  img.src=CARTA_VERSO; document.getElementById('revRodape').textContent='Carta '+(revIdx+1)+' de '+packAtual.length;
-  document.getElementById('revSub').textContent='👆 Toque na carta para revelar';
+  const img=document.getElementById('revImg'); img.onerror=function(){this.src=CARTA_VERSO;}; img.src=CARTA_VERSO;
+  document.getElementById('revRodape').textContent='Carta '+(revIdx+1)+' de '+packAtual.length; document.getElementById('revSub').textContent='👆 Toque na carta para revelar';
 }
 document.getElementById('revCarta').onclick=()=>{
   const c=packAtual[revIdx]; if(!c)return;
-  if(revEstado==='mostrando'){
-    document.getElementById('revImg').src=c.imgSmall||c.img; revEstado='virada';
-    document.getElementById('revSub').innerHTML='<span style="font-size:1.6rem;color:#f7a800;">💰 '+formatarPreco(c.preco)+'</span>';
-  } else { avancarRevelar(); }
+  if(revEstado==='mostrando'){ document.getElementById('revImg').src=c.imgSmall||c.img; revEstado='virada'; document.getElementById('revSub').innerHTML='<span style="font-size:1.6rem;color:#f7a800;">💰 '+formatarPreco(c.preco)+'</span>'; } 
+  else { avancarRevelar(); }
 };
 function avancarRevelar(){ revIdx++; if(revIdx>=packAtual.length)mostrarTelaFinal(); else mostrarCartaRevelar(); }
 document.getElementById('btnSkip').onclick=()=>{ mostrarTelaFinal(); };
@@ -1603,8 +1482,7 @@ function loopAutoRevelar(){
 function pararAutoRevelar(){ autoRevelar=false; }
 
 function mostrarTelaFinal(){
-  mostrarTela('telaFinal'); const g=document.getElementById('finalGrid'); g.innerHTML='';
-  let totalPreco=0;
+  mostrarTela('telaFinal'); const g=document.getElementById('finalGrid'); g.innerHTML=''; let totalPreco=0;
   packAtual.forEach((c,i)=>{ totalPreco+=c.preco; g.innerHTML+='<div class="carta-final"><img src="'+c.imgSmall+'"></div>'; });
   document.getElementById('totalVal').textContent=formatarPreco(totalPreco);
   document.getElementById('btnFinalProximo').onclick=()=>{ if(pacotesFaltandoAbrir>0){ pacotesFaltandoAbrir--; mostrarTela('telaPack'); configurarRasgar(); } else { irParaHome(); } };
@@ -1614,26 +1492,16 @@ function checarAlbumCompleto(setId){
   const pool = setId === 'hack' ? CARTAS_HACK : (CARDS_POR_SET[setId] || []);
   if(!pool.length || colecoesCompletas.includes(setId)) return;
   const temTodas = pool.every(c => colecao[c.id] && (colecao[c.id].qtd > 0 || (colecao[c.id].gradeds||[]).length > 0));
-  if(!temTodas) return;
-  colecoesCompletas.push(setId); salvarEstado();
-  document.getElementById('complSetNome').textContent = setId === 'hack' ? 'ARQUIVO HACK' : setId;
-  document.getElementById('telaCompleta').classList.add('ativo');
+  if(!temTodas) return; colecoesCompletas.push(setId); salvarEstado();
+  document.getElementById('complSetNome').textContent = setId === 'hack' ? 'ARQUIVO HACK' : setId; document.getElementById('telaCompleta').classList.add('ativo');
 }
 
 // --- PERFIL E HISTÓRICO ---
 function abrirPerfil() {
-    mostrarTela('telaPerfil');
-    document.getElementById('perfilNome').innerHTML = (usuario ? usuario.nome : 'Treinador');
-    document.getElementById('perfilId').textContent = perfil.id;
-    document.getElementById('perfilNivel').textContent = calcularNivel(getTotalCartas());
-    document.getElementById('perfilCartas').textContent = getTotalCartas();
-    document.getElementById('perfilGrad').textContent = getTotalGradeds();
-    document.getElementById('perfilMoedas').textContent = getMoedasStr();
-    const cardBg = document.getElementById('perfilCardBg'); cardBg.className = 'perfil-card';
-    cardBg.style.background = perfil.cor;
-    document.getElementById('adminCrown').style.display = perfil.coroa ? 'block' : 'none';
-    document.getElementById('adminBadgeName').style.display = perfil.badge ? 'inline-block' : 'none';
-    document.getElementById('adminBadgeName').textContent = perfil.adminTitle;
+    mostrarTela('telaPerfil'); document.getElementById('perfilNome').innerHTML = (usuario ? usuario.nome : 'Treinador'); document.getElementById('perfilId').textContent = perfil.id;
+    document.getElementById('perfilNivel').textContent = calcularNivel(getTotalCartas()); document.getElementById('perfilCartas').textContent = getTotalCartas(); document.getElementById('perfilGrad').textContent = getTotalGradeds(); document.getElementById('perfilMoedas').textContent = getMoedasStr();
+    const cardBg = document.getElementById('perfilCardBg'); cardBg.className = 'perfil-card'; cardBg.style.background = perfil.cor;
+    document.getElementById('adminCrown').style.display = perfil.coroa ? 'block' : 'none'; document.getElementById('adminBadgeName').style.display = perfil.badge ? 'inline-block' : 'none'; document.getElementById('adminBadgeName').textContent = perfil.adminTitle;
 }
 function trocarNome() {
     if (!dinheiroInfinito && moedas < 50000) { alert('❌ Você não tem 50.000 moedas!'); return; }
@@ -1652,51 +1520,29 @@ function renderizarListaAmigos() {
     const lista = document.getElementById('listaAmigos'); lista.innerHTML = '';
     if(amigos.length === 0) { lista.innerHTML = '<p style="color:#a89ec4; text-align:center;">Sem amigos.</p>'; return; }
     amigos.forEach((amigo, index) => {
-        const d = document.createElement('div'); d.className = 'amigo-card';
-        d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor}">${amigo.avatar}</div><div class="amigo-info"><div class="amigo-nome">${amigo.nome}</div><div class="amigo-status">Nível ${amigo.nivel}</div></div>`;
-        d.onclick = () => { trocaAtual.destinatario = amigo.id; abrirSeletorCarta(); };
-        lista.appendChild(d);
+        const d = document.createElement('div'); d.className = 'amigo-card'; d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor}">${amigo.avatar}</div><div class="amigo-info"><div class="amigo-nome">${amigo.nome}</div><div class="amigo-status">Nível ${amigo.nivel}</div></div>`;
+        d.onclick = () => { trocaAtual.destinatario = amigo.id; abrirSeletorCarta(); }; lista.appendChild(d);
     });
 }
 function abrirModalAddAmigo() { document.getElementById('modalAddAmigo').classList.add('ativo'); }
 function adicionarAmigo() {
     const code = document.getElementById('inputAddAmigo').value.trim();
-    try {
-        const data = JSON.parse(decodeURIComponent(atob(code)));
-        amigos.push(data); salvarEstado(); document.getElementById('modalAddAmigo').classList.remove('ativo'); renderizarListaAmigos();
-    } catch(e) { alert('Código inválido.'); }
+    try { const data = JSON.parse(decodeURIComponent(atob(code))); amigos.push(data); salvarEstado(); document.getElementById('modalAddAmigo').classList.remove('ativo'); renderizarListaAmigos(); } catch(e) { alert('Código inválido.'); }
 }
-
 function abrirSeletorCarta() {
-    document.getElementById('modalSelecionarCarta').classList.add('ativo');
-    const grid = document.getElementById('modalCartasGrid'); grid.innerHTML = '';
-    for(const cId in colecao) {
-        const info = colecao[cId]; const carta = encontrarCarta(cId);
-        if(carta && info.qtd > 0) {
-            const d = document.createElement('div'); d.className = 'modal-carta-item';
-            d.innerHTML = `<img src="${carta.imgSmall}"><div class="qtd-badge">x${info.qtd}</div>`;
-            d.onclick = () => { trocaAtual.cartas.push({ id: cId, tipo: 'raw', img: carta.imgSmall }); document.getElementById('modalSelecionarCarta').classList.remove('ativo'); enviarPropostaTroca(); };
-            grid.appendChild(d);
-        }
+    document.getElementById('modalSelecionarCarta').classList.add('ativo'); const grid = document.getElementById('modalCartasGrid'); grid.innerHTML = '';
+    for(const cId in colecao) { const info = colecao[cId]; const carta = encontrarCarta(cId);
+        if(carta && info.qtd > 0) { const d = document.createElement('div'); d.className = 'modal-carta-item'; d.innerHTML = `<img src="${carta.imgSmall}"><div class="qtd-badge">x${info.qtd}</div>`;
+            d.onclick = () => { trocaAtual.cartas.push({ id: cId, tipo: 'raw', img: carta.imgSmall }); document.getElementById('modalSelecionarCarta').classList.remove('ativo'); enviarPropostaTroca(); }; grid.appendChild(d); }
     }
 }
 
 // --- ADMIN ---
 let adminClickCount = 0, adminClickTimer = null;
-document.getElementById('homeUserName').onclick = () => {
-    adminClickCount++; clearTimeout(adminClickTimer); adminClickTimer = setTimeout(() => adminClickCount = 0, 1500);
-    if(adminClickCount >= 7) { adminClickCount = 0; document.getElementById('modalSenha').classList.add('ativo'); }
-};
-document.getElementById('btnConfirmarSenha').onclick = () => {
-    if(document.getElementById('senhaInput').value === SENHA_MOD) { document.getElementById('modalSenha').classList.remove('ativo'); abrirAdmin(); }
-    else { document.getElementById('erroSenha').textContent = 'Erro!'; }
-};
-
-function abrirAdmin() {
-    mostrarTela('telaAdmin'); atualizarBotoesAdmin(); carregarCartasAdmin(); renderizarAdminVisuais();
-}
+document.getElementById('homeUserName').onclick = () => { adminClickCount++; clearTimeout(adminClickTimer); adminClickTimer = setTimeout(() => adminClickCount = 0, 1500); if(adminClickCount >= 7) { adminClickCount = 0; document.getElementById('modalSenha').classList.add('ativo'); } };
+document.getElementById('btnConfirmarSenha').onclick = () => { if(document.getElementById('senhaInput').value === SENHA_MOD) { document.getElementById('modalSenha').classList.remove('ativo'); abrirAdmin(); } else { document.getElementById('erroSenha').textContent = 'Erro!'; } };
+function abrirAdmin() { mostrarTela('telaAdmin'); atualizarBotoesAdmin(); carregarCartasAdmin(); renderizarAdminVisuais(); }
 document.getElementById('btnSairAdmin').onclick = irParaHome;
-
 function atualizarBotoesAdmin() {
     document.getElementById('btnAdminInfinito').textContent = dinheiroInfinito ? '♾️ Dinheiro: ON' : '♾️ Dinheiro: OFF';
     document.getElementById('btnAdminPacotesInfinitos').textContent = perfil.pacotesInfinitos ? '📦 Pacotes: ON' : '📦 Pacotes: OFF';
@@ -1705,28 +1551,16 @@ function atualizarBotoesAdmin() {
 document.getElementById('btnAdminInfinito').onclick = () => { dinheiroInfinito = !dinheiroInfinito; salvarEstado(); atualizarBotoesAdmin(); };
 document.getElementById('btnAdminPacotesInfinitos').onclick = () => { perfil.pacotesInfinitos = !perfil.pacotesInfinitos; salvarEstado(); atualizarBotoesAdmin(); };
 document.getElementById('btnAdminCoroa').onclick = () => { perfil.coroa = !perfil.coroa; salvarEstado(); atualizarBotoesAdmin(); };
-
-document.getElementById('btnAdminSetId').onclick = () => {
-    const novo = document.getElementById('adminIdInput').value.trim();
-    if(/^#\d{4}$/.test(novo)) { perfil.id = novo; salvarEstado(); alert('ID Alterado!'); } else { alert('Formato inválido (#1234).'); }
-};
+document.getElementById('btnAdminSetId').onclick = () => { const novo = document.getElementById('adminIdInput').value.trim(); if(/^#\d{4}$/.test(novo)) { perfil.id = novo; salvarEstado(); alert('ID Alterado!'); } else { alert('Formato inválido (#1234).'); } };
 document.getElementById('btnAddDinheiro').onclick = () => { moedas += parseInt(document.getElementById('adminDinheiro').value)||0; salvarEstado(); atualizarUI(); };
 document.getElementById('btnRemDinheiro').onclick = () => { moedas -= parseInt(document.getElementById('adminDinheiro').value)||0; salvarEstado(); atualizarUI(); };
-
 function carregarCartasAdmin() {
-    const setId = document.getElementById('adminSetSelect').value;
-    const grid = document.getElementById('adminCardsGrid'); grid.innerHTML = '';
-    (CARDS_POR_SET[setId]||[]).forEach(c => {
-        const d = document.createElement('div'); d.className = 'admin-card-slot';
-        d.innerHTML = `<img src="${c.imgSmall}"><div class="nome-card">${c.nome}</div>`;
-        d.onclick = () => { 
-            if(!colecao[c.id]) colecao[c.id]={qtd:0,gradeds:[]}; colecao[c.id].qtd++; salvarEstado(); atualizarUI(); alert('Carta adicionada!'); 
-        };
-        grid.appendChild(d);
-    });
+    const setId = document.getElementById('adminSetSelect').value; const grid = document.getElementById('adminCardsGrid'); grid.innerHTML = '';
+    (CARDS_POR_SET[setId]||[]).forEach(c => { const d = document.createElement('div'); d.className = 'admin-card-slot'; d.innerHTML = `<img src="${c.imgSmall}"><div class="nome-card">${c.nome}</div>`;
+        d.onclick = () => { if(!colecao[c.id]) colecao[c.id]={qtd:0,gradeds:[]}; colecao[c.id].qtd++; salvarEstado(); atualizarUI(); alert('Carta adicionada!'); }; grid.appendChild(d); });
 }
 
-// --- INICIALIZAÇÃO FINAL E CARREGAMENTO DA API ---
+// --- INICIALIZAÇÃO FINAL ---
 function encontrarCarta(id) {
     const hack = CARTAS_HACK.find(c=>c.id===id); if(hack) return hack;
     for(const s in CARDS_POR_SET){ const f = CARDS_POR_SET[s].find(c=>c.id===id); if(f) return f; }
@@ -1734,7 +1568,7 @@ function encontrarCarta(id) {
 }
 function formatarPreco(v){ return 'R$ ' + v.toFixed(2); }
 function mapRaridade(r){ if(!r)return 'C'; const s=r.toLowerCase(); if(s.includes('special'))return 'SIR'; if(s.includes('ultra'))return 'UR'; if(s.includes('holo'))return 'RH'; if(s.includes('rare'))return 'R'; return 'C'; }
-function calcularPrecoCarta(c){ return (RAR_BASE[mapRaridade(c.rarity)]||0.3) * 1.5; } // Simplificado para evitar erro
+function calcularPrecoCarta(c){ return (RAR_BASE[mapRaridade(c.rarity)]||0.3) * 1.5; } 
 
 async function carregarTudo(){
   const faltando = PACOTES.filter(p=>!CARDS_POR_SET[p.cod]);
@@ -1763,6 +1597,9 @@ document.getElementById('btnVoltarLoja').onclick=irParaHome;
 document.getElementById('btnVoltarInv').onclick=irParaHome;
 document.getElementById('navHome').onclick=irParaHome;
 document.getElementById('navHome2').onclick=irParaHome;
+document.getElementById('btnVoltarCol').onclick=irParaHome;
+document.getElementById('navCol').onclick=mostrarCol;
+document.getElementById('navCol2').onclick=mostrarCol;
 
 // CHAMADA INICIAL
 montarEnergias();
