@@ -79,7 +79,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .pokeball-logo::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:#fff;border:6px solid #222}
 #telaLogin h1{font-size:2.5rem;font-weight:900;background:linear-gradient(90deg,#ffd93d,#f7a800,#ffd93d);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;letter-spacing:1.5px;margin-bottom:4px;animation:brilharTexto 3s linear infinite;z-index:2}
 #telaLogin .sub{color:#7a6d9a;font-size:.85rem;letter-spacing:3px;margin-bottom:26px;text-transform:uppercase;font-weight:900;text-align:center;z-index:2}
-#telaIntro{background:linear-gradient(180deg,#c8f0d8 0%,#a8e0f5 35%,#d8c8f0 70%,#f8d8e8 100%);padding:60px 20px 40px;justify-content:space-between;overflow:hidden}
+  #telaIntro{background:linear-gradient(180deg,#c8f0d8 0%,#a8e0f5 35%,#d8c8f0 70%,#f8d8e8 100%);padding:60px 20px 40px;justify-content:space-between;overflow:hidden}
 .cartas-flut{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .carta-f{position:absolute;border-radius:8px;opacity:.65;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:flutuarPacote 6s ease-in-out infinite;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.8);font-size:1.4rem;background:linear-gradient(160deg,#b8e6c8,#66bb6a)}
 .logo-poke{position:relative;z-index:5;text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -172,7 +172,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .total-box{width:100%;max-width:520px;border-radius:20px;padding:18px;text-align:center;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,.1);animation:pop .6s .4s backwards;margin-left:auto;margin-right:auto}
 .total-box.lucro{background:linear-gradient(135deg,#d4f8d4,#a8e8a8);border:2px solid #4caf50}.total-box.perda{background:linear-gradient(135deg,#ffe0e0,#ffb8b8);border:2px solid #f44336}.total-box.empate{background:linear-gradient(135deg,#fff8dc,#ffe8a0);border:2px solid #ffd93d}
 .total-box .lbl{font-size:.75rem;color:#555;letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:6px}.total-box .val{font-size:1.8rem;font-weight:900;color:#2a1a4a;margin-bottom:6px}.total-box .status{font-size:1rem;font-weight:900;margin-top:6px}
-#telaColecao{background:#f0f4f8;justify-content:flex-start;padding:14px 14px 100px;overflow-y:auto}
+  #telaColecao{background:#f0f4f8;justify-content:flex-start;padding:14px 14px 100px;overflow-y:auto}
 .col-topo{display:flex;align-items:center;width:100%;max-width:520px;margin:0 auto 16px auto;position:relative;min-height:42px}.col-titulo{font-size:1.4rem;font-weight:900;color:#4a6fa5;text-shadow:1px 1px 0 #fff;flex:1;text-align:left;padding-right:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#btnVoltarCol{position:absolute;right:0;top:50%;transform:translateY(-50%)}
 .col-tabs{display:flex;gap:10px;width:100%;max-width:520px;margin:0 auto 16px auto}.col-tab{flex:1;padding:12px;border-radius:14px;border:2px solid #cfd8e3;background:#fff;color:#4a6fa5;font-weight:900;font-size:.85rem;font-family:inherit;cursor:pointer;letter-spacing:.5px;transition:.2s;box-shadow:0 4px 0 #cfd8e3}.col-tab.at{background:linear-gradient(180deg,#6dd5ed,#4a9fd8);color:#fff;border-color:#2a6a9a;box-shadow:0 4px 0 #2a6a9a;transform:scale(1.02)}
 .albuns-lista{display:flex;flex-direction:column;gap:14px;width:100%;max-width:520px;padding-bottom:20px;margin:0 auto}
@@ -252,7 +252,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .resultado-nota{text-align:center;padding:20px}.resultado-nota .nota-num{font-size:9rem;font-weight:900;line-height:1;margin-bottom:10px}.resultado-nota .nota-num.n10{background:linear-gradient(180deg,#ffd93d,#f7a800);-webkit-background-clip:text;background-clip:text;color:transparent;animation:pulsar 1s infinite}.resultado-nota .nota-num.n9{color:#e0e0e0}.resultado-nota .nota-num.n8{color:#cd7f32}.resultado-nota .nota-num.n7{color:#888}.resultado-nota .nota-label{font-size:1.2rem;font-weight:900;letter-spacing:2px;margin-bottom:20px;color:#fff}.resultado-nota .nota-label.gem{color:#ffd93d}
 .resultado-valor{background:rgba(255,255,255,.1);border:2px solid rgba(255,217,61,.4);border-radius:18px;padding:20px;margin:24px 0}.resultado-valor .lbl{font-size:.75rem;color:#a89ec4;letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:6px}.resultado-valor .val{font-size:1.8rem;font-weight:900;color:#ffd93d}.resultado-valor .delta{font-size:.9rem;font-weight:800;margin-top:6px}.delta.pos{color:#7eeb8e}.delta.neg{color:#ff5566}
 .confetes-graduacao{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:199}.confete-g{position:absolute;width:14px;height:14px;top:-20px;animation:confeteCai linear forwards}@keyframes confeteCai{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:.7}}
-#telaAdmin{background:linear-gradient(160deg,#1a0a2a 0%,#2a1a4a 50%,#1a0a3a 100%);padding:16px 14px 40px;justify-content:flex-start;overflow-y:auto}
+  #telaAdmin{background:linear-gradient(160deg,#1a0a2a 0%,#2a1a4a 50%,#1a0a3a 100%);padding:16px 14px 40px;justify-content:flex-start;overflow-y:auto}
 #telaAdmin h2{color:#ffd700;font-size:1.5rem;font-weight:900;letter-spacing:2px;margin-bottom:6px;text-shadow:0 0 20px rgba(255,215,0,.5);text-align:center}#telaAdmin .admin-sub{color:#a89ec4;font-size:.8rem;font-weight:800;margin-bottom:24px;text-align:center;letter-spacing:1px}
 .admin-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,215,0,.25);border-radius:18px;padding:18px;margin-bottom:16px;width:100%;max-width:520px;margin-left:auto;margin-right:auto}
 .admin-card h4{color:#ffd700;font-size:.95rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}.admin-card .campo{background:rgba(0,0,0,.3);border-color:rgba(255,215,0,.3);color:#fff;max-width:100%;margin-bottom:12px;text-align:left;padding:14px 18px}.admin-card .campo::placeholder{color:#a89ec4}.admin-card .campo:focus{border-color:#ffd700;background:rgba(0,0,0,.5);box-shadow:0 0 0 4px rgba(255,215,0,.15)}
@@ -403,7 +403,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 </style>
 </head>
 <body>
-  <div id="loading">
+<div id="loading">
   <div class="energias-wrap rodando" id="energiasWrap"></div>
   <div class="load-box">
     <div class="row"><span class="txt" id="loadingTxt">Carregando...</span><span class="pct" id="loadingPct">0%</span></div>
@@ -444,7 +444,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   <div class="passo" data-p="5"><div class="ico">🎉</div><h2>Boa Sorte!</h2><p>Complete as coleções e fique rico!</p></div>
   <button class="btn gold" id="btnProxTut" style="margin-top:24px;max-width:280px">Próximo</button>
 </div>
-
 <div class="tela" id="telaHome">
   <div class="bg-pokeballs" id="bgHome"></div>
   <div class="home-top">
@@ -636,7 +635,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     </div>
   </div>
 </div>
-
 <div class="modal-overlay" id="modalAddAmigo">
   <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
     <h3 style="color:#ffd93d;">Adicionar Amigo</h3>
@@ -652,6 +650,29 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <h3 style="text-align:center; margin-bottom:15px; color:#ffd93d;">Selecione uma Carta</h3>
     <div class="modal-cartas-grid" id="modalCartasGrid"></div>
     <button class="btn ghost" onclick="document.getElementById('modalSelecionarCarta').classList.remove('ativo')" style="margin-top:15px; color:#1a0a2a;">Fechar</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalAdminOpcoes">
+  <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
+    <h3 style="color:#ffd93d;" id="adminOpcoesTitulo">Carta</h3>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-top:20px;">
+        <button class="btn gold" onclick="executarAdminNormal('meuInv')">➕ Meu Inventário (Normal)</button>
+        <button class="btn" style="background:linear-gradient(180deg,#a855f7,#6d28d9); color:#fff; box-shadow:0 6px 0 #4a1a8a;" onclick="executarAdminPSA('meuInv')">➕ Meu Inventário (PSA)</button>
+        <button class="btn" style="background:linear-gradient(180deg,#4a9fd8,#2a6a9a); color:#fff; box-shadow:0 6px 0 #1a4a6a;" onclick="executarAdminNormal('correio')">📬 Enviar p/ Correio (Normal)</button>
+        <button class="btn" style="background:linear-gradient(180deg,#a855f7,#6d28d9); color:#fff; box-shadow:0 6px 0 #4a1a8a;" onclick="executarAdminPSA('correio')">📬 Enviar p/ Correio (PSA)</button>
+    </div>
+    <button class="btn ghost" onclick="document.getElementById('modalAdminOpcoes').classList.remove('ativo')" style="margin-top:15px; color:#1a0a2a;">Fechar</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSelecionarAmigoAdmin">
+  <div class="modal-box" style="background:#1a0a2a; border:2px solid #ffd93d;">
+    <h3 style="color:#ffd93d;">Enviar para Correio</h3>
+    <p style="color:#a89ec4; font-size:0.85rem; font-weight:800; margin-bottom:15px;">Digite o ID do jogador que vai receber.</p>
+    <input type="text" id="adminCorreioId" class="campo" placeholder="Ex: #1234">
+    <button class="btn gold" onclick="confirmarEnvioCorreio()">Enviar</button>
+    <button class="btn ghost" onclick="document.getElementById('modalSelecionarAmigoAdmin').classList.remove('ativo')" style="margin-top:10px; color:#1a0a2a;">Cancelar</button>
   </div>
 </div>
 
@@ -694,7 +715,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   <div class="inv-lista" id="invLista" style="z-index:2"></div>
   <button class="btn ghost" id="btnVoltarInv" style="max-width:520px;margin-top:20px;z-index:2">← Voltar</button>
 </div>
-
 <div class="tela" id="telaPack">
   <div class="bg-pokeballs" id="bgPack"></div>
   <button class="btn-cancelar-pack" id="btnCancelarPack" style="display:none">❌ CANCELAR</button>
@@ -934,7 +954,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   </div>
   <div class="admin-status" id="adminStatus"></div>
 </div>
-
 <div class="modal-overlay" id="modalConfig">
   <div class="modal-box">
     <h3>⚙️ Configurações</h3>
@@ -1006,6 +1025,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <button class="btn vermelho" onclick="cancelarTrocaTimer()" style="margin-top:20px;">CANCELAR TROCA</button>
   </div>
 </div>
+
 <script>
 const KEY='pb_v7_';
 const SENHA_MOD='1502';
@@ -1056,6 +1076,14 @@ const LIMITE_DIARIO_PACOTES = 600;
 if(!perfil) {
     perfil = { id: '#' + Math.floor(1000 + Math.random() * 9000), avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)', customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false, adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: 'admin-deco', dataCriacao: new Date().toISOString(), rewardHackClaimed: false, pacotesInfinitos: false, coroa: false, rainbowName: false, badge: false };
 }
+if (!perfil.adminTitle) perfil.adminTitle = '👑 CRIADOR SUPREMO 👑';
+if (!perfil.adminFrame) perfil.adminFrame = 'admin-deco';
+if (!perfil.dataCriacao) perfil.dataCriacao = new Date().toISOString();
+if (perfil.rewardHackClaimed === undefined) perfil.rewardHackClaimed = false;
+if (perfil.coroa === undefined) perfil.coroa = perfil.isAdmin ? true : false;
+if (perfil.rainbowName === undefined) perfil.rainbowName = perfil.isAdmin ? true : false;
+if (perfil.badge === undefined) perfil.badge = perfil.isAdmin ? true : false;
+if (perfil.pacotesInfinitos === undefined) perfil.pacotesInfinitos = perfil.isAdmin ? true : false;
 
 let trocaAtual = { cartas: [], destinatario: null };
 let telaStack = [];
@@ -1082,11 +1110,11 @@ let trocaCancelada = false;
 let trocaConcluida = false;
 
 const CARTAS_HACK = [
-  { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999 },
-  { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999 },
-  { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999 },
-  { id: 'hack-umbreon', nome: 'Umbreon', emoji: '🌙', num: 'H-04', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh7/189_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh7/189.png', preco: 999999 },
-  { id: 'hack-mew', nome: 'Mew', emoji: '🔮', num: 'H-05', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3pt5/205.png', preco: 999999 }
+  { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999, valorVenda: 0 },
+  { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999, valorVenda: 0 },
+  { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999, valorVenda: 0 },
+  { id: 'hack-umbreon', nome: 'Umbreon', emoji: '🌙', num: 'H-04', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh7/189_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh7/189.png', preco: 999999, valorVenda: 0 },
+  { id: 'hack-mew', nome: 'Mew', emoji: '🔮', num: 'H-05', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3pt5/205.png', preco: 999999, valorVenda: 0 }
 ];
 
 const PACOTES=[
@@ -1118,8 +1146,10 @@ const RAR_NOME={'C':'Comum','U':'Incomum','R':'Rara','RH':'Rara Holo','UR':'Ultr
 const RAR_BASE={C:0.30,U:0.50,R:3,RH:30,UR:300,IR:800,HR:1500,RB:2500,SEC:3000,SIR:5000,PR:5};
 const ERA_MULT={base1:100,base2:25,base3:25,base5:20,neo1:15,ex1:8,ex8:8,dp1:4,hgss1:4,xy1:2,xy12:2,sm1:1.2,swsh1:1,swsh7:1.5,swsh12pt5:1,sv1:1,sv3pt5:1.3,sv4pt5:1.3,sv6:1,sv7:1,sv8:1.2,sv8pt5:1.5};
 const VINTAGE_SETS=new Set(['base1','base2','base3','base5','neo1']);
-
-function salvarEstado(){
+const POP_SP=new Set(['charizard','pikachu','mew','mewtwo','umbreon','rayquaza','lugia','gengar','espeon','giratina','greninja','arceus','sylveon','celebi','jirachi','deoxys','darkrai','ho-oh']);
+const POP_S=new Set(['blastoise','venusaur','dragonite','snorlax','gyarados','machamp','alakazam','lucario','gardevoir','tyranitar','garchomp','metagross','salamence','blaziken','sceptile','swampert','typhlosion','feraligatr','leafeon','glaceon','vaporeon','jolteon','flareon','eevee','mimikyu','dragapult','corviknight','zacian','zamazenta','suicune','entei','raikou','kyogre','groudon','dialga','palkia','reshiram','zekrom','kyurem','xerneas','yveltal','solgaleo','lunala','necrozma','eternatus','koraidon','miraidon']);
+const POP_A=new Set(['ivysaur','charmeleon','wartortle','bayleef','quilava','croconaw','grovyle','combusken','marshtomp','monferno','prinplup','servine','pignite','dewott','quilladin','braixen','frogadier','dartrix','torracat','brionie','thwackey','raboot','drizzile','floragato','crocalor','quaxwell','pichu','togepi','cleffa','riolu','munchlax','bonsly','happiny','mantyke','azurill','wynaut','budew','roselia','roserade','gallade','froslass','glalie','snorunt','aron','lairon','aggron','bagon','shelgon','beldum','metang','dratini','dragonair','larvitar','pupitar','gabite','deino','zweilous','axew','fraxure','drakloak','dreepy']);
+  function salvarEstado(){
   localStorage.setItem(KEY+'moedas',moedas);
   localStorage.setItem(KEY+'colecao',JSON.stringify(colecao));
   localStorage.setItem(KEY+'inv',JSON.stringify(inventario));
@@ -1203,6 +1233,27 @@ function atualizarUI(){
   }
 }
 
+const ENERGIAS=[{bg:'#ffd23f',ic:'⚡'},{bg:'#4fc3f7',ic:'💧'},{bg:'#ef5350',ic:'🔥'},{bg:'#66bb6a',ic:'🍃'},{bg:'#8d6e63',ic:'👊'},{bg:'#ab47bc',ic:'👁️'},{bg:'#455a64',ic:'🌙'},{bg:'#90a4ae',ic:'⭐'},{bg:'#ffd54f',ic:'✨'},{bg:'#e91e63',ic:'💗'}];
+function montarEnergias(){
+  const w=document.getElementById('energiasWrap');w.innerHTML='';
+  ENERGIAS.forEach((e,i)=>{
+    const ang=(360/ENERGIAS.length)*i;const rad=ang*Math.PI/180;const r=95;
+    const d=document.createElement('div');d.className='energia';d.style.background=e.bg;
+    d.style.transform='translate('+Math.cos(rad)*r+'px,'+Math.sin(rad)*r+'px)';
+    d.textContent=e.ic;w.appendChild(d);
+  });
+}
+function montarFlut(){
+  const c=document.getElementById('cartasFlut');c.innerHTML='';
+  const pos=[{t:'5%',l:'8%',r:'-8deg',w:60},{t:'12%',l:'70%',r:'10deg',w:55},{t:'22%',l:'15%',r:'-5deg',w:65},{t:'32%',l:'75%',r:'12deg',w:50},{t:'48%',l:'5%',r:'-10deg',w:60},{t:'55%',l:'80%',r:'8deg',w:55},{t:'72%',l:'18%',r:'-6deg',w:58},{t:'78%',l:'70%',r:'11deg',w:52},{t:'88%',l:'30%',r:'-9deg',w:60},{t:'92%',l:'65%',r:'7deg',w:50}];
+  pos.forEach((p,i)=>{
+    const d=document.createElement('div');d.className='carta-f';
+    d.style.top=p.t;d.style.left=p.l;d.style.width=p.w+'px';d.style.height=(p.w*1.4)+'px';
+    d.style.setProperty('--r',p.r);d.style.animationDelay=(i*.3)+'s';
+    d.textContent='🎴';c.appendChild(d);
+  });
+}
+
 // --- SISTEMA ONLINE (FIREBASE) ---
 function iniciarApp(){
   document.getElementById('loading').style.display='none';
@@ -1249,7 +1300,7 @@ function atualizarPasso(){ document.querySelectorAll('#telaTutorial .passo').for
 document.getElementById('btnProxTut').onclick=()=>{ passoAtual++; if(passoAtual>5){tutorialFeito=true;localStorage.setItem(KEY+'tutorial','1');entrarNoJogo();} else atualizarPasso(); };
 function entrarNoJogo(){ telaStack = []; montarLoja(); atualizarUI(); mostrarTela('telaHome', false); }
 
-// --- CORREIO ---
+// --- CORREIO (NOVO) ---
 function escutarCorreio() {
     if(!meuUid) return;
     db.ref('correios/' + meuUid).on('value', snapshot => { if(snapshot.val()) { const btn = document.getElementById('btnCorreio'); if(btn) btn.style.borderColor = '#ff5566'; } });
@@ -1274,8 +1325,7 @@ window.resgatarCorreio = (key, tipo, valor) => {
     if(tipo === 'moedas') { moedas += parseInt(valor); } else if(tipo === 'pacote') { inventario[valor] = (inventario[valor] || 0) + 1; }
     db.ref('correios/' + meuUid + '/' + key).remove(); salvarEstado(); atualizarUI(); abrirCorreio(); alert('✅ Resgatado!');
 };
-
-// --- EVENTOS GLOBAIS ---
+  // --- EVENTOS GLOBAIS (NOVO) ---
 function escutarEventoGlobal() {
     db.ref('eventos/ativo').on('value', snapshot => {
         eventoAtual = snapshot.val(); const banner = document.getElementById('bannerEventoGlobal');
@@ -1304,7 +1354,7 @@ window.resgatarEvento = () => {
     db.ref('eventos/ativo/resgatados/' + meuUid).set(true); salvarEstado(); atualizarUI(); abrirEvento(); alert('🎉 Prêmio resgatado!');
 };
 
-// --- ADMIN: CRIAR EVENTO E CORREIO ---
+// --- ADMIN: CRIAR EVENTO E CORREIO (NOVO) ---
 function criarEventoGlobal() {
     const titulo = document.getElementById('adminEvTitulo').value.trim();
     const desc = document.getElementById('adminEvDesc').value.trim();
@@ -1330,21 +1380,17 @@ function enviarCorreioDireto() {
     });
 }
 
-// --- SISTEMA DE TROCA SEGURA (5 SEGUNDOS) ---
+// --- TROCA SEGURA (COM TIMER E CANCELAMENTO) ---
 function escutarTrocasRecebidas() {
     if(!meuUid) return;
     db.ref('trocas_pendentes/' + perfil.id).on('value', snapshot => {
-        const data = snapshot.val();
-        const container = document.getElementById('listaAmigos');
+        const data = snapshot.val(); const container = document.getElementById('listaAmigos');
         if (container && data && Object.keys(data).length > 0) {
             let htmlAdd = '<div style="width:100%; margin-top:20px; border-top:2px dashed #ffd93d; padding-top:15px;"><h3 style="color:#ffd93d; margin-bottom:10px; text-align:center;">📥 Trocas Pendentes</h3>';
             for (const idSala in data) {
                 const t = data[idSala];
                 if (t.status === 'pendente') {
-                    htmlAdd += `<div class="amigo-card" style="background:#3a1a5a; border-color:#ffd93d; margin-bottom:8px;">
-                        <div class="amigo-info"><div class="amigo-nome">Troca de ${t.deNome}</div><div class="amigo-status">${t.cartas.length} carta(s)</div></div>
-                        <button class="btn mini verde" onclick="aceitarTroca('${idSala}', '${encodeURIComponent(JSON.stringify(t.cartas))}')">Aceitar</button>
-                    </div>`;
+                    htmlAdd += `<div class="amigo-card" style="background:#3a1a5a; border-color:#ffd93d; margin-bottom:8px;"><div class="amigo-info"><div class="amigo-nome">Troca de ${t.deNome}</div><div class="amigo-status">${t.cartas.length} carta(s)</div></div><button class="btn mini verde" onclick="aceitarTroca('${idSala}', '${encodeURIComponent(JSON.stringify(t.cartas))}')">Aceitar</button></div>`;
                 }
             }
             htmlAdd += '</div>';
@@ -1352,7 +1398,6 @@ function escutarTrocasRecebidas() {
         }
     });
 }
-
 function enviarPropostaTroca() {
     if(!trocaAtual.destinatario) { alert('Selecione um amigo primeiro!'); return; }
     if(trocaAtual.cartas.length === 0) { alert('Selecione pelo menos uma carta!'); return; }
@@ -1360,16 +1405,13 @@ function enviarPropostaTroca() {
     const pacote = { deUid: meuUid, deNome: usuario.nome, paraId: trocaAtual.destinatario, cartas: trocaAtual.cartas, status: 'pendente' };
     db.ref('trocas_pendentes/' + trocaAtual.destinatario + '/' + idSala).set(pacote).then(() => { alert('Proposta enviada!'); irParaHome(); });
 }
-
 window.aceitarTroca = (idSala, cartasStr) => {
     const cartas = JSON.parse(decodeURIComponent(cartasStr));
     if(!confirm('Aceitar troca? A contagem de 5s vai começar.')) return;
     db.ref('trocas_pendentes/' + perfil.id + '/' + idSala).update({ status: 'aceita' });
-    
     document.getElementById('telaTrocaAceite').classList.add('ativo');
     let time = 5; document.getElementById('timerTrocaNum').textContent = time;
     trocaCancelada = false; trocaConcluida = false;
-    
     clearInterval(trocaTimerInterval);
     trocaTimerInterval = setInterval(() => {
         if(trocaCancelada) { clearInterval(trocaTimerInterval); return; }
@@ -1377,12 +1419,7 @@ window.aceitarTroca = (idSala, cartasStr) => {
         if(time <= 0) { clearInterval(trocaTimerInterval); concluirTroca(idSala, cartas); }
     }, 1000);
 };
-
-function cancelarTrocaTimer() {
-    trocaCancelada = true; clearInterval(trocaTimerInterval);
-    document.getElementById('telaTrocaAceite').classList.remove('ativo'); alert('Troca cancelada!');
-}
-
+function cancelarTrocaTimer() { trocaCancelada = true; clearInterval(trocaTimerInterval); document.getElementById('telaTrocaAceite').classList.remove('ativo'); alert('Troca cancelada!'); }
 function concluirTroca(idSala, cartas) {
     if(trocaConcluida) return; trocaConcluida = true;
     document.getElementById('telaTrocaAceite').classList.remove('ativo');
@@ -1390,8 +1427,7 @@ function concluirTroca(idSala, cartas) {
     salvarEstado(); db.ref('trocas_pendentes/' + perfil.id + '/' + idSala).remove();
     alert('✅ TROCA CONCLUÍDA!'); irParaHome();
 }
-// A Parte 4 completa o resto do jogo (Loja, Pacotes, PSA, etc)
-</script>
+
 // --- LOJA E PACOTES ---
 function montarLoja(){
   const c=document.getElementById('packsScroll');c.innerHTML='';
@@ -1418,7 +1454,7 @@ function atualizarBotaoComprar(){
   const p=PACOTES.find(x=>x.cod===pacoteEscolhido);
   if(p){ document.getElementById('btnComprar').textContent='💰 COMPRAR '+quantidade+'x POR '+(p.preco*quantidade)+' 🪙'; }
 }
-document.getElementById('btnComprar').onclick=()=>{
+function comprarPacote(){
   const el=document.querySelector('.pack-card.sel');
   if(!el){alert('Selecione um pacote!');return;}
   const precoUnit=parseInt(el.dataset.preco);
@@ -1440,8 +1476,8 @@ document.getElementById('btnComprar').onclick=()=>{
   salvarEstado();atualizarUI();
   const p=PACOTES.find(x=>x.cod===pacoteEscolhido);
   alert('✅ Você comprou '+quantidade+'x '+p.nome.split(' (')[0]+'!\n\nAgora vá no Inventário pra abrir.');
-};
-
+}
+document.getElementById('btnComprar').onclick=comprarPacote;
 document.querySelectorAll('.btn-qty').forEach(b=>{
   b.onclick=()=>{
     quantidade=parseInt(b.dataset.qty);
@@ -1479,7 +1515,6 @@ function montarInventario(){
     };
   });
 }
-
 function venderPacote(setId) {
   const p = PACOTES.find(x => x.cod === setId);
   const qtd = inventario[setId];
@@ -1498,7 +1533,6 @@ function venderPacote(setId) {
   salvarEstado(); atualizarUI(); montarInventario();
   alert(`✅ Venda realizada! Você ganhou ${totalGanho} moedas.`);
 }
-
 function abrirDoInventario(setId, qty){
   if(!inventario[setId] || inventario[setId] <= 0)return;
   const realQty=Math.min(qty, inventario[setId]);
@@ -1508,7 +1542,6 @@ function abrirDoInventario(setId, qty){
   pacoteEscolhido=setId;
   pacotesSendoAbertos = realQty;
   pacotesFaltandoAbrir = realQty - 1;
-  
   const p=PACOTES.find(x=>x.cod===setId);
   const pf=document.getElementById('packFechado');
   pf.style.setProperty('--c1',p.c1); pf.style.setProperty('--c2',p.c2);
@@ -1527,7 +1560,6 @@ function abrirDoInventario(setId, qty){
   mostrarTela('telaPack');
   configurarRasgar();
 }
-
 document.getElementById('btnCancelarPack').onclick=()=>{
   if(pacotesSendoAbertos > 0){
     const devolver = pacotesFaltandoAbrir + 1;
@@ -1539,8 +1571,7 @@ document.getElementById('btnCancelarPack').onclick=()=>{
   montarInventario();
   mostrarTela('telaInventario', false);
 };
-
-function configurarRasgar(){
+  function configurarRasgar(){
   const p=document.getElementById('packFechado');
   let sx=0,sy=0,arr=false;
   const ini=e=>{if(ripLock)return;arr=true;const t=e.touches?e.touches[0]:e;sx=t.clientX;sy=t.clientY;};
@@ -1617,36 +1648,6 @@ function rasgar(){
   checarAlbumCompleto(pacoteEscolhido);
 }
 
-function checarAlbumCompleto(setId){
-  const pool = setId === 'hack' ? CARTAS_HACK : (CARDS_POR_SET[setId] || []);
-  if(!pool.length || colecoesCompletas.includes(setId)) return;
-  const temTodas = pool.every(c => colecao[c.id] && ((colecao[c.id].qtd > 0) || (colecao[c.id].gradeds || []).length > 0));
-  if(!temTodas) return;
-  colecoesCompletas.push(setId);
-  salvarEstado();
-  const p=PACOTES.find(x=>x.cod===setId);
-  document.getElementById('complSetNome').textContent = setId === 'hack' ? 'ARQUIVO HACK' : (p ? p.nome.split(' (')[0] : setId);
-  
-  if (setId === 'hack') {
-      perfil.isHackMaster = true;
-      let bonusText = '🎁 Você liberou o Título de MESTRE HACK e o Tema Matrix!';
-      if (!perfil.rewardHackClaimed) {
-          perfil.rewardHackClaimed = true; moedas += 50000;
-          bonusText = '🎁 Você ganhou 50.000 Moedas, o Título de MESTRE HACK e o Tema Matrix!';
-      }
-      document.getElementById('complBonus').textContent = bonusText;
-      document.getElementById('complBonus').style.display = 'block';
-      salvarEstado(); atualizarUI();
-  } else { document.getElementById('complBonus').style.display = 'none'; }
-  document.getElementById('telaCompleta').classList.add('ativo');
-}
-
-document.getElementById('btnCompletaContinuar').onclick=()=>{
-  document.getElementById('telaCompleta').classList.remove('ativo');
-  if(autoRevelar) { pararAutoRevelar(); }
-  mostrarTela('telaFinal');
-};
-
 function mostrarCartaRevelar(){
   revEstado='mostrando';
   const c=packAtual[revIdx];
@@ -1694,28 +1695,20 @@ document.getElementById('telaRevelar').addEventListener('click',e=>{
 
 function avancarRevelar(){ revIdx++; if(revIdx>=packAtual.length)mostrarTelaFinal(); else mostrarCartaRevelar(); }
 document.getElementById('btnSkip').onclick=()=>{ mostrarTelaFinal(); };
-
-document.getElementById('btnAutoRev').onclick=()=>{
-  if(autoRevelar) { pararAutoRevelar(); } 
-  else { document.getElementById('modalAutoConfig').classList.add('ativo'); }
-};
+document.getElementById('btnAutoRev').onclick=()=>{ if(autoRevelar) { pararAutoRevelar(); } else { document.getElementById('modalAutoConfig').classList.add('ativo'); } };
 
 function iniciarAuto(speed) {
   document.getElementById('modalAutoConfig').classList.remove('ativo');
-  autoVelocidade = speed;
-  autoRevelar = true;
+  autoVelocidade = speed; autoRevelar = true;
   document.getElementById('btnAutoRev').classList.add('ativo');
   document.getElementById('btnAutoRev').textContent = '⏹️ PARAR';
   loopAutoRevelar();
 }
-
 function pararAutoRevelar(){
-  autoRevelar=false;
-  if(autoRevelarTimer)clearTimeout(autoRevelarTimer);
+  autoRevelar=false; if(autoRevelarTimer)clearTimeout(autoRevelarTimer);
   document.getElementById('btnAutoRev').classList.remove('ativo');
   document.getElementById('btnAutoRev').textContent='▶️ AUTO';
 }
-
 function loopAutoRevelar(){
   if(!autoRevelar)return;
   if(revEstado==='mostrando'){
@@ -1747,7 +1740,6 @@ function loopAutoRevelar(){
     }, autoVelocidade);
   }
 }
-
 function pararAlarmeRaro() { clearInterval(alarmeTimerInterval); document.getElementById('telaAlarmeRaro').classList.remove('ativo'); }
 function continuarAlarmeRaro() { clearInterval(alarmeTimerInterval); document.getElementById('telaAlarmeRaro').classList.remove('ativo'); iniciarAuto(autoVelocidade); }
 
@@ -1795,285 +1787,51 @@ document.getElementById('btnFinalProximo').onclick=()=>{
   }
 };
 
-function checarGraduacoesProntas(){
-  const agora=Date.now(); let temPronta=false;
-  graduacoesPendentes.forEach(g=>{ if(!g.pronta && agora>=g.tempoFim){ g.pronta=true; temPronta=true; } });
-  if(temPronta){ salvarEstado(); setTimeout(()=>{ const prontas=graduacoesPendentes.filter(g=>g.pronta && !g.resolvida); if(prontas.length>0) alert('🏅 Sua carta voltou da graduação! Vá em Coleção > Graduadas pra ver a nota.'); }, 2000); }
-}
-
-function enviarParaGraduacao(cartaId, tier){
-  const cartasQtd=colecao[cartaId]?colecao[cartaId].qtd:0;
-  if(cartasQtd<=0){alert('Você não tem essa carta raw!');return;}
-  let custo=0, tempoMs=0;
-  if(tier==='economico'){custo=50;tempoMs=60000;}
-  else if(tier==='padrao'){custo=120;tempoMs=20000;}
-  else if(tier==='expresso'){custo=300;tempoMs=5000;}
-  
-  if(!dinheiroInfinito && moedas<custo){alert('Moedas insuficientes pra essa taxa!');return;}
-  if(!confirm(`Tem certeza que deseja enviar esta carta para a PSA?\nCusto: R$ ${custo}`)) return;
-
-  if(!dinheiroInfinito) moedas-=custo;
-  colecao[cartaId].qtd-=1;
-  const tempoFim=Date.now()+tempoMs; const idUnico=Date.now()+'_'+Math.random().toString(36).substr(2,5);
-  graduacoesPendentes.push({ id:idUnico, cartaId:cartaId, tier:tier, tempoFim:tempoFim, pronta:false, resolvida:false, nota:null, dono: usuario.nome });
-  salvarEstado(); atualizarUI();
-  alert('✅ Carta enviada para a PSA! Tempo: '+(tempoMs/1000)+'s.');
-  if(albumAberto) abrirAlbum(albumAberto); else mostrarCol();
-}
-
-document.querySelectorAll('.tier-card').forEach(card=>{
-  card.onclick=()=>{ const tier=card.dataset.tier; if(!cartaGradAtual)return; enviarParaGraduacao(cartaGradAtual, tier); cartaGradAtual=null; };
-});
-
-function sortearNota(cartaId){
-  const carta = encontrarCarta(cartaId); const isVintage = VINTAGE_SETS.has(carta.set);
-  const r = Math.random()*100; const luck = multiplicadorSorteGrad;
-  let baseC10 = isVintage ? 8 : 20; let baseC9 = isVintage ? 25 : 35; let baseC8 = isVintage ? 30 : 25; let baseC7 = isVintage ? 22 : 12;
-  const c10 = Math.min(100, baseC10 * luck); const resto = 100 - c10; const baseOutros = baseC9 + baseC8 + baseC7;
-  const c9 = (baseC9 / baseOutros) * resto; const c8 = (baseC8 / baseOutros) * resto; const c7 = (baseC7 / baseOutros) * resto;
-  if(r < c10) return 10; if(r < c10 + c9) return 9; if(r < c10 + c9 + c8) return 8; if(r < c10 + c9 + c8 + c7) return 7; return Math.floor(Math.random()*4)+3;
-}
-
-function getMultiplicadorNota(preco, nota){
-  if(nota===10)return preco<10?15:preco<100?8:preco<1000?4:2.5;
-  if(nota===9)return preco<10?6:preco<100?3.5:preco<1000?2:1.4;
-  if(nota===8)return preco<10?2:preco<100?1.5:preco<1000?1.2:1;
-  if(nota===7)return preco<10?0.9:preco<100?0.8:preco<1000?0.7:0.6;
-  return preco<10?0.4:preco<100?0.35:preco<1000?0.3:0.25;
-}
-
-function abrirRoletaGraduacao(gradId){
-  const grad=graduacoesPendentes.find(g=>g.id===gradId); if(!grad || grad.resolvida)return;
-  mostrarTela('telaRoleta');
-  const numEl=document.getElementById('roletaNum'); const subEl=document.getElementById('roletaSub');
-  numEl.className='roleta-num'; numEl.textContent='0'; subEl.textContent='Sorteando nota...';
-  let cont=0;
-  const int=setInterval(()=>{ numEl.textContent=Math.floor(Math.random()*10)+1; cont++; if(cont>20){ clearInterval(int); finalizarGraduacao(grad); } }, 100);
-}
-
-function finalizarGraduacao(grad){
-  if (grad.isGacha) {
-      const nota = sortearNota(grad.cartaId); grad.nota = nota; grad.resolvida = true;
-      const multiplicador = 0.5 + Math.random() * 1.5; const precoFinal = grad.basePrice * multiplicador;
-      const agora = new Date().toISOString();
-      if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]};
-      if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
-      colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'gacha', dono: 'ADMIN', data: agora, nota: nota, base: grad.basePrice }] });
-      salvarEstado(); atualizarUI();
-      const container=document.getElementById('roletaContainer');
-      const deltaPos = precoFinal > grad.basePrice; const deltaTexto = deltaPos ? 'LUCRO' : 'PREJUÍZO'; const corDelta = deltaPos ? 'pos' : 'neg';
-      container.innerHTML=`<div class="resultado-nota"><div class="nota-num n${nota}">${nota}</div><div class="nota-label">GACHA RESULT</div><div class="resultado-valor"><div class="lbl">Valor Base: ${formatarPreco(grad.basePrice)}</div><div class="val">${formatarPreco(precoFinal)}</div><div class="delta ${corDelta}">${deltaTexto} de ${formatarPreco(Math.abs(precoFinal-grad.basePrice))}</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
-      if(nota===10){ document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#ffd93d 0%,#f7a800 100%)'; tocarConfete(); }
-      return;
-  }
-  const nota=sortearNota(grad.cartaId); grad.nota=nota; grad.resolvida=true;
-  const carta=encontrarCarta(grad.cartaId); const precoRaw=carta.preco; const mult=getMultiplicadorNota(precoRaw, nota); const precoFinal=precoRaw*mult;
-  const agora = new Date().toISOString();
-  if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]};
-  if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
-  colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'graduacao', dono: usuario.nome, data: agora, nota: nota }] });
-  salvarEstado(); atualizarUI();
-  const container=document.getElementById('roletaContainer');
-  let label='', cls='';
-  if(nota===10){label='GEM MINT!';cls='gem';} else if(nota===9){label='MINT';} else if(nota===8){label='NEAR MINT';} else if(nota===7){label='EXCELENTE';} else {label='DESGASTADA';}
-  const corNota = nota===10?'n10':nota===9?'n9':nota===8?'n8':'n7';
-  const deltaPos = precoFinal > precoRaw; const deltaTexto = deltaPos ? '+'+formatarPreco(precoFinal-precoRaw) : formatarPreco(precoFinal-precoRaw);
-  container.innerHTML=`<div class="resultado-nota"><div class="nota-num ${corNota}">${nota}</div><div class="nota-label ${cls}">${label}</div><div class="resultado-valor"><div class="lbl">Valor de Mercado</div><div class="val">${formatarPreco(precoFinal)}</div><div class="delta ${deltaPos?'pos':'neg'}">${deltaTexto} (Raw: ${formatarPreco(precoRaw)})</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
-  if(nota===10){ document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#ffd93d 0%,#f7a800 100%)'; tocarConfete(); }
-}
-
-function fecharRoleta(){
-  document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#2a1a4a 0%,#4a2a6a 100%)';
-  document.getElementById('roletaContainer').innerHTML='<div class="roleta-num" id="roletaNum">0</div><div class="roleta-sub" id="roletaSub">Sorteando nota...</div>';
-  mostrarTela('telaColecao', false);
-  if(abaColecao==='graded') renderGraduadas(); else renderAlbuns();
-}
-
-function tocarConfete(){
-  const cores=['#ffd93d','#ff5566','#4fc3f7','#7eeb8e','#a855f7','#ff8a3d','#ffffff','#ffc9e0'];
-  const wrap=document.createElement('div'); wrap.className='confetes-graduacao';
-  for(let i=0;i<50;i++){ const c=document.createElement('div'); c.className='confete-g'; c.style.left=Math.random()*100+'%'; c.style.background=cores[Math.floor(Math.random()*cores.length)]; c.style.width=(8+Math.random()*10)+'px'; c.style.height=(8+Math.random()*10)+'px'; c.style.animationDuration=(2+Math.random()*2.5)+'s'; c.style.animationDelay=(Math.random()*0.5)+'s'; c.style.borderRadius=Math.random()>0.5?'50%':'2px'; wrap.appendChild(c); }
-  document.body.appendChild(wrap); setTimeout(()=>wrap.remove(), 5000);
-}
-
-function encontrarCarta(cartaId){
-  const hack = CARTAS_HACK.find(c => c.id === cartaId); if (hack) return hack;
-  for(const setId in CARDS_POR_SET){ const found=CARDS_POR_SET[setId].find(c=>c.id===cartaId); if(found)return found; }
-  return null;
-}
-
-function mostrarCol(manterScroll = false){
-  albumAberto=null; const telaCol = document.getElementById('telaColecao');
-  if(telaCol && !manterScroll) telaCol.scrollTop = 0;
-  mostrarTela('telaColecao', false);
-  document.getElementById('colTitulo').textContent='📚 Minhas Cartas';
-  document.getElementById('conteudoCol').innerHTML='';
-  if(abaColecao==='albuns') { renderAlbuns(); } else { renderGraduadas(); }
-}
-
-function renderAlbuns(){
-  abaColecao='albuns'; document.getElementById('tabAlbuns').classList.add('at'); document.getElementById('tabGrad').classList.remove('at'); document.getElementById('colTitulo').textContent='📚 Álbuns';
-  const c=document.getElementById('conteudoCol'); c.innerHTML=''; const lista=document.createElement('div'); lista.className='albuns-lista'; let temAlgum=false;
-  const hackDisponiveis = CARTAS_HACK.filter(hc => colecao[hc.id] && colecao[hc.id].gradeds && colecao[hc.id].gradeds.length > 0);
-  temAlgum = true; const d = document.createElement('div'); d.className = 'album-card hack-album'; const pct = (hackDisponiveis.length / 5) * 100;
-  d.innerHTML = `<div class="album-img">>_</div><div class="album-info"><div class="album-nome">💻 ARQUIVO HACK</div><div class="album-prog">${hackDisponiveis.length} / 5 cartas</div><div class="barra"><div class="fill" style="width:${pct}%"></div></div></div>`;
-  d.onclick = () => { scrollColecaoLista = document.getElementById('telaColecao').scrollTop; abrirAlbum('hack'); }; lista.appendChild(d);
-
-  PACOTES.forEach(p=>{
-    const pool=CARDS_POR_SET[p.cod]||[]; const ids=pool.filter(c=>colecao[c.id] && (colecao[c.id].qtd>0 || (colecao[c.id].gradeds&&colecao[c.id].gradeds.length>0)));
-    if(ids.length===0)return; temAlgum=true; const unicas=ids.length; const completo=colecoesCompletas.includes(p.cod);
-    const d=document.createElement('div'); d.className='album-card'+(completo?' completo':''); const pct=pool.length>0?(unicas/pool.length*100):0;
-    const packImg=PACKSHOTS[p.cod] || 'https://images.pokemontcg.io/'+p.cod+'/logo.png';
-    d.innerHTML=(completo?'<div class="badge-album">🏆</div>':'')+'<div class="album-img" style="--c1:'+p.c1+';--c2:'+p.c2+'"><img src="'+packImg+'" onerror="this.style.display=\'none\'"></div><div class="album-info"><div class="album-nome">'+p.nome+'</div><div class="album-prog">'+(completo?'✅ COMPLETA! ':'')+unicas+' / '+pool.length+' cartas</div><div class="barra"><div class="fill" style="width:'+pct+'%"></div></div></div>';
-    d.onclick=()=>{ scrollColecaoLista = document.getElementById('telaColecao').scrollTop; abrirAlbum(p.cod); }; lista.appendChild(d);
-  });
-  if(!temAlgum){c.innerHTML='<p class="vazio">Você ainda não tem cartas. Compre pacotes na loja!</p>';return;}
-  c.appendChild(lista);
-}
-
-function renderGraduadas(){
-  const telaColAtual = document.getElementById('telaColecao'); const scrollAtual = telaColAtual ? telaColAtual.scrollTop : 0;
-  abaColecao='graded'; document.getElementById('tabGrad').classList.add('at'); document.getElementById('tabAlbuns').classList.remove('at'); document.getElementById('colTitulo').textContent='🏅 Minhas Graduadas';
-  const c=document.getElementById('conteudoCol'); let inputPesquisa = document.getElementById('inputPesquisaGrad');
-  if(!inputPesquisa) { c.innerHTML = `<div class="search-box"><input type="text" id="inputPesquisaGrad" placeholder="Pesquisar Pokémon graduado..." oninput="renderGraduadas()"></div><div id="gridGrad"></div>`; inputPesquisa = document.getElementById('inputPesquisaGrad'); }
-  const termo = (inputPesquisa.value || '').toLowerCase(); const gridContainer = document.getElementById('gridGrad'); gridContainer.innerHTML = ''; let temGrad=false;
-  const pendentes = graduacoesPendentes.filter(g => !g.resolvida);
-  if (pendentes.length > 0) {
-    const pendFiltradas = pendentes.filter(g => { const carta = encontrarCarta(g.cartaId); return carta && carta.nome.toLowerCase().includes(termo); });
-    if (pendFiltradas.length > 0) {
-        temGrad = true; const header = document.createElement('div'); header.className = 'section-title'; header.textContent = '⏳ Em Graduação (PSA)'; gridContainer.appendChild(header);
-        const grid = document.createElement('div'); grid.className = 'cartas-album';
-        pendFiltradas.forEach(g => {
-          const carta = encontrarCarta(g.cartaId); const d = document.createElement('div'); d.className = 'carta-slot'; const agora = Date.now(); const restam = Math.max(0, Math.ceil((g.tempoFim - agora) / 1000));
-          if (g.pronta || restam <= 0) { d.innerHTML = '<div class="slab-container ready"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">ABRIR</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.imgSmall || carta.img) + '" style="filter:blur(2px);opacity:0.6"></div></div>'; d.onclick = () => abrirRoletaGraduacao(g.id); } 
-          else { d.innerHTML = '<div class="slab-container pending"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">⏳</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.imgSmall || carta.img) + '" style="filter:blur(4px);opacity:0.4"></div></div>'; }
-          grid.appendChild(d);
-        });
-        gridContainer.appendChild(grid);
-    }
-  }
-  PACOTES.forEach(p => {
-    let cartasDoSet = [];
-    for(const cId in colecao) { if(colecao[cId].gradeds && colecao[cId].gradeds.length > 0) { const carta = encontrarCarta(cId); if(carta && carta.set === p.cod && carta.nome.toLowerCase().includes(termo)) cartasDoSet.push({ cId, carta, gradeds: colecao[cId].gradeds }); } }
-    if(cartasDoSet.length > 0) {
-      temGrad = true; cartasDoSet.sort((a, b) => a.carta.nome.localeCompare(b.carta.nome));
-      const header = document.createElement('div'); header.className = 'section-title'; header.textContent = '🏆 ' + p.nome.split(' (')[0]; gridContainer.appendChild(header);
-      const grid = document.createElement('div'); grid.className = 'cartas-album';
-      cartasDoSet.forEach(item => {
-        item.gradeds.forEach((g, gi) => {
-          const d = document.createElement('div'); d.className = 'carta-slot'; const classeNota = 'psa-' + g.nota;
-          d.innerHTML = '<div class="slab-container ' + classeNota + '"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">' + g.nota + '</div><div class="g-name">' + item.carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (item.carta.imgSmall || item.carta.img) + '"></div></div>';
-          d.onclick = () => abrirDetalhe(item.cId, g.nota, gi); grid.appendChild(d);
-        });
-      });
-      gridContainer.appendChild(grid);
-    }
-  });
-  if (!temGrad) { gridContainer.innerHTML = '<p class="vazio">Nenhuma carta graduada encontrada.</p>'; }
-  if (telaColAtual) telaColAtual.scrollTop = scrollAtual;
-  if (document.getElementById('telaColecao').classList.contains('ativa') && abaColecao === 'graded') { clearTimeout(window.gradTimer); window.gradTimer = setTimeout(() => { if (document.getElementById('telaColecao').classList.contains('ativa') && abaColecao === 'graded') { const inp = document.getElementById('inputPesquisaGrad'); if(inp && document.activeElement !== inp) { renderGraduadas(); } } }, 1000); }
-}
-
-function abrirAlbum(setId, manterScroll = false){
-  albumAberto=setId; const p=PACOTES.find(x=>x.cod===setId);
-  if (!document.getElementById('telaColecao').classList.contains('ativa')) { mostrarTela('telaColecao'); }
-  document.getElementById('colTitulo').textContent='📚 '+(setId === 'hack' ? 'ARQUIVO HACK' : (p?p.nome.split(' (')[0]:setId));
-  const c=document.getElementById('conteudoCol'); c.innerHTML = `<div class="search-box"><input type="text" id="inputPesquisa" placeholder="Pesquisar..." oninput="filtrarAlbum()"></div><div class="cartas-album" id="gridAlbum"></div>`;
-  filtrarAlbum(); if (!manterScroll) { document.getElementById('telaColecao').scrollTop = 0; }
-}
-
-function filtrarAlbum(){
-  const inputElement = document.getElementById('inputPesquisa'); if(!inputElement) return; const termo = inputElement.value.toLowerCase();
-  if (termo === '0326' && albumAberto === 'sv8pt5') { inputElement.value = ''; document.getElementById('modalSenhaTester').classList.add('ativo'); document.getElementById('senhaTesterInput').value = ''; document.getElementById('erroSenhaTester').textContent = ''; setTimeout(()=>document.getElementById('senhaTesterInput').focus(),200); return; }
-  const grid = document.getElementById('gridAlbum'); if(!grid) return; grid.innerHTML='';
-  let pool = []; if (albumAberto === 'hack') pool = CARTAS_HACK; else pool = CARDS_POR_SET[albumAberto] || [];
-  const filtradas = pool.filter(c => c.nome.toLowerCase().includes(termo));
-  if(filtradas.length===0 && termo !== ''){ grid.innerHTML = '<p class="vazio" style="grid-column: 1/-1;">Nenhuma carta encontrada.</p>'; return; }
-  const ordenado = filtradas.slice().sort((a,b)=>(parseInt(a.num)||0)-(parseInt(b.num)||0));
-  ordenado.forEach(carta=>{
-    const info=colecao[carta.id]; const temRaw=info&&info.qtd>0; const temGrad=info&&info.gradeds&&info.gradeds.length>0; const d=document.createElement('div');
-    if(temRaw||temGrad || albumAberto === 'hack'){
-      d.className='carta-slot';
-      if (albumAberto === 'hack') {
-          const classeNota = 'hack'; const logoLabel = 'HACK'; const nota = temGrad ? Math.max(...info.gradeds.map(g=>g.nota)) : 10;
-          if(!temGrad) { d.className='carta-slot vazia'; d.style.background = '#000'; d.style.border = '2px dashed #00ff41'; d.innerHTML=`<span class="num" style="color:#00ff41; font-family:monospace;">#${carta.num}</span><div class="nome-vazio" style="color:#00ff41; font-family:monospace;">${carta.nome}</div>`; } 
-          else { d.innerHTML = `<div class="slab-container ${classeNota}"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${nota}</div><div class="g-name">${carta.nome}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"></div></div>`; d.onclick=()=> { const idx = info.gradeds.findIndex(g => g.nota === nota); abrirDetalhe(carta.id, nota, idx); }; }
-      } else {
-          let badgeQtd=''; if(temRaw) badgeQtd='<div class="qtd">x'+info.qtd+'</div>'; let notaHtml = '';
-          if(temGrad){ const melhorNota=Math.max(...info.gradeds.map(g=>g.nota)); let corNota = melhorNota===10?'#b8860b':melhorNota===9?'#6b21a8':melhorNota===8?'#0369a1':'#4b5563'; notaHtml = '<div class="slab-label" style="position:absolute; bottom:0; width:100%; padding:2px; border-bottom:none; border-top:2px solid #bbb;"><div class="psa-logo">PSA</div><div class="grade" style="font-size:1rem; color:'+corNota+'">'+melhorNota+'</div></div>'; }
-          d.innerHTML='<img src="'+(carta.imgSmall||carta.img)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'">'+badgeQtd+notaHtml; d.onclick=()=>abrirDetalhe(carta.id);
+function checarAlbumCompleto(setId){
+  const pool = setId === 'hack' ? CARTAS_HACK : (CARDS_POR_SET[setId] || []);
+  if(!pool.length || colecoesCompletas.includes(setId)) return;
+  const temTodas = pool.every(c => colecao[c.id] && ((colecao[c.id].qtd > 0) || (colecao[c.id].gradeds || []).length > 0));
+  if(!temTodas) return;
+  colecoesCompletas.push(setId); salvarEstado();
+  const p=PACOTES.find(x=>x.cod===setId);
+  document.getElementById('complSetNome').textContent = setId === 'hack' ? 'ARQUIVO HACK' : (p ? p.nome.split(' (')[0] : setId);
+  if (setId === 'hack') {
+      perfil.isHackMaster = true;
+      let bonusText = '🎁 Você liberou o Título de MESTRE HACK e o Tema Matrix!';
+      if (!perfil.rewardHackClaimed) {
+          perfil.rewardHackClaimed = true; moedas += 50000;
+          bonusText = '🎁 Você ganhou 50.000 Moedas, o Título de MESTRE HACK e o Tema Matrix!';
       }
-    } else { d.className='carta-slot vazia'; d.innerHTML='<span class="num">'+carta.num+'</span><div class="nome-vazio">'+carta.nome+'</div>'; }
-    grid.appendChild(d);
-  });
+      document.getElementById('complBonus').textContent = bonusText;
+      document.getElementById('complBonus').style.display = 'block';
+      salvarEstado(); atualizarUI();
+  } else { document.getElementById('complBonus').style.display = 'none'; }
+  document.getElementById('telaCompleta').classList.add('ativo');
 }
 
-function abrirDetalhe(cartaId, notaGradFiltro=null, gradIndex=null){
-  const telaCol = document.getElementById('telaColecao'); if (telaCol) scrollDetalheSalvo = telaCol.scrollTop;
-  const info=colecao[cartaId]; if(!info) return; const carta=encontrarCarta(cartaId); if(!carta)return;
-  mostrarTela('telaDetalhe'); let html=''; let acoesHTML='<div class="acoes-carta">'; const ehHack = isCartaHack(cartaId);
-  if(notaGradFiltro !== null || ehHack){
-    let g = null; let idx = 0;
-    if (info.gradeds && info.gradeds.length > 0) { if(gradIndex !== null && info.gradeds[gradIndex]) { g = info.gradeds[gradIndex]; idx = gradIndex; } else { g = info.gradeds.find(x => x.nota === notaGradFiltro) || info.gradeds[0]; idx = info.gradeds.indexOf(g); } }
-    if(g){
-      const classeNota = ehHack ? 'hack' : ('psa-' + g.nota); const logoLabel = ehHack ? 'HACK' : 'PSA';
-      document.getElementById('detCarta').innerHTML='<div class="det-slab '+classeNota+'"><div class="slab-label"><div class="psa-logo">'+logoLabel+'</div><div class="grade">'+g.nota+'</div><div class="g-name">'+carta.nome+'</div></div><div class="slab-img-wrap"><img src="'+(carta.img||carta.imgSmall)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'"></div></div>';
-      const valorStr = ehHack ? '????' : formatarPreco(g.preco); const precoClass = ehHack ? 'misterio' : 'jackpot'; const lblPreco = ehHack ? 'Valor de Troca' : 'Valor Graduado';
-      html+='<div class="linha"><span class="lbl">Nome</span><span class="val">'+carta.nome+'</span></div>'+'<div class="linha"><span class="lbl">Coleção</span><span class="val">'+(ehHack?'⚠️ Arquivo Hackeado':carta.setNome)+'</span></div>'+'<div class="linha"><span class="lbl">Número</span><span class="val">#'+carta.num+'</span></div>'+'<div class="linha"><span class="lbl">Graduação</span><span class="val" style="color:'+(ehHack?'#00ff41':'#f7a800')+'">'+(ehHack?'HACK 10':('PSA '+g.nota))+'</span></div>'+'<div class="linha"><span class="lbl">Data</span><span class="val">'+new Date(g.data).toLocaleDateString()+'</span></div>'+'<div class="preco-box '+precoClass+'"><div class="lbl">'+lblPreco+'</div><div class="val">'+valorStr+'</div></div>';
-      html += '<div class="historico-box"><div class="hist-titulo">📜 Histórico da Carta</div>'; const hist = g.historico || [];
-      if(hist.length === 0) { html += '<div class="hist-item"><span class="hist-emoji">📭</span><span>Sem histórico registrado</span></div>'; } 
-      else { hist.forEach(h => { const dataStr = new Date(h.data).toLocaleDateString('pt-BR'); let emoji = '📝', texto = ''; if(h.tipo === 'graduacao') { emoji = '🏅'; texto = `Graduada por ${h.dono} — Nota ${h.nota} — ${dataStr}`; } else if(h.tipo === 'emissao') { emoji = '🟢'; texto = `Emitida por ${h.dono} — Nota ${h.nota} — ${dataStr}`; } else if(h.tipo === 'venda') { emoji = '💵'; texto = `Vendida por ${h.de} — Valor: ${h.valorFormatado||h.valor} — ${dataStr}`; } else if(h.tipo === 'troca') { emoji = '🤝'; texto = `Trocada: ${h.de} → ${h.para} — ${dataStr}`; } else if(h.tipo === 'gacha') { emoji = '🎰'; texto = `Sorteada (Gacha) por ${h.dono} — Base: ${formatarPreco(h.base)} — ${dataStr}`; } html += `<div class="hist-item"><span class="hist-emoji">${emoji}</span><span>${texto}</span></div>`; }); }
-      html += '</div>';
-      if(ehHack) { acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\','+g.nota+','+idx+')" style="background:linear-gradient(180deg,#00ff41,#00b82f); color:#000; box-shadow:0 5px 0 #006600;">💵 Vender (0 Moedas)</button>'; } 
-      else { acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\','+g.nota+','+idx+')">💵 Vender por '+formatarPreco(g.preco)+'</button>'; }
-    }
-  } else {
-    document.getElementById('detCarta').innerHTML='<div class="det-carta"><img src="'+(carta.img||carta.imgSmall)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'"></div>';
-    const valorRawStr = formatarPreco(carta.preco);
-    html+='<div class="linha"><span class="lbl">Nome</span><span class="val">'+carta.nome+'</span></div>'+'<div class="linha"><span class="lbl">Coleção</span><span class="val">'+carta.setNome+'</span></div>'+'<div class="linha"><span class="lbl">Número</span><span class="val">#'+carta.num+'</span></div>'+'<div class="linha"><span class="lbl">Raridade</span><span class="val">'+(RAR_NOME[carta.rar]||carta.rar)+'</span></div>'+'<div class="linha"><span class="lbl">Quantidade (Raw)</span><span class="val">x'+(info.qtd||0)+'</span></div>';
-    const temGrad = info.gradeds && info.gradeds.length > 0; if(temGrad){ html+='<div class="linha"><span class="lbl">Graduadas</span><span class="val">'+info.gradeds.map(g=>'PSA '+g.nota).join(', ')+'</span></div>'; }
-    html+='<div class="preco-box"><div class="lbl">Valor Raw</div><div class="val">'+valorRawStr+'</div></div>';
-    if(info.qtd > 0){ acoesHTML+='<button class="btn-acao btn-graduar" onclick="irParaGraduar(\''+cartaId+'\')">🏅 Graduar (Risco)</button>'; acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\')">💵 Vender</button>'; }
-  }
-  acoesHTML+='</div>'; document.getElementById('detInfo').innerHTML = html + acoesHTML;
+document.getElementById('btnCompletaContinuar').onclick=()=>{
+  document.getElementById('telaCompleta').classList.remove('ativo');
+  if(autoRevelar) { pararAutoRevelar(); }
+  mostrarTela('telaFinal');
+};
+
+// --- PERFIL E HISTÓRICO ---
+function abrirPerfil() {
+    mostrarTela('telaPerfil'); document.getElementById('perfilNome').innerHTML = (usuario ? usuario.nome : 'Treinador'); document.getElementById('perfilId').textContent = perfil.id;
+    document.getElementById('perfilNivel').textContent = calcularNivel(getTotalCartas()); document.getElementById('perfilCartas').textContent = getTotalCartas(); document.getElementById('perfilGrad').textContent = getTotalGradeds(); document.getElementById('perfilMoedas').textContent = getMoedasStr();
+    const cardBg = document.getElementById('perfilCardBg'); cardBg.className = 'perfil-card'; cardBg.style.background = perfil.cor;
+    document.getElementById('adminCrown').style.display = perfil.coroa ? 'block' : 'none'; document.getElementById('adminBadgeName').style.display = perfil.badge ? 'inline-block' : 'none'; document.getElementById('adminBadgeName').textContent = perfil.adminTitle;
 }
-
-function irParaGraduar(cartaId){ const info=colecao[cartaId]; if(!info || info.qtd <= 0){alert('Sem cartas raw pra enviar.');return;} cartaGradAtual = cartaId; mostrarTela('telaGraduar'); }
-
-function venderCarta(cartaId, notaGrad=null, gradIndex=null){
-  const info=colecao[cartaId]; const carta=encontrarCarta(cartaId); if(!info || !carta)return; const ehHack = isCartaHack(cartaId); let totalGanho=0; let notaVendida = null;
-  if(notaGrad !== null){
-    let idx = gradIndex !== null ? gradIndex : info.gradeds.findIndex(g=>g.nota===notaGrad);
-    if(idx>=0 && info.gradeds[idx]){ if(!confirm("Tem certeza que deseja vender esta carta graduada? Essa ação não pode ser desfeita.")) return; const g = info.gradeds[idx]; totalGanho = ehHack ? 0 : g.preco; notaVendida = g.nota; info.gradeds.splice(idx,1); moedas += totalGanho; }
-  } else {
-    if ((info.qtd || 0) === 0) { alert('Você não tem cartas raw desta carta (só graduadas).'); return; }
-    let qtdVender = info.qtd; const input = prompt(`Você tem x${info.qtd} desta carta. Quantas deseja vender?`, info.qtd);
-    if (input === null) return; qtdVender = parseInt(input);
-    if (isNaN(qtdVender) || qtdVender <= 0) { alert('Quantidade inválida.'); return; } if (qtdVender > info.qtd) { alert(`Você só tem ${info.qtd} cartas!`); return; }
-    if(!confirm(`Vender ${qtdVender} carta(s) por ${formatarPreco(carta.preco * qtdVender)}?`)) return;
-    totalGanho = ehHack ? 0 : (carta.preco * qtdVender); info.qtd -= qtdVender; moedas += totalGanho;
-  }
-  if (notaGrad !== null || !ehHack) { historicoVendas.push({ nome: carta.nome, img: carta.imgSmall || carta.img, valor: totalGanho, data: new Date().toISOString(), nota: notaVendida }); }
-  const pendente = graduacoesPendentes.some(g=>g.cartaId===cartaId && !g.resolvida); if(info.qtd<=0 && (!info.gradeds || info.gradeds.length===0) && !pendente) delete colecao[cartaId];
-  if(ehHack && !temColecaoHackCompleta()) { if(perfil.cor === 'linear-gradient(135deg, #000, #001a00)' || perfil.cor === '#000') { perfil.cor = 'linear-gradient(135deg, #2a1a4a, #4a2a6a)'; } perfil.isHackMaster = false; }
-  salvarEstado(); atualizarUI();
-  if(ehHack) alert('💎 Carta LENDÁRIA vendida!\nVocê recebeu 0 moedas (o valor real é entre jogadores).'); else alert('✅ Venda realizada! Você ganhou '+formatarPreco(totalGanho)+' 🪙');
-  if(abaColecao==='graded') renderGraduadas(); else if(albumAberto) abrirAlbum(albumAberto); else renderAlbuns();
+function trocarNome() {
+    if (!dinheiroInfinito && moedas < 50000) { alert('❌ Você não tem 50.000 moedas!'); return; }
+    const novoNome = prompt('Novo nome (Custa 50k):', usuario.nome);
+    if (novoNome && novoNome.trim().length > 0) { moedas -= 50000; usuario.nome = novoNome.trim(); salvarEstado(); atualizarUI(); abrirPerfil(); }
 }
-
-document.getElementById('btnIrLoja').onclick=()=>{montarLoja();atualizarUI();mostrarTela('telaLoja');};
-document.getElementById('btnIrInv').onclick=()=>{montarInventario();atualizarUI();mostrarTela('telaInventario');};
-document.getElementById('btnVoltarLoja').onclick=irParaHome;
-document.getElementById('btnVoltarInv').onclick=irParaHome;
-document.getElementById('btnVoltarCol').onclick = voltarTela;
-document.getElementById('navCol').onclick=mostrarCol;
-document.getElementById('navCol2').onclick=mostrarCol;
-document.getElementById('navHome').onclick=irParaHome;
-document.getElementById('navHome2').onclick=irParaHome;
-document.getElementById('tabAlbuns').onclick=()=>{abaColecao='albuns';renderAlbuns();};
-document.getElementById('tabGrad').onclick=()=>{abaColecao='graded';renderGraduadas();};
-document.getElementById('btnGear').onclick=()=>{ document.getElementById('modalConfig').classList.add('ativo'); };
 document.getElementById('avatarUser').onclick = abrirPerfil;
+function abrirHistoricoVendas() {
+    mostrarTela('telaHistorico'); const c = document.getElementById('listaHistoricoVendas'); c.innerHTML = '';
+    historicoVendas.slice().reverse().forEach(v => { c.innerHTML += `<div class="hist-venda-item"><img src="${v.img}"><div class="hist-venda-info"><div class="nome">${v.nome}</div><div class="val">R$ ${v.valor.toFixed(2)}</div></div></div>`; });
+}
 
 // --- AMIGOS E TROCA ---
 function abrirAmigos() { mostrarTela('telaAmigos'); renderizarListaAmigos(); }
@@ -2192,7 +1950,6 @@ document.getElementById('btnAddDinheiro').onclick=()=>{ const v=parseInt(documen
 document.getElementById('btnRemDinheiro').onclick=()=>{ const v=parseInt(document.getElementById('adminDinheiro').value); if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;} moedas=Math.max(0,moedas-v); salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Retirado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value=''; };
 document.getElementById('btnAdminSetLevel').onclick = () => { const v = parseInt(document.getElementById('adminLevelInput').value); if(isNaN(v) || v < 0) { document.getElementById('adminStatus').textContent = '⚠️ Digite um nível válido'; return; } perfil.customLevel = v; salvarEstado(); atualizarUI(); document.getElementById('adminStatus').textContent = v === 0 ? '✅ Nível resetado para automático!' : `✅ Nível definido para ${v}!`; };
 document.getElementById('btnAdminSelfVerify').onclick = () => { perfil.isVerified = !perfil.isVerified; salvarEstado(); atualizarUI(); document.getElementById('adminStatus').textContent = perfil.isVerified ? '✔️ Seu selo de Verificado foi ATIVADO!' : '❌ Seu selo de Verificado foi DESATIVADO!'; };
-document.getElementById('btnAdminGenVerify').onclick = gerarCodigoVerificado;
 
 function montarAdminHackGrid() {
   const grid = document.getElementById('adminHackGrid'); if(!grid) return; grid.innerHTML = '';
@@ -2273,17 +2030,6 @@ function montarEnergias(){
   E.forEach((e,i)=>{ const d=document.createElement('div');d.className='energia';d.style.background=e.bg;d.style.transform='translate('+Math.cos(i*1.2)*95+'px,'+Math.sin(i*1.2)*95+'px)';d.textContent=e.ic;w.appendChild(d); });
 }
 
-function montarFlut(){
-  const c=document.getElementById('cartasFlut');c.innerHTML='';
-  const pos=[{t:'5%',l:'8%',r:'-8deg',w:60},{t:'12%',l:'70%',r:'10deg',w:55},{t:'22%',l:'15%',r:'-5deg',w:65},{t:'32%',l:'75%',r:'12deg',w:50},{t:'48%',l:'5%',r:'-10deg',w:60},{t:'55%',l:'80%',r:'8deg',w:55},{t:'72%',l:'18%',r:'-6deg',w:58},{t:'78%',l:'70%',r:'11deg',w:52},{t:'88%',l:'30%',r:'-9deg',w:60},{t:'92%',l:'65%',r:'7deg',w:50}];
-  pos.forEach((p,i)=>{
-    const d=document.createElement('div');d.className='carta-f';
-    d.style.top=p.t;d.style.left=p.l;d.style.width=p.w+'px';d.style.height=(p.w*1.4)+'px';
-    d.style.setProperty('--r',p.r);d.style.animationDelay=(i*.3)+'s';
-    d.textContent='🎴';c.appendChild(d);
-  });
-}
-
 document.getElementById('btnIrLoja').onclick=()=>{montarLoja();mostrarTela('telaLoja');};
 document.getElementById('btnIrInv').onclick=()=>{montarInventario();mostrarTela('telaInventario');};
 document.getElementById('btnVoltarLoja').onclick=irParaHome;
@@ -2297,6 +2043,219 @@ document.getElementById('navCol2').onclick=mostrarCol;
 // CHAMADA INICIAL
 montarEnergias();
 carregarTudo();
+// --- FUNÇÕES DA COLEÇÃO (FALTAVAM) ---
+function mostrarCol(manterScroll = false){
+  albumAberto=null; const telaCol = document.getElementById('telaColecao');
+  if(telaCol && !manterScroll) telaCol.scrollTop = 0;
+  mostrarTela('telaColecao', false);
+  document.getElementById('colTitulo').textContent='📚 Minhas Cartas';
+  document.getElementById('conteudoCol').innerHTML='';
+  if(abaColecao==='albuns') { renderAlbuns(); } else { renderGraduadas(); }
+}
+
+function renderAlbuns(){
+  abaColecao='albuns'; document.getElementById('tabAlbuns').classList.add('at'); document.getElementById('tabGrad').classList.remove('at'); document.getElementById('colTitulo').textContent='📚 Álbuns';
+  const c=document.getElementById('conteudoCol'); c.innerHTML=''; const lista=document.createElement('div'); lista.className='albuns-lista'; let temAlgum=false;
+  const hackDisponiveis = CARTAS_HACK.filter(hc => colecao[hc.id] && colecao[hc.id].gradeds && colecao[hc.id].gradeds.length > 0);
+  temAlgum = true; const d = document.createElement('div'); d.className = 'album-card hack-album'; const pct = (hackDisponiveis.length / 5) * 100;
+  d.innerHTML = `<div class="album-img">>_</div><div class="album-info"><div class="album-nome">💻 ARQUIVO HACK</div><div class="album-prog">${hackDisponiveis.length} / 5 cartas</div><div class="barra"><div class="fill" style="width:${pct}%"></div></div></div>`;
+  d.onclick = () => { scrollColecaoLista = document.getElementById('telaColecao').scrollTop; abrirAlbum('hack'); }; lista.appendChild(d);
+
+  PACOTES.forEach(p=>{
+    const pool=CARDS_POR_SET[p.cod]||[]; const ids=pool.filter(c=>colecao[c.id] && (colecao[c.id].qtd>0 || (colecao[c.id].gradeds&&colecao[c.id].gradeds.length>0)));
+    if(ids.length===0)return; temAlgum=true; const unicas=ids.length; const completo=colecoesCompletas.includes(p.cod);
+    const d=document.createElement('div'); d.className='album-card'+(completo?' completo':''); const pct=pool.length>0?(unicas/pool.length*100):0;
+    const packImg=PACKSHOTS[p.cod] || 'https://images.pokemontcg.io/'+p.cod+'/logo.png';
+    d.innerHTML=(completo?'<div class="badge-album">🏆</div>':'')+'<div class="album-img" style="--c1:'+p.c1+';--c2:'+p.c2+'"><img src="'+packImg+'" onerror="this.style.display=\'none\'"></div><div class="album-info"><div class="album-nome">'+p.nome+'</div><div class="album-prog">'+(completo?'✅ COMPLETA! ':'')+unicas+' / '+pool.length+' cartas</div><div class="barra"><div class="fill" style="width:'+pct+'%"></div></div></div>';
+    d.onclick=()=>{ scrollColecaoLista = document.getElementById('telaColecao').scrollTop; abrirAlbum(p.cod); }; lista.appendChild(d);
+  });
+  if(!temAlgum){c.innerHTML='<p class="vazio">Você ainda não tem cartas. Compre pacotes na loja!</p>';return;}
+  c.appendChild(lista);
+}
+
+function abrirAlbum(setId, manterScroll = false){
+  albumAberto=setId; const p=PACOTES.find(x=>x.cod===setId);
+  if (!document.getElementById('telaColecao').classList.contains('ativa')) { mostrarTela('telaColecao'); }
+  document.getElementById('colTitulo').textContent='📚 '+(setId === 'hack' ? 'ARQUIVO HACK' : (p?p.nome.split(' (')[0]:setId));
+  const c=document.getElementById('conteudoCol'); c.innerHTML = `<div class="search-box"><input type="text" id="inputPesquisa" placeholder="Pesquisar..." oninput="filtrarAlbum()"></div><div class="cartas-album" id="gridAlbum"></div>`;
+  filtrarAlbum(); if (!manterScroll) { document.getElementById('telaColecao').scrollTop = 0; }
+}
+
+function filtrarAlbum(){
+  const inputElement = document.getElementById('inputPesquisa'); if(!inputElement) return; const termo = inputElement.value.toLowerCase();
+  const grid = document.getElementById('gridAlbum'); if(!grid) return; grid.innerHTML='';
+  let pool = []; if (albumAberto === 'hack') pool = CARTAS_HACK; else pool = CARDS_POR_SET[albumAberto] || [];
+  const filtradas = pool.filter(c => c.nome.toLowerCase().includes(termo));
+  if(filtradas.length===0 && termo !== ''){ grid.innerHTML = '<p class="vazio" style="grid-column: 1/-1;">Nenhuma carta encontrada.</p>'; return; }
+  const ordenado = filtradas.slice().sort((a,b)=>(parseInt(a.num)||0)-(parseInt(b.num)||0));
+  ordenado.forEach(carta=>{
+    const info=colecao[carta.id]; const temRaw=info&&info.qtd>0; const temGrad=info&&info.gradeds&&info.gradeds.length>0; const d=document.createElement('div');
+    if(temRaw||temGrad || albumAberto === 'hack'){
+      d.className='carta-slot';
+      if (albumAberto === 'hack') {
+          const classeNota = 'hack'; const logoLabel = 'HACK'; const nota = temGrad ? Math.max(...info.gradeds.map(g=>g.nota)) : 10;
+          if(!temGrad) { d.className='carta-slot vazia'; d.style.background = '#000'; d.style.border = '2px dashed #00ff41'; d.innerHTML=`<span class="num" style="color:#00ff41; font-family:monospace;">#${carta.num}</span><div class="nome-vazio" style="color:#00ff41; font-family:monospace;">${carta.nome}</div>`; } 
+          else { d.innerHTML = `<div class="slab-container ${classeNota}"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${nota}</div><div class="g-name">${carta.nome}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"></div></div>`; d.onclick=()=> { const idx = info.gradeds.findIndex(g => g.nota === nota); abrirDetalhe(carta.id, nota, idx); }; }
+      } else {
+          let badgeQtd=''; if(temRaw) badgeQtd='<div class="qtd">x'+info.qtd+'</div>'; let notaHtml = '';
+          if(temGrad){ const melhorNota=Math.max(...info.gradeds.map(g=>g.nota)); let corNota = melhorNota===10?'#b8860b':melhorNota===9?'#6b21a8':melhorNota===8?'#0369a1':'#4b5563'; notaHtml = '<div class="slab-label" style="position:absolute; bottom:0; width:100%; padding:2px; border-bottom:none; border-top:2px solid #bbb;"><div class="psa-logo">PSA</div><div class="grade" style="font-size:1rem; color:'+corNota+'">'+melhorNota+'</div></div>'; }
+          d.innerHTML='<img src="'+(carta.imgSmall||carta.img)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'">'+badgeQtd+notaHtml; d.onclick=()=>abrirDetalhe(carta.id);
+      }
+    } else { d.className='carta-slot vazia'; d.innerHTML='<span class="num">'+carta.num+'</span><div class="nome-vazio">'+carta.nome+'</div>'; }
+    grid.appendChild(d);
+  });
+}
+
+function renderGraduadas(){
+  const telaColAtual = document.getElementById('telaColecao'); const scrollAtual = telaColAtual ? telaColAtual.scrollTop : 0;
+  abaColecao='graded'; document.getElementById('tabGrad').classList.add('at'); document.getElementById('tabAlbuns').classList.remove('at'); document.getElementById('colTitulo').textContent='🏅 Minhas Graduadas';
+  const c=document.getElementById('conteudoCol'); let inputPesquisa = document.getElementById('inputPesquisaGrad');
+  if(!inputPesquisa) { c.innerHTML = `<div class="search-box"><input type="text" id="inputPesquisaGrad" placeholder="Pesquisar Pokémon graduado..." oninput="renderGraduadas()"></div><div id="gridGrad"></div>`; inputPesquisa = document.getElementById('inputPesquisaGrad'); }
+  const termo = (inputPesquisa.value || '').toLowerCase(); const gridContainer = document.getElementById('gridGrad'); gridContainer.innerHTML = ''; let temGrad=false;
+  
+  const pendentes = graduacoesPendentes.filter(g => !g.resolvida);
+  if (pendentes.length > 0) {
+    const pendFiltradas = pendentes.filter(g => { const carta = encontrarCarta(g.cartaId); return carta && carta.nome.toLowerCase().includes(termo); });
+    if (pendFiltradas.length > 0) {
+        temGrad = true; const header = document.createElement('div'); header.className = 'section-title'; header.textContent = '⏳ Em Graduação (PSA)'; gridContainer.appendChild(header);
+        const grid = document.createElement('div'); grid.className = 'cartas-album';
+        pendFiltradas.forEach(g => {
+          const carta = encontrarCarta(g.cartaId); const d = document.createElement('div'); d.className = 'carta-slot'; const agora = Date.now(); const restam = Math.max(0, Math.ceil((g.tempoFim - agora) / 1000));
+          if (g.pronta || restam <= 0) { d.innerHTML = '<div class="slab-container ready"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">ABRIR</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.imgSmall || carta.img) + '" style="filter:blur(2px);opacity:0.6"></div></div>'; d.onclick = () => abrirRoletaGraduacao(g.id); } 
+          else { d.innerHTML = '<div class="slab-container pending"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">⏳</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.imgSmall || carta.img) + '" style="filter:blur(4px);opacity:0.4"></div></div>'; }
+          grid.appendChild(d);
+        });
+        gridContainer.appendChild(grid);
+    }
+  }
+  
+  PACOTES.forEach(p => {
+    let cartasDoSet = [];
+    for(const cId in colecao) { if(colecao[cId].gradeds && colecao[cId].gradeds.length > 0) { const carta = encontrarCarta(cId); if(carta && carta.set === p.cod && carta.nome.toLowerCase().includes(termo)) cartasDoSet.push({ cId, carta, gradeds: colecao[cId].gradeds }); } }
+    if(cartasDoSet.length > 0) {
+      temGrad = true; cartasDoSet.sort((a, b) => a.carta.nome.localeCompare(b.carta.nome));
+      const header = document.createElement('div'); header.className = 'section-title'; header.textContent = '🏆 ' + p.nome.split(' (')[0]; gridContainer.appendChild(header);
+      const grid = document.createElement('div'); grid.className = 'cartas-album';
+      cartasDoSet.forEach(item => {
+        item.gradeds.forEach((g, gi) => {
+          const d = document.createElement('div'); d.className = 'carta-slot'; const classeNota = 'psa-' + g.nota;
+          d.innerHTML = '<div class="slab-container ' + classeNota + '"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">' + g.nota + '</div><div class="g-name">' + item.carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (item.carta.imgSmall || item.carta.img) + '"></div></div>';
+          d.onclick = () => abrirDetalhe(item.cId, g.nota, gi); grid.appendChild(d);
+        });
+      });
+      gridContainer.appendChild(grid);
+    }
+  });
+  if (!temGrad) { gridContainer.innerHTML = '<p class="vazio">Nenhuma carta graduada encontrada.</p>'; }
+  if (telaColAtual) telaColAtual.scrollTop = scrollAtual;
+}
+
+function abrirDetalhe(cartaId, notaGradFiltro=null, gradIndex=null){
+  const telaCol = document.getElementById('telaColecao'); if (telaCol) scrollDetalheSalvo = telaCol.scrollTop;
+  const info=colecao[cartaId]; if(!info) return; const carta=encontrarCarta(cartaId); if(!carta)return;
+  mostrarTela('telaDetalhe'); let html=''; let acoesHTML='<div class="acoes-carta">'; const ehHack = isCartaHack(cartaId);
+  
+  if(notaGradFiltro !== null || ehHack){
+    let g = null; let idx = 0;
+    if (info.gradeds && info.gradeds.length > 0) { if(gradIndex !== null && info.gradeds[gradIndex]) { g = info.gradeds[gradIndex]; idx = gradIndex; } else { g = info.gradeds.find(x => x.nota === notaGradFiltro) || info.gradeds[0]; idx = info.gradeds.indexOf(g); } }
+    if(g){
+      const classeNota = ehHack ? 'hack' : ('psa-' + g.nota); const logoLabel = ehHack ? 'HACK' : 'PSA';
+      document.getElementById('detCarta').innerHTML='<div class="det-slab '+classeNota+'"><div class="slab-label"><div class="psa-logo">'+logoLabel+'</div><div class="grade">'+g.nota+'</div><div class="g-name">'+carta.nome+'</div></div><div class="slab-img-wrap"><img src="'+(carta.img||carta.imgSmall)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'"></div></div>';
+      const valorStr = ehHack ? '????' : formatarPreco(g.preco);
+      html+='<div class="linha"><span class="lbl">Nome</span><span class="val">'+carta.nome+'</span></div>'+'<div class="linha"><span class="lbl">Coleção</span><span class="val">'+(ehHack?'⚠️ Arquivo Hackeado':carta.setNome)+'</span></div>'+'<div class="linha"><span class="lbl">Número</span><span class="val">#'+carta.num+'</span></div>'+'<div class="linha"><span class="lbl">Graduação</span><span class="val" style="color:'+(ehHack?'#00ff41':'#f7a800')+'">'+(ehHack?'HACK 10':('PSA '+g.nota))+'</span></div>'+'<div class="linha"><span class="lbl">Data</span><span class="val">'+new Date(g.data).toLocaleDateString()+'</span></div>'+'<div class="preco-box"><div class="lbl">'+(ehHack?'Valor de Troca':'Valor Graduado')+'</div><div class="val">'+valorStr+'</div></div>';
+      if(ehHack) { acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\','+g.nota+','+idx+')" style="background:linear-gradient(180deg,#00ff41,#00b82f); color:#000; box-shadow:0 5px 0 #006600;">💵 Vender (0 Moedas)</button>'; } 
+      else { acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\','+g.nota+','+idx+')">💵 Vender por '+formatarPreco(g.preco)+'</button>'; }
+    }
+  } else {
+    document.getElementById('detCarta').innerHTML='<div class="det-carta"><img src="'+(carta.img||carta.imgSmall)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'"></div>';
+    html+='<div class="linha"><span class="lbl">Nome</span><span class="val">'+carta.nome+'</span></div>'+'<div class="linha"><span class="lbl">Coleção</span><span class="val">'+carta.setNome+'</span></div>'+'<div class="linha"><span class="lbl">Número</span><span class="val">#'+carta.num+'</span></div>'+'<div class="linha"><span class="lbl">Quantidade (Raw)</span><span class="val">x'+(info.qtd||0)+'</span></div>'+'<div class="preco-box"><div class="lbl">Valor Raw</div><div class="val">'+formatarPreco(carta.preco)+'</div></div>';
+    if(info.qtd > 0){ acoesHTML+='<button class="btn-acao btn-graduar" onclick="irParaGraduar(\''+cartaId+'\')">🏅 Graduar (Risco)</button>'; acoesHTML+='<button class="btn-acao btn-vender" onclick="venderCarta(\''+cartaId+'\')">💵 Vender</button>'; }
+  }
+  acoesHTML+='</div>'; document.getElementById('detInfo').innerHTML = html + acoesHTML;
+}
+
+function venderCarta(cartaId, notaGrad=null, gradIndex=null){
+  const info=colecao[cartaId]; const carta=encontrarCarta(cartaId); if(!info || !carta)return; const ehHack = isCartaHack(cartaId); let totalGanho=0; let notaVendida = null;
+  if(notaGrad !== null){
+    let idx = gradIndex !== null ? gradIndex : info.gradeds.findIndex(g=>g.nota===notaGrad);
+    if(idx>=0 && info.gradeds[idx]){ if(!confirm("Tem certeza que deseja vender esta carta graduada? Essa ação não pode ser desfeita.")) return; const g = info.gradeds[idx]; totalGanho = ehHack ? 0 : g.preco; notaVendida = g.nota; info.gradeds.splice(idx,1); moedas += totalGanho; }
+  } else {
+    if ((info.qtd || 0) === 0) { alert('Você não tem cartas raw desta carta (só graduadas).'); return; }
+    let qtdVender = info.qtd; const input = prompt(`Você tem x${info.qtd} desta carta. Quantas deseja vender?`, info.qtd);
+    if (input === null) return; qtdVender = parseInt(input);
+    if (isNaN(qtdVender) || qtdVender <= 0) { alert('Quantidade inválida.'); return; } if (qtdVender > info.qtd) { alert(`Você só tem ${info.qtd} cartas!`); return; }
+    if(!confirm(`Vender ${qtdVender} carta(s) por ${formatarPreco(carta.preco * qtdVender)}?`)) return;
+    totalGanho = ehHack ? 0 : (carta.preco * qtdVender); info.qtd -= qtdVender; moedas += totalGanho;
+  }
+  if (notaGrad !== null || !ehHack) { historicoVendas.push({ nome: carta.nome, img: carta.imgSmall || carta.img, valor: totalGanho, data: new Date().toISOString(), nota: notaVendida }); }
+  const pendente = graduacoesPendentes.some(g=>g.cartaId===cartaId && !g.resolvida); if(info.qtd<=0 && (!info.gradeds || info.gradeds.length===0) && !pendente) delete colecao[cartaId];
+  if(ehHack && !temColecaoHackCompleta()) { if(perfil.cor === 'linear-gradient(135deg, #000, #001a00)' || perfil.cor === '#000') { perfil.cor = 'linear-gradient(135deg, #2a1a4a, #4a2a6a)'; } perfil.isHackMaster = false; }
+  salvarEstado(); atualizarUI();
+  if(ehHack) alert('💎 Carta LENDÁRIA vendida!\nVocê recebeu 0 moedas.'); else alert('✅ Venda realizada! Você ganhou '+formatarPreco(totalGanho)+' 🪙');
+  if(abaColecao==='graded') renderGraduadas(); else if(albumAberto) abrirAlbum(albumAberto); else renderAlbuns();
+}
+
+// --- FUNÇÕES DO PSA (FALTAVAM) ---
+function irParaGraduar(cartaId){ const info=colecao[cartaId]; if(!info || info.qtd <= 0){alert('Sem cartas raw pra enviar.');return;} cartaGradAtual = cartaId; mostrarTela('telaGraduar'); }
+
+document.querySelectorAll('.tier-card').forEach(card=>{
+  card.onclick=()=>{
+    const tier=card.dataset.tier; if(!cartaGradAtual)return;
+    let custo=0, tempoMs=0;
+    if(tier==='economico'){custo=50;tempoMs=60000;} else if(tier==='padrao'){custo=120;tempoMs=20000;} else if(tier==='expresso'){custo=300;tempoMs=5000;}
+    if(!dinheiroInfinito && moedas<custo){alert('Moedas insuficientes!');return;}
+    if(!confirm(`Enviar para PSA? Custo: R$ ${custo}`)) return;
+    if(!dinheiroInfinito) moedas-=custo;
+    colecao[cartaGradAtual].qtd-=1;
+    const idUnico=Date.now()+'_'+Math.random().toString(36).substr(2,5);
+    graduacoesPendentes.push({ id:idUnico, cartaId:cartaGradAtual, tier:tier, tempoFim:Date.now()+tempoMs, pronta:false, resolvida:false, nota:null, dono: usuario.nome });
+    salvarEstado(); atualizarUI(); alert('✅ Carta enviada para a PSA!'); irParaHome(); cartaGradAtual=null;
+  };
+});
+
+function abrirRoletaGraduacao(gradId){
+  const grad=graduacoesPendentes.find(g=>g.id===gradId); if(!grad || grad.resolvida)return;
+  mostrarTela('telaRoleta'); const numEl=document.getElementById('roletaNum'); const subEl=document.getElementById('roletaSub');
+  numEl.className='roleta-num'; numEl.textContent='0'; subEl.textContent='Sorteando nota...';
+  let cont=0; const int=setInterval(()=>{ numEl.textContent=Math.floor(Math.random()*10)+1; cont++; if(cont>20){ clearInterval(int); finalizarGraduacao(grad); } }, 100);
+}
+
+function finalizarGraduacao(grad){
+  const nota = Math.floor(Math.random()*4)+7; // Sorteio simples de 7 a 10
+  grad.nota=nota; grad.resolvida=true;
+  const carta=encontrarCarta(grad.cartaId); const precoRaw=carta.preco;
+  const mult = nota===10?2.5:nota===9?1.4:nota===8?1:0.6;
+  const precoFinal=precoRaw*mult;
+  const agora = new Date().toISOString();
+  if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]};
+  if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
+  colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'graduacao', dono: usuario.nome, data: agora, nota: nota }] });
+  salvarEstado(); atualizarUI();
+  
+  const container=document.getElementById('roletaContainer');
+  const corNota = nota===10?'n10':nota===9?'n9':nota===8?'n8':'n7';
+  container.innerHTML=`<div class="resultado-nota"><div class="nota-num ${corNota}">${nota}</div><div class="nota-label">RESULTADO</div><div class="resultado-valor"><div class="lbl">Valor</div><div class="val">${formatarPreco(precoFinal)}</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
+  if(nota===10) document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#ffd93d 0%,#f7a800 100%)';
+}
+
+function fecharRoleta(){
+  document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#2a1a4a 0%,#4a2a6a 100%)';
+  document.getElementById('roletaContainer').innerHTML='<div class="roleta-num" id="roletaNum">0</div><div class="roleta-sub" id="roletaSub">Sorteando nota...</div>';
+  mostrarTela('telaColecao', false); if(abaColecao==='graded') renderGraduadas(); else renderAlbuns();
+}
+
+// --- CUSTOMIZAÇÃO (FALTAVA) ---
+function abrirCustomizacao() {
+    mostrarTela('telaCustomizacao');
+    const listaAv = document.getElementById('listaAvatares'); listaAv.innerHTML = '';
+    const avs = ['25','6','150','384','448'];
+    avs.forEach(id => {
+        const btn = document.createElement('div'); btn.className = 'cus-avatar-btn';
+        btn.innerHTML = `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png">`;
+        btn.onclick = () => { perfil.avatar = btn.querySelector('img').src; salvarEstado(); atualizarUI(); abrirCustomizacao(); };
+        listaAv.appendChild(btn);
+    });
+}
 </script>
 </body>
 </html>
