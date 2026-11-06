@@ -274,7 +274,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:400;padding:20px}.modal-overlay.ativo{display:flex;animation:fadeIn .3s}
 .modal-box{background:linear-gradient(180deg,#fff,#f0f4f8);border-radius:26px;padding:30px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,.5);animation:pop .35s;position:relative;border:3px solid #fff;margin:0 auto;max-height:90vh;overflow-y:auto}.modal-box h3{color:#4a6fa5;font-size:1.4rem;font-weight:900;margin-bottom:16px}.creditos-box{background:#e8f0fe;border-radius:14px;padding:16px;margin:20px 0;color:#4a6fa5;font-weight:900;font-size:.95rem;border:2px dashed #a8c8e8}.creditos-box span{color:#e63946;font-size:1.1rem;font-weight:900;display:block;margin-top:4px}
 #telaCompleta{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:500;padding:20px;overflow:hidden;background:linear-gradient(160deg,#ffd93d 0%,#ff8a3d 40%,#ff5566 70%,#8b6df0 100%)}#telaCompleta.ativo{display:flex;animation:fadeIn .3s}.confete-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}.confete{position:absolute;width:12px;height:12px;top:-20px;animation:confeteCai linear forwards}.compl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;background:rgba(255,255,255,.98);border-radius:30px;padding:40px 26px;box-shadow:0 30px 80px rgba(0,0,0,.4);max-width:400px;width:100%;animation:zoomIn .7s cubic-bezier(.34,1.56,.64,1);border:4px solid #fff;margin:0 auto}.compl-trofeu{font-size:7rem;animation:brilhoOuro 1.5s ease-in-out infinite;line-height:1}.compl-titulo{font-size:1.6rem;font-weight:900;background:linear-gradient(180deg,#ffd93d,#f7a800);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px;margin:16px 0 12px;line-height:1.15}.compl-set{font-size:1.4rem;font-weight:900;color:#4a6fa5;margin-bottom:8px;line-height:1.2}.compl-sub{font-size:.9rem;color:#7a6d9a;font-weight:800;margin-bottom:24px}@keyframes zoomIn{0%{transform:scale(0) rotate(-180deg);opacity:0}60%{transform:scale(1.1) rotate(8deg)}100%{transform:scale(1) rotate(0);opacity:1}}
-#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaTroca, #telaTrocaSucesso { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
+#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaTroca, #telaTrocaSucesso, #telaChat, #telaRanking { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
 .perfil-topo { position: relative; width: 100%; max-width: 520px; height: 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; z-index: 10; }
 .btn-voltar-topo { position: absolute; right: 0; top: 0; }
 .perfil-card { background: rgba(255,255,255,.05); border-radius: 24px; padding: 20px 20px 30px 20px; width: 100%; max-width: 520px; text-align: center; position: relative; backdrop-filter: blur(15px); border: 3px solid rgba(255,255,255,.2); box-shadow: 0 10px 30px rgba(0,0,0,.3); margin-bottom: 20px; transition: all 0.5s ease; overflow: visible; }
@@ -461,7 +461,55 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .toggle-switch .sw.on { background: #00b82f; }
 .toggle-switch .sw::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: .3s; box-shadow: 0 2px 4px rgba(0,0,0,.4); }
 .toggle-switch .sw.on::after { left: 27px; }
-@media(max-width:400px){.pack-card{width:135px}.booster-mini{height:190px}.pack-3d{width:min(85vw,290px);height:min(68vh,490px)}.logo-poke .nome{font-size:2.8rem}.cartas-album{gap:8px}.carta-slot.vazia .num{font-size:1.2rem}.rev-carta{width:min(78vw,240px)}.total-box .val{font-size:1.4rem}.final-grid .carta-final{width:30%;max-width:90px}.compl-trofeu{font-size:5rem}.compl-titulo{font-size:1.3rem}.roleta-num{font-size:6rem}.resultado-nota .nota-num{font-size:7rem}.pokeball-bg{width:30px;height:30px}.pokebola-home{width:130px;height:130px}.pokebola-home .contador{font-size:0.65rem;padding:5px 10px}}
+
+/* ===== CHAT STYLES ===== */
+.chat-container { display: flex; flex-direction: column; width: 100%; max-width: 520px; height: calc(100vh - 160px); background: #2a1a4a; border-radius: 18px; overflow: hidden; border: 2px solid rgba(255,215,0,0.3); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+.chat-mensagens { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
+.chat-msg { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 0.9rem; font-weight: 700; word-wrap: break-word; line-height: 1.3; animation: pop .2s; }
+.chat-msg.eu { align-self: flex-end; background: linear-gradient(180deg, #4a9fd8, #2a6a9a); color: #fff; border-bottom-right-radius: 4px; }
+.chat-msg.outro { align-self: flex-start; background: rgba(255,255,255,0.15); color: #fff; border-bottom-left-radius: 4px; }
+.chat-msg .hora { font-size: 0.55rem; opacity: 0.7; margin-top: 4px; display: block; font-weight: 800; letter-spacing: .5px; }
+.chat-input-row { display: flex; gap: 8px; padding: 10px; background: #1a0a2a; border-top: 2px solid rgba(255,215,0,0.3); }
+.chat-input-row input { flex: 1; padding: 12px 16px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; font-weight: 700; outline: none; font-family: inherit; font-size: 0.9rem; }
+.chat-input-row input:focus { border-color: #ffd93d; }
+.chat-input-row input::placeholder { color: #8899cc; }
+.chat-input-row button { padding: 0 20px; border-radius: 20px; background: linear-gradient(180deg, #ffd93d, #f7a800); color: #fff; border: none; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #b57a00; font-family: inherit; font-size: 1rem; }
+.chat-input-row button:active { transform: translateY(2px); box-shadow: 0 1px 0 #b57a00; }
+
+/* ===== CHAT NA TROCA ===== */
+.troca-chat { background: #1a0a2a; border-radius: 12px; margin-top: 10px; border: 2px solid rgba(255,215,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
+.troca-chat-titulo { padding: 8px 12px; background: rgba(0,0,0,0.3); color: #ffd93d; font-weight: 900; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+.troca-chat-body { display: flex; flex-direction: column; }
+.troca-chat-mensagens { max-height: 120px; min-height: 60px; overflow-y: auto; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.troca-chat-mensagens .chat-msg { font-size: 0.75rem; padding: 6px 10px; }
+.troca-chat-mensagens .chat-msg .hora { font-size: 0.5rem; }
+.troca-chat-input { display: flex; gap: 6px; padding: 8px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,215,0,0.15); }
+.troca-chat-input input { flex: 1; padding: 8px 12px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.8rem; font-weight: 700; outline: none; font-family: inherit; }
+.troca-chat-input input::placeholder { color: #8899cc; }
+.troca-chat-input input:focus { border-color: #ffd93d; }
+.troca-chat-input button { padding: 0 14px; border-radius: 16px; background: #ffd93d; color: #1a0a2a; border: none; font-weight: 900; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
+
+/* ===== RANKING STYLES ===== */
+.ranking-tabs { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 16px; padding: 0 4px; }
+.ranking-tab { flex: 1; padding: 12px 8px; border-radius: 14px; border: 2px solid #cfd8e3; background: #fff; color: #4a6fa5; font-weight: 900; font-size: 0.78rem; cursor: pointer; font-family: inherit; box-shadow: 0 3px 0 #cfd8e3; transition: .2s; }
+.ranking-tab.at { background: linear-gradient(180deg, #6dd5ed, #4a9fd8); color: #fff; border-color: #2a6a9a; box-shadow: 0 3px 0 #2a6a9a; }
+.ranking-tab:active { transform: translateY(2px); box-shadow: 0 1px 0 #cfd8e3; }
+.ranking-lista { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 10px; padding-bottom: 20px; }
+.ranking-item { background: #2a1a4a; border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; border: 2px solid rgba(255,255,255,0.1); color: #fff; transition: .2s; }
+.ranking-item.eu { border-color: #ffd93d; box-shadow: 0 0 20px rgba(255,217,61,0.4); background: linear-gradient(135deg, #3a2a5a, #2a1a4a); }
+.ranking-pos { font-size: 1.2rem; font-weight: 900; min-width: 45px; text-align: center; }
+.ranking-pos.pos-1 { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+.ranking-pos.pos-2 { color: #c0c0c0; text-shadow: 0 0 10px #c0c0c0; }
+.ranking-pos.pos-3 { color: #cd7f32; text-shadow: 0 0 10px #cd7f32; }
+.ranking-avatar { width: 45px; height: 45px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.ranking-avatar img { width: 100%; height: 100%; object-fit: contain; }
+.ranking-info { flex: 1; min-width: 0; text-align: left; }
+.ranking-nome { font-size: 0.95rem; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: flex; align-items: center; gap: 4px; }
+.ranking-id { font-size: 0.7rem; color: #a89ec4; font-weight: 800; }
+.ranking-valor { font-size: 1.1rem; font-weight: 900; color: #ffd93d; text-align: right; }
+.ranking-valor-lbl { font-size: 0.6rem; color: #a89ec4; font-weight: 800; text-align: right; text-transform: uppercase; letter-spacing: .5px; }
+
+@media(max-width:400px){.pack-card{width:135px}.booster-mini{height:190px}.pack-3d{width:min(85vw,290px);height:min(68vh,490px)}.logo-poke .nome{font-size:2.8rem}.cartas-album{gap:8px}.carta-slot.vazia .num{font-size:1.2rem}.rev-carta{width:min(78vw,240px)}.total-box .val{font-size:1.4rem}.final-grid .carta-final{width:30%;max-width:90px}.compl-trofeu{font-size:5rem}.compl-titulo{font-size:1.3rem}.roleta-num{font-size:6rem}.resultado-nota .nota-num{font-size:7rem}.pokeball-bg{width:30px;height:30px}.pokebola-home{width:130px;height:130px}.pokebola-home .contador{font-size:0.65rem;padding:5px 10px}.ranking-tab{font-size:.7rem;padding:10px 4px}.ranking-valor{font-size:.95rem}}
 </style>
 </head>
 <body>
@@ -552,7 +600,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <button class="nav-btn" id="navCol"><span style="font-size:1.6rem">📚</span><span class="lbl">Coleção</span></button>
   </div>
 </div>
-
 <div class="tela" id="telaCorreio">
   <div class="perfil-topo">
     <div style="font-size:1.3rem;font-weight:900;color:#ffd93d;">📬 Caixa de Correio</div>
@@ -610,6 +657,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 
   <button class="btn gold" onclick="abrirCustomizacao()" style="margin-bottom:12px;">🎨 Personalizar Perfil</button>
   <button class="btn loja" onclick="abrirAmigos()" style="margin-bottom:12px;">👥 Meus Amigos</button>
+  <button class="btn" onclick="abrirChats()" style="margin-bottom:12px; background:linear-gradient(180deg,#a855f7,#6d28d9); box-shadow:0 6px 0 #4a1a8a;">💬 Meus Chats</button>
+  <button class="btn" onclick="abrirRanking()" style="margin-bottom:12px; background:linear-gradient(180deg,#f7a800,#b57a00); box-shadow:0 6px 0 #8a5500;">🏆 Ranking Global</button>
   <button class="btn" onclick="abrirHistoricoVendas()" style="margin-bottom:12px; background:linear-gradient(180deg,#4a9fd8,#2a6a9a); box-shadow:0 6px 0 #1a4a6a;">📜 Histórico de Vendas</button>
 </div>
 
@@ -681,8 +730,9 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         <div class="lbl">Top 3 Cartas Mais Caras</div>
         <div id="amigoTopCartas" style="display:flex; justify-content:center; gap:10px; margin-top:10px;"></div>
     </div>
-    <div style="display:flex; gap:10px; margin-top:20px;">
-        <button class="btn verde" id="btnAbrirTrocaAmigo" style="flex:1; margin:0;">🤝 Trocar Cartas</button>
+    <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <button class="btn verde" id="btnAbrirTrocaAmigo" style="flex:1; margin:0; min-width:140px;">🤝 Trocar Cartas</button>
+        <button class="btn" id="btnAbrirChatAmigo" style="flex:1; margin:0; min-width:140px; background:linear-gradient(180deg,#a855f7,#6d28d9); box-shadow:0 6px 0 #4a1a8a;">💬 Conversar</button>
     </div>
   </div>
 </div>
@@ -707,6 +757,16 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       <div class="troca-slots" id="trocaSlotsBot"></div>
     </div>
     <div class="troca-status" id="trocaStatus">Adicione cartas para iniciar...</div>
+    <div class="troca-chat">
+      <div class="troca-chat-titulo" onclick="toggleTrocaChat()">💬 Chat da Troca <span id="trocaChatSeta">▼</span></div>
+      <div class="troca-chat-body" id="trocaChatBody">
+        <div class="troca-chat-mensagens" id="trocaChatMensagens"></div>
+        <div class="troca-chat-input">
+          <input type="text" id="trocaChatInput" placeholder="Fale com seu amigo..." maxlength="200">
+          <button onclick="enviarMensagemTroca()">Enviar</button>
+        </div>
+      </div>
+    </div>
     <div class="troca-acoes">
       <button class="btn-aceitar" id="btnConfirmarTroca" onclick="confirmarTrocaFinal()" style="display:none;">✅ CONFIRMAR TROCA</button>
       <button class="btn-recusar" onclick="cancelarTroca()">❌ Cancelar</button>
@@ -724,6 +784,41 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <div class="troca-resultado" id="trocaResultadoSucesso"></div>
     <button class="btn gold" onclick="irParaHome()" style="max-width:240px;margin:0 auto;">Voltar ao Início</button>
   </div>
+</div>
+
+<div class="tela" id="telaChat">
+  <div class="perfil-topo">
+    <div style="font-size:1.3rem;font-weight:900;color:#ffd93d;">💬 Meus Chats</div>
+    <button class="btn ghost mini btn-voltar-topo" onclick="voltarTela()">Voltar</button>
+  </div>
+  <div class="amigos-lista" id="listaChats"></div>
+</div>
+
+<div class="tela" id="telaConversa">
+  <div class="perfil-topo">
+    <div style="font-size:1.15rem;font-weight:900;color:#ffd93d;" id="chatComNome">Chat</div>
+    <button class="btn ghost mini btn-voltar-topo" onclick="fecharConversa()">Voltar</button>
+  </div>
+  <div class="chat-container">
+    <div class="chat-mensagens" id="chatMensagens"></div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInputMsg" placeholder="Digite sua mensagem..." maxlength="300">
+      <button onclick="enviarMensagemChat()">➤</button>
+    </div>
+  </div>
+</div>
+
+<div class="tela" id="telaRanking">
+  <div class="perfil-topo">
+    <div style="font-size:1.3rem;font-weight:900;color:#ffd93d;">🏆 Ranking Global</div>
+    <button class="btn ghost mini btn-voltar-topo" onclick="voltarTela()">Voltar</button>
+  </div>
+  <div class="ranking-tabs">
+    <button class="ranking-tab at" id="rkTabNivel" onclick="mudarAbaRanking('nivel', this)">⭐ Nível</button>
+    <button class="ranking-tab" id="rkTabCartas" onclick="mudarAbaRanking('cartas', this)">🎴 Cartas</button>
+    <button class="ranking-tab" id="rkTabMoedas" onclick="mudarAbaRanking('moedas', this)">💰 Moedas</button>
+  </div>
+  <div class="ranking-lista" id="rankingLista"></div>
 </div>
 
 <div class="tela" id="telaLoja">
@@ -1195,6 +1290,10 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let isProcessingResgatar = false;
   let unsubscribePerfil = null;
   let unsubscribeAmigos = null;
+  let unsubscribeAmigoPerfil = null;
+  let unsubscribeChat = null;
+  let unsubscribeTrocaChat = null;
+  let unsubscribeRanking = null;
 
   // Variáveis de Amigos e Trocas
   let meusAmigos = [];
@@ -1204,6 +1303,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let amigoDaTrocaAtual = null;
   let docTrocaId = null;
   let timerTrocaInterval = null;
+
+  // Variáveis de Chat
+  let amigoChatAtual = null;
+  let chatAbertoDuranteTroca = true;
+
+  // Variáveis de Ranking
+  let abaRankingAtual = 'nivel';
 
   let perfil = JSON.parse(localStorage.getItem(KEY+'perfil')||'null');
   if(!perfil) {
@@ -1337,8 +1443,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       }, { merge: true }).catch((erro) => console.error("Erro ao salvar na nuvem:", erro));
     }, 1000);
   }
-
-  function mostrarTela(id, push = true){
+function mostrarTela(id, push = true){
     const atual = document.querySelector('.tela.ativa');
     if (push && atual && atual.id !== id) {
         if (telaStack[telaStack.length - 1] !== atual.id) {
@@ -1358,8 +1463,14 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         modaisAbertos.forEach(m => m.classList.remove('ativo'));
         return;
     }
+    if (document.getElementById('telaConversa') && document.getElementById('telaConversa').classList.contains('ativa')) { fecharConversa(); return; }
+    if (document.getElementById('telaChat').classList.contains('ativa')) { abrirPerfil(); return; }
+    if (document.getElementById('telaRanking').classList.contains('ativa')) { if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; } abrirPerfil(); return; }
     if (document.getElementById('telaTroca').classList.contains('ativa')) { cancelarTroca(); return; }
-    if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) { abrirAmigos(); return; }
+    if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) { 
+        if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
+        abrirAmigos(); return; 
+    }
     if (document.getElementById('telaAmigos').classList.contains('ativa')) { irParaHome(); return; }
     if (document.getElementById('telaPerfil').classList.contains('ativa')) { irParaHome(); return; }
     if (document.getElementById('telaColecao').classList.contains('ativa')) {
@@ -1609,9 +1720,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (!confirm('🚪 Tem certeza que deseja sair da conta?')) return;
     document.getElementById('modalConfig').classList.remove('ativo');
     
-    // Correção de Memória: Limpa os listeners
     if (unsubscribeAmigos) { unsubscribeAmigos(); unsubscribeAmigos = null; }
     if (unsubscribePerfil) { unsubscribePerfil(); unsubscribePerfil = null; }
+    if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
+    if (unsubscribeChat) { unsubscribeChat(); unsubscribeChat = null; }
+    if (unsubscribeTrocaChat) { unsubscribeTrocaChat(); unsubscribeTrocaChat = null; }
+    if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; }
     
     await auth.signOut();
   }
@@ -1621,7 +1735,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const erroEl = document.getElementById('erroLogin'); if (erroEl) erroEl.textContent = '';
     mostrarAbaLogin('entrar');
   }
-// ===== FUNÇÕES GERAIS E CARREGAMENTO =====
+
+  // ===== FUNÇÕES GERAIS E CARREGAMENTO =====
   function getPopularidade(nome){
     const palavras=String(nome).toLowerCase().split(/[\s\-\.]+/); let base=1;
     for(const p of palavras){ if(POP_SP.has(p))return 5; if(POP_S.has(p))base=Math.max(base,3); if(POP_A.has(p))base=Math.max(base,2); }
@@ -1855,7 +1970,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     packAtual=gerarCartasDoPack(pacoteEscolhido); const agora=new Date().toISOString();
     packAtual.forEach(c=>{ if(!colecao[c.id])colecao[c.id]={qtd:0,data:agora,gradeds:[]}; colecao[c.id].qtd=(colecao[c.id].qtd||0)+1; });
     
-    // CORREÇÃO: Salvar imediatamente para evitar perda de dados
     salvarEstado(); atualizarUI(); 
     if (auth.currentUser) {
         db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao });
@@ -2491,7 +2605,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       } else { btnClaim.disabled = false; btnClaim.style.opacity = '1'; btnClaim.textContent = 'Resgatar 20k Moedas'; status.textContent = 'Resgate disponível!'; status.style.color = '#7eeb8e'; }
   }
 
-  // ===== AMIGOS E TROCAS REAIS =====
+  // ===== SISTEMA DE AMIGOS =====
   function abrirAmigos() {
       mostrarTela('telaAmigos'); 
       renderizarListaAmigos();
@@ -2561,8 +2675,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       
       meusAmigos.forEach((amigo, index) => {
           const d = document.createElement('div'); d.className = 'amigo-card' + (amigo.isBanned ? ' banned' : '');
-          let avHtml = amigo.avatar.startsWith('http') ? `<img src="${amigo.avatar}">` : amigo.avatar;
-          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor}">${avHtml}</div>
+          let avHtml = (amigo.avatar && amigo.avatar.startsWith('http')) ? `<img src="${amigo.avatar}">` : (amigo.avatar || '👤');
+          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}</div>
               <div class="amigo-info">
                   <div class="amigo-nome">${amigo.nome} ${amigo.isVerified ? '<span class="icon-verified"></span>' : ''}${amigo.isBanned ? '<span class="ban-tag">BANIDO</span>' : ''}</div>
                   <div class="amigo-status">Nível ${amigo.nivel} • ${amigo.cartas} cartas</div>
@@ -2585,7 +2699,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           const meuData = meuDoc.data();
           
           await euRef.update({
-              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: uidAmigo, id: idAmigo, nome: nomeAmigo, avatar: amigoData.perfil.avatar || '', cor: amigoData.perfil.cor || '', nivel: 1, cartas: amigoData.cartasCount || 0, isVerified: amigoData.perfil.isVerified || false, isBanned: amigoData.banido || false })
+              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: uidAmigo, id: idAmigo, nome: nomeAmigo, avatar: (amigoData.perfil && amigoData.perfil.avatar) || '', cor: (amigoData.perfil && amigoData.perfil.cor) || '', nivel: 1, cartas: amigoData.cartasCount || 0, isVerified: (amigoData.perfil && amigoData.perfil.isVerified) || false, isBanned: amigoData.banido || false })
           });
           await amigoRef.update({
               amigos: firebase.firestore.FieldValue.arrayUnion({ uid: auth.currentUser.uid, id: perfil.id, nome: usuario.nome, avatar: perfil.avatar, cor: perfil.cor, nivel: calcularNivel(getTotalCartas()), cartas: getTotalCartas(), isVerified: perfil.isVerified || false, isBanned: false })
@@ -2609,28 +2723,61 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           const euRef = db.collection('jogadores').doc(auth.currentUser.uid);
           const novoArrayAmigos = meusAmigos.filter(a => a.uid !== uidAmigo);
           await euRef.update({ amigos: novoArrayAmigos });
-          await db.collection('jogadores').doc(uidAmigo).update({ amigos: firebase.firestore.FieldValue.arrayRemove(meusAmigos.find(a => a.uid === uidAmigo)) });
+          const amigoData = meusAmigos.find(a => a.uid === uidAmigo);
+          if (amigoData) {
+              await db.collection('jogadores').doc(uidAmigo).update({ amigos: firebase.firestore.FieldValue.arrayRemove(amigoData) }).catch(()=>{});
+          }
       } catch(e) { console.error(e); }
   }
 
+  // ===== PERFIL DO AMIGO COM TEMPO REAL (CORREÇÃO BUG 5) =====
   function abrirPerfilAmigo(amigo) {
       mostrarTela('telaAmigoPerfil');
-      const av = document.getElementById('amigoAvatar');
-      if(amigo.avatar.startsWith('http')) { av.innerHTML = `<img src="${amigo.avatar}">`; } else { av.innerHTML = `<span style="font-size:3rem;font-weight:900;">${amigo.avatar}</span>`; }
-      
-      const card = document.getElementById('amigoPerfilCard'); card.className = 'perfil-card'; card.style.background = amigo.cor || '#2a1a4a'; card.style.animation = 'none';
-      
-      document.getElementById('amigoNome').innerHTML = amigo.nome + (amigo.isVerified ? ' <span class="icon-verified"></span>' : ''); 
-      document.getElementById('amigoId').textContent = amigo.id;
-      document.getElementById('amigoNivel').textContent = amigo.nivel; 
-      document.getElementById('amigoCartas').textContent = amigo.cartas;
+      renderizarPerfilAmigo(amigo);
       
       document.getElementById('btnAbrirTrocaAmigo').onclick = () => {
           if (amigo.isBanned) { alert('🚫 Este jogador está banido.'); return; }
           iniciarTrocaComAmigo(amigo);
       };
+      document.getElementById('btnAbrirChatAmigo').onclick = () => {
+          abrirConversa(amigo);
+      };
+      
+      // CORREÇÃO BUG 5: onSnapshot em tempo real no perfil do amigo
+      if (unsubscribeAmigoPerfil) unsubscribeAmigoPerfil();
+      unsubscribeAmigoPerfil = db.collection('jogadores').doc(amigo.uid).onSnapshot(snap => {
+          if (!snap.exists) return;
+          const d = snap.data();
+          const p = d.perfil || {};
+          const amigoAtualizado = {
+              uid: amigo.uid, id: p.id || amigo.id, nome: d.nome || amigo.nome,
+              avatar: p.avatar || amigo.avatar, cor: p.cor || amigo.cor,
+              nivel: calcularNivel(d.cartasCount || 0), cartas: d.cartasCount || 0,
+              isVerified: p.isVerified || false, isBanned: d.banido || false
+          };
+          amigoDaTrocaAtual = amigoAtualizado;
+          if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) {
+              renderizarPerfilAmigo(amigoAtualizado);
+          }
+      });
   }
 
+  function renderizarPerfilAmigo(amigo) {
+      const av = document.getElementById('amigoAvatar');
+      if(amigo.avatar && amigo.avatar.startsWith('http')) { av.innerHTML = `<img src="${amigo.avatar}">`; } 
+      else { av.innerHTML = `<span style="font-size:3rem;font-weight:900;">${amigo.avatar || '👤'}</span>`; }
+      
+      const card = document.getElementById('amigoPerfilCard'); card.className = 'perfil-card'; card.style.background = amigo.cor || '#2a1a4a'; card.style.animation = 'none';
+      
+      document.getElementById('amigoNome').innerHTML = (amigo.nome || 'Amigo') + (amigo.isVerified ? ' <span class="icon-verified"></span>' : ''); 
+      document.getElementById('amigoId').textContent = amigo.id || '#----';
+      document.getElementById('amigoNivel').textContent = amigo.nivel || 1; 
+      document.getElementById('amigoCartas').textContent = amigo.cartas || 0;
+      const gc = document.getElementById('amigoGrad'); if (gc) gc.textContent = '0';
+      const cc = document.getElementById('amigoColecoes'); if (cc) cc.textContent = '0';
+  }
+
+  // ===== TROCA DE CARTAS =====
   function iniciarTrocaComAmigo(amigo) {
       amigoDaTrocaAtual = amigo;
       trocaSelecionadaJogador = [];
@@ -2651,6 +2798,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       }).then(docRef => {
           docTrocaId = docRef.id;
           ouvirTroca();
+          iniciarChatTroca();
       });
   }
 
@@ -2686,6 +2834,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 
   function cancelarTrocaLocal() {
       if (timerTrocaInterval) clearInterval(timerTrocaInterval);
+      if (unsubscribeTrocaChat) { unsubscribeTrocaChat(); unsubscribeTrocaChat = null; }
       docTrocaId = null; amigoDaTrocaAtual = null;
       mostrarTela('telaAmigos');
   }
@@ -2708,12 +2857,17 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       if (trocaSelecionadaAmigo.length === 0) slotsB.innerHTML = '<div style="color:#a89ec4;font-size:.8rem;padding:20px;">Aguardando...</div>';
   }
 
+  // CORREÇÃO BUG 2: usar jogador1 === uid em vez de uid < uid
   function atualizarTrocaFirebase() {
       if (!docTrocaId) return;
-      const campo = (auth.currentUser.uid < amigoDaTrocaAtual.uid) ? 'cartas1' : 'cartas2';
-      const updates = {};
-      updates[campo] = trocaSelecionadaJogador.map(c => ({ id: c.id, tipo: c.tipo, nota: c.nota, img: c.imgSmall || c.img, preco: c.precoFinal || c.preco }));
-      db.collection('trocas').doc(docTrocaId).update(updates);
+      db.collection('trocas').doc(docTrocaId).get().then(doc => {
+          if (!doc.exists) return;
+          const data = doc.data();
+          const campo = (data.jogador1 === auth.currentUser.uid) ? 'cartas1' : 'cartas2';
+          const updates = {};
+          updates[campo] = trocaSelecionadaJogador.map(c => ({ id: c.id, tipo: c.tipo, nota: c.nota, img: c.imgSmall || c.img, preco: c.precoFinal || c.preco }));
+          return db.collection('trocas').doc(docTrocaId).update(updates);
+      });
   }
 
   function confirmarTrocaFinal() {
@@ -2774,23 +2928,23 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
               let col1 = user1Doc.data().colecao || {}; let col2 = user2Doc.data().colecao || {};
               
               data.cartas1.forEach(c => {
-                  if (c.tipo === 'raw') col1[c.id].qtd = Math.max(0, col1[c.id].qtd - 1);
-                  else if (c.tipo === 'graded' && col1[c.id].gradeds) col1[c.id].gradeds = col1[c.id].gradeds.filter(g => g.nota !== c.nota);
+                  if (c.tipo === 'raw' && col1[c.id]) col1[c.id].qtd = Math.max(0, (col1[c.id].qtd||0) - 1);
+                  else if (c.tipo === 'graded' && col1[c.id] && col1[c.id].gradeds) col1[c.id].gradeds = col1[c.id].gradeds.filter(g => g.nota !== c.nota);
               });
               data.cartas1.forEach(c => {
                   if (!col2[c.id]) col2[c.id] = { qtd: 0, gradeds: [] };
-                  if (c.tipo === 'raw') col2[c.id].qtd += 1;
-                  else if (c.tipo === 'graded') col2[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() });
+                  if (c.tipo === 'raw') col2[c.id].qtd = (col2[c.id].qtd||0) + 1;
+                  else if (c.tipo === 'graded') { if (!col2[c.id].gradeds) col2[c.id].gradeds = []; col2[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
               });
               
               data.cartas2.forEach(c => {
-                  if (c.tipo === 'raw') col2[c.id].qtd = Math.max(0, col2[c.id].qtd - 1);
-                  else if (c.tipo === 'graded' && col2[c.id].gradeds) col2[c.id].gradeds = col2[c.id].gradeds.filter(g => g.nota !== c.nota);
+                  if (c.tipo === 'raw' && col2[c.id]) col2[c.id].qtd = Math.max(0, (col2[c.id].qtd||0) - 1);
+                  else if (c.tipo === 'graded' && col2[c.id] && col2[c.id].gradeds) col2[c.id].gradeds = col2[c.id].gradeds.filter(g => g.nota !== c.nota);
               });
               data.cartas2.forEach(c => {
                   if (!col1[c.id]) col1[c.id] = { qtd: 0, gradeds: [] };
-                  if (c.tipo === 'raw') col1[c.id].qtd += 1;
-                  else if (c.tipo === 'graded') col1[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() });
+                  if (c.tipo === 'raw') col1[c.id].qtd = (col1[c.id].qtd||0) + 1;
+                  else if (c.tipo === 'graded') { if (!col1[c.id].gradeds) col1[c.id].gradeds = []; col1[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
               });
               
               transaction.update(user1Ref, { colecao: col1 });
@@ -2895,14 +3049,230 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       });
   }
 
-  // ===== ADMIN =====
-  function abrirAdminDireto() {
-      atualizarUI(); document.getElementById('adminStatus').textContent=''; document.getElementById('adminDinheiro').value=''; document.getElementById('adminLevelInput').value=''; document.getElementById('adminIdInput').value='';
-      document.getElementById('adminTitleSelect').value = perfil.adminTitle || '👑 CRIADOR SUPREMO 👑';
-      document.querySelectorAll('#sortePacotes .btn-sorte').forEach(b=>{ b.classList.toggle('ativo', parseInt(b.dataset.luck) === multiplicadorSortePacotes); });
-      document.querySelectorAll('#sorteGraduacao .btn-sorte').forEach(b=>{ b.classList.toggle('ativo', parseInt(b.dataset.luck) === multiplicadorSorteGrad); });
-      atualizarToggleAdminFixo(); renderizarAdminVisuais(); carregarCartasAdmin(); montarAdminHackGrid(); atualizarBotoesAdmin(); renderBanLista(); mostrarTela('telaAdmin');
+  // ===== CHAT =====
+  function gerarChatId(uid1, uid2) {
+      const sorted = [uid1, uid2].sort();
+      return sorted[0] + '_' + sorted[1];
   }
+
+  function abrirChats() {
+      mostrarTela('telaChat');
+      renderizarListaChats();
+  }
+
+  function renderizarListaChats() {
+      const lista = document.getElementById('listaChats'); if (!lista) return;
+      lista.innerHTML = '';
+      
+      if (meusAmigos.length === 0) {
+          lista.innerHTML = '<p style="color:#a89ec4; text-align:center; padding:20px;">Você não tem amigos para conversar ainda.</p>';
+          return;
+      }
+      
+      meusAmigos.forEach(amigo => {
+          const d = document.createElement('div'); d.className = 'amigo-card';
+          let avHtml = (amigo.avatar && amigo.avatar.startsWith('http')) ? `<img src="${amigo.avatar}">` : (amigo.avatar || '👤');
+          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}</div>
+              <div class="amigo-info">
+                  <div class="amigo-nome">${amigo.nome} ${amigo.isVerified ? '<span class="icon-verified"></span>' : ''}</div>
+                  <div class="amigo-status">Clique para conversar 💬</div>
+              </div>
+              <div style="font-size:1.5rem;">💬</div>`;
+          d.onclick = () => abrirConversa(amigo);
+          lista.appendChild(d);
+      });
+  }
+
+  function abrirConversa(amigo) {
+      amigoChatAtual = amigo;
+      mostrarTela('telaConversa');
+      document.getElementById('chatComNome').textContent = '💬 ' + amigo.nome;
+      document.getElementById('chatMensagens').innerHTML = '';
+      document.getElementById('chatInputMsg').value = '';
+      
+      const chatId = gerarChatId(auth.currentUser.uid, amigo.uid);
+      
+      if (unsubscribeChat) unsubscribeChat();
+      unsubscribeChat = db.collection('chats').doc(chatId).collection('mensagens').orderBy('data', 'asc').limit(100).onSnapshot(snap => {
+          const container = document.getElementById('chatMensagens'); if (!container) return;
+          container.innerHTML = '';
+          snap.forEach(doc => {
+              const m = doc.data();
+              const isEu = m.de === auth.currentUser.uid;
+              const div = document.createElement('div');
+              div.className = 'chat-msg ' + (isEu ? 'eu' : 'outro');
+              const hora = new Date(m.data).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+              div.innerHTML = `${escapeHtml(m.texto)}<span class="hora">${hora}</span>`;
+              container.appendChild(div);
+          });
+          container.scrollTop = container.scrollHeight;
+      });
+  }
+
+  function fecharConversa() {
+      if (unsubscribeChat) { unsubscribeChat(); unsubscribeChat = null; }
+      amigoChatAtual = null;
+      abrirChats();
+  }
+
+  async function enviarMensagemChat() {
+      const input = document.getElementById('chatInputMsg');
+      const texto = input.value.trim();
+      if (!texto || !amigoChatAtual) return;
+      
+      input.value = '';
+      const chatId = gerarChatId(auth.currentUser.uid, amigoChatAtual.uid);
+      
+      try {
+          await db.collection('chats').doc(chatId).set({
+              participantes: [auth.currentUser.uid, amigoChatAtual.uid],
+              nomes: { [auth.currentUser.uid]: usuario.nome, [amigoChatAtual.uid]: amigoChatAtual.nome },
+              ultimaMsg: texto, ultimaData: Date.now()
+          }, { merge: true });
+          
+          await db.collection('chats').doc(chatId).collection('mensagens').add({
+              de: auth.currentUser.uid, deNome: usuario.nome, texto: texto, data: Date.now()
+          });
+      } catch(e) { console.error('Erro ao enviar mensagem:', e); alert('Erro ao enviar mensagem.'); }
+  }
+
+  // ===== CHAT NA TROCA =====
+  function iniciarChatTroca() {
+      if (!docTrocaId || !amigoDaTrocaAtual) return;
+      const chatId = gerarChatId(auth.currentUser.uid, amigoDaTrocaAtual.uid);
+      
+      if (unsubscribeTrocaChat) unsubscribeTrocaChat();
+      unsubscribeTrocaChat = db.collection('chats').doc(chatId).collection('mensagens').orderBy('data', 'asc').limit(50).onSnapshot(snap => {
+          const container = document.getElementById('trocaChatMensagens'); if (!container) return;
+          container.innerHTML = '';
+          snap.forEach(doc => {
+              const m = doc.data();
+              const isEu = m.de === auth.currentUser.uid;
+              const div = document.createElement('div');
+              div.className = 'chat-msg ' + (isEu ? 'eu' : 'outro');
+              const hora = new Date(m.data).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+              div.innerHTML = `${escapeHtml(m.texto)}<span class="hora">${hora}</span>`;
+              container.appendChild(div);
+          });
+          container.scrollTop = container.scrollHeight;
+      });
+  }
+
+  async function enviarMensagemTroca() {
+      const input = document.getElementById('trocaChatInput');
+      const texto = input.value.trim();
+      if (!texto || !amigoDaTrocaAtual) return;
+      
+      input.value = '';
+      const chatId = gerarChatId(auth.currentUser.uid, amigoDaTrocaAtual.uid);
+      
+      try {
+          await db.collection('chats').doc(chatId).set({
+              participantes: [auth.currentUser.uid, amigoDaTrocaAtual.uid],
+              nomes: { [auth.currentUser.uid]: usuario.nome, [amigoDaTrocaAtual.uid]: amigoDaTrocaAtual.nome },
+              ultimaMsg: texto, ultimaData: Date.now()
+          }, { merge: true });
+          
+          await db.collection('chats').doc(chatId).collection('mensagens').add({
+              de: auth.currentUser.uid, deNome: usuario.nome, texto: texto, data: Date.now()
+          });
+      } catch(e) { console.error('Erro ao enviar mensagem:', e); }
+  }
+
+  function toggleTrocaChat() {
+      const body = document.getElementById('trocaChatBody');
+      const seta = document.getElementById('trocaChatSeta');
+      if (body.style.display === 'none') { body.style.display = 'flex'; seta.textContent = '▼'; }
+      else { body.style.display = 'none'; seta.textContent = '▲'; }
+  }
+
+  // ===== RANKING GLOBAL =====
+  function abrirRanking() {
+      mostrarTela('telaRanking');
+      mudarAbaRanking('nivel', document.getElementById('rkTabNivel'));
+  }
+
+  function mudarAbaRanking(aba, btn) {
+      abaRankingAtual = aba;
+      document.querySelectorAll('.ranking-tab').forEach(b => b.classList.remove('at'));
+      btn.classList.add('at');
+      
+      if (unsubscribeRanking) unsubscribeRanking();
+      const lista = document.getElementById('rankingLista');
+      lista.innerHTML = '<p style="color:#a89ec4; text-align:center; padding:20px;">Carregando ranking...</p>';
+      
+      const campo = aba === 'nivel' ? 'perfil.customLevel' : (aba === 'cartas' ? 'cartasCount' : 'moedas');
+      const campoReal = aba === 'nivel' ? 'cartasCount' : (aba === 'cartas' ? 'cartasCount' : 'moedas');
+      
+      unsubscribeRanking = db.collection('jogadores')
+        .orderBy(campoReal, aba === 'moedas' ? 'desc' : 'desc')
+        .limit(50)
+        .onSnapshot(snap => {
+            lista.innerHTML = '';
+            let pos = 0;
+            const jogadores = [];
+            snap.forEach(doc => jogadores.push({ uid: doc.id, ...doc.data() }));
+            
+            if (aba === 'nivel') {
+                jogadores.sort((a, b) => {
+                    const nA = (a.perfil && a.perfil.customLevel > 0) ? a.perfil.customLevel : calcularNivel(a.cartasCount || 0);
+                    const nB = (b.perfil && b.perfil.customLevel > 0) ? b.perfil.customLevel : calcularNivel(b.cartasCount || 0);
+                    return nB - nA;
+                });
+            }
+            
+            jogadores.forEach((j) => {
+                pos++;
+                const p = j.perfil || {};
+                const isEu = j.uid === auth.currentUser.uid;
+                const d = document.createElement('div');
+                d.className = 'ranking-item' + (isEu ? ' eu' : '');
+                let posCls = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
+                let med = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : '';
+                let avHtml = (p.avatar && p.avatar.startsWith('http')) ? `<img src="${p.avatar}">` : (p.avatar || '👤');
+                
+                let valorPrincipal = '', valorLbl = '';
+                if (aba === 'nivel') {
+                    valorPrincipal = (p.customLevel > 0) ? p.customLevel : calcularNivel(j.cartasCount || 0);
+                    valorLbl = 'Nível';
+                } else if (aba === 'cartas') {
+                    valorPrincipal = j.cartasCount || 0;
+                    valorLbl = 'Cartas';
+                } else {
+                    valorPrincipal = (j.dinheiroInfinito) ? '♾️' : (j.moedas || 0).toLocaleString('pt-BR');
+                    valorLbl = 'Moedas';
+                }
+                
+                d.innerHTML = `<div class="ranking-pos ${posCls}">${med || pos}</div>
+                    <div class="ranking-avatar">${avHtml}</div>
+                    <div class="ranking-info">
+                        <div class="ranking-nome">${p.nome || j.nome || 'Jogador'} ${p.isVerified ? '<span class="icon-verified"></span>' : ''}${isEu ? ' <span style="color:#ffd93d;font-size:.7rem;">(você)</span>' : ''}</div>
+                        <div class="ranking-id">${p.id || '#----'}</div>
+                    </div>
+                    <div>
+                        <div class="ranking-valor">${valorPrincipal}</div>
+                        <div class="ranking-valor-lbl">${valorLbl}</div>
+                    </div>`;
+                lista.appendChild(d);
+            });
+            
+            if (jogadores.length === 0) {
+                lista.innerHTML = '<p style="color:#a89ec4; text-align:center; padding:20px;">Nenhum jogador no ranking ainda.</p>';
+            }
+        }, err => {
+            console.error('Erro ranking:', err);
+            lista.innerHTML = '<p style="color:#ff5566; text-align:center; padding:20px;">Erro ao carregar ranking.</p>';
+        });
+  }
+
+  // ===== HELPERS =====
+  function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+  }
+
+  // ===== ADMIN =====
+  function abrirAdminDireto() { abrirAdmin(); }
 
   function abrirAdmin(){
     atualizarUI(); document.getElementById('adminStatus').textContent=''; document.getElementById('adminDinheiro').value=''; document.getElementById('adminLevelInput').value=''; document.getElementById('adminIdInput').value='';
@@ -3203,7 +3573,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           if (snapshot.empty) { lista.innerHTML = '<p style="color:#a89ec4;font-size:.8rem;text-align:center;padding:10px;">Nenhum jogador banido.</p>'; return; }
           snapshot.forEach(doc => {
               const d = doc.data();
-              const b = { id: d.perfil.id, motivo: d.banMotivo, tipo: d.banTipo, expiraEm: d.banExpiraEm };
+              const p = d.perfil || {};
+              const b = { id: p.id || '----', motivo: d.banMotivo, tipo: d.banTipo, expiraEm: d.banExpiraEm };
               const div = document.createElement('div'); div.className = 'ban-item'; let tempoTxt = '';
               if (b.tipo === 'perm') tempoTxt = '♾️ Permanente';
               else if (b.expiraEm) {
@@ -3216,6 +3587,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       } catch(e) { console.error(e); lista.innerHTML = '<p style="color:#ff5566;font-size:.8rem;text-align:center;padding:10px;">Erro ao carregar lista.</p>'; }
   }
 
+  // ===== VERIFICADO: DAR via Correio | RETIRAR instantâneo (CORREÇÃO BUG 3) =====
   function darVerificadoPorId() {
       const id = document.getElementById('adminVerifyId').value.trim();
       if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
@@ -3237,73 +3609,19 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       });
   }
 
+  // CORREÇÃO BUG 3: remove verificado INSTANTANEAMENTE, sem passar pelo correio
   function retirarVerificadoPorId() {
       const id = document.getElementById('adminVerifyId').value.trim();
       if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
+      if (!confirm('Retirar o selo de verificado de ' + id + '? (o selo some na hora)')) return;
       db.collection('ids_publicos').doc(id).get().then(idDoc => {
           if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
           const uidAlvo = idDoc.data().uid;
-          const item = { 
-              titulo: '⚠️ Remoção de Selo', 
-              tipo: 'Aviso', 
-              remetente: 'ADMINISTRAÇÃO', 
-              verificado: false, 
-              lido: false, 
-              dataEnvio: Date.now(), 
-              id: 'corr_'+Date.now() 
-          };
-          db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
-              alert('✅ Aviso de remoção enviado pro Correio de ' + id + '!');
-          });
+          db.collection('jogadores').doc(uidAlvo).update({ 'perfil.isVerified': false }).then(() => {
+              alert('✅ Selo retirado INSTANTANEAMENTE de ' + id + '!');
+          }).catch(e => { console.error(e); alert('Erro ao retirar selo.'); });
       });
   }
-
-  document.getElementById('btnAdminSetId').onclick = () => {
-    const novoId = document.getElementById('adminIdInput').value.trim();
-    if (!novoId || !/^#\d{4}$/.test(novoId)) { document.getElementById('adminStatus').textContent = '⚠️ ID inválido! Use formato #1234.'; return; }
-    if (novoId === perfil.id) { document.getElementById('adminStatus').textContent = '⚠️ Esse já é o seu ID atual.'; return; }
-    if (!confirm(`Trocar seu ID para ${novoId}?`)) return;
-    
-    db.collection('ids_publicos').doc(perfil.id).delete().then(() => {
-        return db.collection('ids_publicos').doc(novoId).set({ uid: auth.currentUser.uid, nome: usuario.nome, login: usuario.login });
-    }).then(() => {
-        perfil.id = novoId; salvarEstado(); document.getElementById('adminStatus').textContent = `✅ ID alterado para ${novoId}!`; document.getElementById('adminIdInput').value = '';
-    }).catch(e => alert('Erro ao mudar ID. Talvez já esteja em uso.'));
-  };
-
-  document.getElementById('btnAdminUnlockAll').onclick = () => {
-    if(!confirm('Isso vai adicionar 1 de CADA carta de TODAS as coleções carregadas e completar os troféus. Continuar?')) return;
-    const agora = new Date().toISOString(); let total = 0;
-    PACOTES.forEach(p => {
-      const pool = CARDS_POR_SET[p.cod] || [];
-      pool.forEach(c => { if(!colecao[c.id]) colecao[c.id] = { qtd: 0, data: agora, gradeds: [] }; colecao[c.id].qtd = (colecao[c.id].qtd || 0) + 1; total++; });
-      if(pool.length > 0 && !colecoesCompletas.includes(p.cod)) colecoesCompletas.push(p.cod);
-    });
-    salvarEstado(); atualizarUI(); document.getElementById('adminStatus').textContent = `✅ ${total} cartas adicionadas e coleções completadas!`;
-  };
-
-  document.getElementById('btnAddDinheiro').onclick=()=>{
-    const v=parseInt(document.getElementById('adminDinheiro').value);
-    if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
-    moedas+=v; salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Adicionado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
-  };
-  document.getElementById('btnRemDinheiro').onclick=()=>{
-    const v=parseInt(document.getElementById('adminDinheiro').value);
-    if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
-    moedas=Math.max(0,moedas-v); salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Retirado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
-  };
-
-  document.getElementById('btnAdminSetLevel').onclick = () => {
-      const v = parseInt(document.getElementById('adminLevelInput').value);
-      if(isNaN(v) || v < 0) { document.getElementById('adminStatus').textContent = '⚠️ Digite um nível válido'; return; }
-      perfil.customLevel = v; salvarEstado(); atualizarUI();
-      document.getElementById('adminStatus').textContent = v === 0 ? '✅ Nível resetado para automático!' : `✅ Nível definido para ${v}!`;
-  };
-
-  document.getElementById('btnAdminSelfVerify').onclick = () => {
-      perfil.isVerified = !perfil.isVerified; salvarEstado(); atualizarUI();
-      document.getElementById('adminStatus').textContent = perfil.isVerified ? '✔️ Seu selo de Verificado foi ATIVADO!' : '❌ Seu selo de Verificado foi DESATIVADO!';
-  };
 
   // ===== CORREIO =====
   function abrirCorreio() { mostrarTela('telaCorreio'); renderCorreio(); }
@@ -3356,85 +3674,93 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   }
 
   function resgatarItemCorreio(itemId) {
-      if (isProcessingResgatar) return; // CORREÇÃO CLIQUE DUPLO
+      if (isProcessingResgatar) return;
       isProcessingResgatar = true;
 
-      const idx = correio.findIndex(c => c.id === itemId); if (idx < 0) { isProcessingResgatar = false; return; } const item = correio[idx];
-      
-      if (item.expiraEm && Date.now() >= item.expiraEm) { alert('⏳ Este presente expirou!'); correio.splice(idx, 1); salvarEstado(); renderCorreio(); isProcessingResgatar = false; return; }
-      
-      if (item.misterioso) {
-          giftAtual = item; document.getElementById('modalGiftHack').classList.add('ativo');
-          const giftBox = document.getElementById('giftBox'); giftBox.style.display = 'block'; giftBox.textContent = '🎁'; giftBox.style.animation = 'pulsar 1s infinite';
-          document.getElementById('giftTituloModal').textContent = '🎁 PRESENTE MISTERIOSO!';
-          document.getElementById('giftText').textContent = 'Toque no presente para abrir e descobrir qual carta Hack você ganhou.';
-          document.getElementById('giftCartaImg').style.display = 'none'; document.getElementById('giftCartaInfo').style.display = 'none'; document.getElementById('giftBtnContinuar').style.display = 'none';
-          isProcessingResgatar = false;
-          return;
-      }
-      
-      if (item.verificado !== undefined) {
-          perfil.isVerified = item.verificado; correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
-          alert('🎖️ Selo de Verificado atualizado com sucesso!'); isProcessingResgatar = false; return;
-      }
-
-      if (item.cartaHack) {
-          const hc = CARTAS_HACK.find(x => x.id === item.cartaId);
-          if (hc) {
-              if (!colecao[hc.id]) colecao[hc.id] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
-              if (!colecao[hc.id].gradeds) colecao[hc.id].gradeds = [];
-              colecao[hc.id].gradeds.push({ nota: 10, preco: hc.preco, hack: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 10 }] });
-              checarAlbumCompleto('hack');
+      try {
+          const idx = correio.findIndex(c => c.id === itemId); if (idx < 0) { isProcessingResgatar = false; return; } const item = correio[idx];
+          
+          if (item.expiraEm && Date.now() >= item.expiraEm) { alert('⏳ Este presente expirou!'); correio.splice(idx, 1); salvarEstado(); renderCorreio(); isProcessingResgatar = false; return; }
+          
+          if (item.misterioso) {
+              giftAtual = item; document.getElementById('modalGiftHack').classList.add('ativo');
+              const giftBox = document.getElementById('giftBox'); giftBox.style.display = 'block'; giftBox.textContent = '🎁'; giftBox.style.animation = 'pulsar 1s infinite';
+              document.getElementById('giftTituloModal').textContent = '🎁 PRESENTE MISTERIOSO!';
+              document.getElementById('giftText').textContent = 'Toque no presente para abrir e descobrir qual carta Hack você ganhou.';
+              document.getElementById('giftCartaImg').style.display = 'none'; document.getElementById('giftCartaInfo').style.display = 'none'; document.getElementById('giftBtnContinuar').style.display = 'none';
+              isProcessingResgatar = false;
+              return;
           }
-      } else if (item.cartaId && item.cartaTipo === 'raw') {
-          if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
-          colecao[item.cartaId].qtd = (colecao[item.cartaId].qtd || 0) + (item.cartaQtd || 1);
-      } else if (item.cartaId && item.cartaTipo === 'graded') {
-          if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
-          if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
-          colecao[item.cartaId].gradeds.push({
-              nota: item.cartaNota || 10, preco: item.cartaPrecoFixo || 100, data: new Date().toISOString(),
-              historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: item.cartaNota || 10 }]
-          });
+          
+          if (item.verificado !== undefined) {
+              perfil.isVerified = item.verificado; correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
+              alert('🎖️ Selo de Verificado atualizado com sucesso!'); isProcessingResgatar = false; return;
+          }
+
+          if (item.cartaHack) {
+              const hc = CARTAS_HACK.find(x => x.id === item.cartaId);
+              if (hc) {
+                  if (!colecao[hc.id]) colecao[hc.id] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
+                  if (!colecao[hc.id].gradeds) colecao[hc.id].gradeds = [];
+                  colecao[hc.id].gradeds.push({ nota: 10, preco: hc.preco, hack: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 10 }] });
+                  checarAlbumCompleto('hack');
+              }
+          } else if (item.cartaId && item.cartaTipo === 'raw') {
+              if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
+              colecao[item.cartaId].qtd = (colecao[item.cartaId].qtd || 0) + (item.cartaQtd || 1);
+          } else if (item.cartaId && item.cartaTipo === 'graded') {
+              if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
+              if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
+              colecao[item.cartaId].gradeds.push({
+                  nota: item.cartaNota || 10, preco: item.cartaPrecoFixo || 100, data: new Date().toISOString(),
+                  historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: item.cartaNota || 10 }]
+              });
+          }
+          if (item.moedas) moedas += item.moedas;
+          
+          correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
+          alert('✅ Item resgatado com sucesso!');
+      } finally {
+          isProcessingResgatar = false;
       }
-      if (item.moedas) moedas += item.moedas;
-      
-      correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
-      alert('✅ Item resgatado com sucesso!');
-      isProcessingResgatar = false; // LIBERA O CLIQUE
   }
 
   function revelarCartaHackGift() {
-      if (isProcessingGift) return; // CORREÇÃO CLIQUE DUPLO
+      if (isProcessingGift) return;
       isProcessingGift = true;
 
-      const giftBox = document.getElementById('giftBox');
-      giftBox.style.animation = 'none'; giftBox.textContent = '✨';
-      document.getElementById('giftText').textContent = 'Abrindo...';
+      try {
+          const giftBox = document.getElementById('giftBox');
+          giftBox.style.animation = 'none'; giftBox.textContent = '✨';
+          document.getElementById('giftText').textContent = 'Abrindo...';
 
-      const cartaSorteada = CARTAS_HACK[Math.floor(Math.random() * CARTAS_HACK.length)];
+          const cartaSorteada = CARTAS_HACK[Math.floor(Math.random() * CARTAS_HACK.length)];
 
-      setTimeout(() => {
-          giftBox.style.display = 'none';
-          document.getElementById('giftText').textContent = '🎉 PARABÉNS! VOCÊ GANHOU:';
-          const imgEl = document.getElementById('giftCartaImg'); imgEl.src = cartaSorteada.img; imgEl.style.display = 'block';
-          document.getElementById('giftCartaInfo').textContent = cartaSorteada.nome + ' (HACK PSA 10)'; document.getElementById('giftCartaInfo').style.display = 'block';
-          document.getElementById('giftBtnContinuar').style.display = 'block';
+          setTimeout(() => {
+              giftBox.style.display = 'none';
+              document.getElementById('giftText').textContent = '🎉 PARABÉNS! VOCÊ GANHOU:';
+              const imgEl = document.getElementById('giftCartaImg'); imgEl.src = cartaSorteada.img; imgEl.style.display = 'block';
+              document.getElementById('giftCartaInfo').textContent = cartaSorteada.nome + ' (HACK PSA 10)'; document.getElementById('giftCartaInfo').style.display = 'block';
+              document.getElementById('giftBtnContinuar').style.display = 'block';
 
-          const agora = new Date().toISOString();
-          if(!colecao[cartaSorteada.id]) colecao[cartaSorteada.id] = { qtd: 0, data: agora, gradeds: [] };
-          if(!colecao[cartaSorteada.id].gradeds) colecao[cartaSorteada.id].gradeds = [];
-          colecao[cartaSorteada.id].gradeds.push({ nota: 10, preco: cartaSorteada.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN (Presente)', data: agora, nota: 10 }] });
-          
-          if (giftAtual) {
-              const idx = correio.findIndex(c => c.id === giftAtual.id);
-              if (idx >= 0) correio.splice(idx, 1);
-              giftAtual = null;
-          }
+              const agora = new Date().toISOString();
+              if(!colecao[cartaSorteada.id]) colecao[cartaSorteada.id] = { qtd: 0, data: agora, gradeds: [] };
+              if(!colecao[cartaSorteada.id].gradeds) colecao[cartaSorteada.id].gradeds = [];
+              colecao[cartaSorteada.id].gradeds.push({ nota: 10, preco: cartaSorteada.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN (Presente)', data: agora, nota: 10 }] });
+              
+              if (giftAtual) {
+                  const idx = correio.findIndex(c => c.id === giftAtual.id);
+                  if (idx >= 0) correio.splice(idx, 1);
+                  giftAtual = null;
+              }
 
-          salvarEstado(); atualizarUI(); renderCorreio(); checarAlbumCompleto('hack');
-          isProcessingGift = false; // LIBERA O CLIQUE
-      }, 1500);
+              salvarEstado(); atualizarUI(); renderCorreio(); checarAlbumCompleto('hack');
+              isProcessingGift = false;
+          }, 1500);
+      } catch(e) {
+          isProcessingGift = false;
+          console.error(e);
+      }
   }
 
   function fecharPresenteHack() {
@@ -3507,7 +3833,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           document.getElementById('nomeUser').textContent = usuario.nome;
           montarLoja(); atualizarUI();
 
-          // Listener de Perfil (Corrige o problema de tempo real)
           if (unsubscribePerfil) unsubscribePerfil();
           unsubscribePerfil = db.collection('jogadores').doc(user.uid).onSnapshot(snap => {
               if (!snap.exists) return;
@@ -3524,10 +3849,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
                   document.getElementById('nomeUser').textContent = usuario.nome;
               }
               if (document.getElementById('telaPerfil').classList.contains('ativa')) {
-                  abrirPerfil(); // Atualiza a tela do perfil na hora
+                  abrirPerfil();
               }
               if (document.getElementById('telaCorreio').classList.contains('ativa')) renderCorreio();
               if (document.getElementById('telaAmigos').classList.contains('ativa')) renderizarListaAmigos();
+              if (document.getElementById('telaChat').classList.contains('ativa')) renderizarListaChats();
           });
 
           carregarPedidosAmizade();
@@ -3785,6 +4111,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       if(lastClaim && (Date.now() - parseInt(lastClaim)) < cooldown) { alert('Você já resgatou hoje!'); return; }
       moedas += 20000; localStorage.setItem(KEY+'tester_lastClaim', Date.now()); salvarEstado(); atualizarUI(); atualizarPainelTester(); alert('✅ 20.000 moedas resgatadas com sucesso!');
   };
+
+  // Enter key nos inputs de chat
+  const chatInputEl = document.getElementById('chatInputMsg');
+  if (chatInputEl) chatInputEl.addEventListener('keypress', e => { if (e.key === 'Enter') enviarMensagemChat(); });
+  const chatTrocaInputEl = document.getElementById('trocaChatInput');
+  if (chatTrocaInputEl) chatTrocaInputEl.addEventListener('keypress', e => { if (e.key === 'Enter') enviarMensagemTroca(); });
 
   window.addEventListener('beforeunload', () => {
     if ((pacotesFaltandoAbrir > 0 || pacotesSendoAbertos > 0) && pacoteEscolhido) {
