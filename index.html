@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#f8f4ff">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito',-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito',-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-font-smoothing:antialiased;touch-action: manipulation;}
 html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color:#2a1a4a}
 .tela{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px;z-index:10;overflow-y:auto;overflow-x:hidden;background:transparent}
 .tela.ativa{display:flex;animation:fadeIn .4s ease-out}
@@ -1190,6 +1190,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let multiplicadorSortePacotes = parseInt(localStorage.getItem(KEY+'sorte_pacotes')||'1');
   let multiplicadorSorteGrad = parseInt(localStorage.getItem(KEY+'sorte_grad')||'1');
 
+  // Variáveis de Controle de Bugs
+  let isProcessingGift = false;
+  let isProcessingResgatar = false;
+  let unsubscribePerfil = null;
+  let unsubscribeAmigos = null;
+
   // Variáveis de Amigos e Trocas
   let meusAmigos = [];
   let pedidosAmizade = [];
@@ -1198,7 +1204,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let amigoDaTrocaAtual = null;
   let docTrocaId = null;
   let timerTrocaInterval = null;
-  let unsubscribeAmigos = null;
 
   let perfil = JSON.parse(localStorage.getItem(KEY+'perfil')||'null');
   if(!perfil) {
@@ -1214,7 +1219,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   if (perfil.badge === undefined) perfil.badge = perfil.isAdmin ? true : false;
   if (perfil.pacotesInfinitos === undefined) perfil.pacotesInfinitos = perfil.isAdmin ? true : false;
   if (perfil.adminFixoAtivo === undefined) perfil.adminFixoAtivo = false;
-  if (perfil.adminFrame === 'spider-frame') perfil.adminFrame = 'admin-deco';
 
   let ganhoHoje = parseInt(localStorage.getItem(KEY+'ganhoHoje')||'0');
   let pacotesCompradosHoje = parseInt(localStorage.getItem(KEY+'pacotesHoje')||'0');
@@ -1604,6 +1608,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   async function sairConta() {
     if (!confirm('🚪 Tem certeza que deseja sair da conta?')) return;
     document.getElementById('modalConfig').classList.remove('ativo');
+    
+    // Correção de Memória: Limpa os listeners
+    if (unsubscribeAmigos) { unsubscribeAmigos(); unsubscribeAmigos = null; }
+    if (unsubscribePerfil) { unsubscribePerfil(); unsubscribePerfil = null; }
+    
     await auth.signOut();
   }
 
@@ -1845,7 +1854,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     document.getElementById('btnCancelarPack').style.display='none'; const p=document.getElementById('packFechado'); p.classList.add('aberto');
     packAtual=gerarCartasDoPack(pacoteEscolhido); const agora=new Date().toISOString();
     packAtual.forEach(c=>{ if(!colecao[c.id])colecao[c.id]={qtd:0,data:agora,gradeds:[]}; colecao[c.id].qtd=(colecao[c.id].qtd||0)+1; });
-    salvarEstado();atualizarUI();
+    
+    // CORREÇÃO: Salvar imediatamente para evitar perda de dados
+    salvarEstado(); atualizarUI(); 
+    if (auth.currentUser) {
+        db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao });
+    }
+
     packAtual.forEach(c=>{if(c.imgSmall){const im=new Image();im.src=c.imgSmall;}});
     setTimeout(()=>{
       p.style.display='none'; revIdx=0; const eraAuto = autoRevelar; pararAutoRevelar();
@@ -2785,6 +2800,101 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       } catch(e) { console.error("Erro na troca:", e); }
   }
 
+  function abrirSeletorCartaTroca() {
+      seletorFiltro = 'todas'; seletorColecao = 'todas';
+      const modal = document.getElementById('modalSelecionarCarta'); 
+      const grid = document.getElementById('modalCartasGrid');
+      grid.innerHTML = ''; 
+      document.getElementById('inputPesquisaSeletor').value = '';
+      
+      const filtrosCol = document.getElementById('filtrosColecao'); 
+      filtrosCol.innerHTML = '<button class="modal-tab at" onclick="mudarColecaoSeletor(\'todas\', this)">Todas</button>';
+      
+      PACOTES.forEach(p => {
+          const temCartaNaColecao = Object.keys(colecao).some(cid => {
+              if (isCartaHack(cid)) return false;
+              const cc = encontrarCarta(cid);
+              return cc && cc.set === p.cod && ((colecao[cid].qtd > 0) || (colecao[cid].gradeds && colecao[cid].gradeds.length > 0));
+          });
+          if(temCartaNaColecao) filtrosCol.innerHTML += `<button class="modal-tab" onclick="mudarColecaoSeletor('${p.cod}', this)">${p.nome.split(' (')[0]}</button>`;
+      });
+      
+      const tabs = modal.querySelectorAll('.modal-tabs');
+      if (tabs.length > 0) {
+          tabs[0].querySelectorAll('.modal-tab').forEach(b => { b.classList.remove('at'); b.style.background = '#fff'; b.style.color = '#4a6fa5'; });
+          const btnTodas = tabs[0].querySelector('[data-filtro="todas"]');
+          if (btnTodas) {
+              btnTodas.classList.add('at'); 
+              btnTodas.style.background = '#ffd93d'; 
+              btnTodas.style.color = '#1a0a2a';
+          }
+      }
+      
+      renderizarCartasSeletor(); 
+      modal.classList.add('ativo');
+  }
+
+  function mudarFiltroSeletor(filtro, btn) {
+      seletorFiltro = filtro;
+      document.querySelectorAll('.modal-tabs')[0].querySelectorAll('.modal-tab').forEach(b => { b.classList.remove('at'); b.style.background = '#fff'; b.style.color = '#4a6fa5'; });
+      btn.classList.add('at'); btn.style.background = '#ffd93d'; btn.style.color = '#1a0a2a'; renderizarCartasSeletor();
+  }
+
+  function mudarColecaoSeletor(colecaoId, btn) {
+      seletorColecao = colecaoId;
+      document.querySelectorAll('#filtrosColecao .modal-tab').forEach(b => b.classList.remove('at'));
+      btn.classList.add('at'); renderizarCartasSeletor();
+  }
+
+  function renderizarCartasSeletor() {
+      const grid = document.getElementById('modalCartasGrid'); 
+      grid.innerHTML = '';
+      const termo = (document.getElementById('inputPesquisaSeletor').value || '').toLowerCase();
+      let cartasDisponiveis = [];
+
+      for(const cId in colecao) {
+          const info = colecao[cId]; 
+          const carta = encontrarCarta(cId);
+          if(!carta) continue; 
+          if(!carta.nome.toLowerCase().includes(termo)) continue;
+          
+          const ehHack = isCartaHack(cId); 
+          if(seletorColecao !== 'todas' && carta.set !== seletorColecao) continue;
+          
+          if(seletorFiltro === 'raw' && info.qtd > 0) cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack});
+          if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
+              info.gradeds.forEach((g, gi) => {
+                  cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack});
+              });
+          }
+          if(seletorFiltro === 'todas' && info.qtd > 0) cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack});
+      }
+
+      if(cartasDisponiveis.length === 0) { 
+          grid.innerHTML = '<p class="vazio" style="grid-column:1/-1;color:#fff;">Você não tem cartas disponíveis para trocar.</p>'; 
+          return; 
+      }
+      
+      cartasDisponiveis.forEach(c => {
+          const d = document.createElement('div'); 
+          d.className = 'modal-carta-item' + (c.hack ? ' hack' : '');
+          let badge = ''; 
+          if(c.tipo === 'graded') badge = c.hack ? '⚠️ HACK 10' : `PSA ${c.nota}`; 
+          else badge = `x${colecao[c.id].qtd}`;
+          const precoStr = c.hack ? '????' : `R$ ${c.precoFinal.toFixed(2)}`;
+          
+          d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${c.hack?'background:#00ff41;color:#000;':''}">${badge}</div><div class="price-badge">${precoStr}</div>`;
+          
+          d.onclick = () => {
+              trocaSelecionadaJogador.push(c);
+              atualizarTrocaFirebase();
+              document.getElementById('modalSelecionarCarta').classList.remove('ativo');
+              renderizarSlotsTroca();
+          };
+          grid.appendChild(d);
+      });
+  }
+
   // ===== ADMIN =====
   function abrirAdminDireto() {
       atualizarUI(); document.getElementById('adminStatus').textContent=''; document.getElementById('adminDinheiro').value=''; document.getElementById('adminLevelInput').value=''; document.getElementById('adminIdInput').value='';
@@ -3106,6 +3216,95 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       } catch(e) { console.error(e); lista.innerHTML = '<p style="color:#ff5566;font-size:.8rem;text-align:center;padding:10px;">Erro ao carregar lista.</p>'; }
   }
 
+  function darVerificadoPorId() {
+      const id = document.getElementById('adminVerifyId').value.trim();
+      if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
+      db.collection('ids_publicos').doc(id).get().then(idDoc => {
+          if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
+          const uidAlvo = idDoc.data().uid;
+          const item = { 
+              titulo: '🎖️ Selo de Verificado Oficial', 
+              tipo: 'Reconhecimento', 
+              remetente: 'ADMINISTRAÇÃO', 
+              verificado: true, 
+              lido: false, 
+              dataEnvio: Date.now(), 
+              id: 'corr_'+Date.now() 
+          };
+          db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
+              alert('✅ Selo enviado pro Correio de ' + id + '!');
+          });
+      });
+  }
+
+  function retirarVerificadoPorId() {
+      const id = document.getElementById('adminVerifyId').value.trim();
+      if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
+      db.collection('ids_publicos').doc(id).get().then(idDoc => {
+          if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
+          const uidAlvo = idDoc.data().uid;
+          const item = { 
+              titulo: '⚠️ Remoção de Selo', 
+              tipo: 'Aviso', 
+              remetente: 'ADMINISTRAÇÃO', 
+              verificado: false, 
+              lido: false, 
+              dataEnvio: Date.now(), 
+              id: 'corr_'+Date.now() 
+          };
+          db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
+              alert('✅ Aviso de remoção enviado pro Correio de ' + id + '!');
+          });
+      });
+  }
+
+  document.getElementById('btnAdminSetId').onclick = () => {
+    const novoId = document.getElementById('adminIdInput').value.trim();
+    if (!novoId || !/^#\d{4}$/.test(novoId)) { document.getElementById('adminStatus').textContent = '⚠️ ID inválido! Use formato #1234.'; return; }
+    if (novoId === perfil.id) { document.getElementById('adminStatus').textContent = '⚠️ Esse já é o seu ID atual.'; return; }
+    if (!confirm(`Trocar seu ID para ${novoId}?`)) return;
+    
+    db.collection('ids_publicos').doc(perfil.id).delete().then(() => {
+        return db.collection('ids_publicos').doc(novoId).set({ uid: auth.currentUser.uid, nome: usuario.nome, login: usuario.login });
+    }).then(() => {
+        perfil.id = novoId; salvarEstado(); document.getElementById('adminStatus').textContent = `✅ ID alterado para ${novoId}!`; document.getElementById('adminIdInput').value = '';
+    }).catch(e => alert('Erro ao mudar ID. Talvez já esteja em uso.'));
+  };
+
+  document.getElementById('btnAdminUnlockAll').onclick = () => {
+    if(!confirm('Isso vai adicionar 1 de CADA carta de TODAS as coleções carregadas e completar os troféus. Continuar?')) return;
+    const agora = new Date().toISOString(); let total = 0;
+    PACOTES.forEach(p => {
+      const pool = CARDS_POR_SET[p.cod] || [];
+      pool.forEach(c => { if(!colecao[c.id]) colecao[c.id] = { qtd: 0, data: agora, gradeds: [] }; colecao[c.id].qtd = (colecao[c.id].qtd || 0) + 1; total++; });
+      if(pool.length > 0 && !colecoesCompletas.includes(p.cod)) colecoesCompletas.push(p.cod);
+    });
+    salvarEstado(); atualizarUI(); document.getElementById('adminStatus').textContent = `✅ ${total} cartas adicionadas e coleções completadas!`;
+  };
+
+  document.getElementById('btnAddDinheiro').onclick=()=>{
+    const v=parseInt(document.getElementById('adminDinheiro').value);
+    if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
+    moedas+=v; salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Adicionado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
+  };
+  document.getElementById('btnRemDinheiro').onclick=()=>{
+    const v=parseInt(document.getElementById('adminDinheiro').value);
+    if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
+    moedas=Math.max(0,moedas-v); salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Retirado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
+  };
+
+  document.getElementById('btnAdminSetLevel').onclick = () => {
+      const v = parseInt(document.getElementById('adminLevelInput').value);
+      if(isNaN(v) || v < 0) { document.getElementById('adminStatus').textContent = '⚠️ Digite um nível válido'; return; }
+      perfil.customLevel = v; salvarEstado(); atualizarUI();
+      document.getElementById('adminStatus').textContent = v === 0 ? '✅ Nível resetado para automático!' : `✅ Nível definido para ${v}!`;
+  };
+
+  document.getElementById('btnAdminSelfVerify').onclick = () => {
+      perfil.isVerified = !perfil.isVerified; salvarEstado(); atualizarUI();
+      document.getElementById('adminStatus').textContent = perfil.isVerified ? '✔️ Seu selo de Verificado foi ATIVADO!' : '❌ Seu selo de Verificado foi DESATIVADO!';
+  };
+
   // ===== CORREIO =====
   function abrirCorreio() { mostrarTela('telaCorreio'); renderCorreio(); }
 
@@ -3157,9 +3356,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   }
 
   function resgatarItemCorreio(itemId) {
-      const idx = correio.findIndex(c => c.id === itemId); if (idx < 0) return; const item = correio[idx];
+      if (isProcessingResgatar) return; // CORREÇÃO CLIQUE DUPLO
+      isProcessingResgatar = true;
+
+      const idx = correio.findIndex(c => c.id === itemId); if (idx < 0) { isProcessingResgatar = false; return; } const item = correio[idx];
       
-      if (item.expiraEm && Date.now() >= item.expiraEm) { alert('⏳ Este presente expirou!'); correio.splice(idx, 1); salvarEstado(); renderCorreio(); return; }
+      if (item.expiraEm && Date.now() >= item.expiraEm) { alert('⏳ Este presente expirou!'); correio.splice(idx, 1); salvarEstado(); renderCorreio(); isProcessingResgatar = false; return; }
       
       if (item.misterioso) {
           giftAtual = item; document.getElementById('modalGiftHack').classList.add('ativo');
@@ -3167,12 +3369,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           document.getElementById('giftTituloModal').textContent = '🎁 PRESENTE MISTERIOSO!';
           document.getElementById('giftText').textContent = 'Toque no presente para abrir e descobrir qual carta Hack você ganhou.';
           document.getElementById('giftCartaImg').style.display = 'none'; document.getElementById('giftCartaInfo').style.display = 'none'; document.getElementById('giftBtnContinuar').style.display = 'none';
+          isProcessingResgatar = false;
           return;
       }
       
       if (item.verificado !== undefined) {
           perfil.isVerified = item.verificado; correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
-          alert('🎖️ Selo de Verificado atualizado com sucesso!'); return;
+          alert('🎖️ Selo de Verificado atualizado com sucesso!'); isProcessingResgatar = false; return;
       }
 
       if (item.cartaHack) {
@@ -3198,9 +3401,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       
       correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
       alert('✅ Item resgatado com sucesso!');
+      isProcessingResgatar = false; // LIBERA O CLIQUE
   }
 
   function revelarCartaHackGift() {
+      if (isProcessingGift) return; // CORREÇÃO CLIQUE DUPLO
+      isProcessingGift = true;
+
       const giftBox = document.getElementById('giftBox');
       giftBox.style.animation = 'none'; giftBox.textContent = '✨';
       document.getElementById('giftText').textContent = 'Abrindo...';
@@ -3226,6 +3433,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           }
 
           salvarEstado(); atualizarUI(); renderCorreio(); checarAlbumCompleto('hack');
+          isProcessingGift = false; // LIBERA O CLIQUE
       }, 1500);
   }
 
@@ -3299,14 +3507,25 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           document.getElementById('nomeUser').textContent = usuario.nome;
           montarLoja(); atualizarUI();
 
-          db.collection('jogadores').doc(user.uid).onSnapshot(snap => {
+          // Listener de Perfil (Corrige o problema de tempo real)
+          if (unsubscribePerfil) unsubscribePerfil();
+          unsubscribePerfil = db.collection('jogadores').doc(user.uid).onSnapshot(snap => {
               if (!snap.exists) return;
               const dados = snap.data();
               if (dados.banido) { checarBanAtivo(); return; }
               
+              perfil = dados.perfil || perfil;
               correio = dados.correio || [];
               meusAmigos = dados.amigos || [];
+              usuario.nome = dados.nome || usuario.nome;
+              
               atualizarUI();
+              if (document.getElementById('telaHome').classList.contains('ativa')) {
+                  document.getElementById('nomeUser').textContent = usuario.nome;
+              }
+              if (document.getElementById('telaPerfil').classList.contains('ativa')) {
+                  abrirPerfil(); // Atualiza a tela do perfil na hora
+              }
               if (document.getElementById('telaCorreio').classList.contains('ativa')) renderCorreio();
               if (document.getElementById('telaAmigos').classList.contains('ativa')) renderizarListaAmigos();
           });
@@ -3518,36 +3737,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       perfil.isVerified = !perfil.isVerified; salvarEstado(); atualizarUI();
       document.getElementById('adminStatus').textContent = perfil.isVerified ? '✔️ Seu selo de Verificado foi ATIVADO!' : '❌ Seu selo de Verificado foi DESATIVADO!';
   };
-
-  function darVerificadoPorId() {
-      const id = document.getElementById('adminVerifyId').value.trim();
-      if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
-      db.collection('ids_publicos').doc(id).get().then(idDoc => {
-          if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
-          const uidAlvo = idDoc.data().uid;
-          db.collection('jogadores').doc(uidAlvo).get().then(d => {
-              const p = d.data().perfil; p.isVerified = true;
-              db.collection('jogadores').doc(uidAlvo).update({ perfil: p }).then(() => {
-                  alert('✅ Selo dado para ' + id);
-              });
-          });
-      });
-  }
-
-  function retirarVerificadoPorId() {
-      const id = document.getElementById('adminVerifyId').value.trim();
-      if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
-      db.collection('ids_publicos').doc(id).get().then(idDoc => {
-          if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
-          const uidAlvo = idDoc.data().uid;
-          db.collection('jogadores').doc(uidAlvo).get().then(d => {
-              const p = d.data().perfil; p.isVerified = false;
-              db.collection('jogadores').doc(uidAlvo).update({ perfil: p }).then(() => {
-                  alert('✅ Selo retirado de ' + id);
-              });
-          });
-      });
-  }
 
   document.getElementById('btnAdminUnlockAlbum').onclick=()=>{
     const setId=document.getElementById('adminSetSelect').value; const pool=CARDS_POR_SET[setId]||[];
