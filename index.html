@@ -1150,6 +1150,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script>
   // ===== CONEXÃO FIREBASE =====
   const firebaseConfig = {
@@ -1263,8 +1264,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let alarmeTimerInterval = null;
   let banidoTimerInterval = null;
   let correioTimerInterval = null;
-
-  const CARTAS_HACK = [
+const CARTAS_HACK = [
     { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999, valorVenda: 0 },
     { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999, valorVenda: 0 },
     { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999, valorVenda: 0 },
@@ -1521,47 +1521,101 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       el.textContent = txt;
   }
 
-  function banirJogador() {
-      const id = document.getElementById('adminBanId').value.trim(); const motivo = document.getElementById('adminBanMotivo').value.trim() || 'Não informado';
-      const durBtn = document.querySelector('#banTempos .btn-sorte.ativo'); if (!durBtn) { alert('Selecione a duração do ban.'); return; }
+  async function banirJogador() {
+      const idAlvo = document.getElementById('adminBanId').value.trim(); 
+      const motivo = document.getElementById('adminBanMotivo').value.trim() || 'Não informado';
+      const durBtn = document.querySelector('#banTempos .btn-sorte.ativo'); 
+      if (!durBtn) { alert('Selecione a duração do ban.'); return; }
       const dur = durBtn.dataset.dur;
-      if (!id) { alert('Digite o ID do jogador.'); return; }
-      if (!/^#\d{4}$/.test(id)) { alert('ID inválido. Use formato #1234.'); return; }
-      if (id === perfil.id) { alert('Você não pode banir a si mesmo!'); return; }
       
-      let expiraEm = null; let tipo = 'temp';
-      if (dur === 'perm') tipo = 'perm'; else if (dur === '1h') expiraEm = Date.now() + 3600000;
-      else if (dur === '1d') expiraEm = Date.now() + 86400000; else if (dur === '7d') expiraEm = Date.now() + 7*86400000;
-      else if (dur === '30d') expiraEm = Date.now() + 30*86400000;
+      if (!idAlvo) { alert('Digite o ID do jogador.'); return; }
+      if (!/^#\d{4}$/.test(idAlvo)) { alert('ID inválido. Use formato #1234.'); return; }
+      if (idAlvo === perfil.id) { alert('Você não pode banir a si mesmo!'); return; }
       
-      banidos = banidos.filter(b => b.id !== id); banidos.push({ id, motivo, tipo, expiraEm, dataBan: Date.now() });
-      const bot = BOTS.find(b => b.id === id); if (bot) { bot.isBanned = true; bot.banMotivo = motivo; bot.banAte = expiraEm; bot.banTipo = tipo; }
+      document.getElementById('adminStatus').textContent = '⏳ Buscando jogador no banco de dados...';
       
-      salvarEstado();
-      alert('🚫 Jogador ' + id + ' banido!\nMotivo: ' + motivo + '\nDuração: ' + (tipo==='perm'?'Permanente':dur));
-      document.getElementById('adminBanId').value = ''; document.getElementById('adminBanMotivo').value = '';
-      renderBanLista();
-  }
-
-  function desbanirJogador(id) {
-      banidos = banidos.filter(b => b.id !== id); const bot = BOTS.find(b => b.id === id);
-      if (bot) { bot.isBanned = false; bot.banMotivo = ''; bot.banAte = null; bot.banTipo = null; }
-      salvarEstado(); alert('✅ Jogador ' + id + ' desbanido!'); renderBanLista(); checarBanAtivo();
-  }
-
-  function renderBanLista() {
-      const lista = document.getElementById('banListaAdmin'); if (!lista) return; lista.innerHTML = '';
-      if (banidos.length === 0) { lista.innerHTML = '<p style="color:#a89ec4;font-size:.8rem;text-align:center;padding:10px;">Nenhum jogador banido.</p>'; return; }
-      banidos.forEach(b => {
-          const d = document.createElement('div'); d.className = 'ban-item'; let tempoTxt = '';
-          if (b.tipo === 'perm') tempoTxt = '♾️ Permanente';
-          else if (b.expiraEm) {
-              const diff = Math.max(0, b.expiraEm - Date.now()); const dias = Math.floor(diff / 86400000); const horas = Math.floor((diff % 86400000) / 3600000);
-              tempoTxt = '⏱️ ' + (dias>0?dias+'d ':'') + horas + 'h restantes';
+      try {
+          const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
+          if (!idDoc.exists) {
+              document.getElementById('adminStatus').textContent = '❌ Jogador não encontrado.';
+              alert('❌ Jogador com ID ' + idAlvo + ' não encontrado no banco de dados.');
+              return;
           }
-          d.innerHTML = `<div class="binfo"><div class="bnome">${b.id}</div><div class="bmotivo">${b.motivo}</div><div class="btempo">${tempoTxt}</div></div><button class="btn-desbanir" onclick="desbanirJogador('${b.id}')">Desbanir</button>`;
-          lista.appendChild(d);
-      });
+          const uidAlvo = idDoc.data().uid;
+          
+          let expiraEm = null; let tipo = 'temp';
+          if (dur === 'perm') tipo = 'perm'; 
+          else if (dur === '1h') expiraEm = Date.now() + 3600000;
+          else if (dur === '1d') expiraEm = Date.now() + 86400000; 
+          else if (dur === '7d') expiraEm = Date.now() + 7*86400000;
+          else if (dur === '30d') expiraEm = Date.now() + 30*86400000;
+          
+          await db.collection('jogadores').doc(uidAlvo).update({
+              banido: true,
+              banMotivo: motivo,
+              banTipo: tipo,
+              banExpiraEm: expiraEm,
+              banData: Date.now()
+          });
+          
+          document.getElementById('adminStatus').textContent = '✅ Jogador banido com sucesso!';
+          alert('🚫 Jogador ' + idAlvo + ' banido!\nMotivo: ' + motivo + '\nDuração: ' + (tipo==='perm'?'Permanente':dur));
+          document.getElementById('adminBanId').value = ''; document.getElementById('adminBanMotivo').value = '';
+          renderBanLista();
+      } catch(e) {
+          console.error(e);
+          document.getElementById('adminStatus').textContent = '❌ Erro ao banir jogador.';
+      }
+  }
+
+  async function desbanirJogador(idAlvo) {
+      try {
+          const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
+          if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
+          const uidAlvo = idDoc.data().uid;
+          
+          await db.collection('jogadores').doc(uidAlvo).update({
+              banido: false,
+              banMotivo: '',
+              banTipo: '',
+              banExpiraEm: null
+          });
+          
+          banidos = banidos.filter(b => b.id !== idAlvo); 
+          salvarEstado(); 
+          alert('✅ Jogador ' + idAlvo + ' desbanido!'); 
+          renderBanLista(); 
+          checarBanAtivo();
+      } catch(e) {
+          console.error(e);
+          alert('Erro ao desbanir.');
+      }
+  }
+
+  async function renderBanLista() {
+      const lista = document.getElementById('banListaAdmin'); if (!lista) return; lista.innerHTML = '<p style="color:#a89ec4;font-size:.8rem;text-align:center;padding:10px;">Buscando banidos...</p>';
+      
+      try {
+          const snapshot = await db.collection('jogadores').where('banido', '==', true).get();
+          lista.innerHTML = '';
+          if (snapshot.empty) { lista.innerHTML = '<p style="color:#a89ec4;font-size:.8rem;text-align:center;padding:10px;">Nenhum jogador banido.</p>'; return; }
+          
+          snapshot.forEach(doc => {
+              const d = doc.data();
+              const b = { id: d.perfil.id, motivo: d.banMotivo, tipo: d.banTipo, expiraEm: d.banExpiraEm };
+              const div = document.createElement('div'); div.className = 'ban-item'; let tempoTxt = '';
+              if (b.tipo === 'perm') tempoTxt = '♾️ Permanente';
+              else if (b.expiraEm) {
+                  const diff = Math.max(0, b.expiraEm - Date.now()); const dias = Math.floor(diff / 86400000); const horas = Math.floor((diff % 86400000) / 3600000);
+                  tempoTxt = '⏱️ ' + (dias>0?dias+'d ':'') + horas + 'h restantes';
+              }
+              div.innerHTML = `<div class="binfo"><div class="bnome">${b.id} (${d.nome})</div><div class="bmotivo">${b.motivo}</div><div class="btempo">${tempoTxt}</div></div><button class="btn-desbanir" onclick="desbanirJogador('${b.id}')">Desbanir</button>`;
+              lista.appendChild(div);
+          });
+      } catch(e) {
+          console.error(e);
+          lista.innerHTML = '<p style="color:#ff5566;font-size:.8rem;text-align:center;padding:10px;">Erro ao carregar lista.</p>';
+      }
   }
 
   function selecionarTempoBan(btn) { document.querySelectorAll('#banTempos .btn-sorte').forEach(b => b.classList.remove('ativo')); btn.classList.add('ativo'); }
@@ -2122,7 +2176,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   }
 
   function liberarCartasTravadas() { cartasTravadas = {}; salvarEstado(); }
-function montarEnergias(){
+
+  function montarEnergias(){
     const w=document.getElementById('energiasWrap');w.innerHTML='';
     const ENERGIAS=[{bg:'#ffd23f',ic:'⚡'},{bg:'#4fc3f7',ic:'💧'},{bg:'#ef5350',ic:'🔥'},{bg:'#66bb6a',ic:'🍃'},{bg:'#8d6e63',ic:'👊'},{bg:'#ab47bc',ic:'👁️'},{bg:'#455a64',ic:'🌙'},{bg:'#90a4ae',ic:'⭐'},{bg:'#ffd54f',ic:'✨'},{bg:'#e91e63',ic:'💗'}];
     ENERGIAS.forEach((e,i)=>{
@@ -2412,11 +2467,44 @@ function montarEnergias(){
   function iniciarApp(){
     document.getElementById('loading').style.display='none'; montarFlut();
     
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
-        db.collection("jogadores").doc(user.uid).get().then((doc) => {
+        try {
+          const doc = await db.collection("jogadores").doc(user.uid).get();
           if (!doc.exists) { auth.signOut(); return; }
+          
           const d = doc.data();
+          
+          // VERIFICAÇÃO DE BANIMENTO
+          if (d.banido) {
+              let banExpirado = false;
+              if (d.banTipo === 'temp' && d.banExpiraEm && Date.now() >= d.banExpiraEm) {
+                  banExpirado = true;
+                  await db.collection('jogadores').doc(user.uid).update({ banido: false, banMotivo: '', banTipo: '', banExpiraEm: null });
+              }
+              
+              if (!banExpirado) {
+                  document.getElementById('telaBanido').classList.add('ativo');
+                  document.getElementById('banidoMotivo').textContent = d.banMotivo || 'Não informado';
+                  if (d.banTipo === 'perm') {
+                      document.getElementById('banidoTempo').textContent = 'PERMANENTE';
+                  } else {
+                      if (banidoTimerInterval) clearInterval(banidoTimerInterval);
+                      atualizarTempoBanido(d.banExpiraEm);
+                      banidoTimerInterval = setInterval(() => {
+                          if (Date.now() >= d.banExpiraEm) {
+                              clearInterval(banidoTimerInterval);
+                              window.location.reload(); // recarrega para tirar o ban
+                          } else {
+                              atualizarTempoBanido(d.banExpiraEm);
+                          }
+                      }, 1000);
+                  }
+                  return; // Para tudo aqui, o jogador não entra.
+              }
+          }
+
+          // Se não foi banido, carrega o jogo
           moedas = d.moedas || 0;
           dinheiroInfinito = d.dinheiroInfinito || false;
           colecao = d.colecao || {};
@@ -2426,7 +2514,7 @@ function montarEnergias(){
           historicoVendas = d.historicoVendas || [];
           amigos = d.amigos || [];
           correio = d.correio || [];
-          banidos = d.banidos || [];
+          banidos = d.banidos || []; // Mantido por compatibilidade local
           colecoesCompletas = d.colecoesCompletas || [];
           pacotesCompradosHoje = d.pacotesCompradosHoje || 0;
           ganhoHoje = d.ganhoHoje || 0;
@@ -2441,19 +2529,20 @@ function montarEnergias(){
 
           if (!tutorialFeito) { iniciarTutorial(); }
           else { mostrarTela('telaHome', false); }
-        }).catch((erro) => {
+          
+        } catch (erro) {
           console.error("Erro ao buscar dados:", erro);
           mostrarTela('telaLogin', false);
-        });
+        }
       } else {
         mostrarTela('telaLogin', false);
         limparTelaLogin();
       }
     });
 
-    checarGraduacoesProntas(); preencherAdminSelect(); montarAdminHackGrid(); atualizarUI(); atualizarBotoesAdmin(); checarResetDiario(); checarBanAtivo();
+    checarGraduacoesProntas(); preencherAdminSelect(); montarAdminHackGrid(); atualizarUI(); atualizarBotoesAdmin(); checarResetDiario();
     cartasTravadas = {}; salvarEstado();
-    setInterval(checarResetDiario, 60000); setInterval(checarBanAtivo, 30000);
+    setInterval(checarResetDiario, 60000); 
   }
 
   function checarResetDiario() {
@@ -3279,8 +3368,10 @@ function montarEnergias(){
     try {
       const cred = await auth.createUserWithEmailAndPassword(loginParaEmail(login), senha);
       const agora = new Date().toISOString();
+      const idGerado = '#' + Math.floor(1000 + Math.random() * 9000);
+      
       const novoPerfil = {
-        id: '#' + Math.floor(1000 + Math.random() * 9000), nome, login,
+        id: idGerado, nome, login,
         avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
         cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)',
         customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false,
@@ -3289,13 +3380,19 @@ function montarEnergias(){
         badge: false, pacotesInfinitos: false
       };
 
+      // 1. Salva o perfil completo
       await db.collection('jogadores').doc(cred.user.uid).set({
         uid: cred.user.uid, login, nome, moedas: 0, dinheiroInfinito: false,
         colecao: {}, inventario: {}, graduacoesPendentes: [], perfil: novoPerfil,
         historicoVendas: [], amigos: [], correio: [], banidos: [], colecoesCompletas: [],
         pacotesCompradosHoje: 0, ganhoHoje: 0, ultimoDia: new Date().toDateString(),
         multiplicadorSortePacotes: 1, multiplicadorSorteGrad: 1,
-        tutorialFeito: false, criadoEm: agora
+        tutorialFeito: false, criadoEm: agora, banido: false
+      });
+
+      // 2. Salva o ID público atrelado ao UID (para o admin buscar na hora de banir)
+      await db.collection('ids_publicos').doc(idGerado).set({
+          uid: cred.user.uid, nome: nome, login: login
       });
 
       salvarContaDispositivo(login);
