@@ -27,7 +27,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 @keyframes frameElectric { 0%, 100% { box-shadow: 0 0 20px #ffff00, 0 0 40px #ffd700, inset 0 0 20px #ffa500; border-color: #ffff00; } 50% { box-shadow: 0 0 40px #ffd700, 0 0 80px #fff, inset 0 0 30px #ffff00; border-color: #fff; } }
 @keyframes frameGalaxy { 0%, 100% { box-shadow: 0 0 20px #8a2be2, 0 0 40px #4b0082, inset 0 0 20px #9400d3; border-color: #8a2be2; } 50% { box-shadow: 0 0 40px #9400d3, 0 0 80px #ff00ff, inset 0 0 30px #4b0082; border-color: #ff00ff; } }
 @keyframes frameShadow { 0%, 100% { box-shadow: 0 0 20px #333, 0 0 40px #111, inset 0 0 20px #000; border-color: #555; } 50% { box-shadow: 0 0 40px #111, 0 0 80px #000, inset 0 0 30px #333; border-color: #000; } }
-@keyframes spiderPulse { 0%, 100% { box-shadow: 0 0 20px #ff0000, 0 0 40px #8b0000, inset 0 0 20px #ff0000; border-color: #ff0000; } 50% { box-shadow: 0 0 40px #ff0000, 0 0 80px #8b0000, inset 0 0 30px #ff0000; border-color: #fff; } }
+@keyframes spiderPulse { 0%, 100% { box-shadow: 0 0 15px #ff0000, 0 0 30px #8b0000, inset 0 0 10px #ff0000; border-color: #ff0000; } 50% { box-shadow: 0 0 30px #ff0000, 0 0 60px #8b0000, inset 0 0 20px #ff0000; border-color: #fff; } }
 @keyframes banPulse { 0%, 100% { box-shadow: 0 0 30px #ff0000, inset 0 0 20px #660000; } 50% { box-shadow: 0 0 60px #ff0000, inset 0 0 40px #ff0000; } }
 .frame-fire { animation: frameFire 1.5s infinite alternate !important; border-width: 4px !important; }
 .frame-ice { animation: frameIce 2s infinite alternate !important; border-width: 4px !important; }
@@ -274,7 +274,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:400;padding:20px}.modal-overlay.ativo{display:flex;animation:fadeIn .3s}
 .modal-box{background:linear-gradient(180deg,#fff,#f0f4f8);border-radius:26px;padding:30px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,.5);animation:pop .35s;position:relative;border:3px solid #fff;margin:0 auto;max-height:90vh;overflow-y:auto}.modal-box h3{color:#4a6fa5;font-size:1.4rem;font-weight:900;margin-bottom:16px}.creditos-box{background:#e8f0fe;border-radius:14px;padding:16px;margin:20px 0;color:#4a6fa5;font-weight:900;font-size:.95rem;border:2px dashed #a8c8e8}.creditos-box span{color:#e63946;font-size:1.1rem;font-weight:900;display:block;margin-top:4px}
 #telaCompleta{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:500;padding:20px;overflow:hidden;background:linear-gradient(160deg,#ffd93d 0%,#ff8a3d 40%,#ff5566 70%,#8b6df0 100%)}#telaCompleta.ativo{display:flex;animation:fadeIn .3s}.confete-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}.confete{position:absolute;width:12px;height:12px;top:-20px;animation:confeteCai linear forwards}.compl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;background:rgba(255,255,255,.98);border-radius:30px;padding:40px 26px;box-shadow:0 30px 80px rgba(0,0,0,.4);max-width:400px;width:100%;animation:zoomIn .7s cubic-bezier(.34,1.56,.64,1);border:4px solid #fff;margin:0 auto}.compl-trofeu{font-size:7rem;animation:brilhoOuro 1.5s ease-in-out infinite;line-height:1}.compl-titulo{font-size:1.6rem;font-weight:900;background:linear-gradient(180deg,#ffd93d,#f7a800);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px;margin:16px 0 12px;line-height:1.15}.compl-set{font-size:1.4rem;font-weight:900;color:#4a6fa5;margin-bottom:8px;line-height:1.2}.compl-sub{font-size:.9rem;color:#7a6d9a;font-weight:800;margin-bottom:24px}@keyframes zoomIn{0%{transform:scale(0) rotate(-180deg);opacity:0}60%{transform:scale(1.1) rotate(8deg)}100%{transform:scale(1) rotate(0);opacity:1}}
-#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaTroca, #telaTrocaSucesso, #telaChat, #telaRanking { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
+#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaTroca, #telaTrocaSucesso, #telaChat, #telaRanking, #telaConversa { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
 .perfil-topo { position: relative; width: 100%; max-width: 520px; height: 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; z-index: 10; }
 .btn-voltar-topo { position: absolute; right: 0; top: 0; }
 .perfil-card { background: rgba(255,255,255,.05); border-radius: 24px; padding: 20px 20px 30px 20px; width: 100%; max-width: 520px; text-align: center; position: relative; backdrop-filter: blur(15px); border: 3px solid rgba(255,255,255,.2); box-shadow: 0 10px 30px rgba(0,0,0,.3); margin-bottom: 20px; transition: all 0.5s ease; overflow: visible; }
@@ -432,9 +432,9 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .correio-vazio { color: #8899cc; text-align: center; padding: 60px 20px; font-weight: 800; font-size: 1rem; line-height: 1.6; }
 .correio-timer { display: inline-block; background: rgba(255,0,0,0.2); border: 1px dashed #ff5566; color: #ff5566; font-size: 0.7rem; font-weight: 900; padding: 4px 8px; border-radius: 8px; margin-top: 6px; animation: pulsar 1s infinite; }
 .correio-item.expirado { opacity: 0.5; filter: grayscale(1); }
-.admin-float-btn { position: fixed; bottom: 90px; right: 16px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #ff0000, #8b0000); border: 3px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.7), 0 6px 15px rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 65; font-size: 1.8rem; animation: spiderPulse 2s infinite; }
+.admin-float-btn { position: fixed; bottom: 90px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ff0000, #8b0000); border: 2px solid #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.7), 0 4px 10px rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; cursor: grab; z-index: 65; font-size: 1.4rem; animation: spiderPulse 2s infinite; touch-action: none; }
 .admin-float-btn.ativo { display: flex; }
-.admin-float-btn:active { transform: scale(0.9); }
+.admin-float-btn:active { cursor: grabbing; transform: scale(0.95); }
 .admin-float-btn::before { content: '🕷️'; filter: drop-shadow(0 0 6px #fff); }
 #telaBanido { position: fixed; inset: 0; background: #0a0000; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
 #telaBanido.ativo { display: flex; animation: fadeIn .4s; }
@@ -2515,6 +2515,7 @@ function mostrarTela(id, push = true){
       document.getElementById('perfilMoedas').textContent = getMoedasStr();
   }
 
+  // CORREÇÃO BUG 3: Atualiza o nome na raiz (para o ranking) e no perfil
   function trocarNome() {
       if (!usuario) return;
       if (!dinheiroInfinito && moedas < 50000) { alert('❌ Você não tem 50.000 moedas!'); return; }
@@ -2524,7 +2525,20 @@ function mostrarTela(id, push = true){
       const nomeFinal = novoNome.trim();
       if (nomeFinal.length === 0) { alert('Nome não pode ser vazio.'); return; }
       if (nomeFinal.length > 15) { alert('Máximo 15 caracteres.'); return; }
-      moedas -= 50000; usuario.nome = nomeFinal; perfil.nome = nomeFinal; localStorage.setItem(KEY+'user', JSON.stringify(usuario));
+      
+      moedas -= 50000; 
+      usuario.nome = nomeFinal; 
+      perfil.nome = nomeFinal; 
+      localStorage.setItem(KEY+'user', JSON.stringify(usuario));
+      
+      // Salva no Firebase (atualiza o perfil e a raiz do documento)
+      if(auth.currentUser) {
+          db.collection('jogadores').doc(auth.currentUser.uid).update({
+              nome: nomeFinal,
+              'perfil.nome': nomeFinal
+          });
+      }
+      
       salvarEstado(); atualizarUI(); abrirPerfil();
       document.getElementById('nomeUser').textContent = usuario.nome; alert('✅ Nome alterado para: ' + nomeFinal);
   }
@@ -2606,10 +2620,40 @@ function mostrarTela(id, push = true){
   }
 
   // ===== SISTEMA DE AMIGOS =====
-  function abrirAmigos() {
+  // CORREÇÃO BUG 3: Sincronizar dados dos amigos ao abrir a tela
+  async function abrirAmigos() {
       mostrarTela('telaAmigos'); 
-      renderizarListaAmigos();
+      renderizarListaAmigos(); // Renderiza com os dados locais (mais rápido)
       carregarPedidosAmizade();
+      
+      // Puxa os dados atualizados de cada amigo no banco de dados
+      if(meusAmigos.length > 0) {
+          let atualizou = false;
+          for(let i=0; i<meusAmigos.length; i++) {
+              const amigo = meusAmigos[i];
+              try {
+                  const doc = await db.collection('jogadores').doc(amigo.uid).get();
+                  if(doc.exists) {
+                      const d = doc.data();
+                      const p = d.perfil || {};
+                      if(amigo.nome !== (d.nome || amigo.nome) || amigo.isVerified !== p.isVerified || amigo.avatar !== p.avatar || amigo.cor !== p.cor || amigo.cartas !== (d.cartasCount||0)) {
+                          amigo.nome = d.nome || amigo.nome;
+                          amigo.isVerified = p.isVerified || false;
+                          amigo.avatar = p.avatar || amigo.avatar;
+                          amigo.cor = p.cor || amigo.cor;
+                          amigo.nivel = calcularNivel(d.cartasCount || 0);
+                          amigo.cartas = d.cartasCount || 0;
+                          amigo.isBanned = d.banido || false;
+                          atualizou = true;
+                      }
+                  }
+              } catch(e) {}
+          }
+          if(atualizou) {
+              renderizarListaAmigos();
+              if(auth.currentUser) db.collection('jogadores').doc(auth.currentUser.uid).update({ amigos: meusAmigos });
+          }
+      }
   }
 
   function abrirModalAddAmigo() { document.getElementById('modalAddAmigo').classList.add('ativo'); document.getElementById('inputAddAmigo').value = ''; }
@@ -2730,7 +2774,6 @@ function mostrarTela(id, push = true){
       } catch(e) { console.error(e); }
   }
 
-  // ===== PERFIL DO AMIGO COM TEMPO REAL (CORREÇÃO BUG 5) =====
   function abrirPerfilAmigo(amigo) {
       mostrarTela('telaAmigoPerfil');
       renderizarPerfilAmigo(amigo);
@@ -2743,7 +2786,6 @@ function mostrarTela(id, push = true){
           abrirConversa(amigo);
       };
       
-      // CORREÇÃO BUG 5: onSnapshot em tempo real no perfil do amigo
       if (unsubscribeAmigoPerfil) unsubscribeAmigoPerfil();
       unsubscribeAmigoPerfil = db.collection('jogadores').doc(amigo.uid).onSnapshot(snap => {
           if (!snap.exists) return;
@@ -2857,7 +2899,6 @@ function mostrarTela(id, push = true){
       if (trocaSelecionadaAmigo.length === 0) slotsB.innerHTML = '<div style="color:#a89ec4;font-size:.8rem;padding:20px;">Aguardando...</div>';
   }
 
-  // CORREÇÃO BUG 2: usar jogador1 === uid em vez de uid < uid
   function atualizarTrocaFirebase() {
       if (!docTrocaId) return;
       db.collection('trocas').doc(docTrocaId).get().then(doc => {
@@ -3000,6 +3041,7 @@ function mostrarTela(id, push = true){
       btn.classList.add('at'); renderizarCartasSeletor();
   }
 
+  // CORREÇÃO BUG 1: Verifica a quantidade já selecionada para não deixar passar do limite
   function renderizarCartasSeletor() {
       const grid = document.getElementById('modalCartasGrid'); 
       grid.innerHTML = '';
@@ -3015,17 +3057,27 @@ function mostrarTela(id, push = true){
           const ehHack = isCartaHack(cId); 
           if(seletorColecao !== 'todas' && carta.set !== seletorColecao) continue;
           
-          if(seletorFiltro === 'raw' && info.qtd > 0) cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack});
+          // Quantas dessa carta (raw) já estão na troca
+          const qtdRawNaTroca = trocaSelecionadaJogador.filter(tc => tc.id === cId && tc.tipo === 'raw').length;
+          const disponivelRaw = info.qtd - qtdRawNaTroca;
+
+          if((seletorFiltro === 'raw' || seletorFiltro === 'todas') && disponivelRaw > 0) {
+              cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack, disponivel: disponivelRaw, gi: -1});
+          }
+          
           if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
               info.gradeds.forEach((g, gi) => {
-                  cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack});
+                  // Se já tem essa carta graduada com a mesma nota na troca, não deixa adicionar de novo
+                  const jaNaTroca = trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && tc.nota === g.nota);
+                  if(!jaNaTroca) {
+                      cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1});
+                  }
               });
           }
-          if(seletorFiltro === 'todas' && info.qtd > 0) cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack});
       }
 
       if(cartasDisponiveis.length === 0) { 
-          grid.innerHTML = '<p class="vazio" style="grid-column:1/-1;color:#fff;">Você não tem cartas disponíveis para trocar.</p>'; 
+          grid.innerHTML = '<p class="vazio" style="grid-column:1/-1;color:#fff;">Nenhuma carta disponível para trocar (ou todas já estão na mesa).</p>'; 
           return; 
       }
       
@@ -3034,7 +3086,7 @@ function mostrarTela(id, push = true){
           d.className = 'modal-carta-item' + (c.hack ? ' hack' : '');
           let badge = ''; 
           if(c.tipo === 'graded') badge = c.hack ? '⚠️ HACK 10' : `PSA ${c.nota}`; 
-          else badge = `x${colecao[c.id].qtd}`;
+          else badge = `x${c.disponivel}`;
           const precoStr = c.hack ? '????' : `R$ ${c.precoFinal.toFixed(2)}`;
           
           d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${c.hack?'background:#00ff41;color:#000;':''}">${badge}</div><div class="price-badge">${precoStr}</div>`;
@@ -3201,8 +3253,7 @@ function mostrarTela(id, push = true){
       const lista = document.getElementById('rankingLista');
       lista.innerHTML = '<p style="color:#a89ec4; text-align:center; padding:20px;">Carregando ranking...</p>';
       
-      const campo = aba === 'nivel' ? 'perfil.customLevel' : (aba === 'cartas' ? 'cartasCount' : 'moedas');
-      const campoReal = aba === 'nivel' ? 'cartasCount' : (aba === 'cartas' ? 'cartasCount' : 'moedas');
+      const campoReal = aba === 'moedas' ? 'moedas' : 'cartasCount';
       
       unsubscribeRanking = db.collection('jogadores')
         .orderBy(campoReal, aba === 'moedas' ? 'desc' : 'desc')
@@ -3587,7 +3638,6 @@ function mostrarTela(id, push = true){
       } catch(e) { console.error(e); lista.innerHTML = '<p style="color:#ff5566;font-size:.8rem;text-align:center;padding:10px;">Erro ao carregar lista.</p>'; }
   }
 
-  // ===== VERIFICADO: DAR via Correio | RETIRAR instantâneo (CORREÇÃO BUG 3) =====
   function darVerificadoPorId() {
       const id = document.getElementById('adminVerifyId').value.trim();
       if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
@@ -3609,7 +3659,6 @@ function mostrarTela(id, push = true){
       });
   }
 
-  // CORREÇÃO BUG 3: remove verificado INSTANTANEAMENTE, sem passar pelo correio
   function retirarVerificadoPorId() {
       const id = document.getElementById('adminVerifyId').value.trim();
       if (!id || !/^#\d{4}$/.test(id)) { alert('ID inválido! Use formato #1234.'); return; }
@@ -3775,6 +3824,8 @@ function mostrarTela(id, push = true){
   function iniciarApp(){
     document.getElementById('loading').style.display='none'; montarFlut();
     
+    configurarArrastarAdminBtn(); // Ativa a funcionalidade de arrastar o botão Admin
+
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         try {
@@ -3935,6 +3986,98 @@ function mostrarTela(id, push = true){
       { id: 'giratina_lost', nome: 'Giratina VSTAR', emoji: '🌌', cor: 'linear-gradient(135deg, #483d8b, #191970)', cardId: 'swsh11-131' },
       { id: 'pikachu_zenith', nome: 'Pikachu Zenith', emoji: '✨', cor: 'linear-gradient(135deg, #fffacd, #daa520)', cardId: 'swsh12pt5-gg30' }
   ];
+
+  // ===== BOTÃO ADMIN ARRASTÁVEL E MENOR =====
+  function configurarArrastarAdminBtn() {
+      const btn = document.getElementById('adminFloatBtn');
+      if (!btn) return;
+      
+      // Recupera a posição salva
+      const posSalva = JSON.parse(localStorage.getItem(KEY+'admin_btn_pos') || 'null');
+      if (posSalva) {
+          btn.style.bottom = 'auto';
+          btn.style.right = 'auto';
+          btn.style.left = posSalva.x + 'px';
+          btn.style.top = posSalva.y + 'px';
+      }
+
+      let isDragging = false;
+      let hasMoved = false;
+      let startX, startY, initialLeft, initialTop;
+
+      const dragStart = (e) => {
+          if (e.type === 'mousedown') e.preventDefault();
+          const evt = e.touches ? e.touches[0] : e;
+          startX = evt.clientX;
+          startY = evt.clientY;
+          const rect = btn.getBoundingClientRect();
+          initialLeft = rect.left;
+          initialTop = rect.top;
+          isDragging = true;
+          hasMoved = false;
+          btn.style.transition = 'none';
+      };
+
+      const dragMove = (e) => {
+          if (!isDragging) return;
+          const evt = e.touches ? e.touches[0] : e;
+          const dx = evt.clientX - startX;
+          const dy = evt.clientY - startY;
+          
+          if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasMoved = true;
+
+          if (hasMoved) {
+              if (e.cancelable) e.preventDefault(); // Previne scroll na tela
+              let newLeft = initialLeft + dx;
+              let newTop = initialTop + dy;
+              
+              // Limites da tela
+              const maxLeft = window.innerWidth - btn.offsetWidth;
+              const maxTop = window.innerHeight - btn.offsetHeight;
+              newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+              newTop = Math.max(0, Math.min(newTop, maxTop));
+
+              btn.style.bottom = 'auto';
+              btn.style.right = 'auto';
+              btn.style.left = newLeft + 'px';
+              btn.style.top = newTop + 'px';
+          }
+      };
+
+      const dragEnd = (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          btn.style.transition = '';
+          
+          if (hasMoved) {
+              // Salva a posição
+              const rect = btn.getBoundingClientRect();
+              localStorage.setItem(KEY+'admin_btn_pos', JSON.stringify({ x: rect.left, y: rect.top }));
+              // Previne o clique de abrir o painel se foi só arrastar
+              e.preventDefault();
+              e.stopPropagation();
+          }
+      };
+
+      btn.addEventListener('mousedown', dragStart);
+      window.addEventListener('mousemove', dragMove);
+      window.addEventListener('mouseup', dragEnd);
+      
+      btn.addEventListener('touchstart', dragStart, {passive: true});
+      window.addEventListener('touchmove', dragMove, {passive: false});
+      window.addEventListener('touchend', dragEnd);
+
+      // Sobrescreve o click para não abrir o painel se estiver arrastando
+      btn.onclick = (e) => {
+          if (hasMoved) {
+              e.preventDefault();
+              e.stopPropagation();
+              hasMoved = false; // reseta
+              return;
+          }
+          abrirAdmin();
+      };
+  }
 
   // Event listeners
   document.getElementById('btnIniciar').onclick=()=>{ if(!tutorialFeito)iniciarTutorial();else entrarNoJogo(); };
