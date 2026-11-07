@@ -1268,10 +1268,10 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   const SENHA_TESTER='0326';
   const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
-  // 🔐 TRAVA DE SEGURANÇA DO ADMIN (SÓ ESSAS DUAS CONTAS PODEM ACESSAR O PAINEL)
+  // 🔐 TRAVA DE SEGURANÇA DO ADMIN
   const ADMIN_UIDS = [
-      "mGsAZjoXULgxgsGK4GUYzERdzFH3", // Conta 1 (Sua principal)
-      "liGT9uJpskQJftvLK8EDZvkBc9r2"  // Conta 2 (Sua secundária)
+      "mGsAZjoXULgxgsGK4GUYzERdzFH3",
+      "liGT9uJpskQJftvLK8EDZvkBc9r2"
   ];
 
   let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
@@ -1291,7 +1291,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let multiplicadorSortePacotes = parseInt(localStorage.getItem(KEY+'sorte_pacotes')||'1');
   let multiplicadorSorteGrad = parseInt(localStorage.getItem(KEY+'sorte_grad')||'1');
 
-  // Variáveis de Controle de Bugs
   let isProcessingGift = false;
   let isProcessingResgatar = false;
   let unsubscribePerfil = null;
@@ -1301,7 +1300,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let unsubscribeTrocaChat = null;
   let unsubscribeRanking = null;
 
-  // Variáveis de Amigos e Trocas
   let meusAmigos = [];
   let pedidosAmizade = [];
   let trocaSelecionadaJogador = [];
@@ -1310,11 +1308,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let docTrocaId = null;
   let timerTrocaInterval = null;
 
-  // Variáveis de Chat
   let amigoChatAtual = null;
   let chatAbertoDuranteTroca = true;
-
-  // Variáveis de Ranking
   let abaRankingAtual = 'nivel';
 
   let perfil = JSON.parse(localStorage.getItem(KEY+'perfil')||'null');
@@ -1576,15 +1571,10 @@ function mostrarTela(id, push = true){
         if (naoLidos > 0) { badgeEl.textContent = naoLidos; badgeEl.style.display = 'flex'; } 
         else { badgeEl.style.display = 'none'; }
     }
-    
-    // Só mostra o botão flutuante se estiver ativado E for um UID autorizado
     const floatBtn = document.getElementById('adminFloatBtn');
     if (floatBtn) {
-        if (perfil.adminFixoAtivo && auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
-            floatBtn.classList.add('ativo');
-        } else {
-            floatBtn.classList.remove('ativo');
-        }
+        if (perfil.adminFixoAtivo && auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) floatBtn.classList.add('ativo');
+        else floatBtn.classList.remove('ativo');
     }
   }
 
@@ -1788,61 +1778,182 @@ function mostrarTela(id, push = true){
     localStorage.setItem(KEY+'packs_globais', JSON.stringify(PACKSHOTS));
   }
 
+  // ===== CORREÇÃO DO BUG DA API =====
   async function carregarSetAPI(setId){
     let todas=[], page=1;
+    const MAX_TENTATIVAS = 8;
+    
     while(page<=3){
-      const url='https://api.pokemontcg.io/v2/cards?q=set.id:'+setId+'&pageSize=250&page='+page+'&orderBy=number'; let tent=0, ok=false;
-      while(tent<2&&!ok){
+      const url='https://api.pokemontcg.io/v2/cards?q=set.id:'+setId+'&pageSize=250&page='+page+'&orderBy=number';
+      let sucesso = false;
+      
+      for(let tent=1; tent<=MAX_TENTATIVAS; tent++){
         try{
-          const ctrl=new AbortController(); const tm=setTimeout(()=>ctrl.abort(), 5000);
-          const r=await fetch(url,{signal:ctrl.signal}); clearTimeout(tm);
-          if(r.ok){ const data=await r.json(); const pag=data.data||[]; todas=todas.concat(pag); ok=true; if(pag.length<250){page=99;break;} page++; } 
-          else { tent++; if(tent<2)await new Promise(res=>setTimeout(res,1000)); }
-        }catch(e){ tent++; if(tent<2)await new Promise(res=>setTimeout(res,1000)); }
+          const ctrl=new AbortController();
+          const tm=setTimeout(()=>ctrl.abort(), 20000); // 20s timeout
+          const r=await fetch(url,{signal:ctrl.signal});
+          clearTimeout(tm);
+          
+          if(r.ok){
+            const data=await r.json();
+            const pag=data.data||[];
+            todas=todas.concat(pag);
+            sucesso = true;
+            break;
+          } else if(r.status === 429){
+            const espera = Math.min(60000, 5000 * tent);
+            console.log(`⏳ Rate limit em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}. Esperando ${espera/1000}s...`);
+            await new Promise(res=>setTimeout(res, espera));
+          } else if(r.status >= 500){
+            console.log(`⚠️ Erro ${r.status} em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+            await new Promise(res=>setTimeout(res, 3000 * tent));
+          } else {
+            console.log(`❌ Resposta ${r.status} em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+            await new Promise(res=>setTimeout(res, 2000));
+          }
+        } catch(e){
+          console.log(`💥 Erro de rede em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+          await new Promise(res=>setTimeout(res, 3000 * tent));
+        }
       }
-      if(!ok)break; if(page<3)await new Promise(res=>setTimeout(res,500));
+      
+      if(!sucesso) return null;
+      if(todas.length < page * 250) break;
+      page++;
+      await new Promise(res=>setTimeout(res, 1000));
     }
     return todas;
   }
 
   async function carregarSet(p){
-    if(CARDS_POR_SET[p.cod]&&CARDS_POR_SET[p.cod].length>0)return;
+    if(CARDS_POR_SET[p.cod] && CARDS_POR_SET[p.cod].length > 0) return true;
+    
+    // Se estiver vazio salvo errado antes, apaga do cache local para tentar de novo
+    if(CARDS_POR_SET[p.cod] && CARDS_POR_SET[p.cod].length === 0){
+      delete CARDS_POR_SET[p.cod];
+      const setsAll = JSON.parse(localStorage.getItem(KEY+'sets')||'{}');
+      delete setsAll[p.cod];
+      localStorage.setItem(KEY+'sets', JSON.stringify(setsAll));
+    }
+    
     const cartas_raw = await carregarSetAPI(p.cod);
-    if(cartas_raw.length>0){
-      const cartas=cartas_raw.map(c=>{
+    if(cartas_raw === null){
+      console.log(`❌ ${p.cod} falhou de vez. Vai tentar de novo na próxima abertura.`);
+      return false;
+    }
+    
+    if(cartas_raw.length > 0){
+      const cartas = cartas_raw.map(c=>{
         const rar=mapRaridade(c.rarity); const preco=calcularPrecoCarta(c);
         return { id:c.id,nome:c.name,set:c.set.id,setNome:c.set.name,num:c.number,rar:rar,img:c.images.large||c.images.small||'',imgSmall:c.images.small||c.images.large||'',preco:preco };
       });
-      CARDS_POR_SET[p.cod]=cartas; salvarDadosSet(p.cod,cartas); totalCartasDB+=cartas.length;
-    } else { CARDS_POR_SET[p.cod]=[]; }
+      CARDS_POR_SET[p.cod] = cartas;
+      salvarDadosSet(p.cod, cartas);
+      totalCartasDB += cartas.length;
+      console.log(`✅ ${p.cod}: ${cartas.length} cartas baixadas.`);
+      return true;
+    }
+    return false;
   }
 
   async function carregarTudo(){
-    const pct=document.getElementById('loadingPct'); const fill=document.getElementById('loadingFill'); const txt=document.getElementById('loadingTxt'); const sub=document.getElementById('loadingSub');
-    sub.textContent = 'Buscando imagens...'; txt.textContent = 'Conectando...'; pct.textContent='5%'; fill.style.width='5%';
+    const pct=document.getElementById('loadingPct'); 
+    const fill=document.getElementById('loadingFill'); 
+    const txt=document.getElementById('loadingTxt'); 
+    const sub=document.getElementById('loadingSub');
+    
+    sub.textContent = 'Buscando imagens...'; 
+    txt.textContent = 'Conectando...'; 
+    pct.textContent='5%'; 
+    fill.style.width='5%';
 
     await buscarPackshotsGlobais();
     
-    const faltando=PACOTES.filter(p=>!CARDS_POR_SET[p.cod]||CARDS_POR_SET[p.cod].length===0); const jaTem=PACOTES.length-faltando.length;
-    if(faltando.length===0){ sub.textContent='Tudo já está em cache!'; pct.textContent='100%';fill.style.width='100%'; await new Promise(r=>setTimeout(r,400)); iniciarApp(); return; }
-    sub.textContent=jaTem+' em cache • '+faltando.length+' pra baixar';
+    const faltando = PACOTES.filter(p => !CARDS_POR_SET[p.cod] || CARDS_POR_SET[p.cod].length === 0);
+    const jaTem = PACOTES.length - faltando.length;
     
-    for(let i=0;i<faltando.length;i++){
-      const p=faltando[i]; txt.textContent='('+(i+1)+'/'+faltando.length+') '+p.nome;
-      let pctAtual = Math.round(((i)/faltando.length)*100); if(pctAtual < 5) pctAtual = 5;
-      pct.textContent=pctAtual+'%'; fill.style.width=pctAtual+'%';
-      await carregarSet(p); await new Promise(r=>setTimeout(r,500)); 
+    if(faltando.length === 0){ 
+      sub.textContent='✅ Tudo já está em cache!'; 
+      pct.textContent='100%'; 
+      fill.style.width='100%'; 
+      await new Promise(r=>setTimeout(r,400)); 
+      iniciarApp(); 
+      return; 
     }
-    pct.textContent='100%';fill.style.width='100%'; txt.textContent='Pronto! '+totalCartasDB+' cartas.';
-    await new Promise(r=>setTimeout(r,800)); iniciarApp();
+    
+    sub.textContent = jaTem + ' em cache • ' + faltando.length + ' pra baixar';
+    let falhas = 0;
+    let sucessos = 0;
+    
+    for(let i=0; i<faltando.length; i++){
+      const p = faltando[i]; 
+      txt.textContent = '(' + (i+1) + '/' + faltando.length + ') ' + p.nome;
+      let pctAtual = Math.round(((i) / faltando.length) * 100); 
+      if(pctAtual < 5) pctAtual = 5;
+      pct.textContent = pctAtual + '%'; 
+      fill.style.width = pctAtual + '%';
+      
+      const sucesso = await carregarSet(p);
+      if(sucesso) sucessos++; else falhas++;
+      
+      // Espera 3 segundos entre pacotes para respeitar o Rate Limit
+      await new Promise(r=>setTimeout(r, 3000));
+    }
+    
+    pct.textContent = '100%'; 
+    fill.style.width = '100%'; 
+    txt.textContent = 'Pronto! ' + totalCartasDB + ' cartas.';
+    
+    if(falhas > 0) {
+      sub.textContent = `⚠️ ${falhas} pacote(s) falharam. O jogo vai tentar baixar de novo quando você abrir.`;
+    } else {
+      sub.textContent = `✅ ${sucessos} pacote(s) baixados com sucesso!`;
+    }
+    
+    await new Promise(r=>setTimeout(r,2000)); 
+    iniciarApp();
   }
 
   async function recarregarFaltando(){
-    const faltando=PACOTES.filter(p=>!CARDS_POR_SET[p.cod]||CARDS_POR_SET[p.cod].length===0);
-    if(faltando.length===0){alert('Todos os pacotes já estão carregados!');return;}
-    if(!confirm('Recarregar '+faltando.length+' pacotes que faltaram?'))return;
-    document.getElementById('loading').style.display='flex'; document.getElementById('loadingTxt').textContent='Recarregando...';
-    await carregarTudo(); montarLoja(); atualizarUI();
+    const faltando = PACOTES.filter(p => !CARDS_POR_SET[p.cod] || CARDS_POR_SET[p.cod].length === 0);
+    
+    if(faltando.length === 0){ 
+      alert('✅ Todos os pacotes já estão carregados!'); 
+      return; 
+    }
+    
+    if(!confirm(`Recarregar ${faltando.length} pacote(s) que faltaram?\n\nPode levar alguns minutos. Não feche o app.`)) return;
+    
+    // Limpa os sets vazios do cache
+    const setsAll = JSON.parse(localStorage.getItem(KEY+'sets')||'{}');
+    faltando.forEach(p => { delete setsAll[p.cod]; delete CARDS_POR_SET[p.cod]; });
+    localStorage.setItem(KEY+'sets', JSON.stringify(setsAll));
+    
+    document.getElementById('loading').style.display='flex'; 
+    document.getElementById('loadingTxt').textContent='Recarregando...';
+    
+    let sucessos = 0;
+    let falhas = 0;
+    
+    for(let i=0; i<faltando.length; i++){
+      const p = faltando[i];
+      document.getElementById('loadingTxt').textContent = `Baixando ${p.nome} (${i+1}/${faltando.length})...`;
+      const pct = Math.round(((i+1) / faltando.length) * 100);
+      document.getElementById('loadingPct').textContent = pct + '%';
+      document.getElementById('loadingFill').style.width = pct + '%';
+      document.getElementById('loadingSub').textContent = `Tentando baixar ${p.nome}...`;
+      
+      const ok = await carregarSet(p);
+      if(ok) sucessos++; else falhas++;
+      
+      await new Promise(r => setTimeout(r, 3000));
+    }
+    
+    document.getElementById('loading').style.display='none';
+    alert(`✅ Baixados: ${sucessos}\n⚠️ Falharam: ${falhas}\n\n${falhas > 0 ? 'Clique em Recarregar de novo em alguns minutos.' : 'Tudo pronto!'}`);
+    
+    montarLoja(); 
+    atualizarUI();
   }
 
   // ===== LOJA E INVENTÁRIO =====
@@ -2541,7 +2652,6 @@ function mostrarTela(id, push = true){
       perfil.nome = nomeFinal; 
       localStorage.setItem(KEY+'user', JSON.stringify(usuario));
       
-      // Atualiza o nome na raiz e no perfil do Firebase
       if(auth.currentUser) {
           db.collection('jogadores').doc(auth.currentUser.uid).update({
               nome: nomeFinal,
@@ -3064,7 +3174,6 @@ function mostrarTela(id, push = true){
           const ehHack = isCartaHack(cId); 
           if(seletorColecao !== 'todas' && carta.set !== seletorColecao) continue;
           
-          // Verifica quantas dessa carta (raw) já estão na mesa de troca
           const qtdRawNaTroca = trocaSelecionadaJogador.filter(tc => tc.id === cId && tc.tipo === 'raw').length;
           const disponivelRaw = info.qtd - qtdRawNaTroca;
 
@@ -3074,7 +3183,6 @@ function mostrarTela(id, push = true){
           
           if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
               info.gradeds.forEach((g, gi) => {
-                  // Verifica se essa carta graduada com essa nota exata já está na mesa
                   const jaNaTroca = trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && tc.nota === g.nota);
                   if(!jaNaTroca) {
                       cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1});
@@ -3331,7 +3439,6 @@ function mostrarTela(id, push = true){
 
   // ===== ADMIN =====
   function abrirAdminDireto() { 
-      // Trava de Segurança: Só abre se o UID estiver na lista de ADMs
       if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
           abrirAdmin(); 
       } else {
@@ -4001,7 +4108,7 @@ function mostrarTela(id, push = true){
       { id: 'pikachu_zenith', nome: 'Pikachu Zenith', emoji: '✨', cor: 'linear-gradient(135deg, #fffacd, #daa520)', cardId: 'swsh12pt5-gg30' }
   ];
 
-  // ===== BOTÃO ADMIN ARRASTÁVEL =====
+  // ===== BOTÃO ADMIN ARRASTÁVEL E MENOR =====
   function configurarArrastarAdminBtn() {
       const btn = document.getElementById('adminFloatBtn');
       if (!btn) return;
@@ -4159,7 +4266,6 @@ function mostrarTela(id, push = true){
   function confirmarSenha(){
     const s=document.getElementById('senhaInput').value;
     if(s === SENHA_MOD){ 
-        // Trava de Segurança: Só abre se o UID da conta logada estiver na lista
         if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
             document.getElementById('modalSenha').classList.remove('ativo'); 
             abrirAdmin(); 
@@ -4296,4 +4402,4 @@ function mostrarTela(id, push = true){
   carregarTudo();
 </script>
 </body>
-</htm
+</html>
