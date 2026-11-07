@@ -1268,6 +1268,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   const SENHA_TESTER='0326';
   const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
+  // 🔐 TRAVA DE SEGURANÇA DO ADMIN (SÓ ESSAS DUAS CONTAS PODEM ACESSAR O PAINEL)
+  const ADMIN_UIDS = [
+      "mGsAZjoXULgxgsGK4GUYzERdzFH3", // Conta 1 (Sua principal)
+      "liGT9uJpskQJftvLK8EDZvkBc9r2"  // Conta 2 (Sua secundária)
+  ];
+
   let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
   let moedas = parseInt(localStorage.getItem(KEY+'moedas')||'0');
   let dinheiroInfinito = localStorage.getItem(KEY+'infinito')==='1';
@@ -1570,10 +1576,15 @@ function mostrarTela(id, push = true){
         if (naoLidos > 0) { badgeEl.textContent = naoLidos; badgeEl.style.display = 'flex'; } 
         else { badgeEl.style.display = 'none'; }
     }
+    
+    // Só mostra o botão flutuante se estiver ativado E for um UID autorizado
     const floatBtn = document.getElementById('adminFloatBtn');
     if (floatBtn) {
-        if (perfil.adminFixoAtivo) floatBtn.classList.add('ativo');
-        else floatBtn.classList.remove('ativo');
+        if (perfil.adminFixoAtivo && auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
+            floatBtn.classList.add('ativo');
+        } else {
+            floatBtn.classList.remove('ativo');
+        }
     }
   }
 
@@ -2515,7 +2526,6 @@ function mostrarTela(id, push = true){
       document.getElementById('perfilMoedas').textContent = getMoedasStr();
   }
 
-  // CORREÇÃO BUG 3: Atualiza o nome na raiz (para o ranking) e no perfil
   function trocarNome() {
       if (!usuario) return;
       if (!dinheiroInfinito && moedas < 50000) { alert('❌ Você não tem 50.000 moedas!'); return; }
@@ -2531,7 +2541,7 @@ function mostrarTela(id, push = true){
       perfil.nome = nomeFinal; 
       localStorage.setItem(KEY+'user', JSON.stringify(usuario));
       
-      // Salva no Firebase (atualiza o perfil e a raiz do documento)
+      // Atualiza o nome na raiz e no perfil do Firebase
       if(auth.currentUser) {
           db.collection('jogadores').doc(auth.currentUser.uid).update({
               nome: nomeFinal,
@@ -2620,13 +2630,11 @@ function mostrarTela(id, push = true){
   }
 
   // ===== SISTEMA DE AMIGOS =====
-  // CORREÇÃO BUG 3: Sincronizar dados dos amigos ao abrir a tela
   async function abrirAmigos() {
       mostrarTela('telaAmigos'); 
-      renderizarListaAmigos(); // Renderiza com os dados locais (mais rápido)
+      renderizarListaAmigos(); 
       carregarPedidosAmizade();
       
-      // Puxa os dados atualizados de cada amigo no banco de dados
       if(meusAmigos.length > 0) {
           let atualizou = false;
           for(let i=0; i<meusAmigos.length; i++) {
@@ -3041,7 +3049,6 @@ function mostrarTela(id, push = true){
       btn.classList.add('at'); renderizarCartasSeletor();
   }
 
-  // CORREÇÃO BUG 1: Verifica a quantidade já selecionada para não deixar passar do limite
   function renderizarCartasSeletor() {
       const grid = document.getElementById('modalCartasGrid'); 
       grid.innerHTML = '';
@@ -3057,7 +3064,7 @@ function mostrarTela(id, push = true){
           const ehHack = isCartaHack(cId); 
           if(seletorColecao !== 'todas' && carta.set !== seletorColecao) continue;
           
-          // Quantas dessa carta (raw) já estão na troca
+          // Verifica quantas dessa carta (raw) já estão na mesa de troca
           const qtdRawNaTroca = trocaSelecionadaJogador.filter(tc => tc.id === cId && tc.tipo === 'raw').length;
           const disponivelRaw = info.qtd - qtdRawNaTroca;
 
@@ -3067,7 +3074,7 @@ function mostrarTela(id, push = true){
           
           if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
               info.gradeds.forEach((g, gi) => {
-                  // Se já tem essa carta graduada com a mesma nota na troca, não deixa adicionar de novo
+                  // Verifica se essa carta graduada com essa nota exata já está na mesa
                   const jaNaTroca = trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && tc.nota === g.nota);
                   if(!jaNaTroca) {
                       cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1});
@@ -3323,7 +3330,14 @@ function mostrarTela(id, push = true){
   }
 
   // ===== ADMIN =====
-  function abrirAdminDireto() { abrirAdmin(); }
+  function abrirAdminDireto() { 
+      // Trava de Segurança: Só abre se o UID estiver na lista de ADMs
+      if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
+          abrirAdmin(); 
+      } else {
+          alert('🚫 Você não tem permissão para acessar o Painel Admin.');
+      }
+  }
 
   function abrirAdmin(){
     atualizarUI(); document.getElementById('adminStatus').textContent=''; document.getElementById('adminDinheiro').value=''; document.getElementById('adminLevelInput').value=''; document.getElementById('adminIdInput').value='';
@@ -3824,7 +3838,7 @@ function mostrarTela(id, push = true){
   function iniciarApp(){
     document.getElementById('loading').style.display='none'; montarFlut();
     
-    configurarArrastarAdminBtn(); // Ativa a funcionalidade de arrastar o botão Admin
+    configurarArrastarAdminBtn();
 
     auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -3987,12 +4001,11 @@ function mostrarTela(id, push = true){
       { id: 'pikachu_zenith', nome: 'Pikachu Zenith', emoji: '✨', cor: 'linear-gradient(135deg, #fffacd, #daa520)', cardId: 'swsh12pt5-gg30' }
   ];
 
-  // ===== BOTÃO ADMIN ARRASTÁVEL E MENOR =====
+  // ===== BOTÃO ADMIN ARRASTÁVEL =====
   function configurarArrastarAdminBtn() {
       const btn = document.getElementById('adminFloatBtn');
       if (!btn) return;
       
-      // Recupera a posição salva
       const posSalva = JSON.parse(localStorage.getItem(KEY+'admin_btn_pos') || 'null');
       if (posSalva) {
           btn.style.bottom = 'auto';
@@ -4027,11 +4040,10 @@ function mostrarTela(id, push = true){
           if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasMoved = true;
 
           if (hasMoved) {
-              if (e.cancelable) e.preventDefault(); // Previne scroll na tela
+              if (e.cancelable) e.preventDefault();
               let newLeft = initialLeft + dx;
               let newTop = initialTop + dy;
               
-              // Limites da tela
               const maxLeft = window.innerWidth - btn.offsetWidth;
               const maxTop = window.innerHeight - btn.offsetHeight;
               newLeft = Math.max(0, Math.min(newLeft, maxLeft));
@@ -4050,10 +4062,8 @@ function mostrarTela(id, push = true){
           btn.style.transition = '';
           
           if (hasMoved) {
-              // Salva a posição
               const rect = btn.getBoundingClientRect();
               localStorage.setItem(KEY+'admin_btn_pos', JSON.stringify({ x: rect.left, y: rect.top }));
-              // Previne o clique de abrir o painel se foi só arrastar
               e.preventDefault();
               e.stopPropagation();
           }
@@ -4067,15 +4077,14 @@ function mostrarTela(id, push = true){
       window.addEventListener('touchmove', dragMove, {passive: false});
       window.addEventListener('touchend', dragEnd);
 
-      // Sobrescreve o click para não abrir o painel se estiver arrastando
       btn.onclick = (e) => {
           if (hasMoved) {
               e.preventDefault();
               e.stopPropagation();
-              hasMoved = false; // reseta
+              hasMoved = false;
               return;
           }
-          abrirAdmin();
+          abrirAdminDireto();
       };
   }
 
@@ -4146,10 +4155,23 @@ function mostrarTela(id, push = true){
   document.getElementById('btnCancelarSenha').onclick=()=>{ document.getElementById('modalSenha').classList.remove('ativo'); };
   document.getElementById('senhaInput').addEventListener('input',function(){ if(this.value.length===4)confirmarSenha(); });
   document.getElementById('btnConfirmarSenha').onclick=confirmarSenha;
+  
   function confirmarSenha(){
     const s=document.getElementById('senhaInput').value;
-    if(s===SENHA_MOD){ document.getElementById('modalSenha').classList.remove('ativo'); abrirAdmin(); }
-    else { document.getElementById('erroSenha').textContent='Senha incorreta!'; document.getElementById('senhaInput').value=''; }
+    if(s === SENHA_MOD){ 
+        // Trava de Segurança: Só abre se o UID da conta logada estiver na lista
+        if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
+            document.getElementById('modalSenha').classList.remove('ativo'); 
+            abrirAdmin(); 
+        } else {
+            document.getElementById('erroSenha').textContent = '🚫 Conta não autorizada!';
+            document.getElementById('senhaInput').value = '';
+        }
+    }
+    else { 
+        document.getElementById('erroSenha').textContent='Senha incorreta!'; 
+        document.getElementById('senhaInput').value=''; 
+    }
   }
 
   document.getElementById('btnSairAdmin').onclick=()=>{ irParaHome(); atualizarUI(); };
@@ -4274,4 +4296,4 @@ function mostrarTela(id, push = true){
   carregarTudo();
 </script>
 </body>
-</html>
+</htm
