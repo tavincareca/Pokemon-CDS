@@ -839,10 +839,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <div class="loja-titulo">🏪 Loja</div>
     <div class="loja-saldo" id="lojaSaldo">0 🪙</div>
   </div>
-  <div class="limite-box">
-    <span>📦 Limite por coleção:</span>
-    <span id="lojaLimiteTxt">600 não abertos</span>
-  </div>
   <div style="font-size:.9rem;font-weight:900;color:#4a6fa5;letter-spacing:1.8px;text-transform:uppercase;margin:0 auto 10px auto;width:100%;max-width:520px;text-align:left;padding-left:4px;display:flex;justify-content:space-between;align-items:center;z-index:2">
     <span>🎴 Escolha o pacote</span>
     <button class="btn-mini" id="btnRetry" style="width:auto;padding:6px 12px;font-size:.75rem;background:#fff;border-radius:12px;font-family:inherit;font-weight:900;color:#4a6fa5;cursor:pointer;border:2px solid #e0e8f0;box-shadow:0 3px 10px rgba(0,0,0,.1)">🔄 Recarregar</button>
@@ -864,10 +860,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   <div class="loja-topo">
     <div class="loja-titulo">🎒 Inventário</div>
     <div class="loja-saldo" id="invSaldo">0 🪙</div>
-  </div>
-  <div class="limite-box">
-    <span>📦 Limite por coleção:</span>
-    <span id="invLimiteTxt">600 não abertos</span>
   </div>
   <div class="inv-lista" id="invLista" style="z-index:2"></div>
   <button class="btn ghost" id="btnVoltarInv" style="max-width:520px;margin-top:20px;z-index:2">← Voltar</button>
@@ -1281,10 +1273,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   const SENHA_TESTER='0326';
   const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
-  const ADMIN_UIDS = [
-      "mGsAZjoXULgxgsGK4GUYzERdzFH3",
-      "liGT9uJpskQJftvLK8EDZvkBc9r2"
-  ];
+  // Trava removida! Pode entrar com a senha.
+  const ADMIN_UIDS = []; 
 
   let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
   let moedas = parseInt(localStorage.getItem(KEY+'moedas')||'0');
@@ -1346,7 +1336,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let ultimoDia = localStorage.getItem(KEY+'ultimoDia')||'';
   
   const LIMITE_DIARIO_MOEDAS = 100000; 
-  const LIMITE_PACOTES_POR_SET = 600; 
+  // LIMITE_PACOTES_POR_SET FOI REMOVIDO PARA CORRIGIR O BUG.
 
   let cartaAdminSelecionada = null;
   let seletorFiltro = 'todas';
@@ -1456,7 +1446,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         cartasCount: getTotalCartas(),
         ultimaAtualizacao: new Date().toISOString()
       }, { merge: true }).catch((erro) => console.error("Erro ao salvar na nuvem:", erro));
-    }, 1000);
+    }, 500); // Tempo reduzido para evitar bugs de multiplicação
   }
 
   function mostrarTela(id, push = true){
@@ -1555,12 +1545,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const invSaldo=document.getElementById('invSaldo');
     if(invSaldo)invSaldo.textContent=moedasStr+' 🪙';
     
-    const lojaLimite=document.getElementById('lojaLimiteTxt');
-    const invLimite=document.getElementById('invLimiteTxt');
-    if (lojaLimite && invLimite) {
-        const txtLimite = '600 não abertos';
-        lojaLimite.textContent = txtLimite; invLimite.textContent = txtLimite;
-    }
     const homeVer = document.getElementById('homeVerified');
     if(homeVer) homeVer.style.display = perfil.isVerified ? 'inline-block' : 'none';
 
@@ -1597,7 +1581,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 
     const floatBtn = document.getElementById('adminFloatBtn');
     if (floatBtn) {
-        if (perfil.adminFixoAtivo && auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) floatBtn.classList.add('ativo');
+        if (perfil.adminFixoAtivo && auth.currentUser) floatBtn.classList.add('ativo');
         else floatBtn.classList.remove('ativo');
     }
   }
@@ -1645,7 +1629,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       let txt = ''; if (d > 0) txt += d + 'd '; if (h > 0 || d > 0) txt += h + 'h '; txt += m + 'm ' + s + 's';
       el.textContent = txt;
   }
-
+// ===== SISTEMA DE CONTAS E LOGIN =====
   const LIMITE_CONTAS_DISPOSITIVO = 3;
   const ESPERA_CRIAR_CONTA_MS = 30 * 60 * 1000;
 
@@ -2001,16 +1985,18 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const el=document.querySelector('.pack-card.sel'); if(!el){alert('Selecione um pacote!');return;}
     const precoUnit=parseInt(el.dataset.preco); const precoTotal=precoUnit*quantidade;
     
-    const qtdAtualNoInv = inventario[pacoteEscolhido] || 0;
-    if(!perfil.pacotesInfinitos && (qtdAtualNoInv + quantidade) > LIMITE_PACOTES_POR_SET) {
-        alert(`🚫 LIMITE ATINGIDO!\nVocê já tem ${qtdAtualNoInv} pacotes desta coleção no inventário. O limite é ${LIMITE_PACOTES_POR_SET} não abertos. Abra os seus pacotes para comprar mais!`);
-        return; 
-    }
+    // A TRAVA DE 600 FOI REMOVIDA AQUI.
     
     if(!dinheiroInfinito && moedas<precoTotal){alert('Moedas insuficientes! Precisa de '+precoTotal+' 🪙');return;}
     
     if(!dinheiroInfinito) moedas-=precoTotal; 
     inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade;
+    
+    // Salva imediatamente para evitar bugs
+    if (auth.currentUser) {
+        db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario });
+    }
+    
     salvarEstado();atualizarUI();
     const p=PACOTES.find(x=>x.cod===pacoteEscolhido); alert('✅ Você comprou '+quantidade+'x '+p.nome.split(' (')[0]+'!\n\nAgora vá no Inventário pra abrir.');
   }
@@ -2048,6 +2034,10 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (!confirm(`Vender ${qtdVender} pacote(s) por ${totalGanho} moedas?`)) return;
     moedas += totalGanho; inventario[setId] -= qtdVender;
     if (inventario[setId] <= 0) delete inventario[setId];
+    
+    if (auth.currentUser) {
+        db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario });
+    }
     salvarEstado(); atualizarUI(); montarInventario(); alert(`✅ Venda realizada! Você ganhou ${totalGanho} moedas.`);
   }
 
@@ -2055,6 +2045,12 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if(!inventario[setId] || inventario[setId] <= 0)return;
     const realQty=Math.min(qty, inventario[setId]);
     inventario[setId]-=realQty; if(inventario[setId]<=0) delete inventario[setId];
+    
+    // Salva o inventário atualizado IMEDIATAMENTE para evitar a duplicação
+    if (auth.currentUser) {
+        db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario });
+    }
+    
     salvarEstado();atualizarUI();
     pacoteEscolhido=setId; pacotesSendoAbertos = realQty; pacotesFaltandoAbrir = realQty - 1;
     
@@ -2117,6 +2113,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     
     salvarEstado(); atualizarUI(); 
     if (auth.currentUser) {
+        // Salva a coleção IMEDIATAMENTE na nuvem para o bug não acontecer
         db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao });
     }
 
@@ -2132,7 +2129,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if(pacotesSendoAbertos > 0){
       const devolver = pacotesFaltandoAbrir + 1;
       inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + devolver;
-      pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; salvarEstado(); atualizarUI();
+      pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; 
+      if (auth.currentUser) {
+          db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario });
+      }
+      salvarEstado(); atualizarUI();
     }
     telaStack = []; montarInventario(); mostrarTela('telaInventario', false);
   };
@@ -2348,8 +2349,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const hack = CARTAS_HACK.find(c => c.id === cartaId); if (hack) return hack;
     for(const setId in CARDS_POR_SET){ const found=CARDS_POR_SET[setId].find(c=>c.id===cartaId); if(found)return found; } return null;
   }
-
-  function mostrarCol(manterScroll = false){
+function mostrarCol(manterScroll = false){
     albumAberto=null; const telaCol = document.getElementById('telaColecao'); if(telaCol && !manterScroll) telaCol.scrollTop = 0;
     mostrarTela('telaColecao', false); document.getElementById('colTitulo').textContent='📚 Minhas Cartas'; document.getElementById('conteudoCol').innerHTML='';
     if(abaColecao==='albuns') { renderAlbuns(); } else { renderGraduadas(); }
@@ -3046,7 +3046,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       
       btnTroca.onclick = () => {
           if (amigo.isBanned) { alert('🚫 Este jogador está banido.'); return; }
-          enviarPedidoTroca(amigo);
+          iniciarTrocaComAmigo(amigo);
       };
       btnChat.onclick = () => {
           abrirConversa(amigo);
@@ -3634,7 +3634,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   }
 
   function abrirAdminDireto() { 
-      if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
+      if(auth.currentUser) {
           abrirAdmin(); 
       } else {
           alert('🚫 Você não tem permissão para acessar o Painel Admin.');
@@ -4468,7 +4468,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   function confirmarSenha(){
     const s=document.getElementById('senhaInput').value;
     if(s === SENHA_MOD){ 
-        if(auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) {
+        if(auth.currentUser) {
             document.getElementById('modalSenha').classList.remove('ativo'); 
             abrirAdmin(); 
         } else {
@@ -4598,11 +4598,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       if (devolver > 0) { inventario[pacoteEscolhido] = (inventario[pacoteEscolhido] || 0) + devolver; pacotesFaltandoAbrir = 0; pacotesSendoAbertos = 1; salvarEstado(); }
     }
   });
-
-  window.onerror = function(msg, url, line) {
-      alert("Erro no código: " + msg + "\nLinha: " + line);
-      return false;
-  };
 
   montarEnergias();
   carregarTudo();
