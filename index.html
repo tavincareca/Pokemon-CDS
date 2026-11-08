@@ -1258,6 +1258,1103 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+// ===== CONEXÃO FIREBASE =====
+  const firebaseConfig = {
+    apiKey: "AIzaSyDRBem0eD4dJTh31Q2tnl6FH89HYUkjW1c",
+    authDomain: "pokemoncds-cb09d.firebaseapp.com",
+    projectId: "pokemoncds-cb09d",
+    storageBucket: "pokemoncds-cb09d.firebasestorage.app",
+    messagingSenderId: "21149969106",
+    appId: "1:21149969106:web:dbaca9bf687cb89cf91b0b"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  var db = firebase.firestore();
+  var auth = firebase.auth();
+
+  // ===== ESTADO GLOBAL =====
+  const KEY='pb_v7_';
+  const SENHA_MOD='1502';
+  const SENHA_TESTER='0326';
+  const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
+
+  // 🔐 TRAVA DE SEGURANÇA DO ADMIN
+  const ADMIN_UIDS = [
+      "mGsAZjoXULgxgsGK4GUYzERdzFH3",
+      "liGT9uJpskQJftvLK8EDZvkBc9r2"
+  ];
+
+  let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
+  let moedas = parseInt(localStorage.getItem(KEY+'moedas')||'0');
+  let dinheiroInfinito = localStorage.getItem(KEY+'infinito')==='1';
+  let colecao = JSON.parse(localStorage.getItem(KEY+'colecao')||'{}');
+  let inventario = JSON.parse(localStorage.getItem(KEY+'inv')||'{}');
+  let graduacoesPendentes = JSON.parse(localStorage.getItem(KEY+'gradPend')||'[]');
+  let tutorialFeito = localStorage.getItem(KEY+'tutorial')==='1';
+  let colecoesCompletas = JSON.parse(localStorage.getItem(KEY+'completas')||'[]');
+  let CARDS_POR_SET = JSON.parse(localStorage.getItem(KEY+'sets')||'{}');
+  let PACKSHOTS = JSON.parse(localStorage.getItem(KEY+'packs_globais')||'{}');
+  let totalCartasDB = parseInt(localStorage.getItem(KEY+'total')||'0');
+  let historicoVendas = JSON.parse(localStorage.getItem(KEY+'historico_vendas')||'[]');
+  let correio = JSON.parse(localStorage.getItem(KEY+'correio')||'[]');
+  let notificacoes = JSON.parse(localStorage.getItem(KEY+'notificacoes')||'[]');
+  let pedidosTroca = JSON.parse(localStorage.getItem(KEY+'pedidos_troca')||'[]');
+
+  let multiplicadorSortePacotes = parseInt(localStorage.getItem(KEY+'sorte_pacotes')||'1');
+  let multiplicadorSorteGrad = parseInt(localStorage.getItem(KEY+'sorte_grad')||'1');
+
+  let isProcessingGift = false;
+  let isProcessingResgatar = false;
+  let unsubscribePerfil = null;
+  let unsubscribeAmigos = null;
+  let unsubscribeAmigoPerfil = null;
+  let unsubscribeChat = null;
+  let unsubscribeTrocaChat = null;
+  let unsubscribeRanking = null;
+  let unsubscribeTroca = null;
+
+  let meusAmigos = [];
+  let pedidosAmizade = [];
+  let trocaSelecionadaJogador = [];
+  let trocaSelecionadaAmigo = [];
+  let amigoDaTrocaAtual = null;
+  let docTrocaId = null;
+  let timerTrocaInterval = null;
+
+  let amigoChatAtual = null;
+  let chatAbertoDuranteTroca = true;
+  let abaRankingAtual = 'nivel';
+
+  let perfil = JSON.parse(localStorage.getItem(KEY+'perfil')||'null');
+  if(!perfil) {
+      perfil = { id: '#' + Math.floor(1000 + Math.random() * 9000), nome: '', login: '', avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)', customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false, adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: 'admin-deco', dataCriacao: new Date().toISOString(), rewardHackClaimed: false, adminFixoAtivo: false, aparecerRanking: true };
+      localStorage.setItem(KEY+'perfil', JSON.stringify(perfil));
+  }
+  if (!perfil.adminTitle) perfil.adminTitle = '👑 CRIADOR SUPREMO 👑';
+  if (!perfil.adminFrame) perfil.adminFrame = 'admin-deco';
+  if (!perfil.dataCriacao) perfil.dataCriacao = new Date().toISOString();
+  if (perfil.rewardHackClaimed === undefined) perfil.rewardHackClaimed = false;
+  if (perfil.coroa === undefined) perfil.coroa = perfil.isAdmin ? true : false;
+  if (perfil.rainbowName === undefined) perfil.rainbowName = perfil.isAdmin ? true : false;
+  if (perfil.badge === undefined) perfil.badge = perfil.isAdmin ? true : false;
+  if (perfil.pacotesInfinitos === undefined) perfil.pacotesInfinitos = perfil.isAdmin ? true : false;
+  if (perfil.adminFixoAtivo === undefined) perfil.adminFixoAtivo = false;
+  if (perfil.aparecerRanking === undefined) perfil.aparecerRanking = true;
+
+  let ganhoHoje = parseInt(localStorage.getItem(KEY+'ganhoHoje')||'0');
+  let ultimoDia = localStorage.getItem(KEY+'ultimoDia')||'';
+  
+  const LIMITE_DIARIO_MOEDAS = 100000; 
+  const LIMITE_PACOTES_POR_SET = 600; 
+
+  let cartaAdminSelecionada = null;
+  let seletorFiltro = 'todas';
+  let seletorColecao = 'todas';
+
+  let telaStack = [];
+  let passoAtual=0;
+  let pacoteEscolhido=localStorage.getItem(KEY+'pacote')||'sv1';
+  let quantidade=1;
+  let packAtual=[];
+  let revIdx=0;
+  let revEstado='mostrando';
+  let autoRevelar=false;
+  let autoRevelarTimer=null;
+  let autoVelocidade=800;
+  let albumAberto=null;
+  let abaColecao='albuns';
+  let cartaGradAtual=null;
+  let pacotesFaltandoAbrir=0;
+  let pacotesSendoAbertos=1;
+  let ripLock=false;
+  let scrollColecaoLista = 0;
+  let scrollDetalheSalvo = 0;
+  let alarmeTimerInterval = null;
+  let banidoTimerInterval = null;
+  let cartasTravadas = {};
+  let giftAtual = null;
+
+  const CARTAS_HACK = [
+    { id: 'hack-charizard', nome: 'Charizard', emoji: '🔥', num: 'H-01', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3/223_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3/223.png', preco: 999999, valorVenda: 0 },
+    { id: 'hack-pikachu', nome: 'Pikachu', emoji: '⚡', num: 'H-02', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh4/188_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh4/188.png', preco: 999999, valorVenda: 0 },
+    { id: 'hack-mewtwo', nome: 'Mewtwo', emoji: '🧠', num: 'H-03', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/pgo/30_hires.png', imgSmall: 'https://images.pokemontcg.io/pgo/30.png', preco: 999999, valorVenda: 0 },
+    { id: 'hack-umbreon', nome: 'Umbreon', emoji: '🌙', num: 'H-04', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/swsh7/189_hires.png', imgSmall: 'https://images.pokemontcg.io/swsh7/189.png', preco: 999999, valorVenda: 0 },
+    { id: 'hack-mew', nome: 'Mew', emoji: '🔮', num: 'H-05', set: 'hack', setNome: 'Arquivo Hackeado', rar: 'SIR', img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png', imgSmall: 'https://images.pokemontcg.io/sv3pt5/205.png', preco: 999999, valorVenda: 0 }
+  ];
+
+  function isCartaHack(cartaOuId) {
+      if (typeof cartaOuId === 'string') return cartaOuId.indexOf('hack-') === 0;
+      return cartaOuId && (cartaOuId.set === 'hack' || cartaOuId.hack === true);
+  }
+
+  function temColecaoHackCompleta() {
+      return CARTAS_HACK.every(hc => colecao[hc.id] && (colecao[hc.id].qtd > 0 || (colecao[hc.id].gradeds && colecao[hc.id].gradeds.length > 0)));
+  }
+
+  const PACOTES=[
+    {cod:'base1',nome:'Base Set (1999)',emoji:'👑',preco:250,c1:'#d4a017',c2:'#8b5a00',gh:'base1'},
+    {cod:'base2',nome:'Jungle (1999)',emoji:'🌴',preco:100,c1:'#2e8b57',c2:'#1a4d30',gh:'base2'},
+    {cod:'base3',nome:'Fossil (1999)',emoji:'🦴',preco:90,c1:'#8b7355',c2:'#4a3a20',gh:'base3'},
+    {cod:'base5',nome:'Team Rocket (2000)',emoji:'🚀',preco:100,c1:'#8b1a1a',c2:'#4a0a0a',gh:'base5'},
+    {cod:'neo1',nome:'Neo Genesis (2000)',emoji:'🌟',preco:90,c1:'#4169e1',c2:'#1a2a6a',gh:'neo1'},
+    {cod:'ex1',nome:'EX Ruby & Sapphire (2003)',emoji:'💎',preco:70,c1:'#dc143c',c2:'#8b0a20',gh:'ex1'},
+    {cod:'ex8',nome:'EX Deoxys (2005)',emoji:'🌌',preco:70,c1:'#9400d3',c2:'#4a006a',gh:'ex8'},
+    {cod:'dp1',nome:'Diamond & Pearl (2007)',emoji:'💠',preco:50,c1:'#87ceeb',c2:'#4a7a8b',gh:'dp1'},
+    {cod:'hgss1',nome:'HeartGold SoulSilver (2010)',emoji:'🏆',preco:40,c1:'#ffd700',c2:'#b8860b',gh:'hgss1'},
+    {cod:'xy1',nome:'XY (2014)',emoji:'❌',preco:30,c1:'#e63946',c2:'#8b0a1a',gh:'xy1'},
+    {cod:'xy12',nome:'Evolutions (2016)',emoji:'🔙',preco:50,c1:'#ff8c00',c2:'#8b4a00',gh:'xy12'},
+    {cod:'sm1',nome:'Sun & Moon (2017)',emoji:'☀️',preco:25,c1:'#ffa500',c2:'#8b5a00',gh:'sm1'},
+    {cod:'swsh1',nome:'Sword & Shield (2020)',emoji:'⚔️',preco:20,c1:'#1e90ff',c2:'#0a3a7a',gh:'swsh1'},
+    {cod:'swsh7',nome:'Evolving Skies (2021)',emoji:'🌙',preco:60,c1:'#4a5fc0',c2:'#1a2a6a',gh:'swsh7'},
+    {cod:'swsh12pt5',nome:'Crown Zenith (2023)',emoji:'👑',preco:40,c1:'#ffd93d',c2:'#b8860b',gh:'swsh12pt5'},
+    {cod:'sv1',nome:'Scarlet & Violet (2023)',emoji:'🔴',preco:20,c1:'#ee1515',c2:'#8b0a0a',gh:'sv1'},
+    {cod:'sv3pt5',nome:'Pokémon 151 (2023)',emoji:'🎴',preco:45,c1:'#ffcb05',c2:'#3b4cca',gh:'sv3pt5'},
+    {cod:'sv4pt5',nome:'Paldean Fates (2024)',emoji:'✨',preco:40,c1:'#a855f7',c2:'#4a1a7a',gh:'sv4pt5'},
+    {cod:'sv6',nome:'Twilight Masquerade (2024)',emoji:'🎭',preco:30,c1:'#8b5a8b',c2:'#4a1a4a',gh:'sv6'},
+    {cod:'sv7',nome:'Stellar Crown (2024)',emoji:'👑',preco:30,c1:'#ffb700',c2:'#8b5a00',gh:'sv7'},
+    {cod:'sv8',nome:'Surging Sparks (2024)',emoji:'⚡',preco:45,c1:'#ffd93d',c2:'#f7a800',gh:'sv8'},
+    {cod:'sv8pt5',nome:'Prismatic Evolutions (2025)',emoji:'🌈',preco:70,c1:'#ff6ec7',c2:'#7a1a6a',gh:'sv8pt5'}
+  ];
+
+  const RAR_NOME={'C':'Comum','U':'Incomum','R':'Rara','RH':'Rara Holo','UR':'Ultra Rara','RB':'Rainbow Rare','SEC':'Secret Rare','IR':'Ilustração Rara','SIR':'Ilustração Especial','HR':'Hyper Rare','PR':'Promo'};
+  const RAR_BASE={C:0.30,U:0.50,R:3,RH:30,UR:300,IR:800,HR:1500,RB:2500,SEC:3000,SIR:5000,PR:5};
+  const ERA_MULT={base1:100,base2:25,base3:25,base5:20,neo1:15,ex1:8,ex8:8,dp1:4,hgss1:4,xy1:2,xy12:2,sm1:1.2,swsh1:1,swsh7:1.5,swsh12pt5:1,sv1:1,sv3pt5:1.3,sv4pt5:1.3,sv6:1,sv7:1,sv8:1.2,sv8pt5:1.5};
+  const VINTAGE_SETS=new Set(['base1','base2','base3','base5','neo1']);
+  const POP_SP=new Set(['charizard','pikachu','mew','mewtwo','umbreon','rayquaza','lugia','gengar','espeon','giratina','greninja','arceus','sylveon','celebi','jirachi','deoxys','darkrai','ho-oh']);
+  const POP_S=new Set(['blastoise','venusaur','dragonite','snorlax','gyarados','machamp','alakazam','lucario','gardevoir','tyranitar','garchomp','metagross','salamence','blaziken','sceptile','swampert','typhlosion','feraligatr','leafeon','glaceon','vaporeon','jolteon','flareon','eevee','mimikyu','dragapult','corviknight','zacian','zamazenta','suicune','entei','raikou','kyogre','groudon','dialga','palkia','reshiram','zekrom','kyurem','xerneas','yveltal','solgaleo','lunala','necrozma','eternatus','koraidon','miraidon']);
+  const POP_A=new Set(['ivysaur','charmeleon','wartortle','bayleef','quilava','croconaw','grovyle','combusken','marshtomp','monferno','prinplup','servine','pignite','dewott','quilladin','braixen','frogadier','dartrix','torracat','brionie','thwackey','raboot','drizzile','floragato','crocalor','quaxwell','pichu','togepi','cleffa','riolu','munchlax','bonsly','happiny','mantyke','azurill','wynaut','budew','roselia','roserade','gallade','froslass','glalie','snorunt','aron','lairon','aggron','bagon','shelgon','beldum','metang','dratini','dragonair','larvitar','pupitar','gabite','deino','zweilous','axew','fraxure','drakloak','dreepy']);
+
+  // ===== SALVAR NA NUVEM (FIREBASE) =====
+  let _saveTimeout = null;
+  function salvarEstado(){
+    localStorage.setItem(KEY+'moedas',moedas);
+    localStorage.setItem(KEY+'infinito',dinheiroInfinito?'1':'0');
+    localStorage.setItem(KEY+'colecao',JSON.stringify(colecao));
+    localStorage.setItem(KEY+'inv',JSON.stringify(inventario));
+    localStorage.setItem(KEY+'gradPend',JSON.stringify(graduacoesPendentes));
+    localStorage.setItem(KEY+'sorte_pacotes',multiplicadorSortePacotes);
+    localStorage.setItem(KEY+'sorte_grad',multiplicadorSorteGrad);
+    if(usuario)localStorage.setItem(KEY+'user',JSON.stringify(usuario));
+    localStorage.setItem(KEY+'pacote',pacoteEscolhido);
+    localStorage.setItem(KEY+'completas',JSON.stringify(colecoesCompletas));
+    localStorage.setItem(KEY+'perfil', JSON.stringify(perfil));
+    localStorage.setItem(KEY+'correio', JSON.stringify(correio));
+    localStorage.setItem(KEY+'notificacoes', JSON.stringify(notificacoes));
+    localStorage.setItem(KEY+'pedidos_troca', JSON.stringify(pedidosTroca));
+    localStorage.setItem(KEY+'ganhoHoje', ganhoHoje);
+    localStorage.setItem(KEY+'ultimoDia', ultimoDia);
+    localStorage.setItem(KEY+'historico_vendas', JSON.stringify(historicoVendas));
+    localStorage.setItem(KEY+'tutorial', tutorialFeito?'1':'0');
+
+    if (_saveTimeout) clearTimeout(_saveTimeout);
+    _saveTimeout = setTimeout(() => {
+      if (!auth.currentUser) return;
+      db.collection("jogadores").doc(auth.currentUser.uid).set({
+        moedas, dinheiroInfinito, colecao, inventario, graduacoesPendentes, perfil,
+        historicoVendas, correio, notificacoes, pedidosTroca, colecoesCompletas,
+        ganhoHoje, ultimoDia,
+        multiplicadorSortePacotes, multiplicadorSorteGrad, tutorialFeito,
+        cartasCount: getTotalCartas(),
+        ultimaAtualizacao: new Date().toISOString()
+      }, { merge: true }).catch((erro) => console.error("Erro ao salvar na nuvem:", erro));
+    }, 1000);
+  }
+
+  function mostrarTela(id, push = true){
+    const atual = document.querySelector('.tela.ativa');
+    if (push && atual && atual.id !== id) {
+        if (telaStack[telaStack.length - 1] !== atual.id) {
+            telaStack.push(atual.id);
+        }
+    }
+    document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+    const telaAtiva = document.getElementById(id);
+    if(telaAtiva) telaAtiva.classList.add('ativa');
+    window.scrollTo(0,0);
+    if(telaAtiva) telaAtiva.scrollTop = 0;
+  }
+
+  function voltarTela(){
+    const modaisAbertos = document.querySelectorAll('.modal-overlay.ativo');
+    if(modaisAbertos.length > 0) {
+        modaisAbertos.forEach(m => m.classList.remove('ativo'));
+        return;
+    }
+    if (document.getElementById('telaConversa') && document.getElementById('telaConversa').classList.contains('ativa')) { fecharConversa(); return; }
+    if (document.getElementById('telaChat').classList.contains('ativa')) { abrirPerfil(); return; }
+    if (document.getElementById('telaRanking').classList.contains('ativa')) { if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; } abrirPerfil(); return; }
+    if (document.getElementById('telaTroca').classList.contains('ativa')) { cancelarTroca(); return; }
+    if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) { 
+        if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
+        abrirAmigos(); return; 
+    }
+    if (document.getElementById('telaAmigos').classList.contains('ativa')) { irParaHome(); return; }
+    if (document.getElementById('telaPerfil').classList.contains('ativa')) { irParaHome(); return; }
+    if (document.getElementById('telaNotificacoes').classList.contains('ativa')) { irParaHome(); return; }
+    if (document.getElementById('telaColecao').classList.contains('ativa')) {
+        if (albumAberto) {
+            albumAberto = null; renderAlbuns();
+            setTimeout(() => {
+                const telaCol = document.getElementById('telaColecao');
+                if (telaCol) telaCol.scrollTop = scrollColecaoLista;
+            }, 10);
+            return;
+        } else { irParaHome(); return; }
+    }
+    if (document.getElementById('telaDetalhe').classList.contains('ativa')) {
+        if (albumAberto) { abrirAlbum(albumAberto, true); } 
+        else { abaColecao = 'graded'; mostrarCol(true); }
+        setTimeout(() => {
+            const telaCol = document.getElementById('telaColecao');
+            if (telaCol) telaCol.scrollTop = scrollDetalheSalvo;
+        }, 30);
+        return;
+    }
+    if (telaStack.length > 0) {
+        const anterior = telaStack.pop(); mostrarTela(anterior, false);
+    } else { irParaHome(); }
+  }
+
+  function irParaHome(){ telaStack = []; mostrarTela('telaHome', false); }
+
+  function calcularNivel(totalCartas) {
+      if(perfil && perfil.customLevel > 0) return perfil.customLevel;
+      return Math.max(1, Math.floor(totalCartas / 20) + 1);
+  }
+
+  function getTotalCartas() {
+      let total=0;
+      Object.values(colecao).forEach(c=>{ total+=(c.qtd||0) + (c.gradeds?c.gradeds.length:0); });
+      return total;
+  }
+
+  function getTotalGradeds() {
+      let total=0;
+      Object.values(colecao).forEach(c=>{ if(c.gradeds) total+=c.gradeds.length; });
+      return total;
+  }
+
+  function getMoedasStr() { return dinheiroInfinito ? '♾️' : moedas.toLocaleString('pt-BR'); }
+
+  function atualizarUI(){
+    const moedasStr = getMoedasStr();
+    document.getElementById('statMoedas').textContent = moedasStr;
+    const totalCartas = getTotalCartas();
+    document.getElementById('statCartas').textContent=totalCartas;
+    document.getElementById('statTotal').textContent=totalCartasDB;
+    const nv = calcularNivel(totalCartas);
+    const nvEl = document.getElementById('nvAvatar');
+    if(nvEl) nvEl.textContent='Nv. '+nv;
+    const avEl = document.getElementById('avatarUser');
+    if(perfil && avEl) {
+        const imgHtml = (perfil.avatar.startsWith('http') || perfil.avatar.startsWith('data:')) ? `<img src="${perfil.avatar}" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">` : `<span style="font-size:2rem;font-weight:900;">${perfil.avatar}</span>`;
+        avEl.innerHTML = `${imgHtml}<div class="nv" id="nvAvatar">Nv. ${nv}</div>`;
+        avEl.style.background = perfil.cor;
+    }
+    const lojaSaldo=document.getElementById('lojaSaldo');
+    if(lojaSaldo)lojaSaldo.textContent=moedasStr+' 🪙';
+    const invSaldo=document.getElementById('invSaldo');
+    if(invSaldo)invSaldo.textContent=moedasStr+' 🪙';
+    
+    const lojaLimite=document.getElementById('lojaLimiteTxt');
+    const invLimite=document.getElementById('invLimiteTxt');
+    if (lojaLimite && invLimite) {
+        const txtLimite = '600 não abertos';
+        lojaLimite.textContent = txtLimite; invLimite.textContent = txtLimite;
+    }
+    const homeVer = document.getElementById('homeVerified');
+    if(homeVer) homeVer.style.display = perfil.isVerified ? 'inline-block' : 'none';
+
+    const barraFill = document.getElementById('barraTrabalhoFill');
+    const barraTxt = document.getElementById('barraTrabalhoTxt');
+    if (barraFill && barraTxt) {
+        const pct = Math.min(100, (ganhoHoje / LIMITE_DIARIO_MOEDAS) * 100);
+        barraFill.style.width = pct + '%';
+        barraTxt.textContent = ganhoHoje.toLocaleString('pt-BR') + ' / 100.000';
+    }
+    const contadorPoke = document.getElementById('contadorPokebola');
+    const pokeEl = document.getElementById('pokebolaTrabalho');
+    if (contadorPoke && pokeEl) {
+        if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) {
+            contadorPoke.textContent = '🚫 Limite diário!'; pokeEl.classList.add('locked');
+        } else {
+            contadorPoke.textContent = ganhoHoje.toLocaleString('pt-BR') + ' / 100.000'; pokeEl.classList.remove('locked');
+        }
+    }
+    
+    const naoLidos = correio.filter(c => !c.lido).length;
+    const badgeEl = document.getElementById('correioBadge');
+    if (badgeEl) {
+        if (naoLidos > 0) { badgeEl.textContent = naoLidos; badgeEl.style.display = 'flex'; } 
+        else { badgeEl.style.display = 'none'; }
+    }
+    
+    const notifNaoLidas = notificacoes.filter(n => !n.lido).length;
+    const badgeNotif = document.getElementById('notificacaoBadge');
+    if (badgeNotif) {
+        if (notifNaoLidas > 0) { badgeNotif.textContent = notifNaoLidas; badgeNotif.style.display = 'flex'; } 
+        else { badgeNotif.style.display = 'none'; }
+    }
+
+    const floatBtn = document.getElementById('adminFloatBtn');
+    if (floatBtn) {
+        if (perfil.adminFixoAtivo && auth.currentUser && ADMIN_UIDS.includes(auth.currentUser.uid)) floatBtn.classList.add('ativo');
+        else floatBtn.classList.remove('ativo');
+    }
+  }
+
+  function checarBanAtivo() {
+      const telaBan = document.getElementById('telaBanido'); if (!telaBan) return;
+      if (!auth.currentUser) return;
+      
+      db.collection('jogadores').doc(auth.currentUser.uid).get().then(doc => {
+          if (!doc.exists) return;
+          const d = doc.data();
+          if (d.banido) {
+              if (d.banTipo === 'temp' && d.banExpiraEm && Date.now() >= d.banExpiraEm) {
+                  db.collection('jogadores').doc(auth.currentUser.uid).update({ banido: false, banMotivo: '', banTipo: '', banExpiraEm: null });
+                  telaBan.classList.remove('ativo');
+                  if (banidoTimerInterval) { clearInterval(banidoTimerInterval); banidoTimerInterval = null; }
+                  return;
+              }
+              document.getElementById('banidoMotivo').textContent = d.banMotivo || 'Não informado';
+              if (d.banTipo === 'perm') document.getElementById('banidoTempo').textContent = 'PERMANENTE';
+              else {
+                  atualizarTempoBanido(d.banExpiraEm);
+                  if (banidoTimerInterval) clearInterval(banidoTimerInterval);
+                  banidoTimerInterval = setInterval(() => {
+                      if (Date.now() >= d.banExpiraEm) {
+                          clearInterval(banidoTimerInterval); checarBanAtivo();
+                      } else {
+                          atualizarTempoBanido(d.banExpiraEm);
+                      }
+                  }, 1000);
+              }
+              telaBan.classList.add('ativo');
+          } else {
+              telaBan.classList.remove('ativo');
+              if (banidoTimerInterval) { clearInterval(banidoTimerInterval); banidoTimerInterval = null; }
+          }
+      });
+  }
+
+  function atualizarTempoBanido(expiraEm) {
+      const el = document.getElementById('banidoTempo'); if (!el) return;
+      const diff = Math.max(0, expiraEm - Date.now());
+      const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000); const s = Math.floor((diff % 60000) / 1000);
+      let txt = ''; if (d > 0) txt += d + 'd '; if (h > 0 || d > 0) txt += h + 'h '; txt += m + 'm ' + s + 's';
+      el.textContent = txt;
+  }
+
+  // ===== SISTEMA DE CONTAS E LOGIN =====
+  const LIMITE_CONTAS_DISPOSITIVO = 3;
+  const ESPERA_CRIAR_CONTA_MS = 30 * 60 * 1000;
+
+  function getContasDispositivo() { return JSON.parse(localStorage.getItem(KEY+'contas_disp') || '[]'); }
+  function salvarContaDispositivo(login) { const c = getContasDispositivo(); c.push({ login, criadoEm: Date.now() }); localStorage.setItem(KEY+'contas_disp', JSON.stringify(c)); }
+  function validarNomeLogin(l) { return /^[a-zA-Z0-9_]{3,20}$/.test(l); }
+  function loginParaEmail(l) { return l.toLowerCase() + '@pokemoncds.game'; }
+
+  function mostrarAbaLogin(aba) {
+    const tE = document.getElementById('tabEntrar'), tC = document.getElementById('tabCriar');
+    const fE = document.getElementById('formEntrar'), fC = document.getElementById('formCriar');
+    if (aba === 'entrar') {
+      tE.className = 'btn'; tE.style.cssText = 'flex:1; padding:12px; font-size:0.9rem;';
+      tC.className = 'btn ghost'; tC.style.cssText = 'flex:1; padding:12px; font-size:0.9rem; color:#4a6fa5;';
+      fE.style.display = 'flex'; fC.style.display = 'none';
+    } else {
+      tC.className = 'btn'; tC.style.cssText = 'flex:1; padding:12px; font-size:0.9rem;';
+      tE.className = 'btn ghost'; tE.style.cssText = 'flex:1; padding:12px; font-size:0.9rem; color:#4a6fa5;';
+      fE.style.display = 'none'; fC.style.display = 'flex';
+    }
+    document.getElementById('erroLogin').textContent = '';
+  }
+
+  async function criarConta() {
+    const login = document.getElementById('inputCriarLogin').value.trim();
+    const nome = document.getElementById('inputCriarPerfil').value.trim();
+    const senha = document.getElementById('inputCriarSenha').value;
+    const erro = document.getElementById('erroLogin');
+    erro.style.color = '#ec4a7c'; erro.textContent = '';
+
+    if (!validarNomeLogin(login)) return erro.textContent = '❌ Login: 3-20 caracteres (letras, números, _)';
+    if (nome.length < 2 || nome.length > 15) return erro.textContent = '❌ Nome do perfil: 2-15 caracteres';
+    if (senha.length < 6) return erro.textContent = '❌ Senha: mínimo 6 caracteres';
+
+    const contas = getContasDispositivo();
+    if (contas.length >= LIMITE_CONTAS_DISPOSITIVO) return erro.textContent = `❌ Limite de ${LIMITE_CONTAS_DISPOSITIVO} contas por dispositivo.`;
+    const ult = contas[contas.length - 1];
+    if (ult && Date.now() - ult.criadoEm < ESPERA_CRIAR_CONTA_MS) {
+      return erro.textContent = `⏳ Aguarde ${Math.ceil((ESPERA_CRIAR_CONTA_MS - (Date.now() - ult.criadoEm)) / 60000)} min para criar outra.`;
+    }
+
+    erro.style.color = '#4a9fd8'; erro.textContent = '⏳ Criando conta...';
+
+    try {
+      const cred = await auth.createUserWithEmailAndPassword(loginParaEmail(login), senha);
+      const agora = new Date().toISOString();
+      const idGerado = '#' + Math.floor(1000 + Math.random() * 9000);
+      
+      const novoPerfil = {
+        id: idGerado, nome, login,
+        avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+        cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)',
+        customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false,
+        adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: 'admin-deco', dataCriacao: agora,
+        rewardHackClaimed: false, adminFixoAtivo: false, coroa: false, rainbowName: false,
+        badge: false, pacotesInfinitos: false, aparecerRanking: true
+      };
+
+      await db.collection('jogadores').doc(cred.user.uid).set({
+        uid: cred.user.uid, login, nome, moedas: 0, dinheiroInfinito: false,
+        colecao: {}, inventario: {}, graduacoesPendentes: [], perfil: novoPerfil,
+        historicoVendas: [], amigos: [], correio: [], notificacoes: [], pedidosTroca: [], banidos: [], colecoesCompletas: [],
+        ganhoHoje: 0, ultimoDia: new Date().toDateString(),
+        multiplicadorSortePacotes: 1, multiplicadorSorteGrad: 1,
+        tutorialFeito: false, criadoEm: agora, banido: false
+      });
+
+      await db.collection('ids_publicos').doc(idGerado).set({ uid: cred.user.uid, nome: nome, login: login });
+      salvarContaDispositivo(login);
+      
+      erro.style.color = '#34c759'; erro.textContent = '✅ Conta criada!';
+    } catch (e) {
+      if (e.code === 'auth/email-already-in-use') erro.textContent = '❌ Esse login já está em uso.';
+      else if (e.code === 'auth/weak-password') erro.textContent = '❌ Senha fraca.';
+      else erro.textContent = '❌ Erro: ' + (e.message || 'Verifique sua internet');
+    }
+  }
+
+  async function entrarConta() {
+    const login = document.getElementById('inputEntrarLogin').value.trim();
+    const senha = document.getElementById('inputEntrarSenha').value;
+    const erro = document.getElementById('erroLogin');
+    erro.style.color = '#ec4a7c'; erro.textContent = '';
+    if (!login || !senha) return erro.textContent = '❌ Preencha login e senha';
+    erro.style.color = '#4a9fd8'; erro.textContent = '⏳ Entrando...';
+    try {
+      await auth.signInWithEmailAndPassword(loginParaEmail(login), senha);
+    } catch (e) {
+      erro.style.color = '#ec4a7c';
+      if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') erro.textContent = '❌ Nome ou senha incorretos.';
+      else erro.textContent = '❌ Erro: ' + (e.message || 'Verifique sua internet');
+    }
+  }
+
+  async function sairConta() {
+    if (!confirm('🚪 Tem certeza que deseja sair da conta?')) return;
+    document.getElementById('modalConfig').classList.remove('ativo');
+    
+    if (unsubscribeAmigos) { unsubscribeAmigos(); unsubscribeAmigos = null; }
+    if (unsubscribePerfil) { unsubscribePerfil(); unsubscribePerfil = null; }
+    if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
+    if (unsubscribeChat) { unsubscribeChat(); unsubscribeChat = null; }
+    if (unsubscribeTrocaChat) { unsubscribeTrocaChat(); unsubscribeTrocaChat = null; }
+    if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; }
+    if (unsubscribeTroca) { unsubscribeTroca(); unsubscribeTroca = null; }
+    
+    await auth.signOut();
+  }
+
+  function limparTelaLogin() {
+    ['inputEntrarLogin','inputEntrarSenha','inputCriarLogin','inputCriarPerfil','inputCriarSenha'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    const erroEl = document.getElementById('erroLogin'); if (erroEl) erroEl.textContent = '';
+    mostrarAbaLogin('entrar');
+  }
+
+  // ===== FUNÇÕES GERAIS E CARREGAMENTO =====
+  function getPopularidade(nome){
+    const palavras=String(nome).toLowerCase().split(/[\s\-\.]+/); let base=1;
+    for(const p of palavras){ if(POP_SP.has(p))return 5; if(POP_S.has(p))base=Math.max(base,3); if(POP_A.has(p))base=Math.max(base,2); }
+    if(/ex\b|vmax|vstar|v-union|lv\.x|prime|legend|gx\b/i.test(nome)&&base<2)base=2; return base;
+  }
+  function calcularPrecoCarta(card){
+    const rar=mapRaridade(card.rarity); const rarBase=RAR_BASE[rar]||0.30; const pop=getPopularidade(card.name); const setId=card.set.id;
+    let eraMult=ERA_MULT[setId]||1; if(rar==='C'||rar==='U')eraMult=setId==='base1'?3:1; return Math.round(rarBase*pop*eraMult*100)/100;
+  }
+  function mapRaridade(r){
+    if(!r)return 'C'; const s=String(r).toLowerCase();
+    if(s.includes('special illustration'))return 'SIR'; if(s.includes('illustration rare'))return 'IR'; if(s.includes('hyper rare'))return 'HR'; if(s.includes('rainbow'))return 'RB'; if(s.includes('secret'))return 'SEC'; if(s.includes('ultra')||s.includes('double rare')||s.includes('vmax')||s.includes('vstar'))return 'UR'; if(s.includes('holo'))return 'RH'; if(s.includes('uncommon'))return 'U'; if(s.includes('rare'))return 'R'; return 'C';
+  }
+  function formatarPreco(v){
+    if(v<1)return 'R$ '+v.toFixed(2).replace('.',','); if(v<1000)return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); return 'R$ '+Math.round(v).toLocaleString('pt-BR');
+  }
+  function salvarDadosSet(cod,cartas){
+    const setsAll=JSON.parse(localStorage.getItem(KEY+'sets')||'{}'); setsAll[cod]=cartas;
+    localStorage.setItem(KEY+'sets',JSON.stringify(setsAll)); let t=0; for(const k in setsAll){t+=setsAll[k].length;} localStorage.setItem(KEY+'total',t);
+  }
+
+  async function buscarPackshotsGlobais(){
+    if(Object.keys(PACKSHOTS).length > 5) return; PACKSHOTS = {};
+    for(let p of PACOTES){
+      try {
+        const ctrl = new AbortController(); const tm = setTimeout(() => ctrl.abort(), 2000);
+        const r = await fetch('https://api.github.com/repos/1niceroli/ptcg-assets/contents/'+p.gh+'/packshots', {signal: ctrl.signal}); clearTimeout(tm);
+        if(r.ok){
+          const arqs = await r.json();
+          if(Array.isArray(arqs) && arqs.length > 0){
+            const img = arqs.find(f=>f.name.endsWith('.webp')) || arqs.find(f=>f.name.endsWith('.png')) || arqs[0];
+            if(img) PACKSHOTS[p.cod] = 'https://raw.githubusercontent.com/1niceroli/ptcg-assets/main/'+p.gh+'/packshots/'+img.name;
+          }
+        }
+      } catch(e) {}
+      await new Promise(r => setTimeout(r, 50)); 
+    }
+    localStorage.setItem(KEY+'packs_globais', JSON.stringify(PACKSHOTS));
+  }
+
+  async function carregarSetAPI(setId){
+    let todas=[], page=1;
+    const MAX_TENTATIVAS = 8;
+    
+    while(page<=3){
+      const url='https://api.pokemontcg.io/v2/cards?q=set.id:'+setId+'&pageSize=250&page='+page+'&orderBy=number';
+      let sucesso = false;
+      
+      for(let tent=1; tent<=MAX_TENTATIVAS; tent++){
+        try{
+          const ctrl=new AbortController();
+          const tm=setTimeout(()=>ctrl.abort(), 20000); 
+          const r=await fetch(url,{signal:ctrl.signal});
+          clearTimeout(tm);
+          
+          if(r.ok){
+            const data=await r.json();
+            const pag=data.data||[];
+            todas=todas.concat(pag);
+            sucesso = true;
+            break;
+          } else if(r.status === 429){
+            const espera = Math.min(60000, 5000 * tent);
+            console.log(`⏳ Rate limit em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}. Esperando ${espera/1000}s...`);
+            await new Promise(res=>setTimeout(res, espera));
+          } else if(r.status >= 500){
+            console.log(`⚠️ Erro ${r.status} em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+            await new Promise(res=>setTimeout(res, 3000 * tent));
+          } else {
+            console.log(`❌ Resposta ${r.status} em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+            await new Promise(res=>setTimeout(res, 2000));
+          }
+        } catch(e){
+          console.log(`💥 Erro de rede em ${setId}. Tentativa ${tent}/${MAX_TENTATIVAS}.`);
+          await new Promise(res=>setTimeout(res, 3000 * tent));
+        }
+      }
+      
+      if(!sucesso) return null;
+      if(todas.length < page * 250) break;
+      page++;
+      await new Promise(res=>setTimeout(res, 1000));
+    }
+    return todas;
+  }
+
+  async function carregarSet(p){
+    if(CARDS_POR_SET[p.cod] && CARDS_POR_SET[p.cod].length > 0) return true;
+    
+    if(CARDS_POR_SET[p.cod] && CARDS_POR_SET[p.cod].length === 0){
+      delete CARDS_POR_SET[p.cod];
+      const setsAll = JSON.parse(localStorage.getItem(KEY+'sets')||'{}');
+      delete setsAll[p.cod];
+      localStorage.setItem(KEY+'sets', JSON.stringify(setsAll));
+    }
+    
+    const cartas_raw = await carregarSetAPI(p.cod);
+    if(cartas_raw === null){
+      console.log(`❌ ${p.cod} falhou de vez. Vai tentar de novo na próxima abertura.`);
+      return false;
+    }
+    
+    if(cartas_raw.length > 0){
+      const cartas = cartas_raw.map(c=>{
+        const rar=mapRaridade(c.rarity); const preco=calcularPrecoCarta(c);
+        return { id:c.id,nome:c.name,set:c.set.id,setNome:c.set.name,num:c.number,rar:rar,img:c.images.large||c.images.small||'',imgSmall:c.images.small||c.images.large||'',preco:preco };
+      });
+      CARDS_POR_SET[p.cod] = cartas;
+      salvarDadosSet(p.cod, cartas);
+      totalCartasDB += cartas.length;
+      console.log(`✅ ${p.cod}: ${cartas.length} cartas baixadas.`);
+      return true;
+    }
+    return false;
+  }
+
+  async function carregarTudo(){
+    const pct=document.getElementById('loadingPct'); 
+    const fill=document.getElementById('loadingFill'); 
+    const txt=document.getElementById('loadingTxt'); 
+    const sub=document.getElementById('loadingSub');
+    
+    sub.textContent = 'Buscando imagens...'; 
+    txt.textContent = 'Conectando...'; 
+    pct.textContent='5%'; 
+    fill.style.width='5%';
+
+    await buscarPackshotsGlobais();
+    
+    const faltando = PACOTES.filter(p => !CARDS_POR_SET[p.cod] || CARDS_POR_SET[p.cod].length === 0);
+    const jaTem = PACOTES.length - faltando.length;
+    
+    if(faltando.length === 0){ 
+      sub.textContent='✅ Tudo já está em cache!'; 
+      pct.textContent='100%'; 
+      fill.style.width='100%'; 
+      await new Promise(r=>setTimeout(r,400)); 
+      iniciarApp(); 
+      return; 
+    }
+    
+    sub.textContent = jaTem + ' em cache • ' + faltando.length + ' pra baixar';
+    let falhas = 0;
+    let sucessos = 0;
+    
+    for(let i=0; i<faltando.length; i++){
+      const p = faltando[i]; 
+      txt.textContent = '(' + (i+1) + '/' + faltando.length + ') ' + p.nome;
+      let pctAtual = Math.round(((i) / faltando.length) * 100); 
+      if(pctAtual < 5) pctAtual = 5;
+      pct.textContent = pctAtual + '%'; 
+      fill.style.width = pctAtual + '%';
+      
+      const sucesso = await carregarSet(p);
+      if(sucesso) sucessos++; else falhas++;
+      
+      await new Promise(r=>setTimeout(r, 3000));
+    }
+    
+    pct.textContent = '100%'; 
+    fill.style.width = '100%'; 
+    txt.textContent = 'Pronto! ' + totalCartasDB + ' cartas.';
+    
+    if(falhas > 0) {
+      sub.textContent = `⚠️ ${falhas} pacote(s) falharam. O jogo vai tentar baixar de novo quando você abrir.`;
+    } else {
+      sub.textContent = `✅ ${sucessos} pacote(s) baixados com sucesso!`;
+    }
+    
+    await new Promise(r=>setTimeout(r,2000)); 
+    iniciarApp();
+  }
+
+  async function recarregarFaltando(){
+    const faltando = PACOTES.filter(p => !CARDS_POR_SET[p.cod] || CARDS_POR_SET[p.cod].length === 0);
+    
+    if(faltando.length === 0){ 
+      alert('✅ Todos os pacotes já estão carregados!'); 
+      return; 
+    }
+    
+    if(!confirm(`Recarregar ${faltando.length} pacote(s) que faltaram?\n\nPode levar alguns minutos. Não feche o app.`)) return;
+    
+    const setsAll = JSON.parse(localStorage.getItem(KEY+'sets')||'{}');
+    faltando.forEach(p => { delete setsAll[p.cod]; delete CARDS_POR_SET[p.cod]; });
+    localStorage.setItem(KEY+'sets', JSON.stringify(setsAll));
+    
+    document.getElementById('loading').style.display='flex'; 
+    document.getElementById('loadingTxt').textContent='Recarregando...';
+    
+    let sucessos = 0;
+    let falhas = 0;
+    
+    for(let i=0; i<faltando.length; i++){
+      const p = faltando[i];
+      document.getElementById('loadingTxt').textContent = `Baixando ${p.nome} (${i+1}/${faltando.length})...`;
+      const pct = Math.round(((i+1) / faltando.length) * 100);
+      document.getElementById('loadingPct').textContent = pct + '%';
+      document.getElementById('loadingFill').style.width = pct + '%';
+      document.getElementById('loadingSub').textContent = `Tentando baixar ${p.nome}...`;
+      
+      const ok = await carregarSet(p);
+      if(ok) sucessos++; else falhas++;
+      
+      await new Promise(r => setTimeout(r, 3000));
+    }
+    
+    document.getElementById('loading').style.display='none';
+    alert(`✅ Baixados: ${sucessos}\n⚠️ Falharam: ${falhas}\n\n${falhas > 0 ? 'Clique em Recarregar de novo em alguns minutos.' : 'Tudo pronto!'}`);
+    
+    montarLoja(); 
+    atualizarUI();
+  }
+
+  // ===== LOJA E INVENTÁRIO =====
+  function montarLoja(){
+    const c=document.getElementById('packsScroll');c.innerHTML='';
+    PACOTES.forEach(p=>{
+      const temCartas=CARDS_POR_SET[p.cod]&&CARDS_POR_SET[p.cod].length>0; const packImg=PACKSHOTS[p.cod] || 'https://images.pokemontcg.io/'+p.cod+'/logo.png';
+      const d=document.createElement('div'); d.className='pack-card'+(p.cod===pacoteEscolhido?' sel':'')+(temCartas?'':' failed');
+      d.dataset.setId=p.cod; d.dataset.preco=p.preco; d.dataset.c1=p.c1; d.dataset.c2=p.c2;
+      d.innerHTML='<div class="booster-mini" style="--c1:'+p.c1+';--c2:'+p.c2+'">'+
+        '<div class="b-topo">✦ POKÉMON TCG ✦</div>'+
+        '<img class="b-logo-img" src="'+packImg+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="b-emoji" style="display:none">'+p.emoji+'</div>'+
+        '<div class="b-info">'+p.preco+' 🪙</div></div>'+
+        '<div class="info"><div class="nome">'+p.nome.split(' (')[0]+'</div><div class="preco">'+p.preco+' 🪙'+(temCartas?'':' ⚠️')+'</div></div>';
+      d.onclick=()=>{ if(!temCartas){alert('Esse pacote não carregou. Toque em "🔄 Recarregar".');return;} pacoteEscolhido=p.cod; salvarEstado();montarLoja();atualizarBotaoComprar(); };
+      c.appendChild(d);
+    });
+    atualizarBotaoComprar();
+  }
+
+  function atualizarBotaoComprar(){
+    const p=PACOTES.find(x=>x.cod===pacoteEscolhido);
+    if(p){ document.getElementById('btnComprar').textContent='💰 COMPRAR '+quantidade+'x POR '+(p.preco*quantidade)+' 🪙'; }
+  }
+
+  function comprarPacote(){
+    const el=document.querySelector('.pack-card.sel'); if(!el){alert('Selecione um pacote!');return;}
+    const precoUnit=parseInt(el.dataset.preco); const precoTotal=precoUnit*quantidade;
+    
+    const qtdAtualNoInv = inventario[pacoteEscolhido] || 0;
+    if(!perfil.pacotesInfinitos && (qtdAtualNoInv + quantidade) > LIMITE_PACOTES_POR_SET) {
+        alert(`🚫 LIMITE ATINGIDO!\nVocê já tem ${qtdAtualNoInv} pacotes desta coleção no inventário. O limite é ${LIMITE_PACOTES_POR_SET} não abertos. Abra os seus pacotes para comprar mais!`);
+        return; 
+    }
+    
+    if(!dinheiroInfinito && moedas<precoTotal){alert('Moedas insuficientes! Precisa de '+precoTotal+' 🪙');return;}
+    
+    if(!dinheiroInfinito) moedas-=precoTotal; 
+    inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade;
+    salvarEstado();atualizarUI();
+    const p=PACOTES.find(x=>x.cod===pacoteEscolhido); alert('✅ Você comprou '+quantidade+'x '+p.nome.split(' (')[0]+'!\n\nAgora vá no Inventário pra abrir.');
+  }
+
+  function montarInventario(){
+    const c=document.getElementById('invLista');c.innerHTML='';
+    const keys=Object.keys(inventario).filter(k=>inventario[k]>0);
+    if(keys.length===0){ c.innerHTML='<div class="inv-vazio">🎒 Seu inventário está vazio.<br><br>Compre pacotes na 🏪 Loja!</div>'; return; }
+    keys.forEach(setId=>{
+      const p=PACOTES.find(x=>x.cod===setId); if(!p)return;
+      const qtd=inventario[setId]; const packImg=PACKSHOTS[setId] || 'https://images.pokemontcg.io/'+setId+'/logo.png';
+      const d=document.createElement('div'); d.className='inv-item';
+      d.innerHTML='<div class="thumb" style="--c1:'+p.c1+';--c2:'+p.c2+'"><img src="'+packImg+'" onerror="this.style.display=\'none\'"></div>'+
+        '<div class="info"><div class="nome">'+p.nome+'</div><div class="qtd">📦 '+qtd+' pacote(s)</div></div>'+
+        '<div class="btns"><button class="abrir1" data-set="'+setId+'" data-qty="1">Abrir 1</button><button class="tudo" data-set="'+setId+'" data-qty="'+qtd+'">Abrir '+qtd+'</button><button class="vender" data-set="'+setId+'">Vender (50%)</button></div>';
+      c.appendChild(d);
+    });
+    document.querySelectorAll('.inv-item .btns button').forEach(btn=>{
+      btn.onclick=()=>{
+        const setId=btn.dataset.set;
+        if(btn.classList.contains('vender')) venderPacote(setId);
+        else { const qtyToOpen=parseInt(btn.dataset.qty); abrirDoInventario(setId, qtyToOpen); }
+      };
+    });
+  }
+
+  function venderPacote(setId) {
+    const p = PACOTES.find(x => x.cod === setId); const qtd = inventario[setId];
+    if (!p || qtd <= 0) return;
+    const input = prompt(`Você tem ${qtd} pacote(s) de ${p.nome.split(' (')[0]}.\nCada um vale ${p.preco} moedas na loja, mas você só receberá METADE (${Math.floor(p.preco / 2)}).\nQuantos deseja vender?`, qtd);
+    if (input === null) return; const qtdVender = parseInt(input);
+    if (isNaN(qtdVender) || qtdVender <= 0) { alert('Quantidade inválida.'); return; }
+    if (qtdVender > qtd) { alert(`Você só tem ${qtd} pacotes!`); return; }
+    const valorUnitario = Math.floor(p.preco / 2); const totalGanho = valorUnitario * qtdVender;
+    if (!confirm(`Vender ${qtdVender} pacote(s) por ${totalGanho} moedas?`)) return;
+    moedas += totalGanho; inventario[setId] -= qtdVender;
+    if (inventario[setId] <= 0) delete inventario[setId];
+    salvarEstado(); atualizarUI(); montarInventario(); alert(`✅ Venda realizada! Você ganhou ${totalGanho} moedas.`);
+  }
+
+  function abrirDoInventario(setId, qty){
+    if(!inventario[setId] || inventario[setId] <= 0)return;
+    const realQty=Math.min(qty, inventario[setId]);
+    inventario[setId]-=realQty; if(inventario[setId]<=0) delete inventario[setId];
+    salvarEstado();atualizarUI();
+    pacoteEscolhido=setId; pacotesSendoAbertos = realQty; pacotesFaltandoAbrir = realQty - 1;
+    
+    const p=PACOTES.find(x=>x.cod===setId);
+    const pf=document.getElementById('packFechado');
+    pf.style.setProperty('--c1',p.c1); pf.style.setProperty('--c2',p.c2);
+    const emojiEl=document.getElementById('packEmoji'); const packImg=PACKSHOTS[setId] || 'https://images.pokemontcg.io/'+setId+'/logo.png';
+    pf.querySelectorAll('.pg-logo-img').forEach(x=>x.remove()); emojiEl.style.display='none';
+    const img=document.createElement('img'); img.className='pg-logo-img'; img.src=packImg;
+    img.onerror=function(){this.remove();emojiEl.style.display='block';emojiEl.textContent=p.emoji;};
+    pf.insertBefore(img,emojiEl);
+    document.getElementById('packNome').textContent=p.nome+(realQty>1?' ('+realQty+'x)':'');
+    pf.className='pack-3d'; pf.style.display='flex'; pf.style.opacity='1'; pf.style.transform='';
+    document.getElementById('instrucaoPack').textContent='👆 ARRASTE PARA RASGAR'; document.getElementById('btnCancelarPack').style.display='block';
+    mostrarTela('telaPack'); configurarRasgar();
+  }
+
+  function configurarRasgar(){
+    const p=document.getElementById('packFechado'); let sx=0,sy=0,arr=false;
+    const ini=e=>{if(ripLock)return;arr=true;const t=e.touches?e.touches[0]:e;sx=t.clientX;sy=t.clientY;};
+    const mov=e=>{if(!arr||ripLock)return;const t=e.touches?e.touches[0]:e;if(Math.abs(t.clientX-sx)>50||Math.abs(t.clientY-sy)>50){arr=false;rasgar();}};
+    const fim=()=>{arr=false;};
+    const newP = p.cloneNode(true); p.parentNode.replaceChild(newP, p);
+    newP.addEventListener('touchstart',ini,{passive:true}); newP.addEventListener('touchmove',mov,{passive:true}); newP.addEventListener('touchend',fim);
+    newP.addEventListener('mousedown',ini); newP.addEventListener('mousemove',mov); newP.addEventListener('mouseup',fim);
+  }
+
+  function sortearRar(tab){
+    const tabAjustada = tab.map(t => { if(['UR','IR','SIR','HR','RB','SEC'].includes(t.r)) return {r: t.r, p: t.p * multiplicadorSortePacotes}; return t; });
+    const tot=tabAjustada.reduce((s,t)=>s+t.p,0); let r=Math.random()*tot;
+    for(const t of tabAjustada){ if(r<t.p)return t.r; r-=t.p; } return 'C';
+  }
+
+  function pegarCarta(setId,rarAlvo){
+    const pool=CARDS_POR_SET[setId]||[]; if(pool.length===0)return null;
+    let filtro=pool.filter(c=>c.rar===rarAlvo);
+    if(filtro.length===0){
+      const ordem=['C','U','R','RH','UR','RB','SEC','IR','SIR','HR'];
+      for(const r of ordem){ const f=pool.filter(c=>c.rar===r); if(f.length>0){filtro=f;break;} }
+    }
+    if(filtro.length===0)filtro=pool; return filtro[Math.floor(Math.random()*filtro.length)];
+  }
+
+  const CHANCES_4=[{r:'C', p: 78},{r:'U', p: 15},{r:'R', p: 5},{r:'RH', p: 1.5},{r:'UR', p: 0.175},{r:'IR', p: 0.05},{r:'SIR', p: 0.02},{r:'HR', p: 0.005}];
+  const CHANCES_5=[{r:'C', p: 60},{r:'U', p: 22},{r:'R', p: 10},{r:'RH', p: 6},{r:'UR', p: 0.75},{r:'IR', p: 0.2},{r:'SIR', p: 0.04},{r:'HR', p: 0.01}];
+
+  function gerarCartasDoPack(setId){
+    const cartas=[];
+    for(let i=0;i<7;i++){ const r=Math.random()<0.7?'C':'U'; const c=pegarCarta(setId,r); if(c)cartas.push(c); }
+    const c9=pegarCarta(setId,sortearRar(CHANCES_4)); if(c9)cartas.push(c9);
+    const c10=pegarCarta(setId,sortearRar(CHANCES_5)); if(c10)cartas.push(c10);
+    while(cartas.length<10){ const c=pegarCarta(setId,'C'); if(c)cartas.push(c);else break; } return cartas;
+  }
+
+  function rasgar(){
+    if(ripLock) return; ripLock = true; setTimeout(()=>ripLock=false, 1000);
+    document.getElementById('btnCancelarPack').style.display='none'; const p=document.getElementById('packFechado'); p.classList.add('aberto');
+    packAtual=gerarCartasDoPack(pacoteEscolhido); const agora=new Date().toISOString();
+    packAtual.forEach(c=>{ if(!colecao[c.id])colecao[c.id]={qtd:0,data:agora,gradeds:[]}; colecao[c.id].qtd=(colecao[c.id].qtd||0)+1; });
+    
+    salvarEstado(); atualizarUI(); 
+    if (auth.currentUser) {
+        db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao });
+    }
+
+    packAtual.forEach(c=>{if(c.imgSmall){const im=new Image();im.src=c.imgSmall;}});
+    setTimeout(()=>{
+      p.style.display='none'; revIdx=0; const eraAuto = autoRevelar; pararAutoRevelar();
+      mostrarTela('telaRevelar'); mostrarCartaRevelar(); if(eraAuto) iniciarAuto(autoVelocidade);
+    },400);
+    checarAlbumCompleto(pacoteEscolhido);
+  }
+
+  document.getElementById('btnCancelarPack').onclick=()=>{
+    if(pacotesSendoAbertos > 0){
+      const devolver = pacotesFaltandoAbrir + 1;
+      inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + devolver;
+      pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; salvarEstado(); atualizarUI();
+    }
+    telaStack = []; montarInventario(); mostrarTela('telaInventario', false);
+  };
+
+  function checarAlbumCompleto(setId){
+    const pool = setId === 'hack' ? CARTAS_HACK : (CARDS_POR_SET[setId] || []);
+    if(!pool.length || colecoesCompletas.includes(setId)) return;
+    const temTodas = pool.every(c => colecao[c.id] && ((colecao[c.id].qtd > 0) || (colecao[c.id].gradeds || []).length > 0));
+    if(!temTodas) return; colecoesCompletas.push(setId); salvarEstado();
+    const p=PACOTES.find(x=>x.cod===setId);
+    document.getElementById('complSetNome').textContent = setId === 'hack' ? 'ARQUIVO HACK' : (p ? p.nome.split(' (')[0] : setId);
+    
+    if (setId === 'hack') {
+        perfil.isHackMaster = true; let bonusText = '🎁 Você liberou o Título de MESTRE HACK e o Tema Matrix!';
+        if (!perfil.rewardHackClaimed) { perfil.rewardHackClaimed = true; moedas += 50000; bonusText = '🎁 Você ganhou 50.000 Moedas, o Título de MESTRE HACK e o Tema Matrix!'; }
+        document.getElementById('complBonus').textContent = bonusText; document.getElementById('complBonus').style.display = 'block'; salvarEstado(); atualizarUI();
+    } else { document.getElementById('complBonus').style.display = 'none'; }
+    document.getElementById('telaCompleta').classList.add('ativo');
+  }
+
+  document.getElementById('btnCompletaContinuar').onclick=()=>{
+    document.getElementById('telaCompleta').classList.remove('ativo'); if(autoRevelar) { pararAutoRevelar(); } mostrarTela('telaFinal');
+  };
+
+  function mostrarCartaRevelar(){
+    revEstado='mostrando'; const c=packAtual[revIdx]; if(!c)return;
+    const img=document.getElementById('revImg'); img.onerror=function(){this.onerror=null;this.src=CARTA_VERSO;}; img.src=CARTA_VERSO;
+    document.getElementById('revTitulo').textContent='Olha o que saiu!'; document.getElementById('revSub').textContent='👆 Toque na carta para revelar';
+    document.getElementById('revRodape').textContent='Carta '+(revIdx+1)+' de '+packAtual.length; document.getElementById('btnSkip').style.display='block';
+    const cardEl=document.getElementById('revCarta'); cardEl.style.animation='pop .5s'; cardEl.style.borderColor='#fff'; cardEl.style.boxShadow='0 25px 50px rgba(0,0,0,.4)';
+  }
+
+  document.getElementById('revCarta').onclick=()=>{
+    const c=packAtual[revIdx]; if(!c)return; const img=document.getElementById('revImg');
+    if(revEstado==='mostrando'){
+      img.onerror=function(){ if(this.src!==c.imgSmall&&c.imgSmall){this.src=c.imgSmall;} else{this.onerror=null;this.src=CARTA_VERSO;} };
+      img.src=c.imgSmall||c.img||CARTA_VERSO; revEstado='virada';
+      const precoStr=formatarPreco(c.preco); const rarNome=RAR_NOME[c.rar]||c.rar;
+      document.getElementById('revSub').innerHTML='<span style="font-size:1.6rem;color:#f7a800;font-weight:900">💰 '+precoStr+'</span><br><span style="font-size:.9rem;color:#7a6d9a;font-weight:800">'+rarNome+'</span>';
+      if(['UR','RB','SEC','IR','SIR','HR'].includes(c.rar)){
+        document.getElementById('revCarta').style.animation='pop .5s, bounce 1s infinite';
+        document.getElementById('revCarta').style.borderColor='#ffd93d'; document.getElementById('revCarta').style.boxShadow='0 0 30px #ffd93d';
+      }
+    } else { if(autoRevelar){pararAutoRevelar();} avancarRevelar(); }
+  };
+
+  document.getElementById('telaRevelar').addEventListener('click',e=>{
+    if(e.target.id==='revCarta'||e.target.closest('#revCarta'))return;
+    if(e.target.id==='btnSkip'||e.target.id==='btnAutoRev')return;
+    if(revEstado==='virada'){ avancarRevelar(); }
+  });
+
+  function avancarRevelar(){ revIdx++; if(revIdx>=packAtual.length)mostrarTelaFinal(); else mostrarCartaRevelar(); }
+  document.getElementById('btnSkip').onclick=()=>{ mostrarTelaFinal(); };
+  document.getElementById('btnAutoRev').onclick=()=>{ if(autoRevelar) { pararAutoRevelar(); } else { document.getElementById('modalAutoConfig').classList.add('ativo'); } };
+
+  function iniciarAuto(speed) {
+    document.getElementById('modalAutoConfig').classList.remove('ativo'); autoVelocidade = speed; autoRevelar = true;
+    document.getElementById('btnAutoRev').classList.add('ativo'); document.getElementById('btnAutoRev').textContent = '⏹️ PARAR'; loopAutoRevelar();
+  }
+
+  function pararAutoRevelar(){
+    autoRevelar=false; if(autoRevelarTimer)clearTimeout(autoRevelarTimer);
+    document.getElementById('btnAutoRev').classList.remove('ativo'); document.getElementById('btnAutoRev').textContent='▶️ AUTO';
+  }
+
+  function loopAutoRevelar(){
+    if(!autoRevelar)return;
+    if(revEstado==='mostrando'){
+      document.getElementById('revCarta').click(); const c = packAtual[revIdx];
+      if (c && c.preco >= 700) {
+        pararAutoRevelar();
+        document.getElementById('alarmeNomeCarta').textContent = c.nome + ' (' + formatarPreco(c.preco) + ')';
+        document.getElementById('alarmeImgCarta').src = c.imgSmall || c.img; document.getElementById('telaAlarmeRaro').classList.add('ativo');
+        let timeLeft = 60; document.getElementById('alarmeTimer').textContent = timeLeft + 's'; clearInterval(alarmeTimerInterval);
+        alarmeTimerInterval = setInterval(() => {
+            timeLeft--; document.getElementById('alarmeTimer').textContent = timeLeft + 's';
+            if(timeLeft <= 0) { clearInterval(alarmeTimerInterval); continuarAlarmeRaro(); }
+        }, 1000); return;
+      }
+      autoRevelarTimer=setTimeout(loopAutoRevelar, autoVelocidade);
+    } else {
+      autoRevelarTimer=setTimeout(()=>{
+        avancarRevelar();
+        if(revIdx>=packAtual.length){ if(pacotesFaltandoAbrir > 0) { setTimeout(() => document.getElementById('btnFinalProximo').click(), 1000); } else { pararAutoRevelar(); } }
+        else { loopAutoRevelar(); }
+      }, autoVelocidade);
+    }
+  }
+
+  function pararAlarmeRaro() { clearInterval(alarmeTimerInterval); document.getElementById('telaAlarmeRaro').classList.remove('ativo'); }
+  function continuarAlarmeRaro() { clearInterval(alarmeTimerInterval); document.getElementById('telaAlarmeRaro').classList.remove('ativo'); iniciarAuto(autoVelocidade); }
+
+  function mostrarTelaFinal(){
+    mostrarTela('telaFinal'); const g=document.getElementById('finalGrid'); g.innerHTML='';
+    const raras=packAtual.filter(c=>['UR','RB','SEC','IR','SIR','HR'].includes(c.rar));
+    document.getElementById('finalSub').textContent=raras.length>0 ? raras.length+' rara(s) no pacote! ✨' : 'Nenhuma rara neste pacote... 😢';
+    let totalPreco=0;
+    packAtual.forEach((c,i)=>{
+      totalPreco+=c.preco;
+      const d=document.createElement('div'); d.className='carta-final'; d.style.animationDelay=Math.min(i*0.02,1)+'s';
+      d.innerHTML='<img src="'+(c.imgSmall||c.img)+'" onerror="this.onerror=null;this.src=\''+CARTA_VERSO+'\'">'; g.appendChild(d);
+    });
+    const p=PACOTES.find(x=>x.cod===pacoteEscolhido); const custoReais=p?p.preco*0.50:50;
+    const box=document.getElementById('totalBox'); const val=document.getElementById('totalVal'); const status=document.getElementById('totalStatus');
+    box.classList.remove('lucro','perda','empate'); val.textContent=formatarPreco(totalPreco);
+    const diff=totalPreco-custoReais;
+    if(diff>0){box.classList.add('lucro');status.textContent='📈 LUCRO DE '+formatarPreco(diff);}
+    else if(diff<0){box.classList.add('perda');status.textContent='📉 PREJUÍZO DE '+formatarPreco(Math.abs(diff));}
+    else{box.classList.add('empate');status.textContent='⚖️ EMPATOU';}
+    const btn=document.getElementById('btnFinalProximo');
+    if(pacotesFaltandoAbrir>0){ btn.textContent='Abrir Próximo ('+pacotesFaltandoAbrir+')'; } else { btn.textContent='Próximo'; }
+  }
+
+  document.getElementById('btnFinalProximo').onclick=()=>{
+    if(pacotesFaltandoAbrir>0){
+      pacotesFaltandoAbrir--; const pf=document.getElementById('packFechado');
+      pf.className='pack-3d'; pf.style.display='flex'; pf.style.opacity='1'; pf.style.transform='';
+      document.getElementById('instrucaoPack').textContent='👆 ARRASTE PARA RASGAR'; document.getElementById('btnCancelarPack').style.display='block';
+      mostrarTela('telaPack'); configurarRasgar(); if(autoRevelar) setTimeout(rasgar, 500);
+    } else { pacotesSendoAbertos = 1; if(autoRevelar) { pararAutoRevelar(); } irParaHome(); atualizarUI(); }
+  };
+
+  // ===== GRADUAÇÃO =====
+  function checarGraduacoesProntas(){
+    const agora=Date.now(); let temPronta=false;
+    graduacoesPendentes.forEach(g=>{ if(!g.pronta && agora>=g.tempoFim){ g.pronta=true; temPronta=true; } });
+    if(temPronta){
+      salvarEstado();
+      setTimeout(()=>{ const prontas=graduacoesPendentes.filter(g=>g.pronta && !g.resolvida); if(prontas.length>0) alert('🏅 Sua carta voltou da graduação! Vá em Coleção > Graduadas pra ver a nota.'); }, 2000);
+    }
+  }
+
+  function enviarParaGraduacao(cartaId, tier){
+    if (cartasTravadas[cartaId] && cartasTravadas[cartaId].raw) { alert('🔒 Esta carta está travada em uma troca!'); return; }
+    const cartasQtd=colecao[cartaId]?colecao[cartaId].qtd:0; if(cartasQtd<=0){alert('Você não tem essa carta raw!');return;}
+    let custo=0, tempoMs=0;
+    if(tier==='economico'){custo=50;tempoMs=60000;} else if(tier==='padrao'){custo=120;tempoMs=20000;} else if(tier==='expresso'){custo=300;tempoMs=5000;}
+    
+    if(!dinheiroInfinito && moedas<custo){alert('Moedas insuficientes pra essa taxa!');return;}
+    if(!confirm(`Tem certeza que deseja enviar esta carta para a PSA?\nCusto: R$ ${custo}`)) return;
+    if(!dinheiroInfinito) moedas-=custo; colecao[cartaId].qtd-=1;
+    const tempoFim=Date.now()+tempoMs; const idUnico=Date.now()+'_'+Math.random().toString(36).substr(2,5);
+    graduacoesPendentes.push({ id:idUnico, cartaId:cartaId, tier:tier, tempoFim:tempoFim, pronta:false, resolvida:false, nota:null, dono: usuario.nome });
+    salvarEstado(); atualizarUI(); alert('✅ Carta enviada para a PSA! Tempo: '+(tempoMs/1000)+'s.');
+    if(albumAberto) abrirAlbum(albumAberto); else mostrarCol();
+  }
+
+  document.querySelectorAll('.tier-card').forEach(card=>{
+    card.onclick=()=>{ const tier=card.dataset.tier; if(!cartaGradAtual)return; enviarParaGraduacao(cartaGradAtual, tier); cartaGradAtual=null; };
+  });
+
+  function sortearNota(cartaId){
+    const carta = encontrarCarta(cartaId); const isVintage = VINTAGE_SETS.has(carta.set); const r = Math.random()*100; const luck = multiplicadorSorteGrad;
+    let baseC10 = isVintage ? 8 : 20; let baseC9 = isVintage ? 25 : 35; let baseC8 = isVintage ? 30 : 25; let baseC7 = isVintage ? 22 : 12;
+    const c10 = Math.min(100, baseC10 * luck); const resto = 100 - c10;
+    const baseOutros = baseC9 + baseC8 + baseC7; const c9 = (baseC9 / baseOutros) * resto; const c8 = (baseC8 / baseOutros) * resto; const c7 = (baseC7 / baseOutros) * resto;
+    if(r < c10) return 10; if(r < c10 + c9) return 9; if(r < c10 + c9 + c8) return 8; if(r < c10 + c9 + c8 + c7) return 7;
+    return Math.floor(Math.random()*4)+3;
+  }
+
+  function getMultiplicadorNota(preco, nota){
+    if(nota===10)return preco<10?15:preco<100?8:preco<1000?4:2.5; if(nota===9)return preco<10?6:preco<100?3.5:preco<1000?2:1.4; if(nota===8)return preco<10?2:preco<100?1.5:preco<1000?1.2:1; if(nota===7)return preco<10?0.9:preco<100?0.8:preco<1000?0.7:0.6; return preco<10?0.4:preco<100?0.35:preco<1000?0.3:0.25;
+  }
+
+  function abrirRoletaGraduacao(gradId){
+    const grad=graduacoesPendentes.find(g=>g.id===gradId); if(!grad || grad.resolvida)return;
+    mostrarTela('telaRoleta'); const numEl=document.getElementById('roletaNum'); const subEl=document.getElementById('roletaSub');
+    numEl.className='roleta-num'; numEl.textContent='0'; subEl.textContent='Sorteando nota...'; let cont=0;
+    const int=setInterval(()=>{ numEl.textContent=Math.floor(Math.random()*10)+1; cont++; if(cont>20){ clearInterval(int); finalizarGraduacao(grad); } }, 100);
+  }
+
+  function finalizarGraduacao(grad){
+    if (grad.isGacha) {
+        const nota = sortearNota(grad.cartaId); grad.nota = nota; grad.resolvida = true;
+        const multiplicador = 0.5 + Math.random() * 1.5; const precoFinal = grad.basePrice * multiplicador; const agora = new Date().toISOString();
+        if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]}; if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
+        colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'gacha', dono: 'ADMIN', data: agora, nota: nota, base: grad.basePrice }] });
+        salvarEstado(); atualizarUI();
+        const container=document.getElementById('roletaContainer'); const deltaPos = precoFinal > grad.basePrice; const deltaTexto = deltaPos ? 'LUCRO' : 'PREJUÍZO'; const corDelta = deltaPos ? 'pos' : 'neg';
+        container.innerHTML=`<div class="resultado-nota"><div class="nota-num n${nota}">${nota}</div><div class="nota-label">GACHA RESULT</div><div class="resultado-valor"><div class="lbl">Valor Base: ${formatarPreco(grad.basePrice)}</div><div class="val">${formatarPreco(precoFinal)}</div><div class="delta ${corDelta}">${deltaTexto} de ${formatarPreco(Math.abs(precoFinal-grad.basePrice))}</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
+        if(nota===10){ document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#ffd93d 0%,#f7a800 100%)'; tocarConfete(); }
+        return;
+    }
+    const nota=sortearNota(grad.cartaId); grad.nota=nota; grad.resolvida=true;
+    const carta=encontrarCarta(grad.cartaId); const precoRaw=carta.preco; const mult=getMultiplicadorNota(precoRaw, nota); const precoFinal=precoRaw*mult; const agora = new Date().toISOString();
+    if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]}; if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
+    colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'graduacao', dono: usuario.nome, data: agora, nota: nota }] });
+    salvarEstado(); atualizarUI();
+    const container=document.getElementById('roletaContainer'); let label='', cls='';
+    if(nota===10){label='GEM MINT!';cls='gem';} else if(nota===9){label='MINT';} else if(nota===8){label='NEAR MINT';} else if(nota===7){label='EXCELENTE';} else {label='DESGASTADA';}
+    const corNota = nota===10?'n10':nota===9?'n9':nota===8?'n8':'n7'; const deltaPos = precoFinal > precoRaw; const deltaTexto = deltaPos ? '+'+formatarPreco(precoFinal-precoRaw) : formatarPreco(precoFinal-precoRaw);
+    container.innerHTML=`<div class="resultado-nota"><div class="nota-num ${corNota}">${nota}</div><div class="nota-label ${cls}">${label}</div><div class="resultado-valor"><div class="lbl">Valor de Mercado</div><div class="val">${formatarPreco(precoFinal)}</div><div class="delta ${deltaPos?'pos':'neg'}">${deltaTexto} (Raw: ${formatarPreco(precoRaw)})</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
+    if(nota===10){ document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#ffd93d 0%,#f7a800 100%)'; tocarConfete(); }
+  }
+
+  function fecharRoleta(){
+    document.getElementById('telaRoleta').style.background='linear-gradient(180deg,#2a1a4a 0%,#4a2a6a 100%)';
+    document.getElementById('roletaContainer').innerHTML='<div class="roleta-num" id="roletaNum">0</div><div class="roleta-sub" id="roletaSub">Sorteando nota...</div>';
+    mostrarTela('telaColecao', false); if(abaColecao==='graded') renderGraduadas(); else renderAlbuns();
+  }
+
+  function tocarConfete(){
+    const cores=['#ffd93d','#ff5566','#4fc3f7','#7eeb8e','#a855f7','#ff8a3d','#ffffff','#ffc9e0']; const wrap=document.createElement('div'); wrap.className='confetes-graduacao';
+    for(let i=0;i<50;i++){
+      const c=document.createElement('div'); c.className='confete-g'; c.style.left=Math.random()*100+'%'; c.style.background=cores[Math.floor(Math.random()*cores.length)];
+      c.style.width=(8+Math.random()*10)+'px'; c.style.height=(8+Math.random()*10)+'px'; c.style.animationDuration=(2+Math.random()*2.5)+'s'; c.style.animationDelay=(Math.random()*0.5)+'s'; c.style.borderRadius=Math.random()>0.5?'50%':'2px';
+      wrap.appendChild(c);
+    }
+    document.body.appendChild(wrap); setTimeout(()=>wrap.remove(), 5000);
+  }
+
+  function encontrarCarta(cartaId){
+    const hack = CARTAS_HACK.find(c => c.id === cartaId); if (hack) return hack;
+    for(const setId in CARDS_POR_SET){ const found=CARDS_POR_SET[setId].find(c=>c.id===cartaId); if(found)return found; } return null;
+  }
 // ===== COLEÇÃO E PERFIL =====
   function mostrarCol(manterScroll = false){
     albumAberto=null; const telaCol = document.getElementById('telaColecao'); if(telaCol && !manterScroll) telaCol.scrollTop = 0;
@@ -1680,7 +2777,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
           ...dadosExtra
       };
       notificacoes.unshift(novaNotif);
-      if (notificacoes.length > 50) notificacoes.pop(); // Limita a 50
+      if (notificacoes.length > 50) notificacoes.pop();
       salvarEstado();
       atualizarUI();
   }
