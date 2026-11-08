@@ -731,7 +731,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <button class="btn ghost mini btn-voltar-topo" onclick="voltarTela()">Voltar</button>
   </div>
   <div class="perfil-card" id="amigoPerfilCard" style="animation:none;">
+    <div id="amigoCrown" class="admin-crown" style="display:none;">👑</div>
     <div class="perfil-avatar" id="amigoAvatar" style="background: #fff; color: #000;">🧢</div>
+    <div id="amigoAdminBadge" class="admin-badge" style="display:none;">👑 CRIADOR SUPREMO 👑</div>
+    <div id="amigoTesterBadge" class="tester-badge" style="display:none;">TESTER</div>
+    <div id="amigoMatrixBadge" class="matrix-badge" style="display:none;">⚠️ MESTRE HACK ⚠️</div>
+    <div id="amigoBannedBadge" class="banned-badge" style="display:none;">🚫 BANIDO</div>
+    
     <div class="perfil-nome" id="amigoNome">Jogador <span id="amigoVerified" style="display:none;" class="icon-verified"></span></div>
     <div class="perfil-id" id="amigoId">#9999</div>
     <div class="perfil-datas" id="amigoDatas"></div>
@@ -792,7 +798,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         </div>
       </div>
     </div>
-    <div class="troca-acoes">
+    <div class="troca-acoes" id="trocaAcoesDiv">
       <button class="btn-aceitar" id="btnConfirmarTroca" onclick="confirmarTrocaFinal()" style="display:none;">✅ CONFIRMAR TROCA</button>
       <button class="btn-recusar" onclick="cancelarTroca()">❌ Cancelar</button>
     </div>
@@ -1019,7 +1025,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   <div class="admin-card">
     <h4>💎 Poderes Supremos</h4>
     <button class="btn" id="btnAdminInfinito" style="margin-bottom:10px; background:linear-gradient(180deg,#666,#333); box-shadow:0 6px 0 #111;">♾️ Dinheiro Infinito: DESATIVADO</button>
-    <button class="btn" id="btnAdminPacotesInfinitos" style="margin-bottom:10px; background:linear-gradient(180deg,#666,#333); box-shadow:0 6px 0 #111;">📦 Pacotes Infinitos: DESATIVADO</button>
     <button class="btn" id="btnAdminCoroa" style="margin-bottom:10px; background:linear-gradient(180deg,#666,#333); box-shadow:0 6px 0 #111;">👑 Coroa: OFF</button>
     <button class="btn" id="btnAdminRainbow" style="margin-bottom:10px; background:linear-gradient(180deg,#666,#333); box-shadow:0 6px 0 #111;">🌈 Nome Arco-íris: OFF</button>
     <button class="btn" id="btnAdminBadge" style="margin-bottom:10px; background:linear-gradient(180deg,#666,#333); box-shadow:0 6px 0 #111;">🏷️ Badge de Título: OFF</button>
@@ -1031,6 +1036,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <h4>🆔 Trocar Meu ID</h4>
     <input type="text" class="campo" id="adminIdInput" placeholder="#1234" maxlength="5">
     <button class="btn gold" id="btnAdminSetId">Mudar Meu ID</button>
+  </div>
+
+  <div class="admin-card">
+    <h4>🔄 Mudar ID de Outro Jogador</h4>
+    <input type="text" class="campo" id="adminChangeIdAtual" placeholder="ID Atual (ex: #1234)" maxlength="5">
+    <input type="text" class="campo" id="adminChangeIdNovo" placeholder="Novo ID (ex: #5678)" maxlength="5">
+    <button class="btn gold" id="btnAdminChangeOtherId">Mudar ID do Jogador</button>
   </div>
 
   <div class="admin-card">
@@ -1064,12 +1076,14 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     <h4>🟢 Coleção HACK (Só Admin Entrega)</h4>
     <button class="btn" onclick="darTodaHackMeu()" style="margin-bottom:12px; background:linear-gradient(180deg,#00ff41,#00b82f); color:#000; box-shadow:0 6px 0 #006600; font-weight:900;">🎁 DAR AS 5 CARTAS HACK (MEU INV)</button>
     <button class="btn" onclick="darHackAleatoriaGlobal()" style="margin-bottom:12px; background:linear-gradient(180deg,#ff8c00,#b8860b); color:#fff; box-shadow:0 6px 0 #8b6508; font-weight:900;">🎲 ENVIAR PRESENTE ALEATÓRIO GLOBAL</button>
+    <button class="btn" onclick="darHackAleatoriaId()" style="margin-bottom:12px; background:linear-gradient(180deg,#ff8c00,#b8860b); color:#fff; box-shadow:0 6px 0 #8b6508; font-weight:900;">🎲 ENVIAR PRESENTE ALEATÓRIO POR ID</button>
     <div id="adminHackGrid"></div>
   </div>
 
   <div class="admin-card">
     <h4>💰 Dinheiro</h4>
     <input type="number" class="campo" id="adminDinheiro" placeholder="Digite o valor" inputmode="numeric">
+    <input type="text" class="campo" id="adminDinheiroId" placeholder="ID do jogador (Opcional)">
     <button class="btn verde" id="btnAddDinheiro" style="margin-bottom:10px;">➕ Adicionar</button>
     <button class="btn vermelho" id="btnRemDinheiro">➖ Retirar</button>
   </div>
@@ -1260,6 +1274,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 </div>
 
 <div class="admin-float-btn" id="adminFloatBtn" onclick="abrirAdminDireto()"></div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -1286,7 +1301,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   const SENHA_TESTER='0326';
   const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
-  // TRAVA REMOVIDA! Pode entrar só com a senha.
   const ADMIN_UIDS = []; 
 
   let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
@@ -1346,7 +1360,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let ultimoDia = localStorage.getItem(KEY+'ultimoDia')||'';
   
   const LIMITE_DIARIO_MOEDAS = 100000; 
-  // LIMITE DE 600 PACOTES REMOVIDO.
 
   let cartaAdminSelecionada = null;
   let seletorFiltro = 'todas';
@@ -1458,7 +1471,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         isOnline: true,
         lastSeen: Date.now()
       }, { merge: true }).catch((erro) => console.error("Erro ao salvar na nuvem:", erro));
-    }, 500);
+    }, 100);
   }
 
   function mostrarTela(id, push = true){
@@ -1698,7 +1711,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false,
         adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: null, dataCriacao: agora,
         rewardHackClaimed: false, adminFixoAtivo: false, coroa: false, rainbowName: false,
-        badge: false, pacotesInfinitos: false, aparecerRanking: true
+        badge: false, aparecerRanking: true
       };
 
       await db.collection('jogadores').doc(cred.user.uid).set({
@@ -1763,22 +1776,27 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const erroEl = document.getElementById('erroLogin'); if (erroEl) erroEl.textContent = '';
     mostrarAbaLogin('entrar');
   }
-function getPopularidade(nome){
+
+  function getPopularidade(nome){
     const palavras=String(nome).toLowerCase().split(/[\s\-\.]+/); let base=1;
     for(const p of palavras){ if(POP_SP.has(p))return 5; if(POP_S.has(p))base=Math.max(base,3); if(POP_A.has(p))base=Math.max(base,2); }
     if(/ex\b|vmax|vstar|v-union|lv\.x|prime|legend|gx\b/i.test(nome)&&base<2)base=2; return base;
   }
+  
   function calcularPrecoCarta(card){
     const rar=mapRaridade(card.rarity); const rarBase=RAR_BASE[rar]||0.30; const pop=getPopularidade(card.name); const setId=card.set.id;
     let eraMult=ERA_MULT[setId]||1; if(rar==='C'||rar==='U')eraMult=setId==='base1'?3:1; return Math.round(rarBase*pop*eraMult*100)/100;
   }
+  
   function mapRaridade(r){
     if(!r)return 'C'; const s=String(r).toLowerCase();
     if(s.includes('special illustration'))return 'SIR'; if(s.includes('illustration rare'))return 'IR'; if(s.includes('hyper rare'))return 'HR'; if(s.includes('rainbow'))return 'RB'; if(s.includes('secret'))return 'SEC'; if(s.includes('ultra')||s.includes('double rare')||s.includes('vmax')||s.includes('vstar'))return 'UR'; if(s.includes('holo'))return 'RH'; if(s.includes('uncommon'))return 'U'; if(s.includes('rare'))return 'R'; return 'C';
   }
+  
   function formatarPreco(v){
     if(v<1)return 'R$ '+v.toFixed(2).replace('.',','); if(v<1000)return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); return 'R$ '+Math.round(v).toLocaleString('pt-BR');
   }
+  
   function salvarDadosSet(cod,cartas){
     const setsAll=JSON.parse(localStorage.getItem(KEY+'sets')||'{}'); setsAll[cod]=cartas;
     localStorage.setItem(KEY+'sets',JSON.stringify(setsAll)); let t=0; for(const k in setsAll){t+=setsAll[k].length;} localStorage.setItem(KEY+'total',t);
@@ -2003,14 +2021,11 @@ function getPopularidade(nome){
     const el=document.querySelector('.pack-card.sel'); if(!el){alert('Selecione um pacote!');return;}
     const precoUnit=parseInt(el.dataset.preco); const precoTotal=precoUnit*quantidade;
     
-    // LIMITE DE 600 REMOVIDO AQUI CONFORME PEDIDO.
-    
     if(!dinheiroInfinito && moedas<precoTotal){alert('Moedas insuficientes! Precisa de '+precoTotal+' 🪙');return;}
     
     if(!dinheiroInfinito) moedas-=precoTotal; 
     inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade;
     
-    // Atualiza no Firebase IMEDIATAMENTE para evitar bugs
     if (auth.currentUser) {
         await db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario }).catch(()=>{});
     }
@@ -2064,7 +2079,6 @@ function getPopularidade(nome){
     const realQty=Math.min(qty, inventario[setId]);
     inventario[setId]-=realQty; if(inventario[setId]<=0) delete inventario[setId];
     
-    // Salva IMEDIATAMENTE para evitar a multiplicação
     if (auth.currentUser) {
         await db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario }).catch(()=>{});
     }
@@ -2131,7 +2145,6 @@ function getPopularidade(nome){
     
     salvarEstado(); atualizarUI(); 
     if (auth.currentUser) {
-        // Salva a coleção IMEDIATAMENTE na nuvem para não haver conflito
         await db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao }).catch(()=>{});
     }
 
@@ -2142,8 +2155,7 @@ function getPopularidade(nome){
     },400);
     checarAlbumCompleto(pacoteEscolhido);
   }
-
-  document.getElementById('btnCancelarPack').onclick=async ()=>{
+document.getElementById('btnCancelarPack').onclick=async ()=>{
     if(pacotesSendoAbertos > 0){
       const devolver = pacotesFaltandoAbrir + 1;
       inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + devolver;
@@ -2324,11 +2336,12 @@ function getPopularidade(nome){
   }
 
   function finalizarGraduacao(grad){
+    const uidCarta = grad.id || (Date.now() + '_' + Math.random().toString(36).substr(2, 5));
     if (grad.isGacha) {
         const nota = sortearNota(grad.cartaId); grad.nota = nota; grad.resolvida = true;
         const multiplicador = 0.5 + Math.random() * 1.5; const precoFinal = grad.basePrice * multiplicador; const agora = new Date().toISOString();
         if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]}; if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
-        colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'gacha', dono: 'ADMIN', data: agora, nota: nota, base: grad.basePrice }] });
+        colecao[grad.cartaId].gradeds.push({ _uid: uidCarta, nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'gacha', dono: 'ADMIN', data: agora, nota: nota, base: grad.basePrice }] });
         salvarEstado(); atualizarUI();
         const container=document.getElementById('roletaContainer'); const deltaPos = precoFinal > grad.basePrice; const deltaTexto = deltaPos ? 'LUCRO' : 'PREJUÍZO'; const corDelta = deltaPos ? 'pos' : 'neg';
         container.innerHTML=`<div class="resultado-nota"><div class="nota-num n${nota}">${nota}</div><div class="nota-label">GACHA RESULT</div><div class="resultado-valor"><div class="lbl">Valor Base: ${formatarPreco(grad.basePrice)}</div><div class="val">${formatarPreco(precoFinal)}</div><div class="delta ${corDelta}">${deltaTexto} de ${formatarPreco(Math.abs(precoFinal-grad.basePrice))}</div></div><button class="btn gold" onclick="fecharRoleta()" style="max-width:240px">Continuar</button></div>`;
@@ -2338,7 +2351,7 @@ function getPopularidade(nome){
     const nota=sortearNota(grad.cartaId); grad.nota=nota; grad.resolvida=true;
     const carta=encontrarCarta(grad.cartaId); const precoRaw=carta.preco; const mult=getMultiplicadorNota(precoRaw, nota); const precoFinal=precoRaw*mult; const agora = new Date().toISOString();
     if(!colecao[grad.cartaId]) colecao[grad.cartaId]={qtd:0,data:agora,gradeds:[]}; if(!colecao[grad.cartaId].gradeds)colecao[grad.cartaId].gradeds=[];
-    colecao[grad.cartaId].gradeds.push({ nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'graduacao', dono: usuario.nome, data: agora, nota: nota }] });
+    colecao[grad.cartaId].gradeds.push({ _uid: uidCarta, nota:nota, preco:precoFinal, data:agora, historico: [{ tipo: 'graduacao', dono: usuario.nome, data: agora, nota: nota }] });
     salvarEstado(); atualizarUI();
     const container=document.getElementById('roletaContainer'); let label='', cls='';
     if(nota===10){label='GEM MINT!';cls='gem';} else if(nota===9){label='MINT';} else if(nota===8){label='NEAR MINT';} else if(nota===7){label='EXCELENTE';} else {label='DESGASTADA';}
@@ -2367,7 +2380,8 @@ function getPopularidade(nome){
     const hack = CARTAS_HACK.find(c => c.id === cartaId); if (hack) return hack;
     for(const setId in CARDS_POR_SET){ const found=CARDS_POR_SET[setId].find(c=>c.id===cartaId); if(found)return found; } return null;
   }
-function mostrarCol(manterScroll = false){
+
+  function mostrarCol(manterScroll = false){
     albumAberto=null; const telaCol = document.getElementById('telaColecao'); if(telaCol && !manterScroll) telaCol.scrollTop = 0;
     mostrarTela('telaColecao', false); document.getElementById('colTitulo').textContent='📚 Minhas Cartas'; document.getElementById('conteudoCol').innerHTML='';
     if(abaColecao==='albuns') { renderAlbuns(); } else { renderGraduadas(); }
@@ -2842,7 +2856,16 @@ function mostrarCol(manterScroll = false){
           const doc = await db.collection('jogadores').doc(uid).get();
           if(!doc.exists) return;
           const d = doc.data(); const p = d.perfil || {};
-          const amigo = { uid: doc.id, id: p.id, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false };
+          const amigo = { 
+              uid: doc.id, id: p.id, nome: d.nome, avatar: p.avatar, cor: p.cor, 
+              nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, 
+              isVerified: p.isVerified||false, isBanned: d.banido||false,
+              coroa: p.coroa||false, rainbowName: p.rainbowName||false, adminFrame: p.adminFrame||null,
+              badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
+              isHackMaster: p.isHackMaster||false, isTester: p.isTester||false,
+              gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
+              colecoes: (d.colecoesCompletas || []).length
+          };
           abrirPerfilAmigo(amigo);
       } catch(e) {}
   }
@@ -2876,6 +2899,13 @@ function mostrarCol(manterScroll = false){
                           amigo.cartas = d.cartasCount || 0;
                           amigo.isBanned = d.banido || false;
                           amigo.isOnline = (Date.now() - (d.lastSeen||0) < 120000);
+                          amigo.coroa = p.coroa || false;
+                          amigo.rainbowName = p.rainbowName || false;
+                          amigo.adminFrame = p.adminFrame || null;
+                          amigo.badge = p.badge || false;
+                          amigo.adminTitle = p.adminTitle || '👑 CRIADOR SUPREMO 👑';
+                          amigo.isHackMaster = p.isHackMaster || false;
+                          amigo.isTester = p.isTester || false;
                           atualizou = true;
                       }
                   }
@@ -2906,7 +2936,17 @@ function mostrarCol(manterScroll = false){
           if (!doc.exists) { alert('❌ Dados do jogador não encontrados.'); return; }
           
           const d = doc.data(); const p = d.perfil || {};
-          const amigo = { uid: uidAlvo, id: p.id || idAlvo, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false, isOnline: (Date.now() - (d.lastSeen||0) < 120000) };
+          const amigo = { 
+              uid: uidAlvo, id: p.id || idAlvo, nome: d.nome, avatar: p.avatar, cor: p.cor, 
+              nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, 
+              isVerified: p.isVerified||false, isBanned: d.banido||false, 
+              isOnline: (Date.now() - (d.lastSeen||0) < 120000),
+              coroa: p.coroa||false, rainbowName: p.rainbowName||false, adminFrame: p.adminFrame||null,
+              badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
+              isHackMaster: p.isHackMaster||false, isTester: p.isTester||false,
+              gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
+              colecoes: (d.colecoesCompletas || []).length
+          };
           
           abrirPerfilAmigo(amigo);
       } catch(e) { console.error(e); alert('Erro ao buscar perfil.'); }
@@ -2925,8 +2965,18 @@ function mostrarCol(manterScroll = false){
           const pedido = { deUid: auth.currentUser.uid, deNome: usuario.nome, deId: perfil.id, data: Date.now() };
           await db.collection('jogadores').doc(uidAlvo).collection('pedidos').doc(auth.currentUser.uid).set(pedido);
           
-          const itemCorreio = { titulo: 'Pedido de Amizade', tipo: 'Pedido de Amizade', remetente: usuario.nome, lido: false, dataEnvio: Date.now(), id: 'corr_'+Date.now(), deUid: auth.currentUser.uid, deId: perfil.id, deNome: usuario.nome };
-          await db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(itemCorreio) });
+          const notifItem = { 
+              id: 'notif_amizade_'+Date.now(), 
+              tipo: 'amizade', 
+              titulo: 'Pedido de Amizade', 
+              mensagem: 'quer ser seu amigo!', 
+              remetenteUid: auth.currentUser.uid, 
+              remetenteNome: usuario.nome, 
+              deId: perfil.id, 
+              lido: false, 
+              dataEnvio: Date.now() 
+          };
+          await db.collection('jogadores').doc(uidAlvo).update({ notificacoes: firebase.firestore.FieldValue.arrayUnion(notifItem) });
           
           alert('📤 Pedido de amizade enviado para ' + amigoDaTrocaAtual.nome + '!');
           document.getElementById('btnAddAmigoPerfil').style.display = 'none';
@@ -3072,7 +3122,12 @@ function mostrarCol(manterScroll = false){
               avatar: p.avatar || amigo.avatar, cor: p.cor || amigo.cor,
               nivel: calcularNivel(d.cartasCount || 0), cartas: d.cartasCount || 0,
               isVerified: p.isVerified || false, isBanned: d.banido || false,
-              isOnline: (Date.now() - (d.lastSeen||0) < 120000)
+              isOnline: (Date.now() - (d.lastSeen||0) < 120000),
+              coroa: p.coroa || false, rainbowName: p.rainbowName || false, adminFrame: p.adminFrame || null,
+              badge: p.badge || false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
+              isHackMaster: p.isHackMaster || false, isTester: p.isTester || false,
+              gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
+              colecoes: (d.colecoesCompletas || []).length
           };
           amigoDaTrocaAtual = amigoAtualizado;
           if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) {
@@ -3086,14 +3141,34 @@ function mostrarCol(manterScroll = false){
       if(amigo.avatar && amigo.avatar.startsWith('http')) { av.innerHTML = `<img src="${amigo.avatar}">`; } 
       else { av.innerHTML = `<span style="font-size:3rem;font-weight:900;">${amigo.avatar || '👤'}</span>`; }
       
-      const card = document.getElementById('amigoPerfilCard'); card.className = 'perfil-card'; card.style.background = amigo.cor || '#2a1a4a'; card.style.animation = 'none';
+      const card = document.getElementById('amigoPerfilCard'); 
+      card.className = 'perfil-card'; card.style.background = amigo.cor || '#2a1a4a'; card.style.animation = 'none';
       
+      const crown = document.getElementById('amigoCrown'); const badgeAdmin = document.getElementById('amigoAdminBadge');
+      const badgeTester = document.getElementById('amigoTesterBadge'); const badgeMatrix = document.getElementById('amigoMatrixBadge');
+      const badgeBan = document.getElementById('amigoBannedBadge');
+      
+      crown.style.display = 'none'; badgeAdmin.style.display = 'none'; badgeTester.style.display = 'none'; badgeMatrix.style.display = 'none'; badgeBan.style.display = 'none';
+
+      if (amigo.isHackMaster && (amigo.cor === 'linear-gradient(135deg, #000, #001a00)' || amigo.cor === '#000')) {
+          card.classList.add('matrix-deco'); card.style.background = ''; badgeMatrix.style.display = 'inline-block';
+      } else if (amigo.isTester && amigo.cor === '#0a0005') {
+          card.classList.add('tester-deco'); card.style.background = ''; badgeTester.style.display = 'inline-block';
+      } else if (amigo.adminFrame) {
+          card.classList.add(amigo.adminFrame); if (amigo.adminFrame === 'admin-deco') card.style.background = '';
+      }
+
+      if (amigo.coroa) crown.style.display = 'block';
+      if (amigo.rainbowName && !card.classList.contains('admin-deco')) card.classList.add('rainbow-name');
+      if (amigo.badge) { badgeAdmin.style.display = 'inline-block'; badgeAdmin.textContent = amigo.adminTitle || '👑 CRIADOR SUPREMO 👑'; }
+      if (amigo.isBanned) badgeBan.style.display = 'block';
+
       document.getElementById('amigoNome').innerHTML = (amigo.nome || 'Amigo') + (amigo.isVerified ? ' <span class="icon-verified"></span>' : ''); 
       document.getElementById('amigoId').textContent = amigo.id || '#----';
       document.getElementById('amigoNivel').textContent = amigo.nivel || 1; 
       document.getElementById('amigoCartas').textContent = amigo.cartas || 0;
-      const gc = document.getElementById('amigoGrad'); if (gc) gc.textContent = '0';
-      const cc = document.getElementById('amigoColecoes'); if (cc) cc.textContent = '0';
+      const gc = document.getElementById('amigoGrad'); if (gc) gc.textContent = amigo.gradeds || 0;
+      const cc = document.getElementById('amigoColecoes'); if (cc) cc.textContent = amigo.colecoes || 0;
   }
 
   let esperaTrocaUnsub = null;
@@ -3197,7 +3272,6 @@ function mostrarCol(manterScroll = false){
       document.getElementById('trocaComNome').textContent = amigo.nome;
       document.getElementById('trocaBotNome').textContent = amigo.nome;
       document.getElementById('trocaStatus').textContent = 'Adicione cartas para iniciar...';
-      document.getElementById('btnConfirmarTroca').style.display = 'none';
       
       trocaSelecionadaJogador = []; 
       trocaSelecionadaAmigo = [];
@@ -3240,6 +3314,8 @@ function mostrarCol(manterScroll = false){
       if (unsubscribeTrocaChat) { unsubscribeTrocaChat(); unsubscribeTrocaChat = null; }
       if (unsubscribeTroca) { unsubscribeTroca(); unsubscribeTroca = null; }
       docTrocaId = null; amigoDaTrocaAtual = null;
+      trocaSelecionadaJogador = [];
+      trocaSelecionadaAmigo = [];
       mostrarTela('telaAmigos');
   }
 
@@ -3259,6 +3335,9 @@ function mostrarCol(manterScroll = false){
           d.innerHTML = `<img src="${carta.imgSmall || carta.img}">`; slotsB.appendChild(d);
       });
       if (trocaSelecionadaAmigo.length === 0) slotsB.innerHTML = '<div style="color:#a89ec4;font-size:.8rem;padding:20px;">Aguardando...</div>';
+      
+      const btnConfirmar = document.getElementById('btnConfirmarTroca');
+      if(btnConfirmar) btnConfirmar.style.display = (trocaSelecionadaJogador.length > 0 || trocaSelecionadaAmigo.length > 0) ? 'block' : 'none';
   }
 
   function atualizarTrocaFirebase() {
@@ -3268,7 +3347,7 @@ function mostrarCol(manterScroll = false){
           const data = doc.data();
           const campo = (data.jogador1 === auth.currentUser.uid) ? 'cartas1' : 'cartas2';
           const updates = {};
-          updates[campo] = trocaSelecionadaJogador.map(c => ({ id: c.id, tipo: c.tipo, nota: c.nota, img: c.imgSmall || c.img, preco: c.precoFinal || c.preco }));
+          updates[campo] = trocaSelecionadaJogador.map(c => ({ id: c.id, tipo: c.tipo, nota: c.nota, _uid: c._uid, img: c.imgSmall || c.img, preco: c.precoFinal || c.preco }));
           return db.collection('trocas').doc(docTrocaId).update(updates);
       });
   }
@@ -3332,22 +3411,28 @@ function mostrarCol(manterScroll = false){
               
               data.cartas1.forEach(c => {
                   if (c.tipo === 'raw' && col1[c.id]) col1[c.id].qtd = Math.max(0, (col1[c.id].qtd||0) - 1);
-                  else if (c.tipo === 'graded' && col1[c.id] && col1[c.id].gradeds) col1[c.id].gradeds = col1[c.id].gradeds.filter(g => g.nota !== c.nota);
+                  else if (c.tipo === 'graded' && col1[c.id] && col1[c.id].gradeds) {
+                      const idx = col1[c.id].gradeds.findIndex(g => (c._uid && g._uid === c._uid) || (!c._uid && g.nota === c.nota));
+                      if(idx >= 0) col1[c.id].gradeds.splice(idx, 1);
+                  }
               });
               data.cartas1.forEach(c => {
                   if (!col2[c.id]) col2[c.id] = { qtd: 0, gradeds: [] };
                   if (c.tipo === 'raw') col2[c.id].qtd = (col2[c.id].qtd||0) + 1;
-                  else if (c.tipo === 'graded') { if (!col2[c.id].gradeds) col2[c.id].gradeds = []; col2[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
+                  else if (c.tipo === 'graded') { if (!col2[c.id].gradeds) col2[c.id].gradeds = []; col2[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
               });
               
               data.cartas2.forEach(c => {
                   if (c.tipo === 'raw' && col2[c.id]) col2[c.id].qtd = Math.max(0, (col2[c.id].qtd||0) - 1);
-                  else if (c.tipo === 'graded' && col2[c.id] && col2[c.id].gradeds) col2[c.id].gradeds = col2[c.id].gradeds.filter(g => g.nota !== c.nota);
+                  else if (c.tipo === 'graded' && col2[c.id] && col2[c.id].gradeds) {
+                      const idx = col2[c.id].gradeds.findIndex(g => (c._uid && g._uid === c._uid) || (!c._uid && g.nota === c.nota));
+                      if(idx >= 0) col2[c.id].gradeds.splice(idx, 1);
+                  }
               });
               data.cartas2.forEach(c => {
                   if (!col1[c.id]) col1[c.id] = { qtd: 0, gradeds: [] };
                   if (c.tipo === 'raw') col1[c.id].qtd = (col1[c.id].qtd||0) + 1;
-                  else if (c.tipo === 'graded') { if (!col1[c.id].gradeds) col1[c.id].gradeds = []; col1[c.id].gradeds.push({ nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
+                  else if (c.tipo === 'graded') { if (!col1[c.id].gradeds) col1[c.id].gradeds = []; col1[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
               });
               
               transaction.update(user1Ref, { colecao: col1 });
@@ -3427,9 +3512,9 @@ function mostrarCol(manterScroll = false){
           
           if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
               info.gradeds.forEach((g, gi) => {
-                  const jaNaTroca = trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && tc.nota === g.nota);
+                  const jaNaTroca = trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && (tc._uid ? tc._uid === g._uid : tc.nota === g.nota));
                   if(!jaNaTroca) {
-                      cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1});
+                      cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1});
                   }
               });
           }
@@ -3685,7 +3770,7 @@ function mostrarCol(manterScroll = false){
                     </div>`;
                 d.onclick = () => {
                     if (isEu) { abrirPerfil(); return; }
-                    const amigoData = { uid: j.uid, id: p.id, nome: j.nome, avatar: p.avatar, cor: p.cor, nivel: valorPrincipal, cartas: j.cartasCount || 0, isVerified: p.isVerified || false, isBanned: j.banido || false };
+                    const amigoData = { uid: j.uid, id: p.id, nome: j.nome, avatar: p.avatar, cor: p.cor, nivel: valorPrincipal, cartas: j.cartasCount || 0, isVerified: p.isVerified || false, isBanned: j.banido || false, coroa: p.coroa||false, rainbowName: p.rainbowName||false, adminFrame: p.adminFrame||null, badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑', isHackMaster: p.isHackMaster||false, isTester: p.isTester||false, gradeds: Object.values(j.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0), colecoes: (j.colecoesCompletas || []).length };
                     abrirPerfilAmigo(amigoData);
                 };
                 lista.appendChild(d);
@@ -3736,11 +3821,6 @@ function mostrarCol(manterScroll = false){
     if (btnInf) {
       if (dinheiroInfinito) { btnInf.style.background = 'linear-gradient(180deg,#00ff41,#00b82f)'; btnInf.style.boxShadow = '0 6px 0 #006600'; btnInf.style.color = '#000'; btnInf.textContent = '♾️ Dinheiro Infinito: ATIVO'; }
       else { btnInf.style.background = 'linear-gradient(180deg,#666,#333)'; btnInf.style.boxShadow = '0 6px 0 #111'; btnInf.style.color = '#fff'; btnInf.textContent = '♾️ Dinheiro Infinito: DESATIVADO'; }
-    }
-    const btnPac = document.getElementById('btnAdminPacotesInfinitos');
-    if (btnPac) {
-      if (perfil.pacotesInfinitos) { btnPac.style.background = 'linear-gradient(180deg,#00ff41,#00b82f)'; btnPac.style.boxShadow = '0 6px 0 #006600'; btnPac.style.color = '#000'; btnPac.textContent = '📦 Pacotes Infinitos: ATIVO'; }
-      else { btnPac.style.background = 'linear-gradient(180deg,#666,#333)'; btnPac.style.boxShadow = '0 6px 0 #111'; btnPac.style.color = '#fff'; btnPac.textContent = '📦 Pacotes Infinitos: DESATIVADO'; }
     }
     const btnCoroa = document.getElementById('btnAdminCoroa');
     if (btnCoroa) {
@@ -3834,7 +3914,7 @@ function mostrarCol(manterScroll = false){
       const hc = CARTAS_HACK.find(x => x.id === hackId); if(!hc) return; const agora = new Date().toISOString();
       if (tipo === 'meu') {
           if(!colecao[hc.id]) colecao[hc.id] = { qtd: 0, data: agora, gradeds: [] }; if(!colecao[hc.id].gradeds) colecao[hc.id].gradeds = [];
-          colecao[hc.id].gradeds.push({ nota: 10, preco: hc.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 10 }] });
+          colecao[hc.id].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: hc.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 10 }] });
           salvarEstado(); atualizarUI(); checarAlbumCompleto('hack'); document.getElementById('adminStatus').textContent = `✅ ${hc.nome} entregue no seu inventário!`;
       } else if (tipo === 'id') {
           const idAlvo = prompt('Digite o ID do jogador (ex: #1234):'); if(!idAlvo) return;
@@ -3842,7 +3922,7 @@ function mostrarCol(manterScroll = false){
               const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
               if (!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
               const uidAlvo = idDoc.data().uid;
-              const item = { titulo: hc.nome + ' (HACK 10)', tipo: 'Carta Hack', remetente: 'ADMIN', cartaId: hc.id, cartaHack: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000, id: 'corr_'+Date.now() };
+              const item = { id: 'corr_'+Date.now(), titulo: hc.nome + ' (HACK 10)', tipo: 'Carta Hack', remetente: 'ADMIN', cartaId: hc.id, cartaHack: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
               await db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) });
               document.getElementById('adminStatus').textContent = `✅ ${hc.nome} enviado pro correio de ${idAlvo}!`;
           } catch(e) { console.error(e); }
@@ -3853,7 +3933,7 @@ function mostrarCol(manterScroll = false){
               const snap = await db.collection('jogadores').get();
               const batch = db.batch();
               snap.forEach(doc => {
-                  const item = { titulo: hc.nome + ' (HACK 10)', tipo: 'Carta Hack (Global)', remetente: 'ADMIN', cartaId: hc.id, cartaHack: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000, id: 'corr_'+Date.now()+Math.random() };
+                  const item = { id: 'corr_'+Date.now()+Math.random(), titulo: hc.nome + ' (HACK 10)', tipo: 'Carta Hack (Global)', remetente: 'ADMIN', cartaId: hc.id, cartaHack: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
                   batch.update(doc.ref, { correio: firebase.firestore.FieldValue.arrayUnion(item) });
               });
               await batch.commit();
@@ -3867,7 +3947,7 @@ function mostrarCol(manterScroll = false){
     const agora = new Date().toISOString(); let adicionadas = 0;
     CARTAS_HACK.forEach(hc => {
       if(!colecao[hc.id]) colecao[hc.id] = { qtd: 0, data: agora, gradeds: [] }; if(!colecao[hc.id].gradeds) colecao[hc.id].gradeds = [];
-      colecao[hc.id].gradeds.push({ nota: 10, preco: hc.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 10 }] });
+      colecao[hc.id].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: hc.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 10 }] });
       adicionadas++;
     });
     salvarEstado(); atualizarUI(); checarAlbumCompleto('hack'); document.getElementById('adminStatus').textContent = `✅ ${adicionadas} cartas HACK entregues (PSA 10)!`;
@@ -3880,11 +3960,25 @@ function mostrarCol(manterScroll = false){
           const snap = await db.collection('jogadores').get();
           const batch = db.batch();
           snap.forEach(doc => {
-              const item = { titulo: '🎁 Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000, id: 'corr_'+Date.now()+Math.random() };
+              const item = { id: 'corr_'+Date.now()+Math.random(), titulo: '🎁 Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
               batch.update(doc.ref, { correio: firebase.firestore.FieldValue.arrayUnion(item) });
           });
           await batch.commit();
           document.getElementById('adminStatus').textContent = '✅ Presente Misterioso enviado para TODOS!';
+      } catch(e) { console.error(e); }
+  }
+
+  async function darHackAleatoriaId() {
+      const idAlvo = prompt('Digite o ID do jogador (ex: #1234):');
+      if(!idAlvo) return;
+      document.getElementById('adminStatus').textContent = `⏳ Enviando presente...`;
+      try {
+          const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
+          if (!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
+          const uidAlvo = idDoc.data().uid;
+          const item = { id: 'corr_'+Date.now(), titulo: '🎁 Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
+          await db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) });
+          document.getElementById('adminStatus').textContent = `✅ Presente Misterioso enviado para ${idAlvo}!`;
       } catch(e) { console.error(e); }
   }
 
@@ -3899,7 +3993,7 @@ function mostrarCol(manterScroll = false){
           let idAlvo = document.getElementById('adminTradeId').value.trim(); if (!idAlvo) { idAlvo = prompt('Digite o ID do jogador (ex: #1234):'); } if (!idAlvo) return;
           db.collection('ids_publicos').doc(idAlvo).get().then(idDoc => {
               if (!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
-              const item = { titulo: c.nome, tipo: 'Carta Normal', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'raw', cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now(), id: 'corr_'+Date.now() };
+              const item = { id: 'corr_'+Date.now(), titulo: c.nome, tipo: 'Carta Normal', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'raw', cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now() };
               db.collection('jogadores').doc(idDoc.data().uid).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
                   document.getElementById('adminStatus').textContent = `✅ ${c.nome} enviado pro correio de ${idAlvo}!`;
               });
@@ -3909,7 +4003,7 @@ function mostrarCol(manterScroll = false){
           db.collection('jogadores').get().then(snap => {
               const batch = db.batch();
               snap.forEach(doc => {
-                  const item = { titulo: c.nome, tipo: 'Carta Normal (Broadcast)', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'raw', cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now(), id: 'corr_'+Date.now()+Math.random() };
+                  const item = { id: 'corr_'+Date.now()+Math.random(), titulo: c.nome, tipo: 'Carta Normal (Broadcast)', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'raw', cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now() };
                   batch.update(doc.ref, { correio: firebase.firestore.FieldValue.arrayUnion(item) });
               });
               return batch.commit();
@@ -3933,7 +4027,7 @@ function mostrarCol(manterScroll = false){
           let idAlvo = document.getElementById('adminTradeId').value.trim(); if (!idAlvo) { idAlvo = prompt('Digite o ID do jogador (ex: #1234):'); } if (!idAlvo) return;
           db.collection('ids_publicos').doc(idAlvo).get().then(idDoc => {
               if (!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
-              const item = { titulo: c.nome + ' (PSA 10)', tipo: 'Carta Graduada', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'graded', cartaNota: 10, cartaPrecoFixo: basePrice, cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now(), id: 'corr_'+Date.now() };
+              const item = { id: 'corr_'+Date.now(), titulo: c.nome + ' (PSA 10)', tipo: 'Carta Graduada', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'graded', cartaNota: 10, cartaPrecoFixo: basePrice, cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now() };
               db.collection('jogadores').doc(idDoc.data().uid).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
                   document.getElementById('adminStatus').textContent = `✅ ${c.nome} PSA 10 enviado pro correio de ${idAlvo}!`;
               });
@@ -3943,7 +4037,7 @@ function mostrarCol(manterScroll = false){
           db.collection('jogadores').get().then(snap => {
               const batch = db.batch();
               snap.forEach(doc => {
-                  const item = { titulo: c.nome + ' (PSA 10)', tipo: 'Carta PSA (Broadcast)', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'graded', cartaNota: 10, cartaPrecoFixo: basePrice, cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now(), id: 'corr_'+Date.now()+Math.random() };
+                  const item = { id: 'corr_'+Date.now()+Math.random(), titulo: c.nome + ' (PSA 10)', tipo: 'Carta PSA (Broadcast)', remetente: 'ADMIN', cartaId: c.id, cartaTipo: 'graded', cartaNota: 10, cartaPrecoFixo: basePrice, cartaHack: isCartaHack(c.id), lido: false, dataEnvio: Date.now() };
                   batch.update(doc.ref, { correio: firebase.firestore.FieldValue.arrayUnion(item) });
               });
               return batch.commit();
@@ -4038,13 +4132,7 @@ function mostrarCol(manterScroll = false){
           if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
           const uidAlvo = idDoc.data().uid;
           const item = { 
-              titulo: '🎖️ Selo de Verificado Oficial', 
-              tipo: 'Reconhecimento', 
-              remetente: 'ADMINISTRAÇÃO', 
-              verificado: true, 
-              lido: false, 
-              dataEnvio: Date.now(), 
-              id: 'corr_'+Date.now() 
+              id: 'corr_'+Date.now(), titulo: '🎖️ Selo de Verificado Oficial', tipo: 'Reconhecimento', remetente: 'ADMINISTRAÇÃO', verificado: true, lido: false, dataEnvio: Date.now() 
           };
           db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => {
               alert('✅ Selo enviado pro Correio de ' + id + '!');
@@ -4082,7 +4170,7 @@ function mostrarCol(manterScroll = false){
           if (item.cartaId) {
               const carta = encontrarCarta(item.cartaId);
               if (carta) icoHtml = `<img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.parentElement.textContent='🎁'">`;
-          } else if (item.verificado) icoHtml = '🎖️'; else if (item.misterioso) icoHtml = '❓';
+          } else if (item.verificado) icoHtml = '🎖️'; else if (item.misterioso) icoHtml = '❓'; else if (item.moedas) icoHtml = '💰';
           
           let timerHtml = '';
           if (item.expiraEm) {
@@ -4138,12 +4226,17 @@ function mostrarCol(manterScroll = false){
               alert('🎖️ Selo de Verificado atualizado com sucesso!'); isProcessingResgatar = false; return;
           }
 
+          if (item.moedas) {
+              moedas += item.moedas; correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
+              alert('💰 Você recebeu ' + item.moedas.toLocaleString('pt-BR') + ' moedas!'); isProcessingResgatar = false; return;
+          }
+
           if (item.cartaHack) {
               const hc = CARTAS_HACK.find(x => x.id === item.cartaId);
               if (hc) {
                   if (!colecao[hc.id]) colecao[hc.id] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
                   if (!colecao[hc.id].gradeds) colecao[hc.id].gradeds = [];
-                  colecao[hc.id].gradeds.push({ nota: 10, preco: hc.preco, hack: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 10 }] });
+                  colecao[hc.id].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: hc.preco, hack: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 10 }] });
                   checarAlbumCompleto('hack');
               }
           } else if (item.cartaId && item.cartaTipo === 'raw') {
@@ -4153,11 +4246,10 @@ function mostrarCol(manterScroll = false){
               if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] };
               if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
               colecao[item.cartaId].gradeds.push({
-                  nota: item.cartaNota || 10, preco: item.cartaPrecoFixo || 100, data: new Date().toISOString(),
+                  _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: item.cartaNota || 10, preco: item.cartaPrecoFixo || 100, data: new Date().toISOString(),
                   historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: item.cartaNota || 10 }]
               });
           }
-          if (item.moedas) moedas += item.moedas;
           
           correio.splice(idx, 1); salvarEstado(); atualizarUI(); renderCorreio();
           alert('✅ Item resgatado com sucesso!');
@@ -4187,7 +4279,7 @@ function mostrarCol(manterScroll = false){
               const agora = new Date().toISOString();
               if(!colecao[cartaSorteada.id]) colecao[cartaSorteada.id] = { qtd: 0, data: agora, gradeds: [] };
               if(!colecao[cartaSorteada.id].gradeds) colecao[cartaSorteada.id].gradeds = [];
-              colecao[cartaSorteada.id].gradeds.push({ nota: 10, preco: cartaSorteada.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN (Presente)', data: agora, nota: 10 }] });
+              colecao[cartaSorteada.id].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: cartaSorteada.preco, hack: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN (Presente)', data: agora, nota: 10 }] });
               
               if (giftAtual) {
                   const idx = correio.findIndex(c => c.id === giftAtual.id);
@@ -4563,7 +4655,6 @@ function mostrarCol(manterScroll = false){
   document.getElementById('btnSairAdmin').onclick=()=>{ irParaHome(); atualizarUI(); };
 
   document.getElementById('btnAdminInfinito').onclick = () => { dinheiroInfinito = !dinheiroInfinito; salvarEstado(); atualizarUI(); atualizarBotoesAdmin(); document.getElementById('adminStatus').textContent = dinheiroInfinito ? '♾️ Dinheiro Infinito ATIVADO!' : '💵 Dinheiro Infinito desativado.'; };
-  document.getElementById('btnAdminPacotesInfinitos').onclick = () => { perfil.pacotesInfinitos = !perfil.pacotesInfinitos; salvarEstado(); atualizarUI(); atualizarBotoesAdmin(); document.getElementById('adminStatus').textContent = perfil.pacotesInfinitos ? '📦 Pacotes Infinitos ATIVADO!' : '📦 Pacotes Infinitos desativado.'; };
   document.getElementById('btnAdminCoroa').onclick = () => { perfil.coroa = !perfil.coroa; salvarEstado(); atualizarBotoesAdmin(); document.getElementById('adminStatus').textContent = perfil.coroa ? '👑 Coroa ATIVADA!' : '👑 Coroa desativada.'; };
   document.getElementById('btnAdminRainbow').onclick = () => { perfil.rainbowName = !perfil.rainbowName; salvarEstado(); atualizarBotoesAdmin(); document.getElementById('adminStatus').textContent = perfil.rainbowName ? '🌈 Nome Arco-íris ATIVO!' : '🌈 Nome Arco-íris desativado.'; };
   document.getElementById('btnAdminBadge').onclick = () => { perfil.badge = !perfil.badge; salvarEstado(); atualizarBotoesAdmin(); document.getElementById('adminStatus').textContent = perfil.badge ? '🏷️ Badge ATIVO!' : '🏷️ Badge desativado.'; };
@@ -4582,6 +4673,27 @@ function mostrarCol(manterScroll = false){
     }).catch(e => alert('Erro ao mudar ID. Talvez já esteja em uso.'));
   };
 
+  document.getElementById('btnAdminChangeOtherId').onclick = async () => {
+    const atual = document.getElementById('adminChangeIdAtual').value.trim();
+    const novo = document.getElementById('adminChangeIdNovo').value.trim();
+    if(!atual || !novo || !/^#\d{4}$/.test(novo)) { document.getElementById('adminStatus').textContent = '⚠️ Verifique os IDs (formato #1234)'; return; }
+    if(!confirm(`Mudar o ID de ${atual} para ${novo}?`)) return;
+    
+    try {
+        const idDoc = await db.collection('ids_publicos').doc(atual).get();
+        if(!idDoc.exists) { alert('ID atual não encontrado'); return; }
+        const uid = idDoc.data().uid;
+        
+        await db.collection('ids_publicos').doc(atual).delete();
+        await db.collection('ids_publicos').doc(novo).set({ uid: uid, nome: idDoc.data().nome, login: idDoc.data().login });
+        await db.collection('jogadores').doc(uid).update({ 'perfil.id': novo });
+        
+        document.getElementById('adminStatus').textContent = `✅ ID alterado com sucesso! O antigo (${atual}) foi liberado.`;
+        document.getElementById('adminChangeIdAtual').value = '';
+        document.getElementById('adminChangeIdNovo').value = '';
+    } catch(e) { console.error(e); alert('Erro ao mudar ID. Talvez o novo já esteja em uso.'); }
+  };
+
   document.getElementById('btnAdminUnlockAll').onclick = () => {
     if(!confirm('Isso vai adicionar 1 de CADA carta de TODAS as coleções carregadas e completar os troféus. Continuar?')) return;
     const agora = new Date().toISOString(); let total = 0;
@@ -4593,15 +4705,31 @@ function mostrarCol(manterScroll = false){
     salvarEstado(); atualizarUI(); document.getElementById('adminStatus').textContent = `✅ ${total} cartas adicionadas e coleções completadas!`;
   };
 
-  document.getElementById('btnAddDinheiro').onclick=()=>{
+  document.getElementById('btnAddDinheiro').onclick=async ()=>{
     const v=parseInt(document.getElementById('adminDinheiro').value);
     if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
-    moedas+=v; salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Adicionado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
+    
+    const idAlvo = document.getElementById('adminDinheiroId').value.trim();
+    if(idAlvo) {
+        try {
+            const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
+            if(!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
+            const uid = idDoc.data().uid;
+            const item = { id: 'corr_'+Date.now(), titulo: '💰 Presente em Moedas', tipo: 'Moedas', remetente: 'ADMIN', moedas: v, lido: false, dataEnvio: Date.now() };
+            await db.collection('jogadores').doc(uid).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) });
+            document.getElementById('adminStatus').textContent = `✅ ${v.toLocaleString('pt-BR')} moedas enviadas pro correio de ${idAlvo}!`;
+            document.getElementById('adminDinheiro').value='';
+            document.getElementById('adminDinheiroId').value='';
+        } catch(e) { console.error(e); alert('Erro ao enviar.'); }
+    } else {
+        moedas+=v; salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Adicionado '+v.toLocaleString('pt-BR')+' moedas na SUA conta!'; document.getElementById('adminDinheiro').value='';
+    }
   };
+
   document.getElementById('btnRemDinheiro').onclick=()=>{
     const v=parseInt(document.getElementById('adminDinheiro').value);
     if(!v||v<=0){document.getElementById('adminStatus').textContent='⚠️ Digite um valor válido';return;}
-    moedas=Math.max(0,moedas-v); salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Retirado '+v.toLocaleString('pt-BR')+' moedas!'; document.getElementById('adminDinheiro').value='';
+    moedas=Math.max(0,moedas-v); salvarEstado();atualizarUI(); document.getElementById('adminStatus').textContent='✅ Retirado '+v.toLocaleString('pt-BR')+' moedas da SUA conta!'; document.getElementById('adminDinheiro').value='';
   };
 
   document.getElementById('btnAdminSetLevel').onclick = () => {
