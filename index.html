@@ -603,17 +603,18 @@ html, body {
 .amigo-card .amigo-status { font-size: .75rem; color: #a89ec4; font-weight: 800; margin-top: 2px; }
 .amigo-card .ban-tag { font-size: 0.6rem; background: #ff0000; color: #fff; padding: 2px 6px; border-radius: 6px; font-weight: 900; margin-left: 4px; }
 .troca-container { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 520px; }
-.troca-lado { background: #2a1a4a; border-radius: 18px; padding: 16px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,.2); border: 2px solid rgba(255,255,255,0.1); }
-.troca-lado.amigo { background: #3a1a5a; }
-.troca-lado h4 { font-size: .9rem; text-transform: uppercase; margin-bottom: 10px; color: #ffd93d; display: flex; justify-content: space-between; align-items: center; }
-.troca-slots { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; min-height: 100px; }
-.troca-slot { width: 60px; height: 84px; border-radius: 6px; background: rgba(0,0,0,.3); border: 2px dashed #a89ec4; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; position: relative; }
+.troca-lado { background: #fff; border-radius: 18px; padding: 16px; color: #2a1a4a; box-shadow: 0 8px 25px rgba(0,0,0,.08); border: 2px solid #e0e8f0; }
+.troca-lado.amigo { background: #f0f8ff; border-color: #a8c8e8; }
+.troca-lado h4 { font-size: .9rem; text-transform: uppercase; margin-bottom: 10px; color: #4a6fa5; display: flex; justify-content: space-between; align-items: center; }
+.troca-slots { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; min-height: 120px; }
+.troca-slot { width: 85px; height: 120px; border-radius: 8px; background: #e8eef5; border: 2px dashed #a89ec4; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; position: relative; overflow: hidden; }
 .troca-slot img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
-.troca-slot.add { color: #a89ec4; font-size: 1.5rem; }
+.troca-slot.add { color: #4a6fa5; font-size: 2rem; font-weight: 900; }
 .troca-slot.hack { border-color: #00ff41; box-shadow: 0 0 10px rgba(0,255,65,0.5); }
 .troca-slot.bot-slot { cursor: default; }
+.troca-slot .price-tag { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); color: #ffd93d; font-size: 0.6rem; font-weight: 900; text-align: center; padding: 2px; z-index: 5; }
 .troca-dinheiro { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
-.troca-dinheiro input { flex: 1; padding: 10px; border-radius: 10px; border: 2px solid #a89ec4; font-weight: 800; outline: none; font-size: 1rem; color: #fff; background: rgba(0,0,0,0.3); }
+.troca-dinheiro input { flex: 1; padding: 10px; border-radius: 10px; border: 2px solid #cfd8e3; font-weight: 800; outline: none; font-size: 1rem; color: #2a1a4a; background: #fff; }
 .troca-dinheiro span { font-weight: 900; color: #f7a800; font-size: 1.1rem; }
 .troca-seta { text-align: center; font-size: 2rem; color: #ffd93d; margin: -10px 0; text-shadow: 0 0 10px rgba(255,215,0,.5); }
 .troca-acoes { display: flex; gap: 10px; margin-top: 20px; width: 100%; max-width: 520px; }
@@ -622,7 +623,7 @@ html, body {
 .troca-acoes .btn-aceitar:active { transform: translateY(4px); box-shadow: 0 2px 0 #1f8a3a; }
 .troca-acoes .btn-recusar { background: linear-gradient(180deg, #ff5566, #e03545); box-shadow: 0 6px 0 #a02030; }
 .troca-acoes .btn-recusar:active { transform: translateY(4px); box-shadow: 0 2px 0 #a02030; }
-.troca-status { text-align: center; padding: 12px; color: #ffd93d; font-weight: 900; font-size: 0.9rem; background: rgba(255,215,0,0.1); border-radius: 12px; margin-top: 10px; border: 1px dashed rgba(255,215,0,0.3); }
+.troca-status { text-align: center; padding: 12px; color: #4a6fa5; font-weight: 900; font-size: 0.9rem; background: rgba(74,159,216,0.1); border-radius: 12px; margin-top: 10px; border: 1px dashed rgba(74,159,216,0.3); min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .modal-cartas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-height: 50vh; overflow-y: auto; margin-top: 15px; padding: 4px; }
 .modal-carta-item { border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; position: relative; }
 .modal-carta-item img { width: 100%; display: block; }
@@ -742,16 +743,18 @@ html, body {
 .chat-input-row input::placeholder { color: #8899cc; }
 .chat-input-row button { padding: 0 20px; border-radius: 20px; background: linear-gradient(180deg, #ffd93d, #f7a800); color: #fff; border: none; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #b57a00; font-family: inherit; font-size: 1rem; }
 .chat-input-row button:active { transform: translateY(2px); box-shadow: 0 1px 0 #b57a00; }
-.troca-chat { background: #1a0a2a; border-radius: 12px; margin-top: 10px; border: 2px solid rgba(255,215,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
-.troca-chat-titulo { padding: 8px 12px; background: rgba(0,0,0,0.3); color: #ffd93d; font-weight: 900; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+.troca-chat { background: #f0f4f8; border-radius: 12px; margin-top: 10px; border: 2px solid #cfd8e3; overflow: hidden; display: flex; flex-direction: column; }
+.troca-chat-titulo { padding: 8px 12px; background: #e0e8f0; color: #4a6fa5; font-weight: 900; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
 .troca-chat-body { display: flex; flex-direction: column; }
 .troca-chat-mensagens { max-height: 120px; min-height: 60px; overflow-y: auto; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
 .troca-chat-mensagens .chat-msg { font-size: 0.75rem; padding: 6px 10px; }
+.troca-chat-mensagens .chat-msg.eu { background: #4a9fd8; color: #fff; }
+.troca-chat-mensagens .chat-msg.outro { background: #fff; color: #2a1a4a; border: 1px solid #e0e8f0; }
 .troca-chat-mensagens .chat-msg .hora { font-size: 0.5rem; }
-.troca-chat-input { display: flex; gap: 6px; padding: 8px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,215,0,0.15); }
-.troca-chat-input input { flex: 1; padding: 8px 12px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.8rem; font-weight: 700; outline: none; font-family: inherit; }
+.troca-chat-input { display: flex; gap: 6px; padding: 8px; background: #e0e8f0; border-top: 1px solid #cfd8e3; }
+.troca-chat-input input { flex: 1; padding: 8px 12px; border-radius: 16px; border: 1px solid #cfd8e3; background: #fff; color: #2a1a4a; font-size: 0.8rem; font-weight: 700; outline: none; font-family: inherit; }
 .troca-chat-input input::placeholder { color: #8899cc; }
-.troca-chat-input input:focus { border-color: #ffd93d; }
+.troca-chat-input input:focus { border-color: #4a9fd8; }
 .troca-chat-input button { padding: 0 14px; border-radius: 16px; background: #ffd93d; color: #1a0a2a; border: none; font-weight: 900; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
 .ranking-tabs { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 16px; padding: 0 4px; }
 .ranking-tab { flex: 1; padding: 12px 8px; border-radius: 14px; border: 2px solid #cfd8e3; background: #fff; color: #4a6fa5; font-weight: 900; font-size: 0.78rem; cursor: pointer; font-family: inherit; box-shadow: 0 3px 0 #cfd8e3; transition: .2s; }
@@ -1046,7 +1049,6 @@ html, body {
             <h4>🐉 Decorações Épicas (Cartas Top)</h4>
             <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;" id="listaEpicas"></div>
             
-            <!-- ATIVAR FAVORITOS -->
             <h4 style="margin-top:20px;">⭐ Meus Favoritos</h4>
             <div class="toggle-switch">
                 <span class="lbl">Mostrar Favoritos no Perfil</span>
@@ -1132,9 +1134,10 @@ html, body {
         </div>
     </div>
 
-    <div class="tela" id="telaTroca">
+    <!-- TELA DE TROCA REFORMULADA COM FUNDO CLARO E POKÉBOLA GIRANDO -->
+    <div class="tela" id="telaTroca" style="background: linear-gradient(180deg, #e8d5ff 0%, #d5e8ff 50%, #f0f8ff 100%);">
         <div class="perfil-topo">
-            <div style="font-size:1.15rem;font-weight:900;color:#ffd93d;">🤝 Troca com <span id="trocaComNome">Amigo</span></div>
+            <div style="font-size:1.15rem;font-weight:900;color:#4a6fa5;">🤝 Troca com <span id="trocaComNome">Amigo</span></div>
             <button class="btn ghost mini btn-voltar-topo" onclick="cancelarTroca()">Cancelar</button>
         </div>
         <div class="troca-container">
@@ -1151,7 +1154,12 @@ html, body {
                 <h4><span id="trocaBotNome">Amigo</span> oferece:</h4>
                 <div class="troca-slots" id="trocaSlotsBot"></div>
             </div>
-            <div class="troca-status" id="trocaStatus">Adicione cartas para iniciar...</div>
+            
+            <!-- Status da troca (com pokébola animada) -->
+            <div class="troca-status" id="trocaStatus">
+                Adicione cartas para iniciar...
+            </div>
+
             <div class="troca-chat">
                 <div class="troca-chat-titulo" onclick="toggleTrocaChat()">💬 Chat da Troca <span id="trocaChatSeta">▼</span></div>
                 <div class="troca-chat-body" id="trocaChatBody">
@@ -1846,7 +1854,7 @@ html, body {
         if (_saveTimeout) clearTimeout(_saveTimeout);
         _saveTimeout = setTimeout(() => {
             if (!auth.currentUser) return;
-            // COLEÇÃO REMOVIDA DAQUI PARA NÃO BUGAR A TROCA
+            // A coleção NÃO é salva aqui automaticamente para não sobrescrever o resultado da troca (Race condition)
             db.collection("jogadores").doc(auth.currentUser.uid).set({
                 moedas, 
                 dinheiroInfinito, 
@@ -4258,7 +4266,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         mostrarTela('telaTroca');
         document.getElementById('trocaComNome').textContent = amigo.nome;
         document.getElementById('trocaBotNome').textContent = amigo.nome;
-        document.getElementById('trocaStatus').textContent = 'Adicione cartas para iniciar...';
+        document.getElementById('trocaStatus').innerHTML = 'Adicione cartas para iniciar...';
         
         trocaSelecionadaJogador = []; 
         trocaSelecionadaAmigo = [];
@@ -4315,9 +4323,18 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const slotsJ = document.getElementById('trocaSlotsJogador'); 
         slotsJ.innerHTML = '';
         trocaSelecionadaJogador.forEach((carta, i) => {
+            let cardHtml = '';
+            if (carta.tipo === 'graded') {
+                const isCustom = carta.isCustom;
+                const classeNota = carta.hack ? 'hack' : (isCustom ? 'psa-10' : ('psa-' + carta.nota));
+                const logoLabel = carta.hack ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
+                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${isCustom ? '★' : carta.nota}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
+            } else {
+                cardHtml = `<img src="${carta.imgSmall || carta.img}">`;
+            }
             const d = document.createElement('div'); 
-            d.className = 'troca-slot' + (isCartaHack(carta.id) ? ' hack' : '');
-            d.innerHTML = `<img src="${carta.imgSmall || carta.img}">`;
+            d.className = 'troca-slot';
+            d.innerHTML = cardHtml + `<div class="price-tag">${formatarPreco(carta.precoFinal || carta.preco || 0)}</div>`;
             d.onclick = () => { trocaSelecionadaJogador.splice(i, 1); atualizarTrocaFirebase(); renderizarSlotsTroca(); };
             slotsJ.appendChild(d);
         });
@@ -4330,9 +4347,18 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const slotsB = document.getElementById('trocaSlotsBot'); 
         slotsB.innerHTML = '';
         trocaSelecionadaAmigo.forEach((carta) => {
+            let cardHtml = '';
+            if (carta.tipo === 'graded') {
+                const isCustom = carta.isCustom;
+                const classeNota = carta.hack ? 'hack' : (isCustom ? 'psa-10' : ('psa-' + carta.nota));
+                const logoLabel = carta.hack ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
+                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${isCustom ? '★' : carta.nota}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
+            } else {
+                cardHtml = `<img src="${carta.imgSmall || carta.img}">`;
+            }
             const d = document.createElement('div'); 
-            d.className = 'troca-slot bot-slot' + (isCartaHack(carta.id) ? ' hack' : '');
-            d.innerHTML = `<img src="${carta.imgSmall || carta.img}">`; 
+            d.className = 'troca-slot bot-slot';
+            d.innerHTML = cardHtml + `<div class="price-tag">${formatarPreco(carta.precoFinal || carta.preco || 0)}</div>`; 
             slotsB.appendChild(d);
         });
         if (trocaSelecionadaAmigo.length === 0) slotsB.innerHTML = '<div style="color:#a89ec4;font-size:.8rem;padding:20px;">Aguardando...</div>';
@@ -4346,7 +4372,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const campo = tradeIsJogador1 ? 'cartas1' : 'cartas2';
         const cartasLimpas = trocaSelecionadaJogador.map(c => {
             let obj = { id: c.id, tipo: c.tipo, img: c.imgSmall || c.img, preco: c.precoFinal || c.preco };
-            if (c.tipo === 'graded') { obj.nota = c.nota; obj._uid = c._uid || null; }
+            if (c.tipo === 'graded') { obj.nota = c.nota; obj._uid = c._uid || null; obj.isCustom = c.isCustom || false; obj.hack = c.hack || false; obj.nome = c.nome || ''; }
             return obj;
         });
         const updates = {}; 
@@ -4379,7 +4405,13 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const tempoDecorrido = Math.floor((Date.now() - startTime) / 1000); 
         timerCount = 5 - tempoDecorrido; 
         if (timerCount < 0) timerCount = 0;
-        document.getElementById('trocaStatus').innerHTML = `⏱️ <b style="font-size:1.5rem; color:#ff5566;">${timerCount}</b><br>Troca em andamento... (Aperte Cancelar para desistir)`;
+        
+        // NOVO VISUAL DO TIMER COM POKÉBOLA GIRANDO
+        document.getElementById('trocaStatus').innerHTML = `
+            <div style="font-size: 5rem; animation: girar 1.5s linear infinite; display: inline-block; margin-bottom: 15px; filter: drop-shadow(0 0 15px #ff5566);">🔴</div>
+            <div style="font-size: 2rem; color: #ff5566; font-weight: 900;">${timerCount}</div>
+            <div style="font-size: 0.9rem; color: #4a6fa5; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
+        `;
         
         timerTrocaInterval = setInterval(() => {
             timerCount--;
@@ -4388,7 +4420,11 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 timerTrocaInterval = null; 
                 executarTransacaoTroca(docTrocaId); 
             } else { 
-                document.getElementById('trocaStatus').innerHTML = `⏱️ <b style="font-size:1.5rem; color:#ff5566;">${timerCount}</b><br>Troca em andamento... (Aperte Cancelar para desistir)`; 
+                document.getElementById('trocaStatus').innerHTML = `
+                    <div style="font-size: 5rem; animation: girar 1.5s linear infinite; display: inline-block; margin-bottom: 15px; filter: drop-shadow(0 0 15px #ff5566);">🔴</div>
+                    <div style="font-size: 2rem; color: #ff5566; font-weight: 900;">${timerCount}</div>
+                    <div style="font-size: 0.9rem; color: #4a6fa5; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
+                `; 
             }
         }, 1000);
     }
@@ -4412,6 +4448,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 let col1 = JSON.parse(JSON.stringify(user1Doc.data().colecao || {})); 
                 let col2 = JSON.parse(JSON.stringify(user2Doc.data().colecao || {}));
 
+                // REMOVE AS CARTAS DO JOGADOR 1
                 for (let c of (data.cartas1 || [])) {
                     if (c.tipo === 'raw') { 
                         if (!col1[c.id] || (col1[c.id].qtd || 0) <= 0) throw new Error("Cartas insuficientes."); 
@@ -4425,6 +4462,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                         if ((!col1[c.id].qtd || col1[c.id].qtd === 0) && col1[c.id].gradeds.length === 0) delete col1[c.id]; 
                     }
                 }
+                
+                // REMOVE AS CARTAS DO JOGADOR 2
                 for (let c of (data.cartas2 || [])) {
                     if (c.tipo === 'raw') { 
                         if (!col2[c.id] || (col2[c.id].qtd || 0) <= 0) throw new Error("Cartas insuficientes."); 
@@ -4438,16 +4477,27 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                         if ((!col2[c.id].qtd || col2[c.id].qtd === 0) && col2[c.id].gradeds.length === 0) delete col2[c.id]; 
                     }
                 }
+                
+                // ADICIONA AS CARTAS DO J1 NO J2
                 for (let c of (data.cartas1 || [])) {
                     if (!col2[c.id]) col2[c.id] = { qtd: 0, gradeds: [] };
                     if (c.tipo === 'raw') { col2[c.id].qtd = (col2[c.id].qtd || 0) + 1; } 
-                    else if (c.tipo === 'graded') { if (!col2[c.id].gradeds) col2[c.id].gradeds = []; col2[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
+                    else if (c.tipo === 'graded') { 
+                        if (!col2[c.id].gradeds) col2[c.id].gradeds = []; 
+                        col2[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, isCustom: c.isCustom || false, hack: c.hack || false, data: new Date().toISOString() }); 
+                    }
                 }
+                
+                // ADICIONA AS CARTAS DO J2 NO J1
                 for (let c of (data.cartas2 || [])) {
                     if (!col1[c.id]) col1[c.id] = { qtd: 0, gradeds: [] };
                     if (c.tipo === 'raw') { col1[c.id].qtd = (col1[c.id].qtd || 0) + 1; } 
-                    else if (c.tipo === 'graded') { if (!col1[c.id].gradeds) col1[c.id].gradeds = []; col1[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, data: new Date().toISOString() }); }
+                    else if (c.tipo === 'graded') { 
+                        if (!col1[c.id].gradeds) col1[c.id].gradeds = []; 
+                        col1[c.id].gradeds.push({ _uid: c._uid || (Date.now() + '_' + Math.random().toString(36).substr(2, 5)), nota: c.nota, preco: c.preco, isCustom: c.isCustom || false, hack: c.hack || false, data: new Date().toISOString() }); 
+                    }
                 }
+                
                 transaction.update(user1Ref, { colecao: col1 }); 
                 transaction.update(user2Ref, { colecao: col2 }); 
                 transaction.update(tradeRef, { status: 'concluida' });
@@ -5060,7 +5110,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const idUnico = Date.now() + '_' + Math.random().toString(36).substr(2,5);
         if(!colecao[c.id]) colecao[c.id] = { qtd: 0, data: agora, gradeds: [] }; 
         if(!colecao[c.id].gradeds) colecao[c.id].gradeds = [];
-        colecao[c.id].gradeds.push({ _uid: idUnico, nota: 'CUSTOM', preco: basePrice, isCustom: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 'CUSTOM' }] });
+        // AQUI ESTÁ A CORREÇÃO: nota 10 numérica, e isCustom true.
+        colecao[c.id].gradeds.push({ _uid: idUnico, nota: 10, preco: basePrice, isCustom: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 'CUSTOM' }] });
         
         if(auth.currentUser) db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao }).catch(()=>{});
         salvarEstado(); atualizarUI(); 
@@ -5313,7 +5364,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             } else if (item.cartaId && item.cartaTipo === 'custom') {
                 if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] }; 
                 if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
-                colecao[item.cartaId].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 'CUSTOM', preco: item.cartaPrecoFixo || 100, isCustom: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 'CUSTOM' }] });
+                // CORREÇÃO DO CUSTOM AQUI
+                colecao[item.cartaId].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: item.cartaPrecoFixo || 100, isCustom: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 'CUSTOM' }] });
             } else if (item.cartaId && item.cartaTipo === 'graded') {
                 if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] }; 
                 if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
@@ -5985,7 +6037,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
         const ganho = 10 + Math.floor(Math.random() * 6); 
         let ganhoReal = ganho;
-        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDAS) ganhoReal = LIMITE_DIARIO_MOEDAS - ganhoHoje;
+        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDADAS) ganhoReal = LIMITE_DIARIO_MOEDADAS - ganhoHoje;
         moedas += ganhoReal; 
         ganhoHoje += ganhoReal; 
         salvarEstado(); 
