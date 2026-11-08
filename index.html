@@ -274,7 +274,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:400;padding:20px}.modal-overlay.ativo{display:flex;animation:fadeIn .3s}
 .modal-box{background:linear-gradient(180deg,#fff,#f0f4f8);border-radius:26px;padding:30px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,.5);animation:pop .35s;position:relative;border:3px solid #fff;margin:0 auto;max-height:90vh;overflow-y:auto}.modal-box h3{color:#4a6fa5;font-size:1.4rem;font-weight:900;margin-bottom:16px}.creditos-box{background:#e8f0fe;border-radius:14px;padding:16px;margin:20px 0;color:#4a6fa5;font-weight:900;font-size:.95rem;border:2px dashed #a8c8e8}.creditos-box span{color:#e63946;font-size:1.1rem;font-weight:900;display:block;margin-top:4px}
 #telaCompleta{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:500;padding:20px;overflow:hidden;background:linear-gradient(160deg,#ffd93d 0%,#ff8a3d 40%,#ff5566 70%,#8b6df0 100%)}#telaCompleta.ativo{display:flex;animation:fadeIn .3s}.confete-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}.confete{position:absolute;width:12px;height:12px;top:-20px;animation:confeteCai linear forwards}.compl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;background:rgba(255,255,255,.98);border-radius:30px;padding:40px 26px;box-shadow:0 30px 80px rgba(0,0,0,.4);max-width:400px;width:100%;animation:zoomIn .7s cubic-bezier(.34,1.56,.64,1);border:4px solid #fff;margin:0 auto}.compl-trofeu{font-size:7rem;animation:brilhoOuro 1.5s ease-in-out infinite;line-height:1}.compl-titulo{font-size:1.6rem;font-weight:900;background:linear-gradient(180deg,#ffd93d,#f7a800);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px;margin:16px 0 12px;line-height:1.15}.compl-set{font-size:1.4rem;font-weight:900;color:#4a6fa5;margin-bottom:8px;line-height:1.2}.compl-sub{font-size:.9rem;color:#7a6d9a;font-weight:800;margin-bottom:24px}@keyframes zoomIn{0%{transform:scale(0) rotate(-180deg);opacity:0}60%{transform:scale(1.1) rotate(8deg)}100%{transform:scale(1) rotate(0);opacity:1}}
-#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaNotificacoes, #telaTroca, #telaTrocaSucesso, #telaChat, #telaRanking, #telaConversa { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
+#telaPerfil, #telaAmigos, #telaAmigoPerfil, #telaCustomizacao, #telaTesterPainel, #telaHistorico, #telaCorreio, #telaNotificacoes, #telaTroca, #telaTrocaEspera, #telaTrocaSucesso, #telaChat, #telaRanking, #telaConversa { background: #1a0a2a; color: #fff; justify-content: flex-start; padding-top: 20px;}
 .perfil-topo { position: relative; width: 100%; max-width: 520px; height: 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; z-index: 10; }
 .btn-voltar-topo { position: absolute; right: 0; top: 0; }
 .perfil-card { background: rgba(255,255,255,.05); border-radius: 24px; padding: 20px 20px 30px 20px; width: 100%; max-width: 520px; text-align: center; position: relative; backdrop-filter: blur(15px); border: 3px solid rgba(255,255,255,.2); box-shadow: 0 10px 30px rgba(0,0,0,.3); margin-bottom: 20px; transition: all 0.5s ease; overflow: visible; }
@@ -327,11 +327,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .badge-epica.locked { filter: grayscale(1); opacity: 0.6; cursor: not-allowed; }
 .badge-epica.sel { border-color: #ffd93d; box-shadow: 0 0 15px #ffd93d; }
 .amigos-lista { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
-.amigo-card { background: #2a1a4a; border-radius: 16px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: .2s; box-shadow: 0 4px 15px rgba(0,0,0,.3); color: #fff; border: 2px solid rgba(255,255,255,0.1); }
+.amigo-card { background: #2a1a4a; border-radius: 16px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: .2s; box-shadow: 0 4px 15px rgba(0,0,0,.3); color: #fff; border: 2px solid rgba(255,255,255,0.1); position: relative; }
 .amigo-card:active { transform: scale(.98); border-color: #fff; }
 .amigo-card.banned { border-color: #ff0000; opacity: 0.75; }
-.amigo-card .amigo-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; overflow: hidden;}
+.amigo-card .amigo-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; overflow: hidden; position: relative; }
 .amigo-card .amigo-avatar img { width: 100%; height: 100%; object-fit: contain;}
+.online-dot { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #00ff41; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 5px #00ff41; z-index: 5; }
+.offline-dot { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #666; border: 2px solid #fff; border-radius: 50%; z-index: 5; }
 .amigo-card .amigo-info { flex: 1; }
 .amigo-card .amigo-nome { font-size: 1.05rem; font-weight: 900; display: flex; align-items: center; gap: 4px; }
 .amigo-card .amigo-status { font-size: .75rem; color: #a89ec4; font-weight: 800; margin-top: 2px; }
@@ -377,6 +379,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .troca-resultado .lado .cartas { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
 .troca-resultado .lado .cartas img { width: 45px; border-radius: 4px; }
 .troca-resultado .lado .moedas { color: #f7a800; font-weight: 900; margin-top: 5px; }
+#telaTrocaEspera { justify-content: center; }
+.espera-card { background: #2a1a4a; border-radius: 24px; padding: 40px 30px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,.5); border: 3px solid #ffd93d; position: relative; overflow: hidden;}
+.espera-card h2 { color: #ffd93d; font-size: 1.8rem; margin-bottom: 10px; }
+.espera-card p { color: #fff; font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; }
+.espera-loader { width: 60px; height: 60px; border: 6px solid rgba(255,255,255,0.1); border-top-color: #ffd93d; border-radius: 50%; animation: girar 1s linear infinite; margin: 0 auto 20px auto; }
 #telaTrabalho{background:linear-gradient(180deg,#2a1a4a 0%,#4a2a6a 100%);color:#fff;justify-content:flex-start;padding:20px;overflow:hidden;}
 #areaTrabalho{position:relative;flex:1;width:100%;max-width:520px;margin:20px auto;border-radius:20px;background:rgba(0,0,0,.3);border:2px dashed #a89ec4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 #btnPokeballTrabalho{width:120px;height:120px;border-radius:50%;background:linear-gradient(180deg,#ee1515 0%,#ee1515 45%,#222 45%,#222 55%,#fff 55%,#fff 100%);border:6px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.6);cursor:pointer;transition:.1s;display:flex;align-items:center;justify-content:center;position:relative}
@@ -462,7 +469,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .toggle-switch .sw::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: .3s; box-shadow: 0 2px 4px rgba(0,0,0,.4); }
 .toggle-switch .sw.on::after { left: 27px; }
 
-/* ===== CHAT STYLES ===== */
 .chat-container { display: flex; flex-direction: column; width: 100%; max-width: 520px; height: calc(100vh - 160px); background: #2a1a4a; border-radius: 18px; overflow: hidden; border: 2px solid rgba(255,215,0,0.3); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
 .chat-mensagens { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
 .chat-msg { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 0.9rem; font-weight: 700; word-wrap: break-word; line-height: 1.3; animation: pop .2s; }
@@ -476,7 +482,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .chat-input-row button { padding: 0 20px; border-radius: 20px; background: linear-gradient(180deg, #ffd93d, #f7a800); color: #fff; border: none; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #b57a00; font-family: inherit; font-size: 1rem; }
 .chat-input-row button:active { transform: translateY(2px); box-shadow: 0 1px 0 #b57a00; }
 
-/* ===== CHAT NA TROCA ===== */
 .troca-chat { background: #1a0a2a; border-radius: 12px; margin-top: 10px; border: 2px solid rgba(255,215,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
 .troca-chat-titulo { padding: 8px 12px; background: rgba(0,0,0,0.3); color: #ffd93d; font-weight: 900; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
 .troca-chat-body { display: flex; flex-direction: column; }
@@ -489,7 +494,6 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .troca-chat-input input:focus { border-color: #ffd93d; }
 .troca-chat-input button { padding: 0 14px; border-radius: 16px; background: #ffd93d; color: #1a0a2a; border: none; font-weight: 900; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
 
-/* ===== RANKING STYLES ===== */
 .ranking-tabs { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 16px; padding: 0 4px; }
 .ranking-tab { flex: 1; padding: 12px 8px; border-radius: 14px; border: 2px solid #cfd8e3; background: #fff; color: #4a6fa5; font-weight: 900; font-size: 0.78rem; cursor: pointer; font-family: inherit; box-shadow: 0 3px 0 #cfd8e3; transition: .2s; }
 .ranking-tab.at { background: linear-gradient(180deg, #6dd5ed, #4a9fd8); color: #fff; border-color: #2a6a9a; box-shadow: 0 3px 0 #2a6a9a; }
@@ -502,7 +506,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 .ranking-pos.pos-1 { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
 .ranking-pos.pos-2 { color: #c0c0c0; text-shadow: 0 0 10px #c0c0c0; }
 .ranking-pos.pos-3 { color: #cd7f32; text-shadow: 0 0 10px #cd7f32; }
-.ranking-avatar { width: 45px; height: 45px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.ranking-avatar { width: 45px; height: 45px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; position: relative; }
 .ranking-avatar img { width: 100%; height: 100%; object-fit: contain; }
 .ranking-info { flex: 1; min-width: 0; text-align: left; }
 .ranking-nome { font-size: 0.95rem; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: flex; align-items: center; gap: 4px; }
@@ -746,6 +750,15 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         <button class="btn verde" id="btnAbrirTrocaAmigo" style="flex:1; margin:0; min-width:140px; display:none;">🤝 Trocar Cartas</button>
         <button class="btn" id="btnAbrirChatAmigo" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#a855f7,#6d28d9); box-shadow:0 6px 0 #4a1a8a;">💬 Conversar</button>
     </div>
+  </div>
+</div>
+
+<div class="tela" id="telaTrocaEspera">
+  <div class="espera-card">
+    <div class="espera-loader"></div>
+    <h2>Aguardando...</h2>
+    <p>Esperando <span id="esperaNome">Amigo</span> aceitar sua troca.</p>
+    <button class="btn vermelho" onclick="cancelarEsperaTroca()" style="max-width:200px; margin-top:20px;">Cancelar Pedido</button>
   </div>
 </div>
 
@@ -1273,7 +1286,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   const SENHA_TESTER='0326';
   const CARTA_VERSO='https://images.pokemontcg.io/card-back.png';
 
-  // Trava removida! Pode entrar com a senha.
+  // TRAVA REMOVIDA! Pode entrar só com a senha.
   const ADMIN_UIDS = []; 
 
   let usuario = JSON.parse(localStorage.getItem(KEY+'user')||'null');
@@ -1303,6 +1316,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
   let unsubscribeTrocaChat = null;
   let unsubscribeRanking = null;
   let unsubscribeTroca = null;
+  let unsubscribeEspera = null;
 
   let meusAmigos = [];
   let pedidosAmizade = [];
@@ -1318,25 +1332,21 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
 
   let perfil = JSON.parse(localStorage.getItem(KEY+'perfil')||'null');
   if(!perfil) {
-      perfil = { id: '#' + Math.floor(1000 + Math.random() * 9000), nome: '', login: '', avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)', customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false, adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: 'admin-deco', dataCriacao: new Date().toISOString(), rewardHackClaimed: false, adminFixoAtivo: false, aparecerRanking: true };
+      perfil = { id: '#' + Math.floor(1000 + Math.random() * 9000), nome: '', login: '', avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)', customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false, adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: null, dataCriacao: new Date().toISOString(), rewardHackClaimed: false, adminFixoAtivo: false, aparecerRanking: true, rainbowName: false, coroa: false, badge: false };
       localStorage.setItem(KEY+'perfil', JSON.stringify(perfil));
   }
-  if (!perfil.adminTitle) perfil.adminTitle = '👑 CRIADOR SUPREMO 👑';
-  if (!perfil.adminFrame) perfil.adminFrame = 'admin-deco';
-  if (!perfil.dataCriacao) perfil.dataCriacao = new Date().toISOString();
-  if (perfil.rewardHackClaimed === undefined) perfil.rewardHackClaimed = false;
-  if (perfil.coroa === undefined) perfil.coroa = perfil.isAdmin ? true : false;
-  if (perfil.rainbowName === undefined) perfil.rainbowName = perfil.isAdmin ? true : false;
-  if (perfil.badge === undefined) perfil.badge = perfil.isAdmin ? true : false;
-  if (perfil.pacotesInfinitos === undefined) perfil.pacotesInfinitos = perfil.isAdmin ? true : false;
-  if (perfil.adminFixoAtivo === undefined) perfil.adminFixoAtivo = false;
+  if (perfil.adminFrame === undefined) perfil.adminFrame = null;
+  if (perfil.rainbowName === undefined) perfil.rainbowName = false;
+  if (perfil.coroa === undefined) perfil.coroa = false;
+  if (perfil.badge === undefined) perfil.badge = false;
   if (perfil.aparecerRanking === undefined) perfil.aparecerRanking = true;
+  if (!perfil.dataCriacao) perfil.dataCriacao = new Date().toISOString();
 
   let ganhoHoje = parseInt(localStorage.getItem(KEY+'ganhoHoje')||'0');
   let ultimoDia = localStorage.getItem(KEY+'ultimoDia')||'';
   
   const LIMITE_DIARIO_MOEDAS = 100000; 
-  // LIMITE_PACOTES_POR_SET FOI REMOVIDO PARA CORRIGIR O BUG.
+  // LIMITE DE 600 PACOTES REMOVIDO.
 
   let cartaAdminSelecionada = null;
   let seletorFiltro = 'todas';
@@ -1444,9 +1454,11 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         ganhoHoje, ultimoDia,
         multiplicadorSortePacotes, multiplicadorSorteGrad, tutorialFeito,
         cartasCount: getTotalCartas(),
-        ultimaAtualizacao: new Date().toISOString()
+        ultimaAtualizacao: new Date().toISOString(),
+        isOnline: true,
+        lastSeen: Date.now()
       }, { merge: true }).catch((erro) => console.error("Erro ao salvar na nuvem:", erro));
-    }, 500); // Tempo reduzido para evitar bugs de multiplicação
+    }, 500);
   }
 
   function mostrarTela(id, push = true){
@@ -1473,6 +1485,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (document.getElementById('telaChat').classList.contains('ativa')) { abrirPerfil(); return; }
     if (document.getElementById('telaRanking').classList.contains('ativa')) { if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; } abrirPerfil(); return; }
     if (document.getElementById('telaTroca').classList.contains('ativa')) { cancelarTroca(); return; }
+    if (document.getElementById('telaTrocaEspera').classList.contains('ativa')) { cancelarEsperaTroca(); return; }
     if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) { 
         if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
         abrirAmigos(); return; 
@@ -1480,6 +1493,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (document.getElementById('telaAmigos').classList.contains('ativa')) { irParaHome(); return; }
     if (document.getElementById('telaPerfil').classList.contains('ativa')) { irParaHome(); return; }
     if (document.getElementById('telaNotificacoes').classList.contains('ativa')) { irParaHome(); return; }
+    if (document.getElementById('telaCustomizacao').classList.contains('ativa')) { abrirPerfil(); return; }
     if (document.getElementById('telaColecao').classList.contains('ativa')) {
         if (albumAberto) {
             albumAberto = null; renderAlbuns();
@@ -1586,39 +1600,38 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     }
   }
 
-  function checarBanAtivo() {
+  async function checarBanAtivo() {
       const telaBan = document.getElementById('telaBanido'); if (!telaBan) return;
       if (!auth.currentUser) return;
       
-      db.collection('jogadores').doc(auth.currentUser.uid).get().then(doc => {
-          if (!doc.exists) return;
-          const d = doc.data();
-          if (d.banido) {
-              if (d.banTipo === 'temp' && d.banExpiraEm && Date.now() >= d.banExpiraEm) {
-                  db.collection('jogadores').doc(auth.currentUser.uid).update({ banido: false, banMotivo: '', banTipo: '', banExpiraEm: null });
-                  telaBan.classList.remove('ativo');
-                  if (banidoTimerInterval) { clearInterval(banidoTimerInterval); banidoTimerInterval = null; }
-                  return;
-              }
-              document.getElementById('banidoMotivo').textContent = d.banMotivo || 'Não informado';
-              if (d.banTipo === 'perm') document.getElementById('banidoTempo').textContent = 'PERMANENTE';
-              else {
-                  atualizarTempoBanido(d.banExpiraEm);
-                  if (banidoTimerInterval) clearInterval(banidoTimerInterval);
-                  banidoTimerInterval = setInterval(() => {
-                      if (Date.now() >= d.banExpiraEm) {
-                          clearInterval(banidoTimerInterval); checarBanAtivo();
-                      } else {
-                          atualizarTempoBanido(d.banExpiraEm);
-                      }
-                  }, 1000);
-              }
-              telaBan.classList.add('ativo');
-          } else {
+      const doc = await db.collection('jogadores').doc(auth.currentUser.uid).get();
+      if (!doc.exists) return;
+      const d = doc.data();
+      if (d.banido) {
+          if (d.banTipo === 'temp' && d.banExpiraEm && Date.now() >= d.banExpiraEm) {
+              await db.collection('jogadores').doc(auth.currentUser.uid).update({ banido: false, banMotivo: '', banTipo: '', banExpiraEm: null });
               telaBan.classList.remove('ativo');
               if (banidoTimerInterval) { clearInterval(banidoTimerInterval); banidoTimerInterval = null; }
+              return;
           }
-      });
+          document.getElementById('banidoMotivo').textContent = d.banMotivo || 'Não informado';
+          if (d.banTipo === 'perm') document.getElementById('banidoTempo').textContent = 'PERMANENTE';
+          else {
+              atualizarTempoBanido(d.banExpiraEm);
+              if (banidoTimerInterval) clearInterval(banidoTimerInterval);
+              banidoTimerInterval = setInterval(() => {
+                  if (Date.now() >= d.banExpiraEm) {
+                      clearInterval(banidoTimerInterval); checarBanAtivo();
+                  } else {
+                      atualizarTempoBanido(d.banExpiraEm);
+                  }
+              }, 1000);
+          }
+          telaBan.classList.add('ativo');
+      } else {
+          telaBan.classList.remove('ativo');
+          if (banidoTimerInterval) { clearInterval(banidoTimerInterval); banidoTimerInterval = null; }
+      }
   }
 
   function atualizarTempoBanido(expiraEm) {
@@ -1629,7 +1642,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
       let txt = ''; if (d > 0) txt += d + 'd '; if (h > 0 || d > 0) txt += h + 'h '; txt += m + 'm ' + s + 's';
       el.textContent = txt;
   }
-// ===== SISTEMA DE CONTAS E LOGIN =====
+
   const LIMITE_CONTAS_DISPOSITIVO = 3;
   const ESPERA_CRIAR_CONTA_MS = 30 * 60 * 1000;
 
@@ -1683,7 +1696,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         avatar: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
         cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)',
         customLevel: 0, isAdmin: false, isTester: false, isVerified: false, isHackMaster: false,
-        adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: 'admin-deco', dataCriacao: agora,
+        adminTitle: '👑 CRIADOR SUPREMO 👑', adminFrame: null, dataCriacao: agora,
         rewardHackClaimed: false, adminFixoAtivo: false, coroa: false, rainbowName: false,
         badge: false, pacotesInfinitos: false, aparecerRanking: true
       };
@@ -1694,7 +1707,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
         historicoVendas: [], amigos: [], correio: [], notificacoes: [], banidos: [], colecoesCompletas: [],
         ganhoHoje: 0, ultimoDia: new Date().toDateString(),
         multiplicadorSortePacotes: 1, multiplicadorSorteGrad: 1,
-        tutorialFeito: false, criadoEm: agora, banido: false
+        tutorialFeito: false, criadoEm: agora, banido: false,
+        isOnline: true, lastSeen: Date.now()
       });
 
       await db.collection('ids_publicos').doc(idGerado).set({ uid: cred.user.uid, nome: nome, login: login });
@@ -1728,6 +1742,10 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (!confirm('🚪 Tem certeza que deseja sair da conta?')) return;
     document.getElementById('modalConfig').classList.remove('ativo');
     
+    if (auth.currentUser) {
+        await db.collection('jogadores').doc(auth.currentUser.uid).update({ isOnline: false, lastSeen: Date.now() }).catch(()=>{});
+    }
+    
     if (unsubscribeAmigos) { unsubscribeAmigos(); unsubscribeAmigos = null; }
     if (unsubscribePerfil) { unsubscribePerfil(); unsubscribePerfil = null; }
     if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
@@ -1735,6 +1753,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (unsubscribeTrocaChat) { unsubscribeTrocaChat(); unsubscribeTrocaChat = null; }
     if (unsubscribeRanking) { unsubscribeRanking(); unsubscribeRanking = null; }
     if (unsubscribeTroca) { unsubscribeTroca(); unsubscribeTroca = null; }
+    if (unsubscribeEspera) { unsubscribeEspera(); unsubscribeEspera = null; }
     
     await auth.signOut();
   }
@@ -1744,8 +1763,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     const erroEl = document.getElementById('erroLogin'); if (erroEl) erroEl.textContent = '';
     mostrarAbaLogin('entrar');
   }
-
-  function getPopularidade(nome){
+function getPopularidade(nome){
     const palavras=String(nome).toLowerCase().split(/[\s\-\.]+/); let base=1;
     for(const p of palavras){ if(POP_SP.has(p))return 5; if(POP_S.has(p))base=Math.max(base,3); if(POP_A.has(p))base=Math.max(base,2); }
     if(/ex\b|vmax|vstar|v-union|lv\.x|prime|legend|gx\b/i.test(nome)&&base<2)base=2; return base;
@@ -1981,20 +1999,20 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if(p){ document.getElementById('btnComprar').textContent='💰 COMPRAR '+quantidade+'x POR '+(p.preco*quantidade)+' 🪙'; }
   }
 
-  function comprarPacote(){
+  async function comprarPacote(){
     const el=document.querySelector('.pack-card.sel'); if(!el){alert('Selecione um pacote!');return;}
     const precoUnit=parseInt(el.dataset.preco); const precoTotal=precoUnit*quantidade;
     
-    // A TRAVA DE 600 FOI REMOVIDA AQUI.
+    // LIMITE DE 600 REMOVIDO AQUI CONFORME PEDIDO.
     
     if(!dinheiroInfinito && moedas<precoTotal){alert('Moedas insuficientes! Precisa de '+precoTotal+' 🪙');return;}
     
     if(!dinheiroInfinito) moedas-=precoTotal; 
     inventario[pacoteEscolhido]=(inventario[pacoteEscolhido]||0)+quantidade;
     
-    // Salva imediatamente para evitar bugs
+    // Atualiza no Firebase IMEDIATAMENTE para evitar bugs
     if (auth.currentUser) {
-        db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario });
+        await db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario }).catch(()=>{});
     }
     
     salvarEstado();atualizarUI();
@@ -2023,7 +2041,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     });
   }
 
-  function venderPacote(setId) {
+  async function venderPacote(setId) {
     const p = PACOTES.find(x => x.cod === setId); const qtd = inventario[setId];
     if (!p || qtd <= 0) return;
     const input = prompt(`Você tem ${qtd} pacote(s) de ${p.nome.split(' (')[0]}.\nCada um vale ${p.preco} moedas na loja, mas você só receberá METADE (${Math.floor(p.preco / 2)}).\nQuantos deseja vender?`, qtd);
@@ -2036,19 +2054,19 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     if (inventario[setId] <= 0) delete inventario[setId];
     
     if (auth.currentUser) {
-        db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario });
+        await db.collection('jogadores').doc(auth.currentUser.uid).update({ moedas: moedas, inventario: inventario }).catch(()=>{});
     }
     salvarEstado(); atualizarUI(); montarInventario(); alert(`✅ Venda realizada! Você ganhou ${totalGanho} moedas.`);
   }
 
-  function abrirDoInventario(setId, qty){
+  async function abrirDoInventario(setId, qty){
     if(!inventario[setId] || inventario[setId] <= 0)return;
     const realQty=Math.min(qty, inventario[setId]);
     inventario[setId]-=realQty; if(inventario[setId]<=0) delete inventario[setId];
     
-    // Salva o inventário atualizado IMEDIATAMENTE para evitar a duplicação
+    // Salva IMEDIATAMENTE para evitar a multiplicação
     if (auth.currentUser) {
-        db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario });
+        await db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario }).catch(()=>{});
     }
     
     salvarEstado();atualizarUI();
@@ -2105,7 +2123,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     while(cartas.length<10){ const c=pegarCarta(setId,'C'); if(c)cartas.push(c);else break; } return cartas;
   }
 
-  function rasgar(){
+  async function rasgar(){
     if(ripLock) return; ripLock = true; setTimeout(()=>ripLock=false, 1000);
     document.getElementById('btnCancelarPack').style.display='none'; const p=document.getElementById('packFechado'); p.classList.add('aberto');
     packAtual=gerarCartasDoPack(pacoteEscolhido); const agora=new Date().toISOString();
@@ -2113,8 +2131,8 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     
     salvarEstado(); atualizarUI(); 
     if (auth.currentUser) {
-        // Salva a coleção IMEDIATAMENTE na nuvem para o bug não acontecer
-        db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao });
+        // Salva a coleção IMEDIATAMENTE na nuvem para não haver conflito
+        await db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao }).catch(()=>{});
     }
 
     packAtual.forEach(c=>{if(c.imgSmall){const im=new Image();im.src=c.imgSmall;}});
@@ -2125,13 +2143,13 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     checarAlbumCompleto(pacoteEscolhido);
   }
 
-  document.getElementById('btnCancelarPack').onclick=()=>{
+  document.getElementById('btnCancelarPack').onclick=async ()=>{
     if(pacotesSendoAbertos > 0){
       const devolver = pacotesFaltandoAbrir + 1;
       inventario[pacoteEscolhido] = (inventario[pacoteEscolhido]||0) + devolver;
       pacotesSendoAbertos = 0; pacotesFaltandoAbrir = 0; 
       if (auth.currentUser) {
-          db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario });
+          await db.collection('jogadores').doc(auth.currentUser.uid).update({ inventario: inventario }).catch(()=>{});
       }
       salvarEstado(); atualizarUI();
     }
@@ -2266,7 +2284,7 @@ html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#f8f4ff;color
     }
   }
 
-  function enviarParaGraduacao(cartaId, tier){
+  async function enviarParaGraduacao(cartaId, tier){
     if (cartasTravadas[cartaId] && cartasTravadas[cartaId].raw) { alert('🔒 Esta carta está travada em uma troca!'); return; }
     const cartasQtd=colecao[cartaId]?colecao[cartaId].qtd:0; if(cartasQtd<=0){alert('Você não tem essa carta raw!');return;}
     let custo=0, tempoMs=0;
@@ -2567,7 +2585,7 @@ function mostrarCol(manterScroll = false){
     cartaGradAtual = cartaId; mostrarTela('telaGraduar');
   }
 
-  function venderCarta(cartaId, notaGrad=null, gradIndex=null){
+  async function venderCarta(cartaId, notaGrad=null, gradIndex=null){
     const info=colecao[cartaId]; const carta=encontrarCarta(cartaId); if(!info || !carta)return;
     const ehHack = isCartaHack(cartaId); let totalGanho=0; let notaVendida = null;
     
@@ -2801,7 +2819,7 @@ function mostrarCol(manterScroll = false){
           let btnHtml = '';
           if(n.tipo === 'msg') btnHtml = `<button class="btn-resgatar" onclick="abrirConversaNotif('${n.remetenteUid}')">Abrir Chat</button>`;
           else if(n.tipo === 'amizade') btnHtml = `<button class="btn-resgatar" onclick="abrirPerfilNotif('${n.remetenteUid}')">Ver Perfil</button>`;
-          else if(n.tipo === 'troca') btnHtml = `<button class="btn-resgatar" onclick="aceitarTrocaNotif('${n.id}', '${n.remetenteUid}')">Aceitar Troca</button>`;
+          else if(n.tipo === 'troca') btnHtml = `<button class="btn-resgatar" style="background:linear-gradient(180deg,#7eeb8e,#34c759); color:#fff;" onclick="aceitarTrocaNotif('${n.id}', '${n.remetenteUid}')">Aceitar</button><button class="btn-resgatar" style="background:#ff3b30; color:#fff; margin-top:4px;" onclick="recusarTrocaNotif('${n.id}', '${n.remetenteUid}')">Recusar</button>`;
 
           d.innerHTML = `
               <div class="ico-box">${icoHtml}</div>
@@ -2811,7 +2829,7 @@ function mostrarCol(manterScroll = false){
                   <div class="de">De: ${n.remetenteNome || 'Sistema'}</div>
                   <div class="data">${dataStr}</div>
               </div>
-              ${btnHtml}
+              <div style="display:flex; flex-direction:column; gap:4px;">${btnHtml}</div>
           `;
           lista.appendChild(d);
           
@@ -2835,20 +2853,6 @@ function mostrarCol(manterScroll = false){
       else alert('Você precisa ser amigo dele para abrir o chat.');
   }
 
-  async function aceitarTrocaNotif(notifId, senderUid) {
-      try {
-          const novasNotifs = notificacoes.filter(n => n.id !== notifId);
-          await db.collection('jogadores').doc(auth.currentUser.uid).update({ notificacoes: novasNotifs });
-          
-          const doc = await db.collection('jogadores').doc(senderUid).get();
-          if(!doc.exists) return;
-          const d = doc.data(); const p = d.perfil || {};
-          const amigo = { uid: senderUid, id: p.id, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false };
-          
-          iniciarTrocaComAmigo(amigo);
-      } catch(e) { console.error(e); }
-  }
-
   async function abrirAmigos() {
       mostrarTela('telaAmigos'); 
       renderizarListaAmigos(); 
@@ -2863,7 +2867,7 @@ function mostrarCol(manterScroll = false){
                   if(doc.exists) {
                       const d = doc.data();
                       const p = d.perfil || {};
-                      if(amigo.nome !== (d.nome || amigo.nome) || amigo.isVerified !== p.isVerified || amigo.avatar !== p.avatar || amigo.cor !== p.cor || amigo.cartas !== (d.cartasCount||0)) {
+                      if(amigo.nome !== (d.nome || amigo.nome) || amigo.isVerified !== p.isVerified || amigo.avatar !== p.avatar || amigo.cor !== p.cor || amigo.cartas !== (d.cartasCount||0) || amigo.isOnline !== d.isOnline || (Date.now() - (d.lastSeen||0) < 120000) !== amigo.isOnline) {
                           amigo.nome = d.nome || amigo.nome;
                           amigo.isVerified = p.isVerified || false;
                           amigo.avatar = p.avatar || amigo.avatar;
@@ -2871,6 +2875,7 @@ function mostrarCol(manterScroll = false){
                           amigo.nivel = calcularNivel(d.cartasCount || 0);
                           amigo.cartas = d.cartasCount || 0;
                           amigo.isBanned = d.banido || false;
+                          amigo.isOnline = (Date.now() - (d.lastSeen||0) < 120000);
                           atualizou = true;
                       }
                   }
@@ -2901,7 +2906,7 @@ function mostrarCol(manterScroll = false){
           if (!doc.exists) { alert('❌ Dados do jogador não encontrados.'); return; }
           
           const d = doc.data(); const p = d.perfil || {};
-          const amigo = { uid: uidAlvo, id: p.id || idAlvo, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false };
+          const amigo = { uid: uidAlvo, id: p.id || idAlvo, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false, isOnline: (Date.now() - (d.lastSeen||0) < 120000) };
           
           abrirPerfilAmigo(amigo);
       } catch(e) { console.error(e); alert('Erro ao buscar perfil.'); }
@@ -2971,7 +2976,8 @@ function mostrarCol(manterScroll = false){
       meusAmigos.forEach((amigo, index) => {
           const d = document.createElement('div'); d.className = 'amigo-card' + (amigo.isBanned ? ' banned' : '');
           let avHtml = (amigo.avatar && amigo.avatar.startsWith('http')) ? `<img src="${amigo.avatar}">` : (amigo.avatar || '👤');
-          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}</div>
+          let dotHtml = amigo.isOnline ? '<div class="online-dot"></div>' : '<div class="offline-dot"></div>';
+          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}${dotHtml}</div>
               <div class="amigo-info">
                   <div class="amigo-nome">${amigo.nome} ${amigo.isVerified ? '<span class="icon-verified"></span>' : ''}${amigo.isBanned ? '<span class="ban-tag">BANIDO</span>' : ''}</div>
                   <div class="amigo-status">Nível ${amigo.nivel} • ${amigo.cartas} cartas</div>
@@ -2991,13 +2997,12 @@ function mostrarCol(manterScroll = false){
           if (!amigoDoc.exists || !meuDoc.exists) return;
           
           const amigoData = amigoDoc.data();
-          const meuData = meuDoc.data();
           
           await euRef.update({
-              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: uidAmigo, id: idAmigo, nome: nomeAmigo, avatar: (amigoData.perfil && amigoData.perfil.avatar) || '', cor: (amigoData.perfil && amigoData.perfil.cor) || '', nivel: 1, cartas: amigoData.cartasCount || 0, isVerified: (amigoData.perfil && amigoData.perfil.isVerified) || false, isBanned: amigoData.banido || false })
+              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: uidAmigo, id: idAmigo, nome: nomeAmigo, avatar: (amigoData.perfil && amigoData.perfil.avatar) || '', cor: (amigoData.perfil && amigoData.perfil.cor) || '', nivel: 1, cartas: amigoData.cartasCount || 0, isVerified: (amigoData.perfil && amigoData.perfil.isVerified) || false, isBanned: amigoData.banido || false, isOnline: (Date.now() - (amigoData.lastSeen||0) < 120000) })
           });
           await amigoRef.update({
-              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: auth.currentUser.uid, id: perfil.id, nome: usuario.nome, avatar: perfil.avatar, cor: perfil.cor, nivel: calcularNivel(getTotalCartas()), cartas: getTotalCartas(), isVerified: perfil.isVerified || false, isBanned: false })
+              amigos: firebase.firestore.FieldValue.arrayUnion({ uid: auth.currentUser.uid, id: perfil.id, nome: usuario.nome, avatar: perfil.avatar, cor: perfil.cor, nivel: calcularNivel(getTotalCartas()), cartas: getTotalCartas(), isVerified: perfil.isVerified || false, isBanned: false, isOnline: true })
           });
           await euRef.collection('pedidos').doc(uidAmigo).delete();
           
@@ -3016,11 +3021,16 @@ function mostrarCol(manterScroll = false){
       if(!confirm('Remover este amigo da sua lista?')) return;
       try {
           const euRef = db.collection('jogadores').doc(auth.currentUser.uid);
-          const novoArrayAmigos = meusAmigos.filter(a => a.uid !== uidAmigo);
-          await euRef.update({ amigos: novoArrayAmigos });
-          const amigoData = meusAmigos.find(a => a.uid === uidAmigo);
-          if (amigoData) {
-              await db.collection('jogadores').doc(uidAmigo).update({ amigos: firebase.firestore.FieldValue.arrayRemove(amigoData) }).catch(()=>{});
+          const amigoRef = db.collection('jogadores').doc(uidAmigo);
+          
+          const meuDoc = await euRef.get();
+          let meusAmigosAtualizados = (meuDoc.data().amigos || []).filter(a => a.uid !== uidAmigo);
+          await euRef.update({ amigos: meusAmigosAtualizados });
+          
+          const amigoDoc = await amigoRef.get();
+          if (amigoDoc.exists) {
+              let amigosDoAmigoAtualizados = (amigoDoc.data().amigos || []).filter(a => a.uid !== auth.currentUser.uid);
+              await amigoRef.update({ amigos: amigosDoAmigoAtualizados });
           }
       } catch(e) { console.error(e); }
   }
@@ -3061,7 +3071,8 @@ function mostrarCol(manterScroll = false){
               uid: amigo.uid, id: p.id || amigo.id, nome: d.nome || amigo.nome,
               avatar: p.avatar || amigo.avatar, cor: p.cor || amigo.cor,
               nivel: calcularNivel(d.cartasCount || 0), cartas: d.cartasCount || 0,
-              isVerified: p.isVerified || false, isBanned: d.banido || false
+              isVerified: p.isVerified || false, isBanned: d.banido || false,
+              isOnline: (Date.now() - (d.lastSeen||0) < 120000)
           };
           amigoDaTrocaAtual = amigoAtualizado;
           if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) {
@@ -3085,92 +3096,137 @@ function mostrarCol(manterScroll = false){
       const cc = document.getElementById('amigoColecoes'); if (cc) cc.textContent = '0';
   }
 
-  async function enviarPedidoTroca(amigo) {
+  let esperaTrocaUnsub = null;
+  let esperaTrocaDocId = null;
+  
+  async function iniciarTrocaComAmigo(amigo) {
+      amigoDaTrocaAtual = amigo;
+      const tradeId = 'trade_' + Date.now() + '_' + auth.currentUser.uid;
+      
       try {
+          await db.collection('trocas').doc(tradeId).set({
+              jogador1: auth.currentUser.uid, jogador1Nome: usuario.nome,
+              jogador2: amigo.uid, jogador2Nome: amigo.nome,
+              cartas1: [], cartas2: [], status: 'pendente',
+              aceitou1: false, aceitou2: false, criadoEm: Date.now()
+          });
+          
           const notif = {
               tipo: 'troca',
               titulo: 'Pedido de Troca',
               mensagem: 'quer trocar cartas com você!',
               remetenteUid: auth.currentUser.uid,
               remetenteNome: usuario.nome,
+              tradeId: tradeId,
               lido: false,
               dataEnvio: Date.now(),
               id: 'notif_troca_' + Date.now()
           };
+          
           await db.collection('jogadores').doc(amigo.uid).update({
               notificacoes: firebase.firestore.FieldValue.arrayUnion(notif)
           });
-          alert('Pedido de troca enviado para ' + amigo.nome + '! Aguarde ele aceitar nas notificações.');
-      } catch(e) { console.error(e); alert('Erro ao enviar pedido.'); }
-  }
-
-  function gerarIdTroca(uid1, uid2) {
-      const sorted = [uid1, uid2].sort();
-      return 'trade_' + sorted[0] + '_' + sorted[1];
-  }
-
-  async function iniciarTrocaComAmigo(amigo) {
-      amigoDaTrocaAtual = amigo;
-      docTrocaId = gerarIdTroca(auth.currentUser.uid, amigo.uid);
-      
-      try {
-          const tradeRef = db.collection('trocas').doc(docTrocaId);
-          const doc = await tradeRef.get();
           
-          if (!doc.exists) {
-              await tradeRef.set({
-                  jogador1: auth.currentUser.uid, jogador1Nome: usuario.nome,
-                  jogador2: amigo.uid, jogador2Nome: amigo.nome,
-                  cartas1: [], cartas2: [], status: 'pendente',
-                  aceitou1: false, aceitou2: false, criadoEm: Date.now()
-              });
-          } else {
+          document.getElementById('esperaNome').textContent = amigo.nome;
+          mostrarTela('telaTrocaEspera');
+          esperaTrocaDocId = tradeId;
+          
+          if (esperaTrocaUnsub) esperaTrocaUnsub();
+          esperaTrocaUnsub = db.collection('trocas').doc(tradeId).onSnapshot(doc => {
+              if (!doc.exists) return;
               const data = doc.data();
-              if (data.status === 'concluida' || data.status === 'cancelada') {
-                  await tradeRef.set({
-                      jogador1: auth.currentUser.uid, jogador1Nome: usuario.nome,
-                      jogador2: amigo.uid, jogador2Nome: amigo.nome,
-                      cartas1: [], cartas2: [], status: 'pendente',
-                      aceitou1: false, aceitou2: false, criadoEm: Date.now()
-                  });
-              }
-          }
-          
-          mostrarTela('telaTroca');
-          document.getElementById('trocaComNome').textContent = amigo.nome;
-          document.getElementById('trocaBotNome').textContent = amigo.nome;
-          document.getElementById('trocaStatus').textContent = 'Adicione cartas para iniciar...';
-          document.getElementById('btnConfirmarTroca').style.display = 'none';
-          
-          trocaSelecionadaJogador = []; 
-          trocaSelecionadaAmigo = [];
-          renderizarSlotsTroca();
-          
-          if (unsubscribeTroca) unsubscribeTroca();
-          unsubscribeTroca = tradeRef.onSnapshot(docSnap => {
-              if (!docSnap.exists) { cancelarTrocaLocal(); return; }
-              const data = docSnap.data();
-              
-              if (data.status === 'cancelada') { alert('A troca foi cancelada.'); cancelarTrocaLocal(); return; }
-              
-              if (data.jogador1 === auth.currentUser.uid) {
-                  trocaSelecionadaAmigo = data.cartas2 || [];
-              } else {
-                  trocaSelecionadaAmigo = data.cartas1 || [];
-              }
-              renderizarSlotsTroca();
-              
-              if (data.status === 'timer') {
-                  iniciarTimerTroca(data.timerStart);
-              } else if (data.status === 'concluida') {
-                  alert('✅ Troca concluída com sucesso!');
-                  cancelarTrocaLocal();
-                  window.location.reload(); 
+              if (data.status === 'aceita') {
+                  esperaTrocaUnsub(); esperaTrocaUnsub = null;
+                  abrirPainelTroca(tradeId, amigo);
+              } else if (data.status === 'recusada') {
+                  esperaTrocaUnsub(); esperaTrocaUnsub = null;
+                  db.collection('trocas').doc(tradeId).delete();
+                  alert('O usuário recusou seu pedido de troca.');
+                  irParaHome();
               }
           });
           
-          iniciarChatTroca();
       } catch(e) { console.error(e); alert('Erro ao iniciar troca.'); }
+  }
+
+  function cancelarEsperaTroca() {
+      if (esperaTrocaUnsub) { esperaTrocaUnsub(); esperaTrocaUnsub = null; }
+      if (esperaTrocaDocId) { db.collection('trocas').doc(esperaTrocaDocId).delete(); esperaTrocaDocId = null; }
+      irParaHome();
+  }
+
+  async function aceitarTrocaNotif(notifId, senderUid) {
+      try {
+          const notifDoc = notificacoes.find(n => n.id === notifId);
+          if (!notifDoc) return;
+          const tradeId = notifDoc.tradeId;
+          
+          const novasNotifs = notificacoes.filter(n => n.id !== notifId);
+          await db.collection('jogadores').doc(auth.currentUser.uid).update({ notificacoes: novasNotifs });
+          
+          await db.collection('trocas').doc(tradeId).update({ status: 'aceita' });
+          
+          const doc = await db.collection('jogadores').doc(senderUid).get();
+          const d = doc.data(); const p = d.perfil || {};
+          const amigo = { uid: senderUid, id: p.id, nome: d.nome, avatar: p.avatar, cor: p.cor, nivel: calcularNivel(d.cartasCount||0), cartas: d.cartasCount||0, isVerified: p.isVerified||false, isBanned: d.banido||false };
+          
+          abrirPainelTroca(tradeId, amigo);
+      } catch(e) { console.error(e); }
+  }
+
+  async function recusarTrocaNotif(notifId, senderUid) {
+      try {
+          const notifDoc = notificacoes.find(n => n.id === notifId);
+          if (!notifDoc) return;
+          const tradeId = notifDoc.tradeId;
+          
+          const novasNotifs = notificacoes.filter(n => n.id !== notifId);
+          await db.collection('jogadores').doc(auth.currentUser.uid).update({ notificacoes: novasNotifs });
+          
+          await db.collection('trocas').doc(tradeId).update({ status: 'recusada' });
+          
+          renderNotificacoes();
+      } catch(e) { console.error(e); }
+  }
+
+  function abrirPainelTroca(tradeId, amigo) {
+      docTrocaId = tradeId;
+      amigoDaTrocaAtual = amigo;
+      
+      mostrarTela('telaTroca');
+      document.getElementById('trocaComNome').textContent = amigo.nome;
+      document.getElementById('trocaBotNome').textContent = amigo.nome;
+      document.getElementById('trocaStatus').textContent = 'Adicione cartas para iniciar...';
+      document.getElementById('btnConfirmarTroca').style.display = 'none';
+      
+      trocaSelecionadaJogador = []; 
+      trocaSelecionadaAmigo = [];
+      renderizarSlotsTroca();
+      
+      if (unsubscribeTroca) unsubscribeTroca();
+      unsubscribeTroca = db.collection('trocas').doc(tradeId).onSnapshot(docSnap => {
+          if (!docSnap.exists) { cancelarTrocaLocal(); return; }
+          const data = docSnap.data();
+          
+          if (data.status === 'cancelada') { alert('A troca foi cancelada.'); cancelarTrocaLocal(); return; }
+          
+          if (data.jogador1 === auth.currentUser.uid) {
+              trocaSelecionadaAmigo = data.cartas2 || [];
+          } else {
+              trocaSelecionadaAmigo = data.cartas1 || [];
+          }
+          renderizarSlotsTroca();
+          
+          if (data.status === 'timer') {
+              iniciarTimerTroca(data.timerStart);
+          } else if (data.status === 'concluida') {
+              alert('✅ Troca concluída com sucesso!');
+              cancelarTrocaLocal();
+              window.location.reload(); 
+          }
+      });
+      
+      iniciarChatTroca();
   }
 
   function cancelarTroca() {
@@ -3426,7 +3482,8 @@ function mostrarCol(manterScroll = false){
       meusAmigos.forEach(amigo => {
           const d = document.createElement('div'); d.className = 'amigo-card';
           let avHtml = (amigo.avatar && amigo.avatar.startsWith('http')) ? `<img src="${amigo.avatar}">` : (amigo.avatar || '👤');
-          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}</div>
+          let dotHtml = amigo.isOnline ? '<div class="online-dot"></div>' : '<div class="offline-dot"></div>';
+          d.innerHTML = `<div class="amigo-avatar" style="background:${amigo.cor || '#555'}">${avHtml}${dotHtml}</div>
               <div class="amigo-info">
                   <div class="amigo-nome">${amigo.nome} ${amigo.isVerified ? '<span class="icon-verified"></span>' : ''}</div>
                   <div class="amigo-status">Clique para conversar 💬</div>
@@ -3487,6 +3544,21 @@ function mostrarCol(manterScroll = false){
           await db.collection('chats').doc(chatId).collection('mensagens').add({
               de: auth.currentUser.uid, deNome: usuario.nome, texto: texto, data: Date.now()
           });
+          
+          const notif = {
+              tipo: 'msg',
+              titulo: 'Nova Mensagem',
+              mensagem: texto.substring(0, 30) + (texto.length > 30 ? '...' : ''),
+              remetenteUid: auth.currentUser.uid,
+              remetenteNome: usuario.nome,
+              lido: false,
+              dataEnvio: Date.now(),
+              id: 'notif_msg_' + Date.now()
+          };
+          await db.collection('jogadores').doc(amigoChatAtual.uid).update({
+              notificacoes: firebase.firestore.FieldValue.arrayUnion(notif)
+          });
+          
       } catch(e) { console.error('Erro ao enviar mensagem:', e); alert('Erro ao enviar mensagem.'); }
   }
 
@@ -3712,7 +3784,7 @@ function mostrarCol(manterScroll = false){
           { id: 'frame-electric', nome: 'Elétrico' }, { id: 'frame-galaxy', nome: 'Galáxia' }, { id: 'frame-shadow', nome: 'Sombra' }
       ];
       molduras.forEach(m => {
-          const btn = document.createElement('div'); const isAtivo = (perfil.adminFrame || 'admin-deco') === m.id;
+          const btn = document.createElement('div'); const isAtivo = (perfil.adminFrame || '') === m.id;
           btn.className = 'cus-cor-btn' + (isAtivo ? ' sel' : ''); btn.style.background = 'rgba(255,255,255,0.1)'; btn.style.border = isAtivo ? '3px solid #fff' : '2px solid #ffd700';
           btn.innerHTML = `<span style="font-size:0.6rem; font-weight:900; color:#fff; text-align:center; display:flex; align-items:center; justify-content:center; height:100%;">${m.nome}</span>`;
           btn.onclick = () => { perfil.adminFrame = m.id; if (m.id !== 'admin-deco') perfil.cor = 'linear-gradient(135deg, #2a1a4a, #4a2a6a)'; salvarEstado(); renderizarAdminVisuais(); atualizarUI(); };
@@ -4202,6 +4274,12 @@ function mostrarCol(manterScroll = false){
 
           document.getElementById('nomeUser').textContent = usuario.nome;
           montarLoja(); atualizarUI();
+
+          await db.collection('jogadores').doc(user.uid).update({ isOnline: true, lastSeen: Date.now() });
+          
+          window.addEventListener('beforeunload', () => {
+             db.collection('jogadores').doc(user.uid).update({ isOnline: false, lastSeen: Date.now() }).catch(()=>{});
+          });
 
           if (unsubscribePerfil) unsubscribePerfil();
           unsubscribePerfil = db.collection('jogadores').doc(user.uid).onSnapshot(snap => {
