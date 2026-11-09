@@ -626,10 +626,10 @@ html, body {
 .amigo-card { background: #2a1a4a; border-radius: 16px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: .2s; box-shadow: 0 4px 15px rgba(0,0,0,.3); color: #fff; border: 2px solid rgba(255,255,255,0.1); position: relative; }
 .amigo-card:active { transform: scale(.98); border-color: #fff; }
 .amigo-card.banned { border-color: #ff0000; opacity: 0.75; }
-.amigo-card .amigo-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; overflow: hidden; position: relative; }
-.amigo-card .amigo-avatar img { width: 100%; height: 100%; object-fit: contain; }
-.online-dot { position: absolute; bottom: 0px; right: 0px; width: 12px; height: 12px; background: #00ff41; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 5px #00ff41; z-index: 10; }
-.offline-dot { position: absolute; bottom: 0px; right: 0px; width: 12px; height: 12px; background: #666; border: 2px solid #fff; border-radius: 50%; z-index: 10; }
+.amigo-card .amigo-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; overflow: visible; position: relative; }
+.amigo-card .amigo-avatar img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+.online-dot { position: absolute; bottom: 0px; right: 0px; width: 14px; height: 14px; background: #00ff41; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 5px #00ff41; z-index: 10; }
+.offline-dot { position: absolute; bottom: 0px; right: 0px; width: 14px; height: 14px; background: #666; border: 2px solid #fff; border-radius: 50%; z-index: 10; }
 .amigo-card .amigo-info { flex: 1; }
 .amigo-card .amigo-nome { font-size: 1.05rem; font-weight: 900; display: flex; align-items: center; gap: 4px; }
 .amigo-card .amigo-status { font-size: .75rem; color: #a89ec4; font-weight: 800; margin-top: 2px; }
@@ -1155,8 +1155,8 @@ html, body {
 
             <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center;">
                 <button class="btn verde" id="btnAddAmigoPerfil" onclick="enviarPedidoAmizadeBtn()" style="flex:1; margin:0; min-width:140px; display:none;">➕ Adicionar Amigo</button>
-                <button class="btn verde" id="btnAceitarAmizadePerfil" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#7eeb8e,#34c759);">✅ Aceitar Amizade</button>
-                <button class="btn vermelho" id="btnRecusarAmizadePerfil" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#ff5566,#e03545);">❌ Recusar</button>
+                <button class="btn verde" id="btnAceitarAmizadePerfil" onclick="aceitarAmizadePerfil()" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#7eeb8e,#34c759);">✅ Aceitar Amizade</button>
+                <button class="btn vermelho" id="btnRecusarAmizadePerfil" onclick="recusarAmizadePerfil()" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#ff5566,#e03545);">❌ Recusar</button>
                 <button class="btn verde" id="btnAbrirTrocaAmigo" style="flex:1; margin:0; min-width:140px; display:none;">🤝 Trocar Cartas</button>
                 <button class="btn" id="btnAbrirChatAmigo" style="flex:1; margin:0; min-width:140px; display:none; background:linear-gradient(180deg,#a855f7,#6d28d9); box-shadow:0 6px 0 #4a1a8a;">💬 Conversar</button>
             </div>
@@ -1198,7 +1198,7 @@ html, body {
             </div>
             
             <div class="troca-status" id="trocaStatus">
-                Adicione cartas para iniciar...
+                
             </div>
 
             <div class="troca-acoes" id="trocaAcoesDiv">
@@ -1961,7 +1961,9 @@ html, body {
         if (document.getElementById('telaTrocaEspera').classList.contains('ativa')) { cancelarEsperaTroca(); return; }
         if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) { 
             if (unsubscribeAmigoPerfil) { unsubscribeAmigoPerfil(); unsubscribeAmigoPerfil = null; }
-            abrirAmigos(); return; 
+            if (telaStack.includes('telaRanking')) { telaStack.pop(); mostrarTela('telaRanking', false); }
+            else { abrirAmigos(); }
+            return; 
         }
         if (document.getElementById('telaAmigos').classList.contains('ativa')) { abrirPerfil(); return; }
         if (document.getElementById('telaPerfil').classList.contains('ativa')) { irParaHome(); return; }
@@ -3331,7 +3333,11 @@ html, body {
                 if(c) {
                     let preco = c.preco;
                     if(favs[i].tipo === 'graded') preco = favs[i].preco;
-                    slot.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="fav-price">${formatarPreco(preco)}</div>`;
+                    if (isCartaHack(c.id)) {
+                        slot.innerHTML = `<div class="slab-container hack" style="width:100%;height:100%;padding:2px;"><div class="slab-label" style="padding:1px;"><div class="psa-logo" style="font-size:0.3rem;">HACK</div><div class="grade" style="font-size:0.7rem;">10</div></div><div class="slab-img-wrap"><img src="${c.imgSmall || c.img}" style="width:100%;height:100%;object-fit:contain;"></div></div><div class="fav-price">${formatarPreco(preco)}</div>`;
+                    } else {
+                        slot.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="fav-price">${formatarPreco(preco)}</div>`;
+                    }
                     slot.onclick = () => { if(isMeu) abrirSeletorFavorito(i); else abrirDetalheAmigo(favs[i].id, favs[i].nota, favs[i].gi); };
                     continue;
                 }
@@ -4024,7 +4030,11 @@ html, body {
                     if (!c) return;
                     const d = document.createElement('div');
                     d.className = 'amigo-top-carta';
-                    d.innerHTML = `<img src="${c.imgSmall || c.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"><div class="top-price">${formatarPreco(fav.preco || c.preco)}</div>`;
+                    if (isCartaHack(c.id)) {
+                        d.innerHTML = `<div class="slab-container hack" style="width:100%;height:100%;padding:2px;"><div class="slab-label" style="padding:1px;"><div class="psa-logo" style="font-size:0.3rem;">HACK</div><div class="grade" style="font-size:0.7rem;">10</div></div><div class="slab-img-wrap"><img src="${c.imgSmall || c.img}" style="width:100%;height:100%;object-fit:contain;"></div></div><div class="top-price">${formatarPreco(fav.preco || c.preco)}</div>`;
+                    } else {
+                        d.innerHTML = `<img src="${c.imgSmall || c.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"><div class="top-price">${formatarPreco(fav.preco || c.preco)}</div>`;
+                    }
                     d.onclick = () => { abrirDetalheAmigo(fav.id, fav.nota, fav.gi); };
                     topContainer.appendChild(d);
                 });
@@ -4137,7 +4147,7 @@ html, body {
         mostrarTela('telaTroca');
         document.getElementById('trocaComNome').textContent = amigo.nome;
         document.getElementById('trocaBotNome').textContent = amigo.nome;
-        document.getElementById('trocaStatus').innerHTML = 'Adicione cartas para iniciar...';
+        document.getElementById('trocaStatus').innerHTML = '';
         
         trocaSelecionadaJogador = []; 
         trocaSelecionadaAmigo = [];
@@ -4555,7 +4565,8 @@ html, body {
             if(seletorColecao !== 'todas' && carta.set !== seletorColecao) continue;
             
             const qtdRawNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.filter(tc => tc.id === cId && tc.tipo === 'raw').length : 0;
-            const disponivelRaw = info.qtd - qtdRawNaTroca;
+            const qtdRawFav = seletorContexto === 'favorito' ? perfil.favoritos.filter(f => f && f.id === cId && f.tipo === 'raw').length : 0;
+            const disponivelRaw = info.qtd - qtdRawNaTroca - qtdRawFav;
 
             if((seletorFiltro === 'raw' || seletorFiltro === 'todas') && disponivelRaw > 0) { 
                 cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack, disponivel: disponivelRaw, gi: -1, isCustom: false}); 
@@ -4565,7 +4576,8 @@ html, body {
                 info.gradeds.forEach((g, gi) => {
                     if (g.isCustom) return;
                     const jaNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && (tc._uid ? tc._uid === g._uid : tc.nota === g.nota)) : false;
-                    if(!jaNaTroca) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: false}); }
+                    const jaNosFavs = seletorContexto === 'favorito' ? perfil.favoritos.some(f => f && f.id === cId && f.tipo === 'graded' && f.nota === g.nota) : false;
+                    if(!jaNaTroca && !jaNosFavs) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: false}); }
                 });
             }
 
@@ -4573,7 +4585,8 @@ html, body {
                 info.gradeds.forEach((g, gi) => {
                     if (!g.isCustom) return;
                     const jaNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && (tc._uid ? tc._uid === g._uid : tc.nota === g.nota)) : false;
-                    if(!jaNaTroca) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: true}); }
+                    const jaNosFavs = seletorContexto === 'favorito' ? perfil.favoritos.some(f => f && f.id === cId && f.tipo === 'graded' && f.nota === g.nota) : false;
+                    if(!jaNaTroca && !jaNosFavs) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: true}); }
                 });
             }
         }
@@ -4598,7 +4611,12 @@ html, body {
             let badgeStyle = '';
             if (c.hack) badgeStyle = 'background:#00ff41;color:#000;';
             else if (c.isCustom) badgeStyle = 'background:linear-gradient(180deg,#ffa500,#ff8c00);color:#fff;';
-            d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${badgeStyle}">${badge}</div><div class="price-badge">${precoStr}</div>`;
+            
+            if (c.hack) {
+                d.innerHTML = `<div class="slab-container hack" style="width:100%;height:100%;padding:2px;"><div class="slab-label" style="padding:1px;"><div class="psa-logo" style="font-size:0.3rem;">HACK</div><div class="grade" style="font-size:0.7rem;">10</div></div><div class="slab-img-wrap"><img src="${c.imgSmall || c.img}" style="width:100%;height:100%;object-fit:contain;"></div></div><div class="qtd-badge" style="${badgeStyle}">${badge}</div><div class="price-badge">${precoStr}</div>`;
+            } else {
+                d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${badgeStyle}">${badge}</div><div class="price-badge">${precoStr}</div>`;
+            }
             
             d.onclick = () => {
                 if(seletorContexto === 'troca') { 
@@ -4943,7 +4961,7 @@ html, body {
         CARTAS_HACK.forEach(hc => {
             const d = document.createElement('div'); 
             d.className = 'admin-hack-slot';
-            d.innerHTML = `<img src="${hc.imgSmall || hc.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"><div class="hack-nome">${hc.emoji} ${hc.nome}</div><div style="display:flex; flex-direction:column; gap:4px; width:100%;"><button class="btn-hack" onclick="entregarHack('${hc.id}', 'meu')">MEU</button><button class="btn-hack" onclick="entregarHack('${hc.id}', 'id')" style="background:#4a9fd8; color:#fff;">ID</button><button class="btn-hack" onclick="entregarHack('${hc.id}', 'global')" style="background:#ff8c00; color:#fff;">GLOBAL</button></div>`;
+            d.innerHTML = `<div class="slab-container hack" style="width:100%;margin-bottom:6px;padding:2px;"><div class="slab-label" style="padding:1px;"><div class="psa-logo" style="font-size:0.3rem;">HACK</div><div class="grade" style="font-size:0.9rem;">10</div></div><div class="slab-img-wrap"><img src="${hc.imgSmall || hc.img}" style="width:100%;height:100%;object-fit:contain;"></div></div><div class="hack-nome">${hc.emoji} ${hc.nome}</div><div style="display:flex; flex-direction:column; gap:4px; width:100%;"><button class="btn-hack" onclick="entregarHack('${hc.id}', 'meu')">MEU</button><button class="btn-hack" onclick="entregarHack('${hc.id}', 'id')" style="background:#4a9fd8; color:#fff;">ID</button><button class="btn-hack" onclick="entregarHack('${hc.id}', 'global')" style="background:#ff8c00; color:#fff;">GLOBAL</button></div>`;
             grid.appendChild(d);
         });
     }
@@ -6035,10 +6053,10 @@ html, body {
     document.getElementById('pokebolaTrabalho').onclick = baterPonto;
     function baterPonto() {
         checarResetDiario(); 
-        if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
+        if (ganhoHoje >= LIMITE_DIARIO_MOEDADAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
         const ganho = 10 + Math.floor(Math.random() * 6); 
         let ganhoReal = ganho;
-        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDAS) ganhoReal = LIMITE_DIARIO_MOEDAS - ganhoHoje;
+        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDADAS) ganhoReal = LIMITE_DIARIO_MOEDADAS - ganhoHoje;
         moedas += ganhoReal; 
         ganhoHoje += ganhoReal; 
         salvarEstado(); 
