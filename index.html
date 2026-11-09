@@ -172,6 +172,22 @@ html, body {
     0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px #ff69b4) drop-shadow(0 0 15px #ff1493); }
     50% { transform: scale(1.15); filter: drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 35px #ff1493) drop-shadow(0 0 50px #ff69b4); }
 }
+@keyframes pokeTimerSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes tradeGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.4), 0 0 30px rgba(168,85,247,0.3), inset 0 0 10px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 0 30px rgba(255,215,0,0.7), 0 0 60px rgba(168,85,247,0.6), inset 0 0 20px rgba(255,255,255,0.2); }
+}
+@keyframes tradeFloatSparkle {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
+}
+@keyframes notifSparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.15) rotate(10deg); opacity: 1; }
+}
 .frame-fire { animation: frameFire 1.5s infinite alternate !important; border-width: 4px !important; }
 .frame-ice { animation: frameIce 2s infinite alternate !important; border-width: 4px !important; }
 .frame-electric { animation: frameElectric 1s infinite alternate !important; border-width: 4px !important; }
@@ -373,6 +389,7 @@ html, body {
 .col-tabs { display: flex; gap: 10px; width: 100%; max-width: 520px; margin: 0 auto 16px auto; }
 .col-tab { flex: 1; padding: 12px; border-radius: 14px; border: 2px solid #cfd8e3; background: #fff; color: #4a6fa5; font-weight: 900; font-size: .85rem; font-family: inherit; cursor: pointer; letter-spacing: .5px; transition: .2s; box-shadow: 0 4px 0 #cfd8e3; }
 .col-tab.at { background: linear-gradient(180deg,#6dd5ed,#4a9fd8); color: #fff; border-color: #2a6a9a; box-shadow: 0 4px 0 #2a6a9a; transform: scale(1.02); }
+.col-tab.especial.at { background: linear-gradient(180deg,#ffa500,#ff8c00); border-color:#b22222; box-shadow: 0 4px 0 #b22222; }
 .albuns-lista { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 520px; padding-bottom: 20px; margin: 0 auto; }
 .album-card { background: #fff; border-radius: 18px; padding: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.05); display: flex; gap: 14px; cursor: pointer; transition: .2s; border: 3px solid transparent; align-items: center; position: relative; }
 .album-card:active { transform: scale(.98); border-color: #4a9fd8; }
@@ -386,6 +403,9 @@ html, body {
 .album-card .barra { width: 100%; height: 10px; background: #e0e8f0; border-radius: 5px; overflow: hidden; }
 .album-card .barra .fill { height: 100%; background: linear-gradient(90deg,#6dd5ed,#4a9fd8); border-radius: 5px; transition: width .3s; }
 .album-card.completo .barra .fill { background: linear-gradient(90deg,#ffd93d,#f7a800); }
+.album-card.especial-album { background: linear-gradient(135deg,#fff3e0,#ffe0b2); border: 2px solid #ff8c00; box-shadow: 0 0 15px rgba(255,140,0,0.4); }
+.album-card.especial-album .album-nome { color: #b22222; }
+.album-card.especial-album .album-img { background: linear-gradient(135deg,#ffa500,#ff4500); font-size: 2rem; }
 .search-box { width: 100%; margin-bottom: 16px; position: relative; }
 .search-box input { width: 100%; padding: 14px 20px 14px 45px; border-radius: 16px; border: 2px solid #cfd8e3; font-size: .95rem; font-weight: 800; outline: none; background: #fff; color: #2a1a4a; transition: .3s; box-shadow: 0 4px 10px rgba(0,0,0,.05); }
 .search-box input:focus { border-color: #4a9fd8; box-shadow: 0 4px 15px rgba(74,159,216,.2); }
@@ -428,6 +448,11 @@ html, body {
 .slab-container.psa-6 .grade, .slab-container.psa-5 .grade, .slab-container.psa-4 .grade, .slab-container.psa-3 .grade, .slab-container.psa-2 .grade, .slab-container.psa-1 .grade { color: #4b5563; }
 .slab-container.ready { animation: auraOuro 1s infinite; cursor: pointer; }
 .slab-container.pending { opacity: 0.7; }
+.slab-container.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00, #ffb74d, #ff8c00); border: 3px solid #ff4500; box-shadow: 0 0 20px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4); animation: frameFire 2s infinite alternate; }
+.slab-container.especial .slab-label { background: linear-gradient(180deg, #fff3e0, #ffb74d); border-bottom: 2px solid #b22222; }
+.slab-container.especial .grade { color: #b22222; font-size: 1.8rem; text-shadow: 0 0 8px #fff, 0 0 15px #ff8c00; font-family: 'Nunito', sans-serif; font-weight: 900; }
+.slab-container.especial .psa-logo { color: #b22222; letter-spacing: 2px; font-size: .55rem; }
+.slab-container.especial .slab-img-wrap { background: linear-gradient(135deg, #ffe0b2, #ff8c00); }
 .det-slab { width: min(65vw,240px); aspect-ratio: 245/390; border-radius: 12px; padding: 6px; box-shadow: 0 20px 50px rgba(0,0,0,.4); display: flex; flex-direction: column; border: 3px solid #ccc; margin: 10px auto; position: relative; overflow: hidden; animation: pop .4s; }
 .det-slab .slab-label { padding: 6px; border-bottom: 3px solid #bbb; }
 .det-slab .psa-logo { font-size: .7rem; }
@@ -446,6 +471,10 @@ html, body {
 .det-slab.psa-7 .grade { color: #15803d; }
 .det-slab.psa-6, .det-slab.psa-5, .det-slab.psa-4, .det-slab.psa-3, .det-slab.psa-2, .det-slab.psa-1 { background: #e5e7eb; border-color: #9ca3af; }
 .det-slab.psa-6 .grade, .det-slab.psa-5 .grade, .det-slab.psa-4 .grade, .det-slab.psa-3 .grade, .det-slab.psa-2 .grade, .det-slab.psa-1 .grade { color: #4b5563; }
+.det-slab.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00); border-color: #ff4500; animation: frameFire 2s infinite alternate; }
+.det-slab.especial .slab-label { background: linear-gradient(180deg, #fff3e0, #ffb74d); border-bottom-color: #b22222; }
+.det-slab.especial .grade { color: #b22222; text-shadow: 0 0 8px #fff; font-family: 'Nunito', sans-serif; }
+.det-slab.especial .psa-logo { color: #b22222; }
 #telaDetalhe { background: linear-gradient(180deg,#a8c8e8 0%,#d8e8f5 100%); padding: 20px; justify-content: flex-start; overflow-y: auto; }
 .det-carta { width: min(55vw,200px); aspect-ratio: 245/342; border-radius: 12px; overflow: hidden; margin: 10px auto; box-shadow: 0 20px 50px rgba(0,0,0,.3); background: #fff; border: none; padding: 0; position: relative; animation: pop .4s; }
 .det-carta img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; display: block; }
@@ -461,6 +490,9 @@ html, body {
 .preco-box.misterio { background: linear-gradient(135deg,#001a00,#000); border: 3px solid #00ff41; animation: hackPulse 2s infinite; }
 .preco-box.misterio .lbl { color: #00ff41; }
 .preco-box.misterio .val { color: #00ff41; font-family: monospace; text-shadow: 0 0 10px #00ff41; }
+.preco-box.especial-preco { background: linear-gradient(135deg,#fff3e0,#ffb74d); border: 3px solid #ff4500; box-shadow: 0 0 20px rgba(255,69,0,0.5); }
+.preco-box.especial-preco .lbl { color: #b22222; }
+.preco-box.especial-preco .val { color: #b22222; }
 .acoes-carta { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 .btn-acao { width: 100%; padding: 16px; border-radius: 16px; border: none; font-weight: 900; font-size: .9rem; font-family: inherit; cursor: pointer; letter-spacing: .5px; text-transform: uppercase; transition: .15s; position: relative; overflow: hidden; }
 .btn-acao:active { transform: translateY(4px); }
@@ -606,16 +638,18 @@ html, body {
 .troca-lado { background: #fff; border-radius: 18px; padding: 16px; color: #2a1a4a; box-shadow: 0 8px 25px rgba(0,0,0,.08); border: 2px solid #e0e8f0; }
 .troca-lado.amigo { background: #f0f8ff; border-color: #a8c8e8; }
 .troca-lado h4 { font-size: .9rem; text-transform: uppercase; margin-bottom: 10px; color: #4a6fa5; display: flex; justify-content: space-between; align-items: center; }
-.troca-slots { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; min-height: 120px; }
-.troca-slot { width: 85px; height: 120px; border-radius: 8px; background: #e8eef5; border: 2px dashed #a89ec4; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; position: relative; overflow: hidden; }
-.troca-slot img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
-.troca-slot.add { color: #4a6fa5; font-size: 2rem; font-weight: 900; }
+.troca-slots { display: flex; gap: 12px; overflow-x: auto; padding: 6px 4px 12px 4px; min-height: 200px; }
+.troca-slot { width: 135px; height: 195px; border-radius: 10px; background: #e8eef5; border: 2px dashed #a89ec4; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; position: relative; overflow: hidden; }
+.troca-slot img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.troca-slot.add { color: #4a6fa5; font-size: 3rem; font-weight: 900; }
 .troca-slot.hack { border-color: #00ff41; box-shadow: 0 0 10px rgba(0,255,65,0.5); }
 .troca-slot.bot-slot { cursor: default; }
-.troca-slot .price-tag { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); color: #ffd93d; font-size: 0.6rem; font-weight: 900; text-align: center; padding: 2px; z-index: 5; }
+.troca-slot .price-tag { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); color: #ffd93d; font-size: 0.65rem; font-weight: 900; text-align: center; padding: 3px; z-index: 5; border-radius: 0 0 8px 8px; }
 .troca-dinheiro { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
 .troca-dinheiro input { flex: 1; padding: 10px; border-radius: 10px; border: 2px solid #cfd8e3; font-weight: 800; outline: none; font-size: 1rem; color: #2a1a4a; background: #fff; }
 .troca-dinheiro span { font-weight: 900; color: #f7a800; font-size: 1.1rem; }
+.troca-dinheiro .moedas-espelho { color: #4a6fa5; font-size: 0.85rem; font-weight: 900; padding: 8px 12px; background: #e8f0fe; border-radius: 10px; border: 2px dashed #4a9fd8; min-width: 110px; text-align: center; }
+.troca-dinheiro .moedas-espelho.vazio { color: #8899cc; background: #f0f4f8; border-color: #cfd8e3; }
 .troca-seta { text-align: center; font-size: 2rem; color: #ffd93d; margin: -10px 0; text-shadow: 0 0 10px rgba(255,215,0,.5); }
 .troca-acoes { display: flex; gap: 10px; margin-top: 20px; width: 100%; max-width: 520px; }
 .troca-acoes button { flex: 1; padding: 16px; border-radius: 16px; border: none; font-size: 1rem; font-weight: 900; color: #fff; cursor: pointer; transition: .2s; }
@@ -624,16 +658,21 @@ html, body {
 .troca-acoes .btn-recusar { background: linear-gradient(180deg, #ff5566, #e03545); box-shadow: 0 6px 0 #a02030; }
 .troca-acoes .btn-recusar:active { transform: translateY(4px); box-shadow: 0 2px 0 #a02030; }
 .troca-status { text-align: center; padding: 12px; color: #4a6fa5; font-weight: 900; font-size: 0.9rem; background: rgba(74,159,216,0.1); border-radius: 12px; margin-top: 10px; border: 1px dashed rgba(74,159,216,0.3); min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.poke-timer-ball { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(180deg, #ee1515 0%, #ee1515 44%, #222 44%, #222 56%, #fff 56%, #fff 100%); border: 5px solid #222; position: relative; margin: 0 auto 15px auto; animation: pokeTimerSpin 1.5s linear infinite; box-shadow: 0 0 20px rgba(238,21,21,0.6), 0 4px 12px rgba(0,0,0,0.4); }
+.poke-timer-ball::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 4px solid #222; }
 .modal-cartas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-height: 50vh; overflow-y: auto; margin-top: 15px; padding: 4px; }
 .modal-carta-item { border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; position: relative; }
 .modal-carta-item img { width: 100%; display: block; }
 .modal-carta-item:active { transform: scale(0.95); border-color: #ffd93d; }
 .modal-carta-item.hack { border: 2px solid #00ff41; box-shadow: 0 0 8px rgba(0,255,65,0.5); }
+.modal-carta-item.especial-item { border: 2px solid #ff8c00; box-shadow: 0 0 8px rgba(255,140,0,0.5); }
+.modal-carta-item.bloqueada { opacity: 0.35; pointer-events: none; filter: grayscale(1); }
 .modal-carta-item .qtd-badge { position: absolute; top: 4px; right: 4px; background: rgba(74,159,216,.9); color: #fff; padding: 2px 6px; border-radius: 8px; font-size: .6rem; font-weight: 900; }
 .modal-carta-item .price-badge { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); color: #ffd93d; padding: 2px; border-radius: 0 0 8px 8px; font-size: .6rem; font-weight: 900; text-align: center; }
 .modal-tabs { display: flex; gap: 8px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 5px; }
 .modal-tab { padding: 8px 12px; border-radius: 10px; border: 2px solid #cfd8e3; background: #fff; color: #4a6fa5; font-weight: 900; font-size: .8rem; cursor: pointer; white-space: nowrap; }
 .modal-tab.at { background: #4a9fd8; color: #fff; border-color: #2a6a9a; }
+.modal-tab.especial-tab.at { background: linear-gradient(180deg,#ffa500,#ff8c00); border-color: #b22222; }
 #telaTrocaSucesso { justify-content: center; }
 .sucesso-card { background: #2a1a4a; border-radius: 24px; padding: 30px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,.5); position: relative; overflow: hidden; border: 2px solid #ffd93d; color: #fff; }
 .sucesso-card h2 { color: #34c759; font-size: 2rem; margin-bottom: 10px; }
@@ -689,9 +728,11 @@ html, body {
 .correio-badge { position: absolute; top: -6px; right: -6px; background: #ff0000; color: #fff; font-size: .65rem; font-weight: 900; min-width: 20px; height: 20px; border-radius: 10px; display: flex; align-items: center; justify-content: center; padding: 0 5px; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(255,0,0,.5); animation: pulsar .9s infinite; z-index: 5; }
 .correio-lista { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
 .correio-item { background: linear-gradient(135deg, #2a1a4a, #3a2a5a); border-radius: 18px; padding: 14px; display: flex; gap: 12px; align-items: center; border: 2px solid rgba(255,215,0,0.35); box-shadow: 0 4px 15px rgba(0,0,0,.3); animation: pop .4s; position: relative; overflow: hidden; }
+.correio-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ffd93d, #ff8c00, #ff5566, #a855f7, #4a9fd8, #ffd93d); background-size: 200% auto; animation: rainbowText 3s linear infinite; }
 .correio-item.lido { border-color: rgba(255,255,255,0.1); opacity: 0.85; }
-.correio-item .ico-box { width: 60px; height: 80px; border-radius: 10px; background: linear-gradient(135deg,#ffd93d,#f7a800); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,.3); }
+.correio-item .ico-box { width: 60px; height: 80px; border-radius: 10px; background: linear-gradient(135deg,#ffd93d,#f7a800); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,.3); position: relative; }
 .correio-item .ico-box img { width: 90%; height: 90%; object-fit: contain; border-radius: 6px; }
+.correio-item .ico-box svg { width: 60%; height: 60%; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
 .correio-item .info { flex: 1; min-width: 0; text-align: left; color: #fff; }
 .correio-item .info .titulo { font-size: .95rem; font-weight: 900; color: #ffd93d; margin-bottom: 3px; }
 .correio-item .info .tipo { font-size: .72rem; color: #a89ec4; font-weight: 800; margin-bottom: 3px; }
@@ -702,6 +743,7 @@ html, body {
 .correio-vazio { color: #8899cc; text-align: center; padding: 60px 20px; font-weight: 800; font-size: 1rem; line-height: 1.6; }
 .correio-timer { display: inline-block; background: rgba(255,0,0,0.2); border: 1px dashed #ff5566; color: #ff5566; font-size: 0.7rem; font-weight: 900; padding: 4px 8px; border-radius: 8px; margin-top: 6px; animation: pulsar 1s infinite; }
 .correio-item.expirado { opacity: 0.5; filter: grayscale(1); }
+.notif-svg { display: inline-block; vertical-align: middle; }
 .admin-float-btn { position: fixed; bottom: 90px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ff0000, #8b0000); border: 2px solid #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.7), 0 4px 10px rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; cursor: grab; z-index: 65; font-size: 1.4rem; animation: spiderPulse 2s infinite; touch-action: none; }
 .admin-float-btn.ativo { display: flex; }
 .admin-float-btn:active { cursor: grabbing; transform: scale(0.95); }
@@ -776,11 +818,39 @@ html, body {
 .ranking-valor { font-size: 1.1rem; font-weight: 900; color: #ffd93d; text-align: right; }
 .ranking-valor-lbl { font-size: 0.6rem; color: #a89ec4; font-weight: 800; text-align: right; text-transform: uppercase; letter-spacing: .5px; }
 .fav-slots { display: flex; justify-content: center; gap: 10px; margin-top: 15px; position: relative; z-index: 2; }
-.fav-slot { width: 70px; height: 100px; border-radius: 10px; border: 2px dashed rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); position: relative; overflow: hidden; cursor: pointer; transition: .2s; }
+.fav-slot { width: 70px; height: 100px; border-radius: 10px; border: 2px dashed rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); position: relative; overflow: hidden; cursor: pointer; transition: .2s; flex-direction: column; }
 .fav-slot:hover { border-color: #ffd93d; transform: scale(1.05); }
 .fav-slot img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
-.fav-slot .fav-price { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); color: #ffd93d; font-size: 0.55rem; font-weight: 900; text-align: center; padding: 2px; }
+.fav-slot .fav-price { font-size: 0.55rem; font-weight: 900; color: #ffd93d; text-align: center; padding: 2px 0; background: transparent; width: 100%; line-height: 1; margin-top: 1px; }
 .fav-slot .fav-empty { color: #a89ec4; font-size: 1.5rem; font-weight: 900; }
+#amigoTopCartas { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+.amigo-top-carta { width: 72px; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: .2s; }
+.amigo-top-carta:active { transform: scale(0.94); }
+.amigo-top-carta img { width: 72px; aspect-ratio: 245/342; object-fit: contain; border-radius: 6px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+.amigo-top-carta .top-price { font-size: .55rem; font-weight: 900; color: #ffd93d; margin-top: 3px; background: transparent; padding: 0; line-height: 1; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,.7); }
+#telaTroca.trade-beautified { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a4a 30%, #4a2a6a 60%, #2a1a4a 100%); }
+#telaTroca.trade-beautified::before { content: ''; position: fixed; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(255,215,0,0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.15) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(74,159,216,0.1) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+#telaTroca.trade-beautified .troca-container { position: relative; z-index: 2; }
+#telaTroca.trade-beautified .troca-lado { background: linear-gradient(135deg, #2a1a4a, #3a2a5a); border: 3px solid transparent; background-clip: padding-box; color: #fff; box-shadow: 0 0 30px rgba(255,215,0,0.25), 0 10px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,215,0,0.05); animation: tradeGlow 3s ease-in-out infinite; position: relative; overflow: hidden; }
+#telaTroca.trade-beautified .troca-lado::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, #ffd93d, #ff8c00, #ff5566, #a855f7, #4a9fd8, #ffd93d); background-size: 300% 300%; border-radius: inherit; z-index: -1; animation: rainbowText 4s linear infinite; }
+#telaTroca.trade-beautified .troca-lado.amigo { background: linear-gradient(135deg, #1e3a5f, #2a4a7a); }
+#telaTroca.trade-beautified .troca-lado h4 { color: #ffd93d; text-shadow: 0 0 10px rgba(255,215,0,0.5); font-size: 1rem; letter-spacing: 1.5px; }
+#telaTroca.trade-beautified .troca-seta { color: #ffd93d; font-size: 2.5rem; text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,140,0,0.6); animation: bounce 1.5s infinite; }
+#telaTroca.trade-beautified .troca-status { background: rgba(26,10,42,0.8); color: #ffd93d; border: 2px dashed #ffd93d; box-shadow: 0 0 20px rgba(255,215,0,0.3); text-shadow: 0 0 10px rgba(255,215,0,0.4); }
+#telaTroca.trade-beautified .troca-chat { background: #2a1a4a; border-color: rgba(255,215,0,0.4); }
+#telaTroca.trade-beautified .troca-chat-titulo { background: linear-gradient(180deg, #3a2a5a, #2a1a4a); color: #ffd93d; }
+#telaTroca.trade-beautified .troca-chat-mensagens .chat-msg.outro { background: #3a2a5a; color: #fff; border-color: #ffd93d; }
+#telaTroca.trade-beautified .troca-chat-input { background: #1a0a2a; border-top-color: rgba(255,215,0,0.3); }
+#telaTroca.trade-beautified .troca-chat-input input { background: #2a1a4a; color: #fff; border-color: rgba(255,215,0,0.3); }
+#telaTroca.trade-beautified .troca-chat-input button { background: linear-gradient(180deg, #ffd93d, #f7a800); color: #1a0a2a; }
+#telaTroca.trade-beautified .troca-slots { padding: 8px; background: rgba(0,0,0,0.2); border-radius: 12px; }
+#telaTroca.trade-beautified .troca-slot { background: linear-gradient(135deg, #3a2a5a, #2a1a4a); border-color: #ffd93d; box-shadow: inset 0 0 15px rgba(255,215,0,0.1); }
+#telaTroca.trade-beautified .troca-slot.add { color: #ffd93d; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+#telaTroca.trade-beautified .troca-dinheiro input { background: #2a1a4a; color: #ffd93d; border-color: #ffd93d; }
+#telaTroca.trade-beautified .troca-dinheiro .moedas-espelho { background: rgba(255,215,0,0.15); border-color: #ffd93d; color: #ffd93d; }
+#telaTroca.trade-beautified .perfil-topo { position: relative; z-index: 5; }
+#telaTroca.trade-beautified .perfil-topo > div:first-child { color: #ffd93d !important; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+.trade-sparkle { position: absolute; pointer-events: none; z-index: 1; animation: tradeFloatSparkle 3s ease-in-out infinite; filter: drop-shadow(0 0 8px currentColor); }
 @media(max-width:400px) {
     .pack-card { width: 135px; }
     .booster-mini { height: 190px; }
@@ -800,6 +870,9 @@ html, body {
     .pokebola-home .contador { font-size: 0.65rem; padding: 5px 10px; }
     .ranking-tab { font-size: .7rem; padding: 10px 4px; }
     .ranking-valor { font-size: .95rem; }
+    .troca-slot { width: 115px; height: 170px; }
+    .amigo-top-carta { width: 60px; }
+    .amigo-top-carta img { width: 60px; }
 }
 </style>
 </head>
@@ -947,8 +1020,7 @@ html, body {
             </button>
         </div>
     </div>
-
-    <div class="tela" id="telaNotificacoes">
+<div class="tela" id="telaNotificacoes">
         <div class="perfil-topo">
             <div style="font-size:1.3rem;font-weight:900;color:#ffd93d;">🔔 Notificações</div>
             <button class="btn ghost mini btn-voltar-topo" onclick="voltarTela()">Voltar</button>
@@ -1013,7 +1085,6 @@ html, body {
                 </div>
             </div>
 
-            <!-- SLOTS DE FAVORITOS NO PERFIL -->
             <div class="fav-slots" id="perfilFavSlots" style="display:none;">
                 <div class="fav-slot" id="favSlot0"><span class="fav-empty">+</span></div>
                 <div class="fav-slot" id="favSlot1"><span class="fav-empty">+</span></div>
@@ -1107,10 +1178,9 @@ html, body {
             </div>
             <div class="preco-box" style="margin-top:10px;">
                 <div class="lbl">Top 3 Cartas Mais Caras</div>
-                <div id="amigoTopCartas" style="display:flex; justify-content:center; gap:10px; margin-top:10px;"></div>
+                <div id="amigoTopCartas" style="display:flex; justify-content:center; gap:12px; margin-top:12px;"></div>
             </div>
 
-            <!-- FAVORITOS DO AMIGO -->
             <div class="fav-slots" id="amigoFavSlots" style="display:none;">
                 <div class="fav-slot" id="amigoFavSlot0"></div>
                 <div class="fav-slot" id="amigoFavSlot1"></div>
@@ -1134,10 +1204,9 @@ html, body {
         </div>
     </div>
 
-    <!-- TELA DE TROCA REFORMULADA COM FUNDO CLARO E POKÉBOLA GIRANDO -->
-    <div class="tela" id="telaTroca" style="background: linear-gradient(180deg, #e8d5ff 0%, #d5e8ff 50%, #f0f8ff 100%);">
+    <div class="tela trade-beautified" id="telaTroca">
         <div class="perfil-topo">
-            <div style="font-size:1.15rem;font-weight:900;color:#4a6fa5;">🤝 Troca com <span id="trocaComNome">Amigo</span></div>
+            <div style="font-size:1.15rem;font-weight:900;color:#ffd93d;">🤝 Troca com <span id="trocaComNome">Amigo</span></div>
             <button class="btn ghost mini btn-voltar-topo" onclick="cancelarTroca()">Cancelar</button>
         </div>
         <div class="troca-container">
@@ -1146,16 +1215,23 @@ html, body {
                 <div class="troca-slots" id="trocaSlotsJogador"></div>
                 <div class="troca-dinheiro">
                     <span>🪙</span>
-                    <input type="number" id="trocaMoedas" placeholder="Moedas (Opcional)" min="0">
+                    <input type="number" id="trocaMoedas" placeholder="Moedas (Opcional)" min="0" oninput="onTrocaMoedasInput()">
+                </div>
+                <div style="margin-top:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:0.75rem; color:#a89ec4; font-weight:800;">O outro oferece:</span>
+                    <div class="moedas-espelho vazio" id="trocaMoedasAmigo">— moedas</div>
                 </div>
             </div>
             <div class="troca-seta">⇅</div>
             <div class="troca-lado amigo">
                 <h4><span id="trocaBotNome">Amigo</span> oferece:</h4>
                 <div class="troca-slots" id="trocaSlotsBot"></div>
+                <div style="margin-top:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:0.75rem; color:#a89ec4; font-weight:800;">Você oferece:</span>
+                    <div class="moedas-espelho vazio" id="trocaMoedasMeuEspelho">— moedas</div>
+                </div>
             </div>
             
-            <!-- Status da troca (com pokébola animada) -->
             <div class="troca-status" id="trocaStatus">
                 Adicione cartas para iniciar...
             </div>
@@ -1307,6 +1383,7 @@ html, body {
         <div class="col-tabs" style="z-index:2">
             <button class="col-tab at" id="tabAlbuns">📚 Álbuns</button>
             <button class="col-tab" id="tabGrad">🏅 Graduadas</button>
+            <button class="col-tab especial" id="tabEspeciais">✨ Especiais</button>
         </div>
         <div id="conteudoCol" style="width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;z-index:2"></div>
         <div class="nav-baixo">
@@ -1529,8 +1606,9 @@ html, body {
             </div>
             <div class="modal-tabs">
                 <button class="modal-tab at" data-filtro="todas" onclick="mudarFiltroSeletor('todas', this)" style="background:#ffd93d; color:#1a0a2a;">Todas</button>
-                <button class="modal-tab" data-filtro="raw" onclick="mudarFiltroSeletor('raw', this)">Raw (Normais)</button>
+                <button class="modal-tab" data-filtro="raw" onclick="mudarFiltroSeletor('raw', this)">Raw</button>
                 <button class="modal-tab" data-filtro="graded" onclick="mudarFiltroSeletor('graded', this)">Graduadas</button>
+                <button class="modal-tab especial-tab" data-filtro="especial" onclick="mudarFiltroSeletor('especial', this)">✨ Especiais</button>
             </div>
             <div class="modal-tabs" id="filtrosColecao"></div>
             <div class="modal-cartas-grid" id="modalCartasGrid"></div>
@@ -1707,6 +1785,8 @@ html, body {
     let docTrocaId = null;
     let timerTrocaInterval = null;
     let tradeIsJogador1 = false;
+    let tradeMoedasMinhas = 0;
+    let tradeMoedasAmigo = 0;
 
     let amigoChatAtual = null;
     let chatAbertoDuranteTroca = true;
@@ -1854,7 +1934,6 @@ html, body {
         if (_saveTimeout) clearTimeout(_saveTimeout);
         _saveTimeout = setTimeout(() => {
             if (!auth.currentUser) return;
-            // A coleção NÃO é salva aqui automaticamente para não sobrescrever o resultado da troca (Race condition)
             db.collection("jogadores").doc(auth.currentUser.uid).set({
                 moedas, 
                 dinheiroInfinito, 
@@ -1923,6 +2002,7 @@ html, body {
         }
         if (document.getElementById('telaDetalhe').classList.contains('ativa')) {
             if (albumAberto) { abrirAlbum(albumAberto, true); } 
+            else if (abaColecao === 'especiais') { renderEspeciais(); }
             else { abaColecao = 'graded'; mostrarCol(true); }
             setTimeout(() => {
                 const telaCol = document.getElementById('telaColecao');
@@ -3008,6 +3088,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         document.getElementById('roletaContainer').innerHTML = '<div class="roleta-num" id="roletaNum">0</div><div class="roleta-sub" id="roletaSub">Sorteando nota...</div>';
         mostrarTela('telaColecao', false); 
         if(abaColecao === 'graded') renderGraduadas(); 
+        else if(abaColecao === 'especiais') renderEspeciais();
         else renderAlbuns();
     }
 
@@ -3049,13 +3130,15 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         document.getElementById('colTitulo').textContent = '📚 Minhas Cartas'; 
         document.getElementById('conteudoCol').innerHTML = '';
         if(abaColecao === 'albuns') { renderAlbuns(); } 
-        else { renderGraduadas(); }
+        else if(abaColecao === 'graded') { renderGraduadas(); }
+        else { renderEspeciais(); }
     }
 
     function renderAlbuns() {
         abaColecao = 'albuns'; 
         document.getElementById('tabAlbuns').classList.add('at'); 
         document.getElementById('tabGrad').classList.remove('at');
+        document.getElementById('tabEspeciais').classList.remove('at');
         document.getElementById('colTitulo').textContent = '📚 Álbuns'; 
         const c = document.getElementById('conteudoCol'); 
         c.innerHTML = '';
@@ -3097,6 +3180,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         abaColecao = 'graded'; 
         document.getElementById('tabGrad').classList.add('at'); 
         document.getElementById('tabAlbuns').classList.remove('at');
+        document.getElementById('tabEspeciais').classList.remove('at');
         document.getElementById('colTitulo').textContent = '🏅 Minhas Graduadas'; 
         const c = document.getElementById('conteudoCol');
         
@@ -3158,11 +3242,11 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 grid.className = 'cartas-album';
                 cartasDoSet.forEach(item => {
                     item.gradeds.forEach((g, gi) => {
+                        if (g.isCustom) return;
                         const d = document.createElement('div'); 
                         d.className = 'carta-slot'; 
-                        const isCustom = g.isCustom;
-                        const classeNota = isCustom ? 'psa-10' : ('psa-' + g.nota);
-                        d.innerHTML = '<div class="slab-container ' + classeNota + '"><div class="slab-label"><div class="psa-logo">'+(isCustom?'✨ ESPECIAL':'PSA')+'</div><div class="grade">' + (isCustom?'★':g.nota) + '</div><div class="g-name">' + item.carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (item.carta.imgSmall || item.carta.img) + '"></div></div>';
+                        const classeNota = 'psa-' + g.nota;
+                        d.innerHTML = '<div class="slab-container ' + classeNota + '"><div class="slab-label"><div class="psa-logo">PSA</div><div class="grade">' + g.nota + '</div><div class="g-name">' + item.carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (item.carta.imgSmall || item.carta.img) + '"></div></div>';
                         d.onclick = () => abrirDetalhe(item.cId, g.nota, gi); 
                         grid.appendChild(d);
                     });
@@ -3206,6 +3290,65 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         }
     }
 
+    function renderEspeciais() {
+        const telaColAtual = document.getElementById('telaColecao'); 
+        const scrollAtual = telaColAtual ? telaColAtual.scrollTop : 0;
+        abaColecao = 'especiais'; 
+        document.getElementById('tabEspeciais').classList.add('at'); 
+        document.getElementById('tabAlbuns').classList.remove('at');
+        document.getElementById('tabGrad').classList.remove('at');
+        document.getElementById('colTitulo').textContent = '✨ Cartas Especiais'; 
+        const c = document.getElementById('conteudoCol');
+        
+        let inputPesquisa = document.getElementById('inputPesquisaEsp');
+        if(!inputPesquisa) {
+            c.innerHTML = `<div class="search-box"><input type="text" id="inputPesquisaEsp" placeholder="Pesquisar carta especial..." oninput="renderEspeciais()"></div><div id="gridEsp"></div>`;
+            inputPesquisa = document.getElementById('inputPesquisaEsp');
+        }
+        const termo = (inputPesquisa.value || '').toLowerCase(); 
+        const gridContainer = document.getElementById('gridEsp'); 
+        gridContainer.innerHTML = ''; 
+        let temEsp = false;
+
+        const especiaisPorSet = {};
+        for(const cId in colecao) {
+            const info = colecao[cId];
+            if(!info.gradeds || info.gradeds.length === 0) continue;
+            const carta = encontrarCarta(cId);
+            if(!carta || !carta.nome.toLowerCase().includes(termo)) continue;
+            const customGrads = info.gradeds.map((g, gi) => ({ g, gi })).filter(x => x.g.isCustom);
+            if(customGrads.length === 0) continue;
+            const setId = carta.set;
+            if(!especiaisPorSet[setId]) especiaisPorSet[setId] = [];
+            especiaisPorSet[setId].push({ cId, carta, customGrads });
+        }
+
+        Object.keys(especiaisPorSet).forEach(setId => {
+            temEsp = true;
+            const p = PACOTES.find(x => x.cod === setId);
+            const nomeSet = p ? p.nome.split(' (')[0] : setId;
+            const header = document.createElement('div'); 
+            header.className = 'section-title'; 
+            header.textContent = '✨ ' + nomeSet; 
+            gridContainer.appendChild(header);
+            const grid = document.createElement('div'); 
+            grid.className = 'cartas-album';
+            especiaisPorSet[setId].forEach(item => {
+                item.customGrads.forEach(({g, gi}) => {
+                    const d = document.createElement('div'); 
+                    d.className = 'carta-slot'; 
+                    d.innerHTML = '<div class="slab-container especial"><div class="slab-label"><div class="psa-logo">ESPECIAL</div><div class="grade">★</div><div class="g-name">' + item.carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (item.carta.imgSmall || item.carta.img) + '"></div></div>';
+                    d.onclick = () => abrirDetalhe(item.cId, g.nota, gi); 
+                    grid.appendChild(d);
+                });
+            });
+            gridContainer.appendChild(grid);
+        });
+
+        if (!temEsp) { gridContainer.innerHTML = '<p class="vazio">Nenhuma carta especial ainda.<br><br>Cartas especiais são dadas pelo Admin!</p>'; }
+        if (telaColAtual) telaColAtual.scrollTop = scrollAtual;
+    }
+
     function abrirAlbum(setId, manterScroll = false) {
         albumAberto = setId; 
         const p = PACOTES.find(x => x.cod === setId);
@@ -3243,7 +3386,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         ordenado.forEach(carta => {
             const info = colecao[carta.id]; 
             const temRaw = info && info.qtd > 0; 
-            const temGrad = info && info.gradeds && info.gradeds.length > 0;
+            const gradedsNaoCustom = info && info.gradeds ? info.gradeds.filter(g => !g.isCustom) : [];
+            const temGrad = gradedsNaoCustom.length > 0;
             const travada = cartasTravadas[carta.id]; 
             const rawTravada = travada && travada.raw; 
             const d = document.createElement('div');
@@ -3251,17 +3395,15 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             if(temRaw || temGrad || albumAberto === 'hack') {
                 d.className = 'carta-slot';
                 if (albumAberto === 'hack') {
-                    const classeNota = 'hack'; 
-                    const logoLabel = 'HACK'; 
-                    const nota = temGrad ? Math.max(...info.gradeds.map(g => g.nota)) : 10;
+                    const nota = temGrad ? Math.max(...gradedsNaoCustom.map(g => g.nota)) : 10;
                     if(!temGrad) {
                         d.className = 'carta-slot vazia'; 
                         d.style.background = '#000'; 
                         d.style.border = '2px dashed #00ff41';
                         d.innerHTML = `<span class="num" style="color:#00ff41; font-family:monospace;">#${carta.num}</span><div class="nome-vazio" style="color:#00ff41; font-family:monospace;">${carta.nome}</div>`;
                     } else {
-                        d.innerHTML = `<div class="slab-container ${classeNota}"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${nota}</div><div class="g-name">${carta.nome}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"></div></div>`;
-                        d.onclick = () => { const idx = info.gradeds.findIndex(g => g.nota === nota); abrirDetalhe(carta.id, nota, idx); };
+                        d.innerHTML = `<div class="slab-container hack"><div class="slab-label"><div class="psa-logo">HACK</div><div class="grade">${nota}</div><div class="g-name">${carta.nome}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"></div></div>`;
+                        d.onclick = () => { const idx = info.gradeds.findIndex(g => g.nota === nota && !g.isCustom); abrirDetalhe(carta.id, nota, idx); };
                     }
                 } else {
                     let badgeQtd = ''; 
@@ -3269,10 +3411,9 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     let lockBadge = rawTravada ? '<div class="lock-badge">🔒 Troca</div>' : ''; 
                     let notaHtml = '';
                     if(temGrad) {
-                        const melhorNota = Math.max(...info.gradeds.map(g => g.nota)); 
+                        const melhorNota = Math.max(...gradedsNaoCustom.map(g => g.nota)); 
                         let corNota = melhorNota === 10 ? '#b8860b' : melhorNota === 9 ? '#6b21a8' : melhorNota === 8 ? '#0369a1' : '#4b5563';
-                        const isCustom = info.gradeds.some(g => g.isCustom);
-                        notaHtml = '<div class="slab-label" style="position:absolute; bottom:0; width:100%; padding:2px; border-bottom:none; border-top:2px solid #bbb;"><div class="psa-logo">' + (isCustom ? '✨ ESPECIAL' : 'PSA') + '</div><div class="grade" style="font-size:1rem; color:' + (isCustom ? '#ffd700' : corNota) + '">' + (isCustom ? '★' : melhorNota) + '</div></div>';
+                        notaHtml = '<div class="slab-label" style="position:absolute; bottom:0; width:100%; padding:2px; border-bottom:none; border-top:2px solid #bbb;"><div class="psa-logo">PSA</div><div class="grade" style="font-size:1rem; color:' + corNota + '">' + melhorNota + '</div></div>';
                     }
                     d.innerHTML = '<img src="' + (carta.imgSmall || carta.img) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'">' + badgeQtd + lockBadge + notaHtml;
                     d.onclick = () => abrirDetalhe(carta.id);
@@ -3306,17 +3447,24 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             }
             if(g) {
                 const isCustom = g.isCustom;
-                const classeNota = ehHack ? 'hack' : (isCustom ? 'psa-10' : ('psa-' + g.nota)); 
+                let classeNota;
+                if (ehHack) classeNota = 'hack';
+                else if (isCustom) classeNota = 'especial';
+                else classeNota = 'psa-' + g.nota;
                 const logoLabel = ehHack ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
-                document.getElementById('detCarta').innerHTML = '<div class="det-slab ' + classeNota + '"><div class="slab-label"><div class="psa-logo">' + logoLabel + '</div><div class="grade">' + (isCustom ? '★' : g.nota) + '</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.img || carta.imgSmall) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'"></div></div>';
-                const valorStr = ehHack ? '????' : formatarPreco(g.preco); 
-                const precoClass = ehHack ? 'misterio' : 'jackpot'; 
+                const gradeLabel = ehHack ? g.nota : (isCustom ? '★' : g.nota);
+                document.getElementById('detCarta').innerHTML = '<div class="det-slab ' + classeNota + '"><div class="slab-label"><div class="psa-logo">' + logoLabel + '</div><div class="grade">' + gradeLabel + '</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.img || carta.imgSmall) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'"></div></div>';
+                const valorStr = ehHack ? '????' : formatarPreco(g.preco || 0); 
+                let precoClass;
+                if (ehHack) precoClass = 'misterio';
+                else if (isCustom) precoClass = 'especial-preco';
+                else precoClass = 'jackpot';
                 const lblPreco = ehHack ? 'Valor de Troca' : (isCustom ? 'Valor Especial' : 'Valor Graduado');
                 
                 html += '<div class="linha"><span class="lbl">Nome</span><span class="val">' + carta.nome + '</span></div>' + 
                         '<div class="linha"><span class="lbl">Coleção</span><span class="val">' + (ehHack ? '⚠️ Arquivo Hackeado' : carta.setNome) + '</span></div>' + 
                         '<div class="linha"><span class="lbl">Número</span><span class="val">#' + carta.num + '</span></div>' + 
-                        '<div class="linha"><span class="lbl">Graduação</span><span class="val" style="color:' + (ehHack ? '#00ff41' : '#f7a800') + '">' + (ehHack ? 'HACK 10' : (isCustom ? 'Especial ★' : ('PSA ' + g.nota))) + '</span></div>' + 
+                        '<div class="linha"><span class="lbl">Graduação</span><span class="val" style="color:' + (ehHack ? '#00ff41' : (isCustom ? '#b22222' : '#f7a800')) + '">' + (ehHack ? 'HACK 10' : (isCustom ? 'Especial ★' : ('PSA ' + g.nota))) + '</span></div>' + 
                         '<div class="linha"><span class="lbl">Data</span><span class="val">' + new Date(g.data).toLocaleDateString() + '</span></div>' + 
                         '<div class="preco-box ' + precoClass + '"><div class="lbl">' + lblPreco + '</div><div class="val">' + valorStr + '</div></div>';
 
@@ -3338,7 +3486,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 html += '</div>';
 
                 if(ehHack) acoesHTML += '<button class="btn-acao btn-vender" onclick="venderCarta(\'' + cartaId + '\',' + g.nota + ',' + idx + ')" style="background:linear-gradient(180deg,#00ff41,#00b82f); color:#000; box-shadow:0 5px 0 #006600;">💵 Vender (0 Moedas)</button>';
-                else acoesHTML += '<button class="btn-acao btn-vender" onclick="venderCarta(\'' + cartaId + '\',' + g.nota + ',' + idx + ')">💵 Vender por ' + formatarPreco(g.preco) + '</button>';
+                else acoesHTML += '<button class="btn-acao btn-vender" onclick="venderCarta(\'' + cartaId + '\',' + g.nota + ',' + idx + ')">💵 Vender por ' + formatarPreco(g.preco || 0) + '</button>';
             }
         } else {
             document.getElementById('detCarta').innerHTML = '<div class="det-carta"><img src="' + (carta.img || carta.imgSmall) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'"></div>';
@@ -3352,8 +3500,9 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     '<div class="linha"><span class="lbl">Raridade</span><span class="val">' + (RAR_NOME[carta.rar] || carta.rar) + '</span></div>' + 
                     '<div class="linha"><span class="lbl">Quantidade (Raw)</span><span class="val">x' + (info.qtd || 0) + '</span></div>';
             if (rawTravada) html += '<div class="linha"><span class="lbl">Status</span><span class="val" style="color:#f7a800;">🔒 Em troca com ' + (travada.com || 'Amigo') + '</span></div>';
-            const temGrad = info.gradeds && info.gradeds.length > 0;
-            if(temGrad) html += '<div class="linha"><span class="lbl">Graduadas</span><span class="val">' + info.gradeds.map(g => g.isCustom ? 'Especial' : 'PSA ' + g.nota).join(', ') + '</span></div>';
+            const gradedsNaoCustom = info.gradeds ? info.gradeds.filter(g => !g.isCustom) : [];
+            const temGrad = gradedsNaoCustom.length > 0;
+            if(temGrad) html += '<div class="linha"><span class="lbl">Graduadas</span><span class="val">' + gradedsNaoCustom.map(g => 'PSA ' + g.nota).join(', ') + '</span></div>';
             html += '<div class="preco-box"><div class="lbl">Valor Raw</div><div class="val">' + valorRawStr + '</div></div>';
             
             if(info.qtd > 0) {
@@ -3367,6 +3516,45 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         }
         acoesHTML += '</div>'; 
         document.getElementById('detInfo').innerHTML = html + acoesHTML;
+    }
+
+    function abrirDetalheAmigo(cartaId, notaGradFiltro = null, gradIndex = null) {
+        const carta = encontrarCarta(cartaId);
+        if (!carta) return;
+        const colAmigo = (amigoDaTrocaAtual && amigoDaTrocaAtual.colecao) ? amigoDaTrocaAtual.colecao : {};
+        const info = colAmigo[cartaId];
+        if (!info) return;
+        mostrarTela('telaDetalhe');
+        let html = '';
+        let temGrad = info.gradeds && info.gradeds.length > 0;
+        if (notaGradFiltro !== null || temGrad) {
+            let g = null, idx = 0;
+            if (temGrad) {
+                if (gradIndex !== null && info.gradeds[gradIndex]) { g = info.gradeds[gradIndex]; idx = gradIndex; }
+                else { g = info.gradeds.find(x => x.nota === notaGradFiltro) || info.gradeds[0]; idx = info.gradeds.indexOf(g); }
+            }
+            if (g) {
+                const isCustom = g.isCustom;
+                let classeNota;
+                if (isCartaHack(cartaId)) classeNota = 'hack';
+                else if (isCustom) classeNota = 'especial';
+                else classeNota = 'psa-' + g.nota;
+                const logoLabel = isCartaHack(cartaId) ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
+                const gradeLabel = isCustom ? '★' : g.nota;
+                document.getElementById('detCarta').innerHTML = '<div class="det-slab ' + classeNota + '"><div class="slab-label"><div class="psa-logo">' + logoLabel + '</div><div class="grade">' + gradeLabel + '</div><div class="g-name">' + carta.nome + '</div></div><div class="slab-img-wrap"><img src="' + (carta.img || carta.imgSmall) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'"></div></div>';
+                html += '<div class="linha"><span class="lbl">Nome</span><span class="val">' + carta.nome + '</span></div>';
+                html += '<div class="linha"><span class="lbl">Coleção</span><span class="val">' + carta.setNome + '</span></div>';
+                html += '<div class="linha"><span class="lbl">Graduação</span><span class="val">' + (isCustom ? 'Especial ★' : ('PSA ' + g.nota)) + '</span></div>';
+                html += '<div class="preco-box"><div class="lbl">Valor</div><div class="val">' + formatarPreco(g.preco || 0) + '</div></div>';
+            }
+        } else {
+            document.getElementById('detCarta').innerHTML = '<div class="det-carta"><img src="' + (carta.img || carta.imgSmall) + '" onerror="this.onerror=null;this.src=\'' + CARTA_VERSO + '\'"></div>';
+            html += '<div class="linha"><span class="lbl">Nome</span><span class="val">' + carta.nome + '</span></div>';
+            html += '<div class="linha"><span class="lbl">Coleção</span><span class="val">' + carta.setNome + '</span></div>';
+            html += '<div class="linha"><span class="lbl">Quantidade</span><span class="val">x' + (info.qtd || 0) + '</span></div>';
+            html += '<div class="preco-box"><div class="lbl">Valor Raw</div><div class="val">' + formatarPreco(carta.preco) + '</div></div>';
+        }
+        document.getElementById('detInfo').innerHTML = html;
     }
 
     function irParaGraduar(cartaId) {
@@ -3390,7 +3578,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             if(idx >= 0 && info.gradeds[idx]) {
                 if(!confirm("Tem certeza que deseja vender esta carta graduada? Essa ação não pode ser desfeita.")) return;
                 const g = info.gradeds[idx]; 
-                totalGanho = ehHack ? 0 : g.preco; 
+                totalGanho = ehHack ? 0 : (g.preco || 0); 
                 notaVendida = g.nota;
                 info.gradeds.splice(idx, 1); 
                 moedas += totalGanho;
@@ -3427,6 +3615,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         else alert('✅ Venda realizada! Você ganhou ' + formatarPreco(totalGanho) + ' 🪙');
         
         if(abaColecao === 'graded') renderGraduadas(); 
+        else if(abaColecao === 'especiais') renderEspeciais();
         else if(albumAberto) abrirAlbum(albumAberto); 
         else renderAlbuns();
     }
@@ -3519,7 +3708,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     let preco = c.preco;
                     if(favs[i].tipo === 'graded') preco = favs[i].preco;
                     slot.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="fav-price">${formatarPreco(preco)}</div>`;
-                    slot.onclick = () => { if(isMeu) abrirSeletorFavorito(i); else abrirDetalhe(favs[i].id, favs[i].nota, favs[i].gi); };
+                    slot.onclick = () => { if(isMeu) abrirSeletorFavorito(i); else abrirDetalheAmigo(favs[i].id, favs[i].nota, favs[i].gi); };
                     continue;
                 }
             }
@@ -3756,6 +3945,21 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         }
     }
 
+    function svgIcon(tipo) {
+        const svgs = {
+            msg: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#4a9fd8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
+            amizade: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#7eeb8e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>',
+            troca: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#ffd93d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>',
+            bell: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#ffd93d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>',
+            gift: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#ff8c00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>',
+            verific: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#1DA1F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
+            coins: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#ffd93d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="6" x2="12" y2="8"></line><line x1="12" y1="16" x2="12" y2="18"></line></svg>',
+            mail: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#4a9fd8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+            question: '<svg class="notif-svg" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+        };
+        return svgs[tipo] || svgs.bell;
+    }
+
     function abrirNotificacoes() { 
         mostrarTela('telaNotificacoes'); 
         renderNotificacoes(); 
@@ -3766,17 +3970,17 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         if(!lista) return; 
         lista.innerHTML = '';
         if(notificacoes.length === 0) {
-            lista.innerHTML = '<div class="correio-vazio">🔔 Nenhuma notificação por aqui.<br><br>Quando alguém te mandar mensagem, pedir amizade ou troca, aparece aqui!</div>';
+            lista.innerHTML = '<div class="correio-vazio">' + svgIcon('bell') + '<br>Nenhuma notificação por aqui.<br><br>Quando alguém te mandar mensagem, pedir amizade ou troca, aparece aqui!</div>';
             return;
         }
         
         notificacoes.slice().reverse().forEach(n => {
             const d = document.createElement('div'); 
             d.className = 'correio-item' + (n.lido ? ' lido' : '');
-            let icoHtml = '🔔';
-            if(n.tipo === 'msg') icoHtml = '💬'; 
-            else if(n.tipo === 'amizade') icoHtml = '👋'; 
-            else if(n.tipo === 'troca') icoHtml = '🤝';
+            let icoHtml = svgIcon('bell');
+            if(n.tipo === 'msg') icoHtml = svgIcon('msg'); 
+            else if(n.tipo === 'amizade') icoHtml = svgIcon('amizade'); 
+            else if(n.tipo === 'troca') icoHtml = svgIcon('troca');
             
             const tempoAtras = Math.floor((Date.now() - n.dataEnvio) / 60000); 
             let dataStr = 'agora';
@@ -3818,7 +4022,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
                 isHackMaster: p.isHackMaster||false, isTester: p.isTester||false,
                 gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
-                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false
+                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false,
+                colecao: d.colecao || {}
             };
             abrirPerfilAmigo(amigo);
         } catch(e) {}
@@ -3905,7 +4110,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
                 isHackMaster: p.isHackMaster||false, isTester: p.isTester||false,
                 gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
-                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false
+                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false,
+                colecao: d.colecao || {}
             };
             
             abrirPerfilAmigo(amigo);
@@ -4096,7 +4302,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 badge: p.badge || false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑',
                 isHackMaster: p.isHackMaster || false, isTester: p.isTester || false,
                 gradeds: Object.values(d.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0),
-                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false
+                colecoes: (d.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false,
+                colecao: d.colecao || {}
             };
             amigoDaTrocaAtual = amigoAtualizado;
             if (document.getElementById('telaAmigoPerfil').classList.contains('ativa')) {
@@ -4154,6 +4361,41 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const cc = document.getElementById('amigoColecoes'); 
         if (cc) cc.textContent = amigo.colecoes || 0;
 
+        const topContainer = document.getElementById('amigoTopCartas');
+        if (topContainer) {
+            topContainer.innerHTML = '';
+            const listaTop = [];
+            const colAmigo = amigo.colecao || {};
+            for (const cid in colAmigo) {
+                const info = colAmigo[cid];
+                const carta = encontrarCarta(cid);
+                if (!carta) continue;
+                if (info.qtd > 0) {
+                    listaTop.push({ id: cid, preco: carta.preco, nota: null, gi: -1, img: carta.imgSmall || carta.img });
+                }
+                if (info.gradeds && info.gradeds.length > 0) {
+                    info.gradeds.forEach((g, gi) => {
+                        listaTop.push({ id: cid, preco: g.preco || 0, nota: g.nota, gi: gi, img: carta.imgSmall || carta.img });
+                    });
+                }
+            }
+            listaTop.sort((a, b) => (b.preco || 0) - (a.preco || 0));
+            const top3 = listaTop.slice(0, 3);
+            if (top3.length === 0) {
+                topContainer.innerHTML = '<div style="color:#a89ec4;font-size:.75rem;font-weight:800;padding:10px;">Sem cartas ainda</div>';
+            } else {
+                top3.forEach(item => {
+                    const d = document.createElement('div');
+                    d.className = 'amigo-top-carta';
+                    d.innerHTML = `<img src="${item.img}" onerror="this.onerror=null;this.src='${CARTA_VERSO}'"><div class="top-price">${formatarPreco(item.preco)}</div>`;
+                    d.onclick = () => {
+                        abrirDetalheAmigo(item.id, item.nota, item.gi);
+                    };
+                    topContainer.appendChild(d);
+                });
+            }
+        }
+
         const favSlots = document.getElementById('amigoFavSlots');
         if(amigo.mostrarFavoritos) { 
             favSlots.style.display = 'flex'; 
@@ -4174,7 +4416,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             await db.collection('trocas').doc(tradeId).set({
                 jogador1: auth.currentUser.uid, jogador1Nome: usuario.nome,
                 jogador2: amigo.uid, jogador2Nome: amigo.nome,
-                cartas1: [], cartas2: [], status: 'pendente',
+                cartas1: [], cartas2: [], moedas1: 0, moedas2: 0, status: 'pendente',
                 aceitou1: false, aceitou2: false, criadoEm: Date.now()
             });
             
@@ -4270,7 +4512,13 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         
         trocaSelecionadaJogador = []; 
         trocaSelecionadaAmigo = [];
+        tradeMoedasMinhas = 0;
+        tradeMoedasAmigo = 0;
+        document.getElementById('trocaMoedas').value = '';
+        atualizarEspelhosMoedas();
         renderizarSlotsTroca();
+        
+        criarParticulasTroca();
         
         if (unsubscribeTroca) unsubscribeTroca();
         unsubscribeTroca = db.collection('trocas').doc(tradeId).onSnapshot(docSnap => {
@@ -4284,10 +4532,20 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             if (tradeIsJogador1) {
                 trocaSelecionadaJogador = data.cartas1 || [];
                 trocaSelecionadaAmigo = data.cartas2 || [];
+                tradeMoedasMinhas = data.moedas1 || 0;
+                tradeMoedasAmigo = data.moedas2 || 0;
             } else {
                 trocaSelecionadaJogador = data.cartas2 || [];
                 trocaSelecionadaAmigo = data.cartas1 || [];
+                tradeMoedasMinhas = data.moedas2 || 0;
+                tradeMoedasAmigo = data.moedas1 || 0;
             }
+            
+            const inputEl = document.getElementById('trocaMoedas');
+            if (document.activeElement !== inputEl) {
+                inputEl.value = tradeMoedasMinhas > 0 ? tradeMoedasMinhas : '';
+            }
+            atualizarEspelhosMoedas();
             renderizarSlotsTroca();
             
             if (data.status === 'timer') {
@@ -4300,6 +4558,61 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         });
         
         iniciarChatTroca();
+    }
+
+    function atualizarEspelhosMoedas() {
+        const espelhoAmigo = document.getElementById('trocaMoedasAmigo');
+        const espelhoMeu = document.getElementById('trocaMoedasMeuEspelho');
+        if (espelhoAmigo) {
+            if (tradeMoedasAmigo > 0) {
+                espelhoAmigo.textContent = tradeMoedasAmigo.toLocaleString('pt-BR') + ' 🪙';
+                espelhoAmigo.classList.remove('vazio');
+            } else {
+                espelhoAmigo.textContent = '— moedas';
+                espelhoAmigo.classList.add('vazio');
+            }
+        }
+        if (espelhoMeu) {
+            if (tradeMoedasMinhas > 0) {
+                espelhoMeu.textContent = tradeMoedasMinhas.toLocaleString('pt-BR') + ' 🪙';
+                espelhoMeu.classList.remove('vazio');
+            } else {
+                espelhoMeu.textContent = '— moedas';
+                espelhoMeu.classList.add('vazio');
+            }
+        }
+    }
+
+    function onTrocaMoedasInput() {
+        if (!docTrocaId) return;
+        const val = parseInt(document.getElementById('trocaMoedas').value) || 0;
+        tradeMoedasMinhas = Math.max(0, val);
+        atualizarEspelhosMoedas();
+        const campo = tradeIsJogador1 ? 'moedas1' : 'moedas2';
+        const updates = {};
+        updates[campo] = tradeMoedasMinhas;
+        db.collection('trocas').doc(docTrocaId).update(updates).catch(e => console.error("Erro nas moedas:", e));
+    }
+
+    function criarParticulasTroca() {
+        const container = document.getElementById('telaTroca');
+        if (!container) return;
+        const antigos = container.querySelectorAll('.trade-sparkle');
+        antigos.forEach(a => a.remove());
+        const emojis = ['✨','⭐','💫','🌟','✦'];
+        const cores = ['#ffd93d','#ff8c00','#a855f7','#4a9fd8','#ff5566'];
+        for (let i = 0; i < 12; i++) {
+            const p = document.createElement('div');
+            p.className = 'trade-sparkle';
+            p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            p.style.left = (Math.random() * 90 + 5) + '%';
+            p.style.top = (Math.random() * 90 + 5) + '%';
+            p.style.fontSize = (Math.random() * 12 + 12) + 'px';
+            p.style.color = cores[Math.floor(Math.random() * cores.length)];
+            p.style.animationDelay = (Math.random() * 3) + 's';
+            p.style.animationDuration = (2 + Math.random() * 2) + 's';
+            container.appendChild(p);
+        }
     }
 
     function cancelarTroca() {
@@ -4316,6 +4629,8 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         amigoDaTrocaAtual = null;
         trocaSelecionadaJogador = [];
         trocaSelecionadaAmigo = [];
+        tradeMoedasMinhas = 0;
+        tradeMoedasAmigo = 0;
         mostrarTela('telaAmigos');
     }
 
@@ -4326,9 +4641,13 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             let cardHtml = '';
             if (carta.tipo === 'graded') {
                 const isCustom = carta.isCustom;
-                const classeNota = carta.hack ? 'hack' : (isCustom ? 'psa-10' : ('psa-' + carta.nota));
+                let classeNota;
+                if (carta.hack) classeNota = 'hack';
+                else if (isCustom) classeNota = 'especial';
+                else classeNota = 'psa-' + carta.nota;
                 const logoLabel = carta.hack ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
-                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${isCustom ? '★' : carta.nota}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
+                const gradeLabel = isCustom ? '★' : carta.nota;
+                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${gradeLabel}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
             } else {
                 cardHtml = `<img src="${carta.imgSmall || carta.img}">`;
             }
@@ -4350,9 +4669,13 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             let cardHtml = '';
             if (carta.tipo === 'graded') {
                 const isCustom = carta.isCustom;
-                const classeNota = carta.hack ? 'hack' : (isCustom ? 'psa-10' : ('psa-' + carta.nota));
+                let classeNota;
+                if (carta.hack) classeNota = 'hack';
+                else if (isCustom) classeNota = 'especial';
+                else classeNota = 'psa-' + carta.nota;
                 const logoLabel = carta.hack ? 'HACK' : (isCustom ? 'ESPECIAL' : 'PSA');
-                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${isCustom ? '★' : carta.nota}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
+                const gradeLabel = isCustom ? '★' : carta.nota;
+                cardHtml = `<div class="slab-container ${classeNota}" style="width:100%;height:100%;"><div class="slab-label"><div class="psa-logo">${logoLabel}</div><div class="grade">${gradeLabel}</div><div class="g-name">${carta.nome || ''}</div></div><div class="slab-img-wrap"><img src="${carta.imgSmall || carta.img}"></div></div>`;
             } else {
                 cardHtml = `<img src="${carta.imgSmall || carta.img}">`;
             }
@@ -4364,7 +4687,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         if (trocaSelecionadaAmigo.length === 0) slotsB.innerHTML = '<div style="color:#a89ec4;font-size:.8rem;padding:20px;">Aguardando...</div>';
         
         const btnConfirmar = document.getElementById('btnConfirmarTroca');
-        if(btnConfirmar) btnConfirmar.style.display = (trocaSelecionadaJogador.length > 0 || trocaSelecionadaAmigo.length > 0) ? 'block' : 'none';
+        if(btnConfirmar) btnConfirmar.style.display = (trocaSelecionadaJogador.length > 0 || trocaSelecionadaAmigo.length > 0 || tradeMoedasMinhas > 0 || tradeMoedasAmigo > 0) ? 'block' : 'none';
     }
 
     function atualizarTrocaFirebase() {
@@ -4405,14 +4728,11 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const tempoDecorrido = Math.floor((Date.now() - startTime) / 1000); 
         timerCount = 5 - tempoDecorrido; 
         if (timerCount < 0) timerCount = 0;
-        
-        // NOVO VISUAL DO TIMER COM POKÉBOLA GIRANDO
         document.getElementById('trocaStatus').innerHTML = `
-            <div style="font-size: 5rem; animation: girar 1.5s linear infinite; display: inline-block; margin-bottom: 15px; filter: drop-shadow(0 0 15px #ff5566);">🔴</div>
+            <div class="poke-timer-ball"></div>
             <div style="font-size: 2rem; color: #ff5566; font-weight: 900;">${timerCount}</div>
-            <div style="font-size: 0.9rem; color: #4a6fa5; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
+            <div style="font-size: 0.9rem; color: #ffd93d; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
         `;
-        
         timerTrocaInterval = setInterval(() => {
             timerCount--;
             if (timerCount <= 0) { 
@@ -4421,9 +4741,9 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 executarTransacaoTroca(docTrocaId); 
             } else { 
                 document.getElementById('trocaStatus').innerHTML = `
-                    <div style="font-size: 5rem; animation: girar 1.5s linear infinite; display: inline-block; margin-bottom: 15px; filter: drop-shadow(0 0 15px #ff5566);">🔴</div>
+                    <div class="poke-timer-ball"></div>
                     <div style="font-size: 2rem; color: #ff5566; font-weight: 900;">${timerCount}</div>
-                    <div style="font-size: 0.9rem; color: #4a6fa5; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
+                    <div style="font-size: 0.9rem; color: #ffd93d; font-weight: 800; margin-top: 5px;">Troca em andamento... (Aperte Cancelar para desistir)</div>
                 `; 
             }
         }, 1000);
@@ -4440,15 +4760,27 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 
                 const uid1 = data.jogador1; 
                 const uid2 = data.jogador2;
+                const moedas1 = data.moedas1 || 0;
+                const moedas2 = data.moedas2 || 0;
+                
                 const user1Ref = db.collection('jogadores').doc(uid1); 
                 const user2Ref = db.collection('jogadores').doc(uid2);
                 const user1Doc = await transaction.get(user1Ref); 
                 const user2Doc = await transaction.get(user2Ref);
                 
-                let col1 = JSON.parse(JSON.stringify(user1Doc.data().colecao || {})); 
-                let col2 = JSON.parse(JSON.stringify(user2Doc.data().colecao || {}));
+                const user1Data = user1Doc.data();
+                const user2Data = user2Doc.data();
+                const moedasU1 = user1Data.moedas || 0;
+                const moedasU2 = user2Data.moedas || 0;
+                const infU1 = user1Data.dinheiroInfinito || false;
+                const infU2 = user2Data.dinheiroInfinito || false;
+                
+                if (!infU1 && moedasU1 < moedas1) throw new Error("Jogador 1 não tem moedas suficientes.");
+                if (!infU2 && moedasU2 < moedas2) throw new Error("Jogador 2 não tem moedas suficientes.");
+                
+                let col1 = JSON.parse(JSON.stringify(user1Data.colecao || {})); 
+                let col2 = JSON.parse(JSON.stringify(user2Data.colecao || {}));
 
-                // REMOVE AS CARTAS DO JOGADOR 1
                 for (let c of (data.cartas1 || [])) {
                     if (c.tipo === 'raw') { 
                         if (!col1[c.id] || (col1[c.id].qtd || 0) <= 0) throw new Error("Cartas insuficientes."); 
@@ -4463,7 +4795,6 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     }
                 }
                 
-                // REMOVE AS CARTAS DO JOGADOR 2
                 for (let c of (data.cartas2 || [])) {
                     if (c.tipo === 'raw') { 
                         if (!col2[c.id] || (col2[c.id].qtd || 0) <= 0) throw new Error("Cartas insuficientes."); 
@@ -4478,7 +4809,6 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     }
                 }
                 
-                // ADICIONA AS CARTAS DO J1 NO J2
                 for (let c of (data.cartas1 || [])) {
                     if (!col2[c.id]) col2[c.id] = { qtd: 0, gradeds: [] };
                     if (c.tipo === 'raw') { col2[c.id].qtd = (col2[c.id].qtd || 0) + 1; } 
@@ -4488,7 +4818,6 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     }
                 }
                 
-                // ADICIONA AS CARTAS DO J2 NO J1
                 for (let c of (data.cartas2 || [])) {
                     if (!col1[c.id]) col1[c.id] = { qtd: 0, gradeds: [] };
                     if (c.tipo === 'raw') { col1[c.id].qtd = (col1[c.id].qtd || 0) + 1; } 
@@ -4498,8 +4827,11 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                     }
                 }
                 
-                transaction.update(user1Ref, { colecao: col1 }); 
-                transaction.update(user2Ref, { colecao: col2 }); 
+                const novasMoedasU1 = infU1 ? moedasU1 : (moedasU1 - moedas1 + moedas2);
+                const novasMoedasU2 = infU2 ? moedasU2 : (moedasU2 - moedas2 + moedas1);
+                
+                transaction.update(user1Ref, { colecao: col1, moedas: novasMoedasU1 }); 
+                transaction.update(user2Ref, { colecao: col2, moedas: novasMoedasU2 }); 
                 transaction.update(tradeRef, { status: 'concluida' });
             });
             console.log("✅ Troca realizada com sucesso!");
@@ -4546,7 +4878,11 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         seletorFiltro = filtro; 
         document.querySelectorAll('.modal-tabs')[0].querySelectorAll('.modal-tab').forEach(b => { b.classList.remove('at'); b.style.background = '#fff'; b.style.color = '#4a6fa5'; });
         btn.classList.add('at'); 
-        btn.style.background = '#ffd93d'; 
+        if (filtro === 'especial') {
+            btn.style.background = 'linear-gradient(180deg,#ffa500,#ff8c00)';
+        } else {
+            btn.style.background = '#ffd93d';
+        }
         btn.style.color = '#1a0a2a'; 
         renderizarCartasSeletor();
     }
@@ -4574,12 +4910,21 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             const qtdRawNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.filter(tc => tc.id === cId && tc.tipo === 'raw').length : 0;
             const disponivelRaw = info.qtd - qtdRawNaTroca;
 
-            if((seletorFiltro === 'raw' || seletorFiltro === 'todas') && disponivelRaw > 0) { cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack, disponivel: disponivelRaw, gi: -1}); }
+            if((seletorFiltro === 'raw' || seletorFiltro === 'todas') && disponivelRaw > 0) { cartasDisponiveis.push({...carta, tipo: 'raw', precoFinal: carta.preco, hack: ehHack, disponivel: disponivelRaw, gi: -1, isCustom: false}); }
             
             if((seletorFiltro === 'graded' || seletorFiltro === 'todas') && info.gradeds && info.gradeds.length > 0) {
                 info.gradeds.forEach((g, gi) => {
+                    if (g.isCustom) return;
                     const jaNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && (tc._uid ? tc._uid === g._uid : tc.nota === g.nota)) : false;
-                    if(!jaNaTroca) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco, hack: ehHack, disponivel: 1, isCustom: g.isCustom}); }
+                    if(!jaNaTroca) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: false}); }
+                });
+            }
+
+            if(seletorFiltro === 'especial' && info.gradeds && info.gradeds.length > 0) {
+                info.gradeds.forEach((g, gi) => {
+                    if (!g.isCustom) return;
+                    const jaNaTroca = seletorContexto === 'troca' ? trocaSelecionadaJogador.some(tc => tc.id === cId && tc.tipo === 'graded' && (tc._uid ? tc._uid === g._uid : tc.nota === g.nota)) : false;
+                    if(!jaNaTroca) { cartasDisponiveis.push({...carta, tipo: 'graded', nota: g.nota, _uid: g._uid, gi: gi, precoFinal: g.preco || 0, hack: ehHack, disponivel: 1, isCustom: true}); }
                 });
             }
         }
@@ -4588,10 +4933,23 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         
         cartasDisponiveis.forEach(c => {
             const d = document.createElement('div'); 
-            d.className = 'modal-carta-item' + (c.hack ? ' hack' : '');
-            let badge = c.tipo === 'graded' ? (c.hack ? '⚠️ HACK 10' : (c.isCustom ? '✨ ESPECIAL' : `PSA ${c.nota}`)) : `x${c.disponivel}`;
+            let classeExtra = '';
+            if (c.hack) classeExtra = ' hack';
+            else if (c.isCustom) classeExtra = ' especial-item';
+            d.className = 'modal-carta-item' + classeExtra;
+            let badge;
+            if (c.tipo === 'graded') {
+                if (c.hack) badge = '⚠️ HACK 10';
+                else if (c.isCustom) badge = '✨ ESPECIAL';
+                else badge = `PSA ${c.nota}`;
+            } else {
+                badge = `x${c.disponivel}`;
+            }
             const precoStr = c.hack ? '????' : `R$ ${c.precoFinal.toFixed(2)}`;
-            d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${c.hack?'background:#00ff41;color:#000;':''}">${badge}</div><div class="price-badge">${precoStr}</div>`;
+            let badgeStyle = '';
+            if (c.hack) badgeStyle = 'background:#00ff41;color:#000;';
+            else if (c.isCustom) badgeStyle = 'background:linear-gradient(180deg,#ffa500,#ff8c00);color:#fff;';
+            d.innerHTML = `<img src="${c.imgSmall || c.img}"><div class="qtd-badge" style="${badgeStyle}">${badge}</div><div class="price-badge">${precoStr}</div>`;
             
             d.onclick = () => {
                 if(seletorContexto === 'troca') { 
@@ -4608,8 +4966,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             grid.appendChild(d);
         });
     }
-
-    function gerarChatId(uid1, uid2) { 
+function gerarChatId(uid1, uid2) { 
         const sorted = [uid1, uid2].sort(); 
         return sorted[0] + '_' + sorted[1]; 
     }
@@ -4773,7 +5130,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 d.innerHTML = `<div class="ranking-pos ${posCls}">${med || pos}</div><div class="ranking-avatar">${avHtml}</div><div class="ranking-info"><div class="ranking-nome">${p.nome || j.nome || 'Jogador'} ${p.isVerified ? '<span class="icon-verified"></span>' : ''}${isEu ? ' <span style="color:#ffd93d;font-size:.7rem;">(você)</span>' : ''}</div><div class="ranking-id">${p.id || '#----'}</div></div><div><div class="ranking-valor">${valorPrincipal}</div><div class="ranking-valor-lbl">${valorLbl}</div></div>`;
                 d.onclick = () => {
                     if (isEu) { abrirPerfil(); return; }
-                    const amigoData = { uid: j.uid, id: p.id, nome: j.nome, avatar: p.avatar, cor: p.cor, nivel: valorPrincipal, cartas: j.cartasCount || 0, isVerified: p.isVerified || false, isBanned: j.banido || false, coroa: p.coroa||false, rainbowName: p.rainbowName||false, adminFrame: p.adminFrame||null, badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑', isHackMaster: p.isHackMaster||false, isTester: p.isTester||false, gradeds: Object.values(j.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0), colecoes: (j.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false };
+                    const amigoData = { uid: j.uid, id: p.id, nome: j.nome, avatar: p.avatar, cor: p.cor, nivel: valorPrincipal, cartas: j.cartasCount || 0, isVerified: p.isVerified || false, isBanned: j.banido || false, coroa: p.coroa||false, rainbowName: p.rainbowName||false, adminFrame: p.adminFrame||null, badge: p.badge||false, adminTitle: p.adminTitle || '👑 CRIADOR SUPREMO 👑', isHackMaster: p.isHackMaster||false, isTester: p.isTester||false, gradeds: Object.values(j.colecao || {}).reduce((acc, c) => acc + (c.gradeds?.length || 0), 0), colecoes: (j.colecoesCompletas || []).length, favoritos: p.favoritos || [null,null,null], mostrarFavoritos: p.mostrarFavoritos || false, colecao: j.colecao || {} };
                     abrirPerfilAmigo(amigoData);
                 };
                 lista.appendChild(d);
@@ -5008,7 +5365,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             const snap = await db.collection('jogadores').get(); 
             const batch = db.batch();
             snap.forEach(doc => { 
-                const item = { id: 'corr_'+Date.now()+Math.random(), titulo: '🎁 Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 }; 
+                const item = { id: 'corr_'+Date.now()+Math.random(), titulo: 'Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 }; 
                 batch.update(doc.ref, { correio: firebase.firestore.FieldValue.arrayUnion(item) }); 
             });
             await batch.commit(); 
@@ -5024,7 +5381,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             const idDoc = await db.collection('ids_publicos').doc(idAlvo).get();
             if (!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
             const uidAlvo = idDoc.data().uid;
-            const item = { id: 'corr_'+Date.now(), titulo: '🎁 Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
+            const item = { id: 'corr_'+Date.now(), titulo: 'Presente Misterioso', tipo: 'Carta Hack Aleatória', remetente: 'ADMIN', misterioso: true, lido: false, dataEnvio: Date.now(), expiraEm: Date.now() + 10*60*1000 };
             await db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) });
             document.getElementById('adminStatus').textContent = `✅ Presente Misterioso enviado para ${idAlvo}!`;
         } catch(e) { console.error(e); }
@@ -5110,7 +5467,6 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         const idUnico = Date.now() + '_' + Math.random().toString(36).substr(2,5);
         if(!colecao[c.id]) colecao[c.id] = { qtd: 0, data: agora, gradeds: [] }; 
         if(!colecao[c.id].gradeds) colecao[c.id].gradeds = [];
-        // AQUI ESTÁ A CORREÇÃO: nota 10 numérica, e isCustom true.
         colecao[c.id].gradeds.push({ _uid: idUnico, nota: 10, preco: basePrice, isCustom: true, data: agora, historico: [{ tipo: 'emissao', dono: 'ADMIN', data: agora, nota: 'CUSTOM' }] });
         
         if(auth.currentUser) db.collection('jogadores').doc(auth.currentUser.uid).update({ colecao: colecao }).catch(()=>{});
@@ -5237,7 +5593,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         db.collection('ids_publicos').doc(id).get().then(idDoc => {
             if (!idDoc.exists) { alert('Jogador não encontrado.'); return; }
             const uidAlvo = idDoc.data().uid;
-            const item = { id: 'corr_'+Date.now(), titulo: '🎖️ Selo de Verificado Oficial', tipo: 'Reconhecimento', remetente: 'ADMINISTRAÇÃO', verificado: true, lido: false, dataEnvio: Date.now() };
+            const item = { id: 'corr_'+Date.now(), titulo: 'Selo de Verificado Oficial', tipo: 'Reconhecimento', remetente: 'ADMINISTRAÇÃO', verificado: true, lido: false, dataEnvio: Date.now() };
             db.collection('jogadores').doc(uidAlvo).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) }).then(() => { alert('✅ Selo enviado pro Correio de ' + id + '!'); });
         });
     }
@@ -5270,18 +5626,18 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         });
         if (correioModificado) salvarEstado();
 
-        if (correio.length === 0) { lista.innerHTML = '<div class="correio-vazio">📭 Sua caixa de correio está vazia.<br><br>Quando o admin enviar algo pra você, aparece aqui!</div>'; return; }
+        if (correio.length === 0) { lista.innerHTML = '<div class="correio-vazio">' + svgIcon('mail') + '<br>Sua caixa de correio está vazia.<br><br>Quando o admin enviar algo pra você, aparece aqui!</div>'; return; }
         
         correio.slice().reverse().forEach(item => {
             const d = document.createElement('div'); 
             d.className = 'correio-item' + (item.lido ? ' lido' : '');
-            let icoHtml = '🎁';
+            let icoHtml = svgIcon('gift');
             if (item.cartaId) { 
                 const carta = encontrarCarta(item.cartaId); 
-                if (carta) icoHtml = `<img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.parentElement.textContent='🎁'">`; 
-            } else if (item.verificado) icoHtml = '🎖️'; 
-            else if (item.misterioso) icoHtml = '❓'; 
-            else if (item.moedas) icoHtml = '💰';
+                if (carta) icoHtml = `<img src="${carta.imgSmall || carta.img}" onerror="this.onerror=null;this.parentElement.innerHTML='${svgIcon('gift')}'">`; 
+            } else if (item.verificado) icoHtml = svgIcon('verific'); 
+            else if (item.misterioso) icoHtml = svgIcon('question'); 
+            else if (item.moedas) icoHtml = svgIcon('coins');
             
             let timerHtml = ''; 
             if (item.expiraEm) { 
@@ -5320,7 +5676,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 giftBox.style.display = 'block'; 
                 giftBox.textContent = '🎁'; 
                 giftBox.style.animation = 'pulsar 1s infinite';
-                document.getElementById('giftTituloModal').textContent = '🎁 PRESENTE MISTERIOSO!'; 
+                document.getElementById('giftTituloModal').textContent = 'PRESENTE MISTERIOSO!'; 
                 document.getElementById('giftText').textContent = 'Toque no presente para abrir e descobrir qual carta Hack você ganhou.';
                 document.getElementById('giftCartaImg').style.display = 'none'; 
                 document.getElementById('giftCartaInfo').style.display = 'none'; 
@@ -5364,7 +5720,6 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             } else if (item.cartaId && item.cartaTipo === 'custom') {
                 if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] }; 
                 if (!colecao[item.cartaId].gradeds) colecao[item.cartaId].gradeds = [];
-                // CORREÇÃO DO CUSTOM AQUI
                 colecao[item.cartaId].gradeds.push({ _uid: Date.now() + '_' + Math.random().toString(36).substr(2, 5), nota: 10, preco: item.cartaPrecoFixo || 100, isCustom: true, data: new Date().toISOString(), historico: [{ tipo: 'emissao', dono: item.remetente || 'ADMIN', data: new Date().toISOString(), nota: 'CUSTOM' }] });
             } else if (item.cartaId && item.cartaTipo === 'graded') {
                 if (!colecao[item.cartaId]) colecao[item.cartaId] = { qtd: 0, data: new Date().toISOString(), gradeds: [] }; 
@@ -5392,7 +5747,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
             const cartaSorteada = CARTAS_HACK[Math.floor(Math.random() * CARTAS_HACK.length)];
             setTimeout(() => {
                 giftBox.style.display = 'none'; 
-                document.getElementById('giftText').textContent = '🎉 PARABÉNS! VOCÊ GANHOU:';
+                document.getElementById('giftText').textContent = 'PARABÉNS! VOCÊ GANHOU:';
                 const imgEl = document.getElementById('giftCartaImg'); 
                 imgEl.src = cartaSorteada.img; 
                 imgEl.style.display = 'block';
@@ -5425,7 +5780,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         giftBox.style.display = 'block'; 
         giftBox.textContent = '🎁'; 
         giftBox.style.animation = 'pulsar 1s infinite';
-        document.getElementById('giftTituloModal').textContent = '🎁 PRESENTE RECEBIDO!'; 
+        document.getElementById('giftTituloModal').textContent = 'PRESENTE RECEBIDO!'; 
         document.getElementById('giftText').textContent = 'Toque no presente para abrir e descobrir o que você ganhou.';
         document.getElementById('giftCartaImg').style.display = 'none'; 
         document.getElementById('giftCartaInfo').style.display = 'none'; 
@@ -5756,6 +6111,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
     document.getElementById('navHome2').onclick = irParaHome; 
     document.getElementById('tabAlbuns').onclick = () => { abaColecao = 'albuns'; renderAlbuns(); };
     document.getElementById('tabGrad').onclick = () => { abaColecao = 'graded'; renderGraduadas(); };
+    document.getElementById('tabEspeciais').onclick = () => { abaColecao = 'especiais'; renderEspeciais(); };
     document.getElementById('btnGear').onclick = () => { document.getElementById('modalConfig').classList.add('ativo'); };
     document.getElementById('btnCorreio').onclick = abrirCorreio; 
     document.getElementById('btnNotificacoes').onclick = abrirNotificacoes;
@@ -5942,7 +6298,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
                 const idDoc = await db.collection('ids_publicos').doc(idAlvo).get(); 
                 if(!idDoc.exists) { alert('❌ Jogador não encontrado.'); return; }
                 const uid = idDoc.data().uid;
-                const item = { id: 'corr_'+Date.now(), titulo: '💰 Presente em Moedas', tipo: 'Moedas', remetente: 'ADMIN', moedas: v, lido: false, dataEnvio: Date.now() };
+                const item = { id: 'corr_'+Date.now(), titulo: 'Presente em Moedas', tipo: 'Moedas', remetente: 'ADMIN', moedas: v, lido: false, dataEnvio: Date.now() };
                 await db.collection('jogadores').doc(uid).update({ correio: firebase.firestore.FieldValue.arrayUnion(item) });
                 document.getElementById('adminStatus').textContent = `✅ ${v.toLocaleString('pt-BR')} moedas enviadas pro correio de ${idAlvo}!`;
                 document.getElementById('adminDinheiro').value = ''; 
@@ -6037,7 +6393,7 @@ document.getElementById('btnCancelarPack').onclick = async () => {
         if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
         const ganho = 10 + Math.floor(Math.random() * 6); 
         let ganhoReal = ganho;
-        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDADAS) ganhoReal = LIMITE_DIARIO_MOEDADAS - ganhoHoje;
+        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDAS) ganhoReal = LIMITE_DIARIO_MOEDAS - ganhoHoje;
         moedas += ganhoReal; 
         ganhoHoje += ganhoReal; 
         salvarEstado(); 
