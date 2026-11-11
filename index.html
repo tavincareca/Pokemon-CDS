@@ -116,32 +116,35 @@ html, body {
     100% { box-shadow: 0 0 40px #ff1493, 0 0 80px #ff69b4, inset 0 0 40px #ff1493; border-color: #ffc0cb; }
 }
 @keyframes hackPulse {
-    0%, 100% { box-shadow: 0 0 15px #00ff41, 0 0 30px rgba(0,255,65,0.4), inset 0 0 15px rgba(0,255,65,0.2); }
-    50% { box-shadow: 0 0 30px #00ff41, 0 0 60px rgba(0,255,65,0.7), inset 0 0 25px rgba(0,255,65,0.4); }
+    0%, 100% { box-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0,255,65,0.6), inset 0 0 20px rgba(0,255,65,0.4); border-color: #00ff41; }
+    50% { box-shadow: 0 0 40px #00ff41, 0 0 80px rgba(0,255,65,0.8), inset 0 0 40px rgba(0,255,65,0.6); border-color: #ccffcc; }
 }
 @keyframes hackBlink {
-    0%, 100% { opacity: 1; }
+    0%, 100% { opacity: 0.1; }
     50% { opacity: 0.4; }
 }
-@keyframes frameFire {
-    0%, 100% { box-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00, inset 0 0 20px #ff0000; border-color: #ff4500; }
-    50% { box-shadow: 0 0 40px #ff8c00, 0 0 80px #ffd700, inset 0 0 30px #ff4500; border-color: #ffd700; }
+@keyframes fireAnim {
+    0% { box-shadow: 0 0 20px #ff0000, 0 0 50px #ff4500, inset 0 0 20px #ff8c00; border-color: #ff0000; }
+    50% { box-shadow: 0 0 50px #ff4500, 0 0 100px #ffd700, inset 0 0 40px #ff0000; border-color: #ff8c00; }
+    100% { box-shadow: 0 0 30px #ff8c00, 0 0 70px #ff0000, inset 0 0 30px #ff4500; border-color: #ffd700; }
 }
-@keyframes frameIce {
-    0%, 100% { box-shadow: 0 0 20px #00ffff, 0 0 40px #87ceeb, inset 0 0 20px #00bfff; border-color: #00ffff; }
-    50% { box-shadow: 0 0 40px #87ceeb, 0 0 80px #e0ffff, inset 0 0 30px #00ffff; border-color: #fff; }
+@keyframes iceAnim {
+    0%, 100% { box-shadow: 0 0 20px #00ffff, 0 0 50px #87ceeb, inset 0 0 20px #00bfff; border-color: #00ffff; }
+    50% { box-shadow: 0 0 50px #87ceeb, 0 0 100px #e0ffff, inset 0 0 40px #00ffff; border-color: #fff; }
 }
-@keyframes frameElectric {
-    0%, 100% { box-shadow: 0 0 20px #ffff00, 0 0 40px #ffd700, inset 0 0 20px #ffa500; border-color: #ffff00; }
-    50% { box-shadow: 0 0 40px #ffd700, 0 0 80px #fff, inset 0 0 30px #ffff00; border-color: #fff; }
+@keyframes electricAnim {
+    0%, 100% { box-shadow: 0 0 20px #ffff00, 0 0 50px #ffd700, inset 0 0 20px #ffa500; border-color: #ffff00; }
+    25% { box-shadow: 0 0 60px #ffff00, 0 0 100px #ffd700, inset 0 0 50px #ffa500; border-color: #fff; }
+    50% { box-shadow: 0 0 10px #ffd700, 0 0 30px #ffff00, inset 0 0 15px #ffff00; border-color: #ffd700; }
+    75% { box-shadow: 0 0 50px #ffff00, 0 0 110px #ffd700, inset 0 0 45px #ffa500; border-color: #fff; }
 }
-@keyframes frameGalaxy {
-    0%, 100% { box-shadow: 0 0 20px #8a2be2, 0 0 40px #4b0082, inset 0 0 20px #9400d3; border-color: #8a2be2; }
-    50% { box-shadow: 0 0 40px #9400d3, 0 0 80px #ff00ff, inset 0 0 30px #4b0082; border-color: #ff00ff; }
+@keyframes galaxyAnim {
+    0%, 100% { box-shadow: 0 0 20px #8a2be2, 0 0 50px #4b0082, inset 0 0 30px #9400d3; border-color: #8a2be2; }
+    50% { box-shadow: 0 0 50px #9400d3, 0 0 100px #ff00ff, inset 0 0 60px #4b0082; border-color: #ff00ff; }
 }
-@keyframes frameShadow {
-    0%, 100% { box-shadow: 0 0 20px #333, 0 0 40px #111, inset 0 0 20px #000; border-color: #555; }
-    50% { box-shadow: 0 0 40px #111, 0 0 80px #000, inset 0 0 30px #333; border-color: #000; }
+@keyframes shadowAnim {
+    0%, 100% { box-shadow: 0 0 30px #000, 0 0 60px #111, inset 0 0 40px #000; border-color: #333; }
+    50% { box-shadow: 0 0 10px #222, 0 0 20px #000, inset 0 0 20px #111; border-color: #555; }
 }
 @keyframes spiderPulse {
     0%, 100% { box-shadow: 0 0 15px #ff0000, 0 0 30px #8b0000, inset 0 0 10px #ff0000; border-color: #ff0000; }
@@ -188,11 +191,66 @@ html, body {
     0%, 100% { box-shadow: 0 0 15px #4a9fd8, 0 0 30px rgba(74,159,216,0.5); transform: scale(1); }
     50% { box-shadow: 0 0 25px #4a9fd8, 0 0 50px rgba(74,159,216,0.8); transform: scale(1.05); }
 }
-.frame-fire { animation: frameFire 1.5s infinite alternate !important; border-width: 4px !important; }
-.frame-ice { animation: frameIce 2s infinite alternate !important; border-width: 4px !important; }
-.frame-electric { animation: frameElectric 1s infinite alternate !important; border-width: 4px !important; }
-.frame-galaxy { animation: frameGalaxy 2.5s infinite alternate !important; border-width: 4px !important; }
-.frame-shadow { animation: frameShadow 2s infinite alternate !important; border-width: 4px !important; }
+
+/* =========================================
+   TEMAS NOVOS FORÇADOS (!important)
+   ========================================= */
+
+.perfil-card.matrix-deco { 
+    background-color: #000 !important; 
+    background-image: 
+        radial-gradient(circle at 10% 50%, rgba(0,255,65,0.2) 0%, transparent 40%),
+        radial-gradient(circle at 90% 50%, rgba(0,255,65,0.2) 0%, transparent 40%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M15,80 Q25,20 40,50 Q30,70 15,80 Z" fill="rgba(0,255,65,0.4)"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M85,80 Q75,20 60,50 Q70,70 85,80 Z" fill="rgba(0,255,65,0.4)"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,100 L0,70 Q10,40 25,80 T50,60 T75,90 T100,80 L100,100 Z" fill="rgba(0,255,65,0.5)"/></svg>') !important;
+    background-size: 100% 100%, 100% 100%, 40% 40%, 40% 40%, 100% 30% !important;
+    background-position: center, center, left 90%, right 90%, bottom !important;
+    background-repeat: no-repeat !important;
+    border: 4px solid #00ff41 !important; 
+    box-shadow: 0 0 30px #00ff41, inset 0 0 40px rgba(0,255,65,0.4) !important; 
+    animation: hackPulse 1.5s infinite !important;
+    position: relative; 
+    overflow: hidden; 
+}
+.perfil-card.matrix-deco::before { 
+    content: '01001000 01100001 01100011 01101011 00100000 01010100 01101000 01100101 00100000 01010000 01101100 01100001 01101110 01100101 01110100 00001010 01001000 01100001 01100011 01101011 00100000 01010100 01101000 01100101 00100000 01010000 01101100 01100001 01101110 01100101 01110100 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000 00110001 00110000' !important; 
+    position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+    font-family: monospace !important; font-size: 1rem !important; color: #00ff41 !important; line-height: 1.5 !important; 
+    opacity: 0.15 !important; word-break: break-all !important; white-space: pre-wrap !important; 
+    animation: hackBlink 3s ease-in-out infinite alternate !important; 
+    pointer-events: none !important; text-align: justify !important; z-index: 0 !important; padding: 10px !important;
+}
+.perfil-card.matrix-deco::after {
+    content: ''; position: absolute; inset: 0; 
+    background-image: radial-gradient(circle, rgba(0,255,65,0.15) 1px, transparent 1px);
+    background-size: 15px 15px; z-index: 0 !important; pointer-events: none !important; opacity: 0.5 !important;
+}
+.perfil-card.matrix-deco .perfil-nome { color: #00ff41 !important; font-family: monospace !important; text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 !important; z-index: 2 !important; }
+.perfil-card.matrix-deco .perfil-id, .perfil-card.matrix-deco .perfil-datas { color: #00ff41 !important; z-index: 2 !important; }
+.perfil-card.matrix-deco .perfil-stat-item { background: #000 !important; border: 1px solid #00ff41 !important; box-shadow: 0 0 10px rgba(0,255,65,0.3) !important; z-index: 2 !important; }
+.perfil-card.matrix-deco .perfil-avatar { border-color: #00ff41 !important; box-shadow: 0 0 20px #00ff41 !important; z-index: 2 !important; }
+
+.perfil-card.frame-fire { background: #1a0a2a !important; border: 4px solid #ff4500 !important; box-shadow: 0 0 40px #ff4500, inset 0 0 30px #ff0000 !important; animation: fireAnim 1.5s infinite alternate !important; position: relative; }
+.perfil-card.frame-fire::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,69,0,0.2) 0%, transparent 70%); z-index: 0; }
+.perfil-card.frame-fire .perfil-nome, .perfil-card.frame-fire .perfil-stat-item { z-index: 2; }
+
+.perfil-card.frame-ice { background: #0a1a2a !important; border: 4px solid #00ffff !important; box-shadow: 0 0 40px #00ffff, inset 0 0 30px #00bfff !important; animation: iceAnim 2s infinite alternate !important; position: relative; }
+.perfil-card.frame-ice::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,255,255,0.15) 0%, transparent 70%); z-index: 0; }
+.perfil-card.frame-ice .perfil-nome, .perfil-card.frame-ice .perfil-stat-item { z-index: 2; }
+
+.perfil-card.frame-electric { background: #1a1a0a !important; border: 4px solid #ffff00 !important; box-shadow: 0 0 40px #ffff00, inset 0 0 30px #ffa500 !important; animation: electricAnim 1s infinite alternate !important; position: relative; }
+.perfil-card.frame-electric::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,255,0,0.15) 0%, transparent 70%); z-index: 0; }
+.perfil-card.frame-electric .perfil-nome, .perfil-card.frame-electric .perfil-stat-item { z-index: 2; }
+
+.perfil-card.frame-galaxy { background: #000011 !important; border: 4px solid #8a2be2 !important; box-shadow: 0 0 40px #8a2be2, inset 0 0 30px #4b0082 !important; animation: galaxyAnim 2.5s infinite alternate !important; position: relative; }
+.perfil-card.frame-galaxy::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(138,43,226,0.2) 0%, transparent 70%); z-index: 0; }
+.perfil-card.frame-galaxy .perfil-nome, .perfil-card.frame-galaxy .perfil-stat-item { z-index: 2; }
+
+.perfil-card.frame-shadow { background: #0a0a0a !important; border: 4px solid #333 !important; box-shadow: 0 0 40px #000, inset 0 0 30px #000 !important; animation: shadowAnim 2s infinite alternate !important; position: relative; }
+.perfil-card.frame-shadow::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(50,50,50,0.2) 0%, transparent 70%); z-index: 0; }
+.perfil-card.frame-shadow .perfil-nome, .perfil-card.frame-shadow .perfil-stat-item { z-index: 2; }
+
 .slab-container.hack { background: linear-gradient(135deg, #000, #001a00); border: 3px solid #00ff41; box-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0,255,65,0.4), inset 0 0 15px rgba(0,255,65,0.2); animation: hackPulse 2s infinite; position: relative; overflow: hidden; }
 .slab-container.hack .slab-label { background: linear-gradient(180deg, #003300, #00ff41); border-bottom: 2px solid #00b82f; }
 .slab-container.hack .psa-logo { color: #000; font-family: monospace; font-weight: 900; font-size: 0.55rem; }
@@ -448,7 +506,7 @@ html, body {
 .slab-container.psa-6 .grade, .slab-container.psa-5 .grade, .slab-container.psa-4 .grade, .slab-container.psa-3 .grade, .slab-container.psa-2 .grade, .slab-container.psa-1 .grade { color: #4b5563; }
 .slab-container.ready { animation: auraOuro 1s infinite; cursor: pointer; }
 .slab-container.pending { opacity: 0.7; }
-.slab-container.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00, #ffb74d, #ff8c00); border: 3px solid #ff4500; box-shadow: 0 0 20px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4); animation: frameFire 2s infinite alternate; }
+.slab-container.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00, #ffb74d, #ff8c00); border: 3px solid #ff4500; box-shadow: 0 0 20px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4); animation: fireAnim 2s infinite alternate; }
 .slab-container.especial .slab-label { background: linear-gradient(180deg, #fff3e0, #ffb74d); border-bottom: 2px solid #b22222; }
 .slab-container.especial .grade { color: #b22222; font-size: 1.8rem; text-shadow: 0 0 8px #fff, 0 0 15px #ff8c00; font-family: 'Nunito', sans-serif; font-weight: 900; }
 .slab-container.especial .psa-logo { color: #b22222; letter-spacing: 2px; font-size: .55rem; }
@@ -471,7 +529,7 @@ html, body {
 .det-slab.psa-7 .grade { color: #15803d; }
 .det-slab.psa-6, .det-slab.psa-5, .det-slab.psa-4, .det-slab.psa-3, .det-slab.psa-2, .det-slab.psa-1 { background: #e5e7eb; border-color: #9ca3af; }
 .det-slab.psa-6 .grade, .det-slab.psa-5 .grade, .det-slab.psa-4 .grade, .det-slab.psa-3 .grade, .det-slab.psa-2 .grade, .det-slab.psa-1 .grade { color: #4b5563; }
-.det-slab.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00); border-color: #ff4500; animation: frameFire 2s infinite alternate; }
+.det-slab.especial { background: linear-gradient(135deg, #fff3e0, #ff8c00); border-color: #ff4500; animation: fireAnim 2s infinite alternate; }
 .det-slab.especial .slab-label { background: linear-gradient(180deg, #fff3e0, #ffb74d); border-bottom-color: #b22222; }
 .det-slab.especial .grade { color: #b22222; text-shadow: 0 0 8px #fff; font-family: 'Nunito', sans-serif; }
 .det-slab.especial .psa-logo { color: #b22222; }
@@ -597,9 +655,6 @@ html, body {
 .perfil-card.tester-deco .tester-badge { background: rgba(255, 105, 180, 0.2); border: 2px solid #ff69b4; margin: 0 auto 5px auto; display: block; width: fit-content; letter-spacing: 3px; }
 .tester-badge { color: #ff69b4; font-weight: 900; font-size: 0.85rem; text-transform: uppercase; position: relative; z-index: 2; padding: 4px 12px; border-radius: 10px; }
 .flor-tester-id { font-size: 1.2rem; display: block; text-align: center; margin-bottom: 20px; animation: florRosaGlow 2s ease-in-out infinite; filter: drop-shadow(0 0 8px #ff69b4) drop-shadow(0 0 15px #ff1493); line-height: 1; z-index: 2; position: relative; }
-.perfil-card.matrix-deco { background: #000; border: 3px solid #00ff41; box-shadow: 0 0 20px #00ff41; animation: hackPulse 2s infinite; }
-.perfil-card.matrix-deco::before { content: '01001000 01000001 01000011 01001011'; position: absolute; inset: 0; color: rgba(0,255,65,0.1); font-family: monospace; font-size: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; text-align: center; pointer-events: none; z-index: 0; overflow: hidden; line-height: 1.5; }
-.perfil-card.matrix-deco .perfil-nome { color: #00ff41; font-family: monospace; text-shadow: 0 0 10px #00ff41; }
 .matrix-badge { display: inline-block; background: #00ff41; color: #000; font-weight: 900; font-size: 0.85rem; margin-bottom: 10px; letter-spacing: 2px; padding: 4px 12px; border-radius: 10px; box-shadow: 0 0 15px #00ff41; text-transform: uppercase; font-family: monospace; position: relative; z-index: 2; }
 #telaCustomizacao, #telaTesterPainel { background: #1a0a2a; }
 .personalizacao { background: rgba(0,0,0,.3); border-radius: 18px; padding: 16px; width: 100%; max-width: 520px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.1); }
@@ -3290,7 +3345,7 @@ html, body {
             salvarEstado();
         }
 
-        if (perfil.isHackMaster && temHack && (perfil.cor === 'linear-gradient(135deg, #000, #001a00)' || perfil.cor === '#000')) {
+        if (perfil.isHackMaster && temHack) {
             cardBg.classList.add('matrix-deco'); 
             cardBg.style.background = ''; 
             badgeMatrix.style.display = 'inline-block';
@@ -3301,7 +3356,7 @@ html, body {
             if (florTester) florTester.style.display = 'block';
         } else if (perfil.adminFrame) {
             cardBg.classList.add(perfil.adminFrame); 
-            if (perfil.adminFrame === 'admin-deco') cardBg.style.background = '';
+            cardBg.style.background = ''; 
         }
 
         if (perfil.coroa) crown.style.display = 'block';
@@ -3993,7 +4048,7 @@ html, body {
         badgeMatrix.style.display = 'none'; 
         badgeBan.style.display = 'none';
 
-        if (amigo.isHackMaster && (amigo.cor === 'linear-gradient(135deg, #000, #001a00)' || amigo.cor === '#000')) {
+        if (amigo.isHackMaster) {
             card.classList.add('matrix-deco'); 
             card.style.background = ''; 
             badgeMatrix.style.display = 'inline-block';
@@ -4003,7 +4058,7 @@ html, body {
             badgeTester.style.display = 'inline-block';
         } else if (amigo.adminFrame) {
             card.classList.add(amigo.adminFrame); 
-            if (amigo.adminFrame === 'admin-deco') card.style.background = '';
+            card.style.background = ''; 
         }
 
         if (amigo.coroa) crown.style.display = 'block';
@@ -5624,26 +5679,30 @@ html, body {
     ];
 
     const FUNDOS_BASICOS = [
-        { cor: 'linear-gradient(135deg, #2a1a4a, #4a2a6a)', nv: 1 }, { cor: 'linear-gradient(135deg, #b91c1c, #7f1d1d)', nv: 2 },
-        { cor: 'linear-gradient(135deg, #2563eb, #1e3a8a)', nv: 4 }, { cor: 'linear-gradient(135deg, #16a34a, #064e3b)', nv: 6 },
-        { cor: 'linear-gradient(135deg, #ca8a04, #78350f)', nv: 8 }, { cor: 'linear-gradient(135deg, #7e22ce, #4c1d95)', nv: 12 },
-        { cor: 'linear-gradient(135deg, #db2777, #831843)', nv: 16 }, { cor: 'linear-gradient(135deg, #0ea5e9, #082f49)', nv: 20 },
-        { cor: 'linear-gradient(135deg, #f97316, #7c2d12)', nv: 25 }
+        { cor: 'radial-gradient(circle at 10% 20%, rgba(255,255,255,0.15) 0%, transparent 40%), linear-gradient(135deg, #2a1a4a, #4a2a6a)', nv: 1 },
+        { cor: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px), linear-gradient(135deg, #b91c1c, #7f1d1d)', nv: 2 },
+        { cor: 'radial-gradient(circle at 80% 80%, rgba(100,200,255,0.4) 0%, transparent 50%), linear-gradient(135deg, #2563eb, #1e3a8a)', nv: 4 },
+        { cor: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 2px, transparent 2px, transparent 8px), linear-gradient(135deg, #16a34a, #064e3b)', nv: 6 },
+        { cor: 'radial-gradient(circle at 50% 10%, rgba(255,255,100,0.3) 0%, transparent 60%), linear-gradient(135deg, #ca8a04, #78350f)', nv: 8 },
+        { cor: 'radial-gradient(circle at 20% 50%, rgba(200,100,255,0.3) 0%, transparent 50%), linear-gradient(135deg, #7e22ce, #4c1d95)', nv: 12 },
+        { cor: 'radial-gradient(circle at 80% 20%, rgba(255,100,150,0.3) 0%, transparent 50%), linear-gradient(135deg, #db2777, #831843)', nv: 16 },
+        { cor: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 5px), linear-gradient(135deg, #0ea5e9, #082f49)', nv: 20 },
+        { cor: 'radial-gradient(circle at 10% 90%, rgba(255,255,255,0.2) 0%, transparent 40%), radial-gradient(circle at 90% 10%, rgba(255,255,255,0.2) 0%, transparent 40%), linear-gradient(135deg, #f97316, #7c2d12)', nv: 25 }
     ];
 
     const DECORACOES_EPICAS = [
-        { id: 'charizard_base', nome: 'Charizard Base', emoji: '🔥', cor: 'linear-gradient(135deg, #ff4500, #8b0000)', cardId: 'base1-4' },
-        { id: 'blastoise_base', nome: 'Blastoise Base', emoji: '💧', cor: 'linear-gradient(135deg, #00bfff, #00008b)', cardId: 'base1-2' },
-        { id: 'venusaur_base', nome: 'Venusaur Base', emoji: '🍃', cor: 'linear-gradient(135deg, #32cd32, #006400)', cardId: 'base1-15' },
-        { id: 'mewtwo_base', nome: 'Mewtwo Base', emoji: '🧠', cor: 'linear-gradient(135deg, #9400d3, #4b0082)', cardId: 'base1-10' },
-        { id: 'pikachu_base', nome: 'Pikachu Base', emoji: '⚡', cor: 'linear-gradient(135deg, #ffd700, #b8860b)', cardId: 'base1-58' },
-        { id: 'lugia_neo', nome: 'Lugia Neo', emoji: '🌊', cor: 'linear-gradient(135deg, #e0ffff, #4682b4)', cardId: 'neo1-9' },
-        { id: 'umbreon_sky', nome: 'Umbreon VMAX', emoji: '🌙', cor: 'linear-gradient(135deg, #2f4f4f, #000000)', cardId: 'swsh7-215' },
-        { id: 'rayquaza_sky', nome: 'Rayquaza VMAX', emoji: '🐉', cor: 'linear-gradient(135deg, #00fa9a, #2e8b57)', cardId: 'swsh7-218' },
-        { id: 'charizard_151', nome: 'Charizard ex 151', emoji: '🔥', cor: 'linear-gradient(135deg, #ff8c00, #8b0000)', cardId: 'sv3pt5-6' },
-        { id: 'mew_151', nome: 'Mew ex 151', emoji: '🔮', cor: 'linear-gradient(135deg, #ffb6c1, #db7093)', cardId: 'sv3pt5-151' },
-        { id: 'giratina_lost', nome: 'Giratina VSTAR', emoji: '🌌', cor: 'linear-gradient(135deg, #483d8b, #191970)', cardId: 'swsh11-131' },
-        { id: 'pikachu_zenith', nome: 'Pikachu Zenith', emoji: '✨', cor: 'linear-gradient(135deg, #fffacd, #daa520)', cardId: 'swsh12pt5-gg30' }
+        { id: 'charizard_base', nome: 'Charizard Base', emoji: '🔥', cor: 'radial-gradient(circle at center, rgba(255,100,0,0.4) 0%, transparent 60%), linear-gradient(135deg, #ff4500, #8b0000)', cardId: 'base1-4' },
+        { id: 'blastoise_base', nome: 'Blastoise Base', emoji: '💧', cor: 'radial-gradient(circle at center, rgba(0,200,255,0.4) 0%, transparent 60%), linear-gradient(135deg, #00bfff, #00008b)', cardId: 'base1-2' },
+        { id: 'venusaur_base', nome: 'Venusaur Base', emoji: '🍃', cor: 'radial-gradient(circle at center, rgba(100,255,100,0.3) 0%, transparent 60%), linear-gradient(135deg, #32cd32, #006400)', cardId: 'base1-15' },
+        { id: 'mewtwo_base', nome: 'Mewtwo Base', emoji: '🧠', cor: 'radial-gradient(circle at center, rgba(200,0,255,0.4) 0%, transparent 60%), linear-gradient(135deg, #9400d3, #4b0082)', cardId: 'base1-10' },
+        { id: 'pikachu_base', nome: 'Pikachu Base', emoji: '⚡', cor: 'radial-gradient(circle at center, rgba(255,255,0,0.4) 0%, transparent 60%), linear-gradient(135deg, #ffd700, #b8860b)', cardId: 'base1-58' },
+        { id: 'lugia_neo', nome: 'Lugia Neo', emoji: '🌊', cor: 'radial-gradient(circle at center, rgba(200,255,255,0.4) 0%, transparent 60%), linear-gradient(135deg, #e0ffff, #4682b4)', cardId: 'neo1-9' },
+        { id: 'umbreon_sky', nome: 'Umbreon VMAX', emoji: '🌙', cor: 'radial-gradient(circle at center, rgba(100,100,150,0.4) 0%, transparent 60%), linear-gradient(135deg, #2f4f4f, #000000)', cardId: 'swsh7-215' },
+        { id: 'rayquaza_sky', nome: 'Rayquaza VMAX', emoji: '🐉', cor: 'radial-gradient(circle at center, rgba(0,255,100,0.4) 0%, transparent 60%), linear-gradient(135deg, #00fa9a, #2e8b57)', cardId: 'swsh7-218' },
+        { id: 'charizard_151', nome: 'Charizard ex 151', emoji: '🔥', cor: 'radial-gradient(circle at center, rgba(255,150,0,0.4) 0%, transparent 60%), linear-gradient(135deg, #ff8c00, #8b0000)', cardId: 'sv3pt5-6' },
+        { id: 'mew_151', nome: 'Mew ex 151', emoji: '🔮', cor: 'radial-gradient(circle at center, rgba(255,200,200,0.4) 0%, transparent 60%), linear-gradient(135deg, #ffb6c1, #db7093)', cardId: 'sv3pt5-151' },
+        { id: 'giratina_lost', nome: 'Giratina VSTAR', emoji: '🌌', cor: 'radial-gradient(circle at center, rgba(100,100,255,0.4) 0%, transparent 60%), linear-gradient(135deg, #483d8b, #191970)', cardId: 'swsh11-131' },
+        { id: 'pikachu_zenith', nome: 'Pikachu Zenith', emoji: '✨', cor: 'radial-gradient(circle at center, rgba(255,255,200,0.5) 0%, transparent 60%), linear-gradient(135deg, #fffacd, #daa520)', cardId: 'swsh12pt5-gg30' }
     ];
 
     function configurarArrastarAdminBtn() {
@@ -6053,10 +6112,10 @@ html, body {
     document.getElementById('pokebolaTrabalho').onclick = baterPonto;
     function baterPonto() {
         checarResetDiario(); 
-        if (ganhoHoje >= LIMITE_DIARIO_MOEDADAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
+        if (ganhoHoje >= LIMITE_DIARIO_MOEDAS) { document.getElementById('contadorPokebola').textContent = '🚫 Limite diário!'; return; }
         const ganho = 10 + Math.floor(Math.random() * 6); 
         let ganhoReal = ganho;
-        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDADAS) ganhoReal = LIMITE_DIARIO_MOEDADAS - ganhoHoje;
+        if (ganhoHoje + ganho > LIMITE_DIARIO_MOEDAS) ganhoReal = LIMITE_DIARIO_MOEDAS - ganhoHoje;
         moedas += ganhoReal; 
         ganhoHoje += ganhoReal; 
         salvarEstado(); 
